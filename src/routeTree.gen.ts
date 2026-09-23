@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FlavoursRouteImport } from './routes/flavours'
+import { Route as WhereToBuyRouteImport } from './routes/where-to-buy'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FlavoursRoute = FlavoursRouteImport.update({
+  id: '/flavours',
+  path: '/flavours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WhereToBuyRoute = WhereToBuyRouteImport.update({
+  id: '/where-to-buy',
+  path: '/where-to-buy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/flavours': typeof FlavoursRoute
+  '/where-to-buy': typeof WhereToBuyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/flavours': typeof FlavoursRoute
+  '/where-to-buy': typeof WhereToBuyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/flavours': typeof FlavoursRoute
+  '/where-to-buy': typeof WhereToBuyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/about' | '/contact' | '/flavours' | '/where-to-buy'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/about' | '/contact' | '/flavours' | '/where-to-buy'
+  id: '__root__' | '/' | '/about' | '/contact' | '/flavours' | '/where-to-buy'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  FlavoursRoute: typeof FlavoursRoute
+  WhereToBuyRoute: typeof WhereToBuyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/flavours': {
+      id: '/flavours'
+      path: '/flavours'
+      fullPath: '/flavours'
+      preLoaderRoute: typeof FlavoursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/where-to-buy': {
+      id: '/where-to-buy'
+      path: '/where-to-buy'
+      fullPath: '/where-to-buy'
+      preLoaderRoute: typeof WhereToBuyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  FlavoursRoute: FlavoursRoute,
+  WhereToBuyRoute: WhereToBuyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
