@@ -199,7 +199,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Fruti Pop Bali makes bright, real-fruit sorbet pops in Bali. Explore flavours, find where to buy, and get in touch. (Unpublished redesign draft.)",
+          "Fruti Pop Bali makes bright, real-fruit sorbet pops in Bali. Family packs, parties, schools, events and villas.",
       },
       { property: "og:title", content: "Fruti Pop Bali — Tropical Fruit Sorbet Pops" },
       {
