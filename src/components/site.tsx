@@ -77,16 +77,30 @@ export function PhotoGrid({ photos, cols = "sm:grid-cols-2 lg:grid-cols-3" }: { 
 }
 
 export function PackSpotlight({ photo }: { photo?: Photo }) {
-  return (
-    <div className={`grid items-center overflow-hidden rounded-3xl bg-accent text-accent-foreground ${photo ? "md:grid-cols-[0.9fr_1.15fr_auto]" : "md:grid-cols-[1fr_auto]"}`}>
-      {photo && (
+  if (photo) {
+    return (
+      <div className="grid overflow-hidden rounded-3xl bg-accent text-accent-foreground shadow-lg md:grid-cols-[1.05fr_0.95fr]">
         <img
           src={photo.src}
           alt={photo.alt}
           loading="lazy"
-          className="h-56 w-full object-cover object-center md:h-full md:min-h-80"
+          className="h-56 w-full object-cover object-[center_48%] sm:h-64 md:h-80"
         />
-      )}
+        <div className="flex flex-col justify-center px-6 py-7 sm:px-8 md:py-8">
+          <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family pack</p>
+          <h2 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">20 POPS. 20 BIG SMILES!</h2>
+          <p className="mt-3 font-display text-4xl font-bold text-mango sm:text-5xl">{FAMILY_PACK.price}</p>
+          <p className="mt-2 text-base font-semibold opacity-90">Fill the freezer. Bring on the smiles.</p>
+          <WhatsAppButton message={`Hi Fruti Pop! I'd like to order a family pack of ${FAMILY_PACK.pops} pops (${FAMILY_PACK.price}).`} className={`${btn.primary} mt-5 self-start`}>
+            Order on WhatsApp
+          </WhatsAppButton>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid items-center overflow-hidden rounded-3xl bg-accent text-accent-foreground md:grid-cols-[1fr_auto]">
       <div className="p-7 md:p-9">
         <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family pack</p>
         <p className="mt-2 font-display text-4xl font-bold md:text-5xl">
