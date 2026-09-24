@@ -12,3 +12,7 @@
 
 ## Open (waiting on owner)
 1. Owner review of flavour/occasion descriptions (Lovable wording).
+
+## Open
+- [ ] Rebuild Occasions as a compact 2 × 2 grid from the supplied reference.
+- [ ] Replace navigation social icons with official Instagram and Facebook brand marks.
