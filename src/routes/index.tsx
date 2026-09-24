@@ -56,13 +56,13 @@ function Hero() {
                 className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${fit} ${n === i ? "opacity-100" : "opacity-0"}`}
               />
             ))}
-          <div className="absolute inset-x-0 bottom-3 z-10 flex items-center justify-center gap-3">
-            <button onClick={() => go(i - 1)} aria-label="Previous photo" className="h-9 w-9 rounded-full border-2 border-accent bg-background/85 font-bold text-accent shadow">‹</button>
-            {SLIDES.map((_, n) => (
-              <button key={n} onClick={() => setI(n)} aria-label={`Show photo ${n + 1}`} aria-current={n === i} className={`h-3 rounded-full shadow transition-all ${n === i ? "w-8 bg-accent" : "w-3 bg-background/85"}`} />
-            ))}
-            <button onClick={() => go(i + 1)} aria-label="Next photo" className="h-9 w-9 rounded-full border-2 border-accent bg-background/85 font-bold text-accent shadow">›</button>
           </div>
+          <div className="mt-3 flex items-center justify-center gap-3">
+            <button onClick={() => go(i - 1)} aria-label="Previous photo" className="h-9 w-9 rounded-full border-2 border-accent bg-background font-bold text-accent shadow">‹</button>
+            {SLIDES.map((_, n) => (
+              <button key={n} onClick={() => setI(n)} aria-label={`Show photo ${n + 1}`} aria-current={n === i} className={`h-3 rounded-full transition-all ${n === i ? "w-8 bg-accent" : "w-3 bg-primary/30"}`} />
+            ))}
+            <button onClick={() => go(i + 1)} aria-label="Next photo" className="h-9 w-9 rounded-full border-2 border-accent bg-background font-bold text-accent shadow">›</button>
           </div>
         </div>
       </div>
