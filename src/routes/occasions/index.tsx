@@ -41,7 +41,7 @@ function OccasionsIndex() {
       cta: "Plan Your Party →",
       type: "Birthday party",
       photo: { src: birthdayParty.url, alt: "Excited children around a cooler full of Fruti Pops at a poolside party" },
-      position: "object-cover object-center",
+      position: "object-cover object-[50%_58%]",
     },
     {
       id: "schools-sports-clubs",
