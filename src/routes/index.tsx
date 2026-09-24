@@ -21,9 +21,9 @@ export const Route = createFileRoute("/")({
 });
 
 const SLIDES = [
-  { photo: P.heroCoolerGroup, fit: "object-contain object-center" },
-  { photo: P.footballKidsKiosk, fit: "object-contain object-center" },
-  { photo: P.beachGroup, fit: "object-cover object-center" },
+  { photo: P.heroCoolerGroup, fit: "object-cover object-center" },
+  { photo: P.footballKidsKiosk, fit: "object-cover object-center" },
+  { photo: P.beachCouple, fit: "object-cover object-center" },
 ];
 
 function Hero() {
@@ -45,7 +45,7 @@ function Hero() {
           </div>
         </div>
         <div className="min-w-0">
-          <div className="relative h-60 overflow-hidden rounded-3xl bg-primary/10 shadow-xl sm:h-72 md:h-[min(53vh,27rem)]">
+          <div className="relative mx-auto aspect-[3/4] w-full max-w-[17rem] overflow-hidden rounded-3xl bg-primary/10 shadow-xl sm:max-w-xs md:h-[min(60vh,30rem)] md:w-[calc(min(60vh,30rem)*0.75)] md:max-w-none">
             {SLIDES.map(({ photo, fit }, n) => (
               <img
                 key={photo.src}
@@ -107,11 +107,10 @@ function Home() {
             <div className="relative isolate overflow-hidden rounded-3xl bg-accent px-5 py-4 text-accent-foreground shadow-lg md:px-7">
               <span aria-hidden="true" className="absolute -right-5 -top-7 -z-10 h-24 w-24 rounded-full bg-mango" />
               <span aria-hidden="true" className="absolute bottom-2 right-14 -z-10 h-8 w-8 rounded-full bg-dragonfruit" />
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                 <strong className="shrink-0 font-display text-4xl font-bold leading-none text-mango sm:text-5xl">65% FRUIT</strong>
                 <p className="max-w-xs text-sm font-bold leading-snug sm:text-base">Less added sugar than regular ice pops.</p>
               </div>
-              <p className="mt-2 text-xs font-semibold opacity-80">Average fruit content across all six flavours.</p>
             </div>
           </div>
           <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
@@ -147,7 +146,7 @@ function Home() {
               { p: P.mnm[1]!, caption: "First bite at the Montessori Night Market" },
               { p: P.footballPair, caption: "Cooling down after football" },
               { p: P.mnm[3]!, caption: "Choosing a favourite at the market" },
-              { p: P.beachCouple, caption: "A cool treat by the Bali beach" },
+              { p: P.beachGroup, caption: "A cool treat by the Bali beach" },
             ].map(({ p, caption }) => (
               <li key={p.src}>
                 <img src={p.src} alt={p.alt} loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />
