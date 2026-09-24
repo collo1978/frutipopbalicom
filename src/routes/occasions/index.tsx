@@ -3,7 +3,7 @@ import { useState } from "react";
 import { EnquiryForm, btn } from "@/components/site";
 import { P } from "@/lib/photos";
 import { FAMILY_PACK } from "@/lib/site";
-import birthdayParty from "@/assets/birthday-party.jpg.asset.json";
+import birthdayParty from "@/assets/birthday-pool-party.png.asset.json";
 import eventBoy from "@/assets/event-boy-two-pops.jpg.asset.json";
 
 export const Route = createFileRoute("/occasions/")({
@@ -40,7 +40,7 @@ function OccasionsIndex() {
       description: "Cake is great. But nothing gets a squeal quite like a cooler full of bright, fruity pops on a hot Bali afternoon.",
       cta: "Plan Your Party →",
       type: "Birthday party",
-      photo: { src: birthdayParty.url, alt: "Children celebrating a birthday with Fruti Pops around a cake" },
+      photo: { src: birthdayParty.url, alt: "Excited children around a cooler full of Fruti Pops at a poolside party" },
       position: "object-cover object-center",
     },
     {
