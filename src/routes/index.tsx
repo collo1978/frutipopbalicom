@@ -56,7 +56,6 @@ function Hero() {
                 className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${fit} ${n === i ? "opacity-100" : "opacity-0"}`}
               />
             ))}
-          </div>
           <div className="absolute inset-x-0 bottom-3 z-10 flex items-center justify-center gap-3">
             <button onClick={() => go(i - 1)} aria-label="Previous photo" className="h-9 w-9 rounded-full border-2 border-accent bg-background/85 font-bold text-accent shadow">‹</button>
             {SLIDES.map((_, n) => (
