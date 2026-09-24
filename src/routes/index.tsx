@@ -102,6 +102,9 @@ function Home() {
             <h2 className="text-3xl font-bold text-accent md:text-4xl">Six fruity favourites</h2>
             <Link to="/flavours" className="font-bold text-primary underline underline-offset-4">See all flavours</Link>
           </div>
+          <p className="mt-4 inline-flex items-center rounded-full bg-card px-4 py-2 text-sm font-bold text-primary shadow-sm">
+            Made with an average of 65% fruit and less added sugar than regular ice pops.
+          </p>
           <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
             {FLAVOURS.map((f) => <FlavourCard key={f.name} f={f} />)}
           </div>

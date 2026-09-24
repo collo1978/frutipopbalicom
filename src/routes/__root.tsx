@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
+import { Instagram } from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -103,6 +104,17 @@ function SiteFooter() {
         <div>
           <img src={logo.url} alt="Fruti Pop" className="h-14 w-auto" />
           <p className="mt-3 text-sm opacity-90">Little pops. Big smiles. Fruity sorbet pops in Bali.</p>
+          <div className="mt-4 flex gap-2">
+            <a
+              href="https://www.instagram.com/frutipop_bali"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Fruti Pop Bali on Instagram"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-foreground/10 transition-colors hover:bg-accent-foreground/20"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+          </div>
         </div>
         <div>
           <p className="font-display font-semibold text-mango">Explore</p>

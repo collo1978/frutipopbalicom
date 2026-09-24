@@ -57,6 +57,6 @@ export const P = {
     { src: mnmToddlers, alt: "Two young children with Fruti Pops at the Montessori Night Market" },
     { src: mnmGirlMenu, alt: "A girl with a Fruti Pop beside the flavour menu at the Montessori Night Market" },
     { src: mnmGirl, alt: "A girl holding a Fruti Pop at the Montessori Night Market" },
-    { src: mnmStall, alt: "The Fruti Pop stall at the Montessori Night Market" },
+    { src: mnmStall, alt: "Paul, founder of Fruti Pop, in his straw hat at the Fruti Pop stall at the Montessori Night Market" },
   ],
 } satisfies Record<string, Photo | Photo[]>;
