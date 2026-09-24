@@ -108,7 +108,7 @@ function OccasionsIndex() {
           <img src={P.heroCoolerPair.src} alt={P.heroCoolerPair.alt} loading="lazy" className="mx-auto aspect-[4/5] w-full max-w-[15rem] md:max-w-[17rem] rounded-3xl object-cover object-center shadow-lg" />
           <div>
             <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family Pack</p>
-            <h2 className="mt-2 text-3xl font-bold md:text-4xl">20 POPS. 20 BIG SMILES!</h2>
+            <h2 className="mt-2 text-3xl font-bold md:text-4xl">10 POPS. 10 BIG SMILES!</h2>
             <p className="mt-3 font-display text-4xl font-bold text-mango">{FAMILY_PACK.price}</p>
             <p className="mt-2 text-lg font-semibold">Fill the freezer. Bring on the smiles.</p>
             <a href="#enquiry" onClick={(event) => { event.preventDefault(); showEnquiry(); }} className={`${btn.primary} mt-5`}>Get Your Party Pops →</a>

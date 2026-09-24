@@ -24,11 +24,7 @@ const NAV = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
-const FOOTER_NAV = [
-  { to: "/", label: "Home" },
-  { to: "/flavours", label: "Flavours" },
-  ...NAV.slice(1),
-] as const;
+const FOOTER_NAV = NAV;
 
 const linkCls = "rounded-full px-3 py-2 text-sm font-bold text-foreground/80 transition-colors hover:bg-secondary hover:text-accent";
 const activeCls = { className: "bg-secondary text-accent" };

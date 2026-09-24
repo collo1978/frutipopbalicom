@@ -13,7 +13,7 @@ export const SNOWWAVE = {
   blurb: "for hospitality, wholesale, villas and poolside",
 };
 
-export const FAMILY_PACK = { pops: 20, price: "Rp250,000" };
+export const FAMILY_PACK = { pops: 10, price: "Rp250,000" };
 
 export function waLink(message = "Hi Fruti Pop! I'd like to order some pops.") {
   return `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(message)}`;
@@ -24,7 +24,7 @@ export function mailLink(subject: string, body = "") {
 }
 
 export const ENQUIRY_TYPES = [
-  "Family pack (20 pops)",
+  "Family pack (10 pops)",
   "Birthday party",
   "School or sports club",
   "Event",

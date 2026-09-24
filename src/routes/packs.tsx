@@ -8,9 +8,9 @@ export const Route = createFileRoute("/packs")({
   head: () => ({
     meta: [
       { title: "Fill the Freezer | Fruti Pop Bali" },
-      { name: "description", content: "Order a Fruti Pop family pack of 20 pops for Rp250,000, or enquire about parties, schools, events and villas via WhatsApp." },
+      { name: "description", content: "Order a Fruti Pop family pack of 10 pops for Rp250,000, or enquire about parties, schools, events and villas via WhatsApp." },
       { property: "og:title", content: "Fill the Freezer | Fruti Pop Bali" },
-      { property: "og:description", content: "20 pops for Rp250,000. Order or enquire on WhatsApp." },
+      { property: "og:description", content: "10 pops for Rp250,000. Order or enquire on WhatsApp." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/packs" },
     ],
@@ -19,28 +19,21 @@ export const Route = createFileRoute("/packs")({
   component: PacksPage,
 });
 
-const FAMILY_MSG = "Hi Fruti Pop! I'd like to order the Family Pack of 20 pops for Rp250,000. Could you please help me with my order?";
+const FAMILY_MSG = "Hi Fruti Pop! I'd like to order the Family Pack of 10 pops for Rp250,000. Could you please help me with my order?";
 
 function PacksPage() {
   const email = mailLink("Family Pack enquiry", FAMILY_MSG);
   return (
     <>
       <section className="mx-auto max-w-6xl px-4 pt-6">
-        <h1 className="sr-only">Fill the Freezer: Family Pack, 20 pops for Rp250,000</h1>
-        {/* Desktop/tablet: full promo image with real buttons placed over the image's button areas */}
-        <div className="relative hidden overflow-hidden rounded-3xl shadow-lg md:block">
-          <img src={freezer.url} alt="A mum and two children opening a freezer at home full of Fruti Pops. Family Pack, 20 pops, 20 big smiles, Rp250,000." width={1860} height={845} className="block h-auto w-full" />
-          <a href={waLink(FAMILY_MSG)} target="_blank" rel="noopener noreferrer" aria-label="Order the Family Pack on WhatsApp" className="absolute rounded-full focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-mango" style={{ left: "64.2%", top: "71%", width: "27.4%", height: "11.9%" }} />
-          <a href={email} aria-label="Enquire about the Family Pack by email" className="absolute rounded focus-visible:outline-4 focus-visible:outline-mango" style={{ left: "64.4%", top: "85.2%", width: "12.6%", height: "4.6%" }} />
-        </div>
-        {/* Mobile: photo portion plus real HTML offer */}
-        <div className="overflow-hidden rounded-3xl bg-accent text-accent-foreground shadow-lg md:hidden">
-          <div className="aspect-[1128/845] overflow-hidden">
+        <h1 className="sr-only">Fill the Freezer: Family Pack, 10 pops for Rp250,000</h1>
+        <div className="grid overflow-hidden rounded-3xl bg-accent text-accent-foreground shadow-lg md:grid-cols-[1.35fr_1fr]">
+          <div className="aspect-[1128/845] overflow-hidden md:aspect-auto md:min-h-[27rem]">
             <img src={freezer.url} alt="A mum and two children opening a freezer at home full of Fruti Pops." className="h-full w-full object-cover object-left" />
           </div>
-          <div className="p-6">
+          <div className="flex flex-col justify-center p-6 md:p-9">
             <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family Pack</p>
-            <p className="mt-1 font-display text-3xl font-bold">20 POPS. 20 BIG SMILES!</p>
+            <p className="mt-1 font-display text-3xl font-bold">10 POPS. 10 BIG SMILES!</p>
             <p className="mt-1 font-display text-4xl font-bold text-mango">{FAMILY_PACK.price}</p>
             <p className="mt-2 text-lg">Fill the freezer. Bring on the smiles.</p>
             <a href={waLink(FAMILY_MSG)} target="_blank" rel="noopener noreferrer" className={`${btn.primary} mt-4`}><WhatsAppIcon className="h-5 w-5" /> Order on WhatsApp →</a>

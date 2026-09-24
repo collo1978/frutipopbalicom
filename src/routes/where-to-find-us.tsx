@@ -21,7 +21,7 @@ export const Route = createFileRoute("/where-to-find-us")({
 function FindUs() {
   const paths = [
     { t: "Where can I buy one?", d: "Ask us where Fruti Pop is available near you right now.", msg: "Hi Fruti Pop! Where can I buy Fruti Pops near me? I'm in:" },
-    { t: "Order a family pack", d: "20 pops for Rp250,000, arranged with you directly.", link: "/packs" as const },
+    { t: "Order a family pack", d: "10 pops for Rp250,000, arranged with you directly.", link: "/packs" as const },
     { t: "Events & villas", d: "Parties, schools, markets or pool days? Tell us the plan.", link: "/occasions" as const },
   ];
   return (

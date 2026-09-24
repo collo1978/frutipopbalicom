@@ -91,7 +91,7 @@ export function PackSpotlight({ photo }: { photo?: Photo }) {
         />
         <div className="flex flex-col justify-center px-6 py-7 sm:px-9 md:py-8">
           <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family pack</p>
-          <h2 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">20 POPS. 20 BIG SMILES!</h2>
+          <h2 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">10 POPS. 10 BIG SMILES!</h2>
           <p className="mt-3 font-display text-4xl font-bold text-mango sm:text-5xl">{FAMILY_PACK.price}</p>
           <p className="mt-2 text-base font-semibold opacity-90">Fill the freezer. Bring on the smiles.</p>
           <WhatsAppButton message={`Hi Fruti Pop! I'd like to order a family pack of ${FAMILY_PACK.pops} pops (${FAMILY_PACK.price}).`} className={`${btn.primary} mt-5 self-start`}>

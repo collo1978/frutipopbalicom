@@ -1,5 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { btn } from "@/components/site";
+import { createFileRoute } from "@tanstack/react-router";
 import { P } from "@/lib/photos";
 import { SNOWWAVE } from "@/lib/site";
 
@@ -74,10 +73,6 @@ function OurStory() {
           </a>
         </div>
       </section>
-
-      <div className="mt-12 text-center">
-        <Link to="/flavours" className={btn.primary}>Meet the flavours</Link>
-      </div>
     </>
   );
 }
