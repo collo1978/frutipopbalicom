@@ -49,7 +49,7 @@ export function PageHeader({ eyebrow, title, children, photo }: { eyebrow: strin
 export function FlavourCard({ f }: { f: Flavour }) {
   return (
     <article className={`flex flex-col items-center rounded-3xl p-2.5 text-center ${f.tint}`}>
-      <div className="relative h-40 w-full md:h-44 lg:h-40">
+      <div className="relative h-44 w-full md:h-48 lg:h-52">
         {f.img ? (
           <img src={f.img} alt={`Fruti Pop ${f.name} sorbet pack`} loading="lazy" className="absolute inset-0 h-full w-full object-contain drop-shadow-lg" />
         ) : (
