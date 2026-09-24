@@ -6,9 +6,9 @@ import { P } from "@/lib/photos";
 export const Route = createFileRoute("/occasions/")({
   head: () => ({
     meta: [
-      { title: "Occasions — Fruti Pop Bali" },
-      { name: "description", content: "Birthday parties, schools and sports clubs, events and villa pool days — find the Fruti Pop moment for you." },
-      { property: "og:title", content: "Occasions — Fruti Pop Bali" },
+      { title: "Occasions | Fruti Pop Bali" },
+      { name: "description", content: "Birthday parties, schools and sports clubs, events and villa pool days. Find the Fruti Pop moment for you." },
+      { property: "og:title", content: "Occasions | Fruti Pop Bali" },
       { property: "og:description", content: "Birthday parties, schools, events and villa pool days with Fruti Pop." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/occasions" },

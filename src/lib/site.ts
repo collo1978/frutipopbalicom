@@ -9,7 +9,7 @@ export const CONTACT = {
 
 export const SNOWWAVE = {
   url: "https://thesnowwavebali.com/",
-  label: "Snowwave Bali – Frozen Fruit & Fruit Purées",
+  label: "Snowwave Bali: Frozen Fruit & Fruit Purées",
   blurb: "for hospitality, wholesale, villas and poolside",
 };
 

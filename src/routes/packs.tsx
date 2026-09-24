@@ -6,9 +6,9 @@ import { CONTACT, mailLink } from "@/lib/site";
 export const Route = createFileRoute("/packs")({
   head: () => ({
     meta: [
-      { title: "Packs & Orders — Fruti Pop Bali" },
-      { name: "description", content: "Order a Fruti Pop family pack — 20 pops for Rp250,000 — or enquire about parties, schools, events and villas via WhatsApp." },
-      { property: "og:title", content: "Packs & Orders — Fruti Pop Bali" },
+      { title: "Packs & Orders | Fruti Pop Bali" },
+      { name: "description", content: "Order a Fruti Pop family pack of 20 pops for Rp250,000, or enquire about parties, schools, events and villas via WhatsApp." },
+      { property: "og:title", content: "Packs & Orders | Fruti Pop Bali" },
       { property: "og:description", content: "20 pops for Rp250,000. Order or enquire on WhatsApp." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/packs" },
@@ -42,7 +42,7 @@ function PacksPage() {
             </li>
           ))}
         </ol>
-        <p className="mt-4 text-sm text-muted-foreground">There's no online checkout — every order is confirmed personally by our team.</p>
+        <p className="mt-4 text-sm text-muted-foreground">There's no online checkout. Every order is confirmed personally by our team.</p>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-8">
@@ -55,7 +55,7 @@ function PacksPage() {
       <section className="mx-auto grid max-w-6xl gap-8 px-4 py-8 md:grid-cols-[1fr_1.4fr]">
         <div>
           <h2 className="text-3xl font-bold text-accent">Send an enquiry</h2>
-          <p className="mt-3 text-foreground/80">Fill in what you know — we'll take it from there.</p>
+          <p className="mt-3 text-foreground/80">Fill in what you know and we'll take it from there.</p>
           <ul className="mt-4 space-y-2 font-semibold">
             <li><a className="text-accent underline underline-offset-4" href={CONTACT.phoneHref}>Call {CONTACT.phoneDisplay}</a></li>
             <li><a className="text-accent underline underline-offset-4" href={mailLink("Fruti Pop order enquiry")}>{CONTACT.email}</a></li>

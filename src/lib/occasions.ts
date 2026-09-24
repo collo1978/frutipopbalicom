@@ -36,7 +36,7 @@ export const OCCASIONS: Occasion[] = [
     slug: "events",
     label: "Events",
     hook: "A little joy for a big crowd.",
-    intro: "Markets, community nights and celebrations — Fruti Pop brings a splash of colour and a queue of smiling faces.",
+    intro: "Markets, community nights and celebrations. Fruti Pop brings a splash of colour and a queue of smiling faces.",
     enquiryType: "Event",
     cover: P.mnm[0]!,
     gallery: [P.eventStrawHat, P.eventStrawberry, P.eventNight],
