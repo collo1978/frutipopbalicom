@@ -48,8 +48,8 @@ export function PageHeader({ eyebrow, title, children, photo }: { eyebrow: strin
 
 export function FlavourCard({ f }: { f: Flavour }) {
   return (
-    <article className={`flex flex-col items-center rounded-3xl p-2.5 text-center ${f.tint}`}>
-      <div className="relative h-44 w-full md:h-48 lg:h-52">
+    <article className={`flex flex-col items-center rounded-3xl p-2 text-center ${f.tint}`}>
+      <div className="relative h-44 w-full md:h-56 lg:h-64">
         {f.img ? (
           <img src={f.img} alt={`Fruti Pop ${f.name} sorbet pack`} loading="lazy" className="absolute inset-0 h-full w-full object-contain drop-shadow-lg" />
         ) : (
@@ -60,7 +60,7 @@ export function FlavourCard({ f }: { f: Flavour }) {
           </div>
         )}
       </div>
-      <h3 className="mt-1.5 text-lg font-bold text-accent">{f.name}</h3>
+      <h3 className="mt-1 text-lg font-bold text-accent">{f.name}</h3>
       {f.tagline && <p className="text-xs font-semibold text-foreground/70">“{f.tagline}”</p>}
     </article>
   );
