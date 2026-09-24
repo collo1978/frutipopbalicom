@@ -40,7 +40,7 @@ function Hero() {
             Fruity sorbet pops for kids and grown-ups in Bali. Perfect for hot afternoons, pool days and every little celebration.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
-            <Link to="/flavours" className={btn.grape}>Explore the Pops</Link>
+            <a href="#flavours" className={btn.grape}>Explore the Pops</a>
             <Link to="/packs" className={btn.outline}>Order Now</Link>
           </div>
         </div>
@@ -100,10 +100,15 @@ function Home() {
         </ul>
       </section>
 
-      <section className="bg-muted py-8 md:py-9">
+      <section id="flavours" className="scroll-mt-16 bg-muted py-8 md:py-9">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="grid items-center gap-5 md:grid-cols-[minmax(0,1fr)_minmax(20rem,0.85fr)]">
-            <h2 className="text-3xl font-bold text-accent md:text-4xl">Six fruity favourites</h2>
+          <div className="grid items-center gap-4 md:grid-cols-[minmax(0,1fr)_minmax(20rem,0.85fr)] md:gap-5">
+            <div>
+              <h2 className="text-3xl font-bold text-accent md:text-4xl">Which one's your favourite?</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-snug text-foreground/80 sm:text-base">
+                Six fruity sorbet pops, each in its own bright 100g tube. Kids pick by colour. Grown-ups usually want two.
+              </p>
+            </div>
             <div className="relative isolate overflow-hidden rounded-3xl bg-accent px-5 py-4 text-accent-foreground shadow-lg md:px-7">
               <span aria-hidden="true" className="absolute -right-5 -top-7 -z-10 h-24 w-24 rounded-full bg-mango" />
               <span aria-hidden="true" className="absolute bottom-2 right-14 -z-10 h-8 w-8 rounded-full bg-dragonfruit" />
