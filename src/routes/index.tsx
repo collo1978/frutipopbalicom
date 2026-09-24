@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
 const SLIDES = [
   { photo: P.heroCoolerGroup, fit: "object-cover object-center" },
   { photo: P.footballKidsKiosk, fit: "object-cover object-center" },
-  { photo: P.beachGroup, fit: "object-cover object-center" },
+  { photo: P.beachCouple, fit: "object-cover object-center" },
 ];
 
 function Hero() {
@@ -146,7 +146,7 @@ function Home() {
               { p: P.mnm[1]!, caption: "First bite at the Montessori Night Market" },
               { p: P.footballPair, caption: "Cooling down after football" },
               { p: P.mnm[3]!, caption: "Choosing a favourite at the market" },
-              { p: P.beachCouple, caption: "A cool treat by the Bali beach" },
+              { p: P.beachGroup, caption: "A cool treat by the Bali beach" },
             ].map(({ p, caption }) => (
               <li key={p.src}>
                 <img src={p.src} alt={p.alt} loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />
