@@ -29,7 +29,7 @@ function PacksPage() {
         <h1 className="sr-only">Fill the Freezer: Family Pack, 10 pops for Rp250,000</h1>
         <div className="grid overflow-hidden rounded-3xl bg-accent text-accent-foreground shadow-lg md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
           <div className="min-w-0 aspect-[1128/845] overflow-hidden md:aspect-auto md:min-h-[27rem]">
-            <img src={freezer.url} alt="A mum and two children opening a freezer at home full of Fruti Pops." className="h-full w-full object-cover object-left" />
+            <img src={freezer.url} alt="A mum and two children opening a freezer at home full of Fruti Pops." className="h-full w-full object-cover object-left md:w-[165%] md:max-w-none" />
           </div>
           <div className="flex flex-col justify-center p-6 md:p-9">
             <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family Pack</p>
