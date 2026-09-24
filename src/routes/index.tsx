@@ -41,7 +41,6 @@ function Hero() {
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <a href="#flavours" className={btn.grape}>Explore the Pops</a>
-            <Link to="/packs" className={btn.outline}>Order Now</Link>
           </div>
         </div>
         <div className="min-w-0">
