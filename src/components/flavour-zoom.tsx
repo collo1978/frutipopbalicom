@@ -80,7 +80,9 @@ function FlavourLightbox({ f, onClose }: { f: Flavour; onClose: () => void }) {
 
     const dist = () => {
       const pts = [...pointers.current.values()];
-      return pts.length === 2 ? Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) : 0;
+      const a = pts[0];
+      const b = pts[1];
+      return a && b ? Math.hypot(a.x - b.x, a.y - b.y) : 0;
     };
 
     const onPointerDown = (e: PointerEvent) => {
