@@ -48,8 +48,8 @@ export function PageHeader({ eyebrow, title, children, photo }: { eyebrow: strin
 
 export function FlavourCard({ f }: { f: Flavour }) {
   return (
-    <article className={`flex flex-col items-center rounded-3xl p-5 text-center ${f.tint}`}>
-      <div className="flex h-56 w-full items-center justify-center">
+    <article className={`flex flex-col items-center rounded-3xl p-4 text-center ${f.tint}`}>
+      <div className="flex h-72 w-full items-center justify-center sm:h-80">
         {f.img ? (
           <img src={f.img} alt={`Fruti Pop ${f.name} sorbet pack`} loading="lazy" className="h-full w-auto object-contain drop-shadow-lg" />
         ) : (
@@ -58,7 +58,7 @@ export function FlavourCard({ f }: { f: Flavour }) {
           </div>
         )}
       </div>
-      <h3 className="mt-4 text-xl font-bold text-accent">{f.name}</h3>
+      <h3 className="mt-3 text-xl font-bold text-accent">{f.name}</h3>
       {f.tagline && <p className="text-sm font-semibold text-foreground/70">“{f.tagline}”</p>}
     </article>
   );
@@ -79,14 +79,14 @@ export function PhotoGrid({ photos, cols = "sm:grid-cols-2 lg:grid-cols-3" }: { 
 export function PackSpotlight({ photo }: { photo?: Photo }) {
   if (photo) {
     return (
-      <div className="grid overflow-hidden rounded-3xl bg-accent text-accent-foreground shadow-lg md:grid-cols-[auto_1fr]">
+      <div className="grid overflow-hidden rounded-3xl bg-accent text-accent-foreground shadow-lg md:mx-auto md:w-fit md:grid-cols-[auto_minmax(0,26rem)]">
         <img
           src={photo.src}
           alt={photo.alt}
           loading="lazy"
-          className="mx-auto aspect-[3/4] w-full max-w-xs object-cover md:h-[26rem] md:w-[19.5rem] md:max-w-none"
+          className="mx-auto aspect-[3/4] w-full max-w-sm object-cover md:h-[30rem] md:w-[22.5rem] md:max-w-none"
         />
-        <div className="flex flex-col justify-center px-6 py-7 sm:px-8 md:py-8">
+        <div className="flex flex-col justify-center px-6 py-7 sm:px-9 md:py-8">
           <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family pack</p>
           <h2 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">20 POPS. 20 BIG SMILES!</h2>
           <p className="mt-3 font-display text-4xl font-bold text-mango sm:text-5xl">{FAMILY_PACK.price}</p>

@@ -31,7 +31,7 @@ function Hero() {
   const go = (n: number) => setI((n + SLIDES.length) % SLIDES.length);
   return (
     <section className="bg-secondary/70" aria-roledescription="carousel" aria-label="Fruti Pop moments">
-      <div className="mx-auto grid max-w-6xl items-center gap-5 px-4 py-6 md:h-[calc(100svh-4.0625rem)] md:min-h-[26rem] md:grid-cols-[0.9fr_1.1fr] md:gap-8 md:py-5">
+      <div className="mx-auto grid max-w-6xl items-center gap-5 px-4 py-6 md:h-[calc(100svh-4.0625rem)] md:min-h-[28rem] md:grid-cols-2 md:gap-10 md:py-5">
         <div className="min-w-0">
           <h1 className="text-5xl font-bold leading-[1.02] text-accent md:text-6xl lg:text-7xl">
             Little pops.<br /><span className="text-primary">Big smiles.</span>
@@ -45,7 +45,7 @@ function Hero() {
           </div>
         </div>
         <div className="min-w-0">
-          <div className="relative mx-auto aspect-[3/4] w-full max-w-[17rem] overflow-hidden rounded-3xl bg-primary/10 shadow-xl sm:max-w-xs md:h-[min(60vh,30rem)] md:w-[calc(min(60vh,30rem)*0.75)] md:max-w-none">
+          <div className="relative mx-auto aspect-[3/4] w-full max-w-xs overflow-hidden rounded-3xl bg-primary/10 shadow-xl sm:max-w-sm md:h-[min(68vh,33rem)] md:w-[calc(min(68vh,33rem)*0.75)] md:max-w-none">
             {SLIDES.map(({ photo, fit }, n) => (
               <img
                 key={photo.src}
