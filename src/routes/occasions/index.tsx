@@ -54,7 +54,7 @@ function OccasionsIndex() {
       description: "From community gatherings to big celebrations, bring a burst of fruity fun that gets everyone smiling.",
       cta: "Plan Your Event →",
       type: "Event",
-      photo: P.mnm[0],
+      photo: P.mnm[0]!,
       band: "bg-mango/20",
       imageFirst: false,
       position: "object-cover object-center",
