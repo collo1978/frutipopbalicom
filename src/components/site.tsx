@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { CONTACT, ENQUIRY_TYPES, FAMILY_PACK, mailLink, waLink } from "@/lib/site";
 import type { Flavour } from "@/lib/flavours";
+import { ZoomableFlavourImage } from "@/components/flavour-zoom";
 import type { Photo } from "@/lib/photos";
 
 export const btn = {
