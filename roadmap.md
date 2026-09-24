@@ -1,4 +1,4 @@
-- [ ] Remove Our Story “Meet the flavours” button and all links to standalone Flavours page
-- [ ] Delete standalone Flavours page
-- [ ] Update every Family Pack reference from 20 pops to 10 pops, retaining Rp250,000
-- [ ] Verify links, forms, messages, desktop and mobile views
+- [x] Remove Our Story “Meet the flavours” button and all links to standalone Flavours page
+- [x] Delete standalone Flavours page
+- [x] Update every Family Pack reference from 20 pops to 10 pops, retaining Rp250,000
+- [x] Verify links, forms, messages, desktop and mobile views
