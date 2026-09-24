@@ -127,8 +127,10 @@ function FlavourLightbox({ f, onClose }: { f: Flavour; onClose: () => void }) {
       pointers.current.delete(e.pointerId);
       if (pointers.current.size === 1) {
         const pt = [...pointers.current.values()][0];
-        gesture.current.startX = pt.x - view.current.x;
-        gesture.current.startY = pt.y - view.current.y;
+        if (pt) {
+          gesture.current.startX = pt.x - view.current.x;
+          gesture.current.startY = pt.y - view.current.y;
+        }
       }
       if (view.current.scale < 1.05) {
         view.current.scale = 1;
