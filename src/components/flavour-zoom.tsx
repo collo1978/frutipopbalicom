@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import type { Flavour } from "@/lib/flavours";
 
 /**
@@ -8,32 +9,51 @@ import type { Flavour } from "@/lib/flavours";
  * The surrounding card layout is untouched: the trigger keeps the exact
  * same box the plain <img> used before.
  */
+const LENS = 190;
+const LENS_ZOOM = 3;
+
 export function ZoomableFlavourImage({ f }: { f: Flavour }) {
   const [open, setOpen] = useState(false);
-  const [origin, setOrigin] = useState("50% 40%");
-  const [hovered, setHovered] = useState(false);
+  const [lens, setLens] = useState<null | { x: number; y: number; bg: string; size: string }>(null);
+  const imgEl = useRef<HTMLImageElement>(null);
+
+  const onMove = (e: React.MouseEvent) => {
+    const img = imgEl.current;
+    if (!img || !img.naturalWidth) return;
+    const r = img.getBoundingClientRect();
+    // Rendered area of the pack inside the object-contain box
+    const s = Math.min(r.width / img.naturalWidth, r.height / img.naturalHeight);
+    const w = img.naturalWidth * s;
+    const h = img.naturalHeight * s;
+    const left = r.left + (r.width - w) / 2;
+    const top = r.top + (r.height - h) / 2;
+    const px = Math.min(w, Math.max(0, e.clientX - left));
+    const py = Math.min(h, Math.max(0, e.clientY - top));
+    setLens({
+      x: e.clientX,
+      y: e.clientY,
+      size: `${w * LENS_ZOOM}px ${h * LENS_ZOOM}px`,
+      bg: `${LENS / 2 - px * LENS_ZOOM}px ${LENS / 2 - py * LENS_ZOOM}px`,
+    });
+  };
 
   return (
     <>
       <button
         type="button"
         aria-label={`Zoom in on the Fruti Pop ${f.name} pack`}
-        onClick={() => setOpen(true)}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        onMouseMove={(e) => {
-          const r = e.currentTarget.getBoundingClientRect();
-          setOrigin(`${(((e.clientX - r.left) / r.width) * 100).toFixed(1)}% ${(((e.clientY - r.top) / r.height) * 100).toFixed(1)}%`);
-        }}
+        onClick={() => { setLens(null); setOpen(true); }}
+        onMouseMove={(e) => { if (window.matchMedia("(hover: hover)").matches) onMove(e); }}
+        onMouseLeave={() => setLens(null)}
         className="relative h-full w-full cursor-zoom-in overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
       >
         <img
+          ref={imgEl}
           src={f.img!}
           alt={`Fruti Pop ${f.name} sorbet pack`}
           loading="lazy"
           draggable={false}
-          className="absolute inset-0 h-full w-full object-contain drop-shadow-lg transition-transform duration-200 ease-out motion-reduce:transition-none"
-          style={{ transform: hovered ? "scale(2.4)" : "scale(1)", transformOrigin: origin }}
+          className="absolute inset-0 h-full w-full object-contain drop-shadow-lg"
         />
         <span className="pointer-events-none absolute right-1.5 top-1.5 flex h-7 w-7 items-center justify-center rounded-full bg-card/80 text-accent shadow-sm" aria-hidden="true">
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
@@ -41,9 +61,27 @@ export function ZoomableFlavourImage({ f }: { f: Flavour }) {
             <path d="m20 20-3.8-3.8M11 8.5v5M8.5 11h5" />
           </svg>
         </span>
-        <span className="sr-only">Tap to open a larger view, or hover to magnify.</span>
+        <span className="sr-only">Tap or click to open a larger view, or hover to magnify.</span>
       </button>
-      {open && <FlavourLightbox f={f} onClose={() => setOpen(false)} />}
+      {lens && typeof document !== "undefined" &&
+        createPortal(
+          <div
+            aria-hidden="true"
+            className="pointer-events-none fixed z-50 rounded-full border-4 border-card bg-card bg-no-repeat shadow-2xl"
+            style={{
+              width: LENS,
+              height: LENS,
+              left: lens.x - LENS / 2,
+              top: lens.y - LENS / 2,
+              backgroundImage: `url(${f.img})`,
+              backgroundSize: lens.size,
+              backgroundPosition: lens.bg,
+            }}
+          />,
+          document.body,
+        )}
+      {open && typeof document !== "undefined" &&
+        createPortal(<FlavourLightbox f={f} onClose={() => setOpen(false)} />, document.body)}
     </>
   );
 }
