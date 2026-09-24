@@ -45,7 +45,7 @@ function Hero() {
           </div>
         </div>
         <div className="min-w-0">
-          <div className="relative mx-auto aspect-[3/4] w-full max-w-[17rem] overflow-hidden rounded-3xl bg-primary/10 shadow-xl sm:max-w-xs md:h-[min(60vh,30rem)] md:w-auto md:max-w-none">
+          <div className="relative mx-auto aspect-[3/4] w-full max-w-[17rem] overflow-hidden rounded-3xl bg-primary/10 shadow-xl sm:max-w-xs md:h-[min(60vh,30rem)] md:w-[calc(min(60vh,30rem)*0.75)] md:max-w-none">
             {SLIDES.map(({ photo, fit }, n) => (
               <img
                 key={photo.src}

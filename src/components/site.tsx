@@ -84,7 +84,7 @@ export function PackSpotlight({ photo }: { photo?: Photo }) {
           src={photo.src}
           alt={photo.alt}
           loading="lazy"
-          className="mx-auto aspect-[3/4] w-full max-w-xs object-cover md:h-[26rem] md:w-auto md:max-w-none"
+          className="mx-auto aspect-[3/4] w-full max-w-xs object-cover md:h-[26rem] md:w-[19.5rem] md:max-w-none"
         />
         <div className="flex flex-col justify-center px-6 py-7 sm:px-8 md:py-8">
           <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family pack</p>
