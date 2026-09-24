@@ -8,7 +8,6 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { Facebook, Instagram } from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -35,9 +34,36 @@ const linkCls = "rounded-full px-3 py-2 text-sm font-bold text-foreground/80 tra
 const activeCls = { className: "bg-secondary text-accent" };
 
 const SOCIAL = [
-  { href: "https://www.instagram.com/frutipop_bali", label: "Fruti Pop Bali on Instagram", Icon: Instagram },
-  { href: "https://www.facebook.com/profile.php?id=61589503270373", label: "Fruti Pop Bali on Facebook", Icon: Facebook },
+  { href: "https://www.instagram.com/frutipop_bali", label: "Fruti Pop Bali on Instagram", brand: "instagram" },
+  { href: "https://www.facebook.com/profile.php?id=61589503270373", label: "Fruti Pop Bali on Facebook", brand: "facebook" },
 ] as const;
+
+function SocialBrandIcon({ brand, className = "h-6 w-6" }: { brand: "instagram" | "facebook"; className?: string }) {
+  if (brand === "instagram") {
+    return (
+      <svg viewBox="0 0 32 32" aria-hidden="true" className={className}>
+        <defs>
+          <linearGradient id="instagram-gradient" x1="3" y1="29" x2="29" y2="3" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#FFD600" />
+            <stop offset="0.45" stopColor="#FF0169" />
+            <stop offset="1" stopColor="#D300C5" />
+          </linearGradient>
+        </defs>
+        <rect width="32" height="32" rx="8" fill="url(#instagram-gradient)" />
+        <rect x="8" y="8" width="16" height="16" rx="5" fill="none" stroke="white" strokeWidth="2.2" />
+        <circle cx="16" cy="16" r="3.8" fill="none" stroke="white" strokeWidth="2.2" />
+        <circle cx="22" cy="10.4" r="1.35" fill="white" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true" className={className}>
+      <circle cx="16" cy="16" r="16" fill="#1877F2" />
+      <path fill="white" d="M18.4 27V17.1h3.3l.5-3.9h-3.8v-2.5c0-1.1.3-1.9 1.9-1.9h2V5.3c-.4 0-1.6-.2-3-.2-3 0-5.1 1.9-5.1 5.3v2.9h-3.4v3.9h3.4V27h4.2Z" />
+    </svg>
+  );
+}
 
 function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -54,8 +80,8 @@ function SiteHeader() {
         </nav>
         <div className="flex items-center gap-2">
           <div className="hidden items-center gap-1 sm:flex">
-            {SOCIAL.map(({ href, label, Icon }) => (
-              <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-10 w-10 items-center justify-center rounded-full text-accent transition-colors hover:bg-secondary"><Icon className="h-5 w-5" /></a>
+            {SOCIAL.map(({ href, label, brand }) => (
+              <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-10 w-10 items-center justify-center rounded-full transition-transform hover:scale-105"><SocialBrandIcon brand={brand} className="h-6 w-6" /></a>
             ))}
           </div>
           <a href={waLink()} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-primary px-4 text-sm font-bold text-primary-foreground shadow">
@@ -72,8 +98,8 @@ function SiteHeader() {
             <Link key={item.to} to={item.to} onClick={() => setOpen(false)} activeOptions={{ exact: true }} className="block rounded-xl px-3 py-3 font-bold" activeProps={activeCls}>{item.label}</Link>
           ))}
           <div className="mt-2 flex gap-3 border-t px-3 pt-4">
-            {SOCIAL.map(({ href, label, Icon }) => (
-              <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-accent"><Icon className="h-6 w-6" /></a>
+            {SOCIAL.map(({ href, label, brand }) => (
+              <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-secondary"><SocialBrandIcon brand={brand} className="h-7 w-7" /></a>
             ))}
           </div>
         </nav>
@@ -97,7 +123,7 @@ function SiteFooter() {
               aria-label="Fruti Pop Bali on Facebook"
               className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-foreground/10 transition-colors hover:bg-accent-foreground/20"
             >
-              <Facebook className="h-5 w-5" />
+              <SocialBrandIcon brand="facebook" className="h-6 w-6" />
             </a>
             <a
               href="https://www.instagram.com/frutipop_bali"
@@ -106,7 +132,7 @@ function SiteFooter() {
               aria-label="Fruti Pop Bali on Instagram"
               className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-foreground/10 transition-colors hover:bg-accent-foreground/20"
             >
-              <Instagram className="h-5 w-5" />
+              <SocialBrandIcon brand="instagram" className="h-6 w-6" />
             </a>
           </div>
         </div>
