@@ -216,13 +216,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Fruti Pop Bali — Tropical Fruit Sorbet Pops" },
+      { title: "Fruti Pop Bali | Tropical Fruit Sorbet Pops" },
       {
         name: "description",
         content:
           "Fruti Pop Bali makes bright, real-fruit sorbet pops in Bali. Family packs, parties, schools, events and villas.",
       },
-      { property: "og:title", content: "Fruti Pop Bali — Tropical Fruit Sorbet Pops" },
+      { property: "og:title", content: "Fruti Pop Bali | Tropical Fruit Sorbet Pops" },
       {
         property: "og:description",
         content:

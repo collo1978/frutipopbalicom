@@ -4,7 +4,7 @@ import { EnquiryForm, PageHeader, PhotoGrid, WhatsAppButton, btn } from "@/compo
 import { OCCASIONS, type Occasion } from "@/lib/occasions";
 
 export function occasionHead(o: Occasion) {
-  const title = `${o.label} — Fruti Pop Bali`;
+  const title = `${o.label} | Fruti Pop Bali`;
   return {
     meta: [
       { title },

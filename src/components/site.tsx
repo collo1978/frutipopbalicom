@@ -85,7 +85,7 @@ export function PackSpotlight() {
           {FAMILY_PACK.pops} pops <span className="text-mango">·</span> {FAMILY_PACK.price}
         </p>
         <p className="mt-3 max-w-lg opacity-90">
-          One pack of 20 Fruti Pops — enough to keep the freezer ready for hot afternoons, playdates and little celebrations.
+          One pack of 20 Fruti Pops, enough to keep the freezer ready for hot afternoons, playdates and little celebrations.
         </p>
       </div>
       <div className="flex flex-col gap-3">

@@ -20,7 +20,7 @@ function EventsPage() {
           <h2 className="mt-2 text-3xl font-bold md:text-4xl">Montessori Night Market, Bali</h2>
           <p className="mt-3 max-w-2xl opacity-90">
             Paul and the team ran the Fruti Pop stall at the Montessori Night Market. These photos are from that
-            evening — kids choosing their flavour, first bites, and families gathered around the freezer.
+            evening. Kids choosing their flavour, first bites, and families gathered around the freezer.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4 md:grid-rows-2">
             {[serving, boy, toddlers, girlMenu, girl, stall].map((p, i) => (

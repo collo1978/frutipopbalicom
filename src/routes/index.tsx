@@ -8,9 +8,9 @@ import { P } from "@/lib/photos";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Fruti Pop Bali — Little pops. Big smiles." },
+      { title: "Fruti Pop Bali | Little pops. Big smiles." },
       { name: "description", content: "Fruity sorbet pops for kids and grown-ups in Bali. Family packs, birthday parties, schools, events and villa pool days." },
-      { property: "og:title", content: "Fruti Pop Bali — Little pops. Big smiles." },
+      { property: "og:title", content: "Fruti Pop Bali | Little pops. Big smiles." },
       { property: "og:description", content: "Fruity sorbet pops for kids and grown-ups in Bali." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
@@ -33,7 +33,7 @@ function Hero() {
             Little pops.<br /><span className="text-primary">Big smiles.</span>
           </h1>
           <p className="mt-5 max-w-md text-lg text-foreground/80">
-            Fruity sorbet pops for kids and grown-ups in Bali — for hot afternoons, pool days and every little celebration.
+            Fruity sorbet pops for kids and grown-ups in Bali. Perfect for hot afternoons, pool days and every little celebration.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link to="/flavours" className={btn.grape}>Explore the Pops</Link>
@@ -68,7 +68,7 @@ function Hero() {
 
 const MOMENTS = [
   { t: "Hot afternoon at home", d: "A freezer stocked for when the kids get home.", p: P.heroCoolerPair, to: "/packs" as const },
-  { t: "Birthday party treats", d: "The cooler opens — the squeals begin.", p: P.heroCoolerGroup, to: "/occasions/birthday-parties" as const },
+  { t: "Birthday party treats", d: "The cooler opens and the squeals begin.", p: P.heroCoolerGroup, to: "/occasions/birthday-parties" as const },
   { t: "After football", d: "Final whistle, fruity reward.", p: P.footballBoy, to: "/occasions/schools-sports-clubs" as const },
   { t: "School & community events", d: "A little joy for a big crowd.", p: P.mnm[0]!, to: "/occasions/events" as const },
   { t: "Villa pool days", d: "A cooler of pops, right to your door.", p: P.villaDelivery, to: "/occasions/villas-poolside" as const },
