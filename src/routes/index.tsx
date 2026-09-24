@@ -39,9 +39,8 @@ function Hero() {
           <p className="mt-3 max-w-md text-base text-foreground/80 md:text-lg">
             Fruity sorbet pops for kids and grown-ups in Bali. Perfect for hot afternoons, pool days and every little celebration.
           </p>
-          <div className="mt-4 inline-flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl bg-accent px-4 py-2.5 text-accent-foreground shadow-md sm:px-5 sm:py-3">
-            <strong className="font-display text-2xl font-bold leading-none text-mango sm:text-3xl">65% FRUIT</strong>
-            <p className="text-sm font-bold leading-snug sm:text-base">Less sugar than regular ice pops.</p>
+          <div className="mt-4 inline-flex w-full max-w-md items-center justify-center rounded-2xl bg-accent px-5 py-2.5 shadow-md sm:px-6 sm:py-3">
+            <p className="text-center text-sm font-bold leading-snug text-white sm:text-base">Less sugar than regular ice pops.</p>
           </div>
           <div className="mt-4 flex flex-wrap gap-3">
             <a
