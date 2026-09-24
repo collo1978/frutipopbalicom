@@ -19,12 +19,17 @@ import { CONTACT, SNOWWAVE, waLink } from "@/lib/site";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/flavours", label: "Flavours" },
   { to: "/packs", label: "Packs & Orders" },
   { to: "/occasions", label: "Occasions" },
   { to: "/where-to-find-us", label: "Where to Find Us" },
   { to: "/our-story", label: "Our Story" },
   { to: "/contact", label: "Contact" },
+] as const;
+
+const FOOTER_NAV = [
+  { to: "/", label: "Home" },
+  { to: "/flavours", label: "Flavours" },
+  ...NAV.slice(1),
 ] as const;
 
 const linkCls = "rounded-full px-3 py-2 text-sm font-bold text-foreground/80 transition-colors hover:bg-secondary hover:text-accent";
@@ -128,7 +133,7 @@ function SiteFooter() {
         <div>
           <p className="font-display font-semibold text-mango">Explore</p>
           <ul className="mt-2 space-y-1 text-sm">
-            {NAV.map((i) => <li key={i.to}><Link to={i.to} className="opacity-90 hover:underline">{i.label}</Link></li>)}
+            {FOOTER_NAV.map((i) => <li key={i.to}><Link to={i.to} className="opacity-90 hover:underline">{i.label}</Link></li>)}
           </ul>
         </div>
         <div>
