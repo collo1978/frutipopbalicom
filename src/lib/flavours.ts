@@ -1,9 +1,9 @@
-import strawberry from "@/assets/strawberry-pop.webp.asset.json";
-import soursop from "@/assets/soursop-pop.png.asset.json";
-import pineapple from "@/assets/pineapple-pop.png.asset.json";
-import pinaColada from "@/assets/pina-colada-pop.png.asset.json";
-import mango from "@/assets/mango-pop.png.asset.json";
-import passionFruit from "@/assets/passion-fruit-pop.png.asset.json";
+import strawberry from "@/assets/strawberry-pop-card.webp.asset.json";
+import soursop from "@/assets/soursop-pop-card.webp.asset.json";
+import pineapple from "@/assets/pineapple-pop-card.webp.asset.json";
+import pinaColada from "@/assets/pina-colada-pop-card.webp.asset.json";
+import mango from "@/assets/mango-pop-card.webp.asset.json";
+import passionFruit from "@/assets/passion-fruit-pop-card.webp.asset.json";
 
 // Six flavours confirmed by the owner. Taglines are printed on the genuine packaging.
 export type Flavour = { name: string; tagline?: string; img: string | null; tint: string };
