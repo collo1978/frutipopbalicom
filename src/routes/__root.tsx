@@ -14,7 +14,6 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import logo from "@/assets/fruti-pop-logo.png.asset.json";
 import { WhatsAppIcon } from "@/components/site";
-import { OCCASIONS } from "@/lib/occasions";
 import { CONTACT, SNOWWAVE, waLink } from "@/lib/site";
 
 const NAV = [
@@ -35,33 +34,6 @@ const FOOTER_NAV = [
 const linkCls = "rounded-full px-3 py-2 text-sm font-bold text-foreground/80 transition-colors hover:bg-secondary hover:text-accent";
 const activeCls = { className: "bg-secondary text-accent" };
 
-function OccasionsMenu() {
-  const [open, setOpen] = useState(false);
-  return (
-    <div
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
-      onBlur={(e) => !e.currentTarget.contains(e.relatedTarget as Node) && setOpen(false)}
-    >
-      <div className="flex items-center">
-        <Link to="/occasions" className={linkCls} activeProps={activeCls}>Occasions</Link>
-        <button aria-label="Show occasions" aria-expanded={open} aria-haspopup="true" onClick={() => setOpen((v) => !v)} className="-ml-2 rounded-full px-1.5 py-2 text-xs text-accent">▾</button>
-      </div>
-      {open && (
-        <ul className="absolute left-0 top-full z-50 w-60 rounded-2xl border bg-card p-2 shadow-xl">
-          {OCCASIONS.map((o) => (
-            <li key={o.slug}>
-              <Link to={`/occasions/${o.slug}`} onClick={() => setOpen(false)} className="block rounded-xl px-3 py-2 text-sm font-semibold hover:bg-secondary" activeProps={activeCls}>{o.label}</Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
 function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
@@ -71,11 +43,9 @@ function SiteHeader() {
           <img src={logo.url} alt="Fruti Pop" className="h-12 w-auto" />
         </Link>
         <nav aria-label="Main" className="hidden items-center lg:flex">
-          {NAV.map((item) =>
-            item.to === "/occasions" ? <OccasionsMenu key={item.to} /> : (
-              <Link key={item.to} to={item.to} activeOptions={{ exact: item.to === "/" }} className={linkCls} activeProps={activeCls}>{item.label}</Link>
-            ),
-          )}
+          {NAV.map((item) => (
+            <Link key={item.to} to={item.to} activeOptions={{ exact: item.to === "/" }} className={linkCls} activeProps={activeCls}>{item.label}</Link>
+          ))}
         </nav>
         <div className="flex items-center gap-2">
           <a href={waLink()} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-primary px-4 text-sm font-bold text-primary-foreground shadow">
@@ -89,12 +59,7 @@ function SiteHeader() {
       {open && (
         <nav id="mobile-nav" aria-label="Mobile" className="max-h-[80vh] overflow-y-auto border-t bg-coconut px-4 pb-4 lg:hidden">
           {NAV.map((item) => (
-            <div key={item.to}>
-              <Link to={item.to} onClick={() => setOpen(false)} activeOptions={{ exact: true }} className="block rounded-xl px-3 py-3 font-bold" activeProps={activeCls}>{item.label}</Link>
-              {item.to === "/occasions" && OCCASIONS.map((o) => (
-                <Link key={o.slug} to={`/occasions/${o.slug}`} onClick={() => setOpen(false)} className="block rounded-xl py-2 pl-8 text-sm font-semibold text-foreground/80" activeProps={activeCls}>{o.label}</Link>
-              ))}
-            </div>
+            <Link key={item.to} to={item.to} onClick={() => setOpen(false)} activeOptions={{ exact: true }} className="block rounded-xl px-3 py-3 font-bold" activeProps={activeCls}>{item.label}</Link>
           ))}
         </nav>
       )}

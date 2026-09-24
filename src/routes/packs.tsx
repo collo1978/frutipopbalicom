@@ -48,7 +48,7 @@ function PacksPage() {
       <section className="mx-auto max-w-6xl px-4 py-8">
         <h2 className="text-3xl font-bold text-accent">Planning something bigger?</h2>
         <div className="mt-4 flex flex-wrap gap-3">
-          {OCCASIONS.map((o) => <Link key={o.slug} to={`/occasions/${o.slug}`} className={btn.outline}>{o.label}</Link>)}
+          {OCCASIONS.map((o) => <Link key={o.slug} to="/occasions" hash={o.slug} className={btn.outline}>{o.label}</Link>)}
         </div>
       </section>
 

@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { CONTACT, ENQUIRY_TYPES, FAMILY_PACK, mailLink, waLink } from "@/lib/site";
 import type { Flavour } from "@/lib/flavours";
 import { ZoomableFlavourImage } from "@/components/flavour-zoom";
@@ -128,13 +128,25 @@ export function PackSpotlight({ photo }: { photo?: Photo }) {
 const field = "mt-1 w-full rounded-xl border border-input bg-card px-3 py-2.5 text-base focus:outline-none focus:ring-4 focus:ring-ring/30";
 
 /** Builds a prefilled WhatsApp message — no data is stored or sent anywhere else. */
-export function EnquiryForm({ defaultType = ENQUIRY_TYPES[0] as string }: { defaultType?: string }) {
+export function EnquiryForm({
+  defaultType = ENQUIRY_TYPES[0] as string,
+  typeOptions = ENQUIRY_TYPES,
+  quantityLabel = "Number of pops or guests",
+}: {
+  defaultType?: string;
+  typeOptions?: readonly string[];
+  quantityLabel?: string;
+}) {
   const [type, setType] = useState(defaultType);
   const [name, setName] = useState("");
   const [qty, setQty] = useState("");
   const [date, setDate] = useState("");
   const [location, setLocation] = useState("");
   const [notes, setNotes] = useState("");
+
+  useEffect(() => {
+    setType(defaultType);
+  }, [defaultType]);
 
   const message = [
     "Hi Fruti Pop!",
@@ -157,7 +169,7 @@ export function EnquiryForm({ defaultType = ENQUIRY_TYPES[0] as string }: { defa
       <label className="text-sm font-semibold sm:col-span-2">
         What can we help with?
         <select className={field} value={type} onChange={(e) => setType(e.target.value)}>
-          {ENQUIRY_TYPES.map((t) => <option key={t}>{t}</option>)}
+          {typeOptions.map((t) => <option key={t}>{t}</option>)}
         </select>
       </label>
       <label className="text-sm font-semibold">
@@ -165,7 +177,7 @@ export function EnquiryForm({ defaultType = ENQUIRY_TYPES[0] as string }: { defa
         <input className={field} value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />
       </label>
       <label className="text-sm font-semibold">
-        Number of pops or guests
+        {quantityLabel}
         <input className={field} value={qty} onChange={(e) => setQty(e.target.value)} inputMode="numeric" />
       </label>
       <label className="text-sm font-semibold">
