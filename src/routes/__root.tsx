@@ -18,7 +18,7 @@ import { CONTACT, SNOWWAVE, waLink } from "@/lib/site";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/packs", label: "Packs & Orders" },
+  { to: "/packs", label: "Fill the Freezer" },
   { to: "/occasions", label: "Occasions" },
   { to: "/where-to-find-us", label: "Where to Find Us" },
   { to: "/our-story", label: "Our Story" },
@@ -49,7 +49,7 @@ function SiteHeader() {
         </nav>
         <div className="flex items-center gap-2">
           <a href={waLink()} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-primary px-4 text-sm font-bold text-primary-foreground shadow">
-            <WhatsAppIcon className="h-4 w-4" /> Order<span className="sr-only"> on WhatsApp</span>
+            <WhatsAppIcon className="h-4 w-4" /> Order Now<span className="sr-only"> on WhatsApp</span>
           </a>
           <button className="flex h-10 w-10 items-center justify-center rounded-full border lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen((v) => !v)}>
             <span aria-hidden className="text-xl">{open ? "✕" : "☰"}</span>
