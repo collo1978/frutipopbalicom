@@ -79,12 +79,12 @@ export function PhotoGrid({ photos, cols = "sm:grid-cols-2 lg:grid-cols-3" }: { 
 export function PackSpotlight({ photo }: { photo?: Photo }) {
   if (photo) {
     return (
-      <div className="grid overflow-hidden rounded-3xl bg-accent text-accent-foreground shadow-lg md:grid-cols-[1.05fr_0.95fr]">
+      <div className="grid overflow-hidden rounded-3xl bg-accent text-accent-foreground shadow-lg md:grid-cols-[auto_1fr]">
         <img
           src={photo.src}
           alt={photo.alt}
           loading="lazy"
-          className="h-56 w-full object-cover object-[center_48%] sm:h-64 md:h-80"
+          className="mx-auto aspect-[3/4] w-full max-w-xs object-cover md:h-[26rem] md:w-auto md:max-w-none"
         />
         <div className="flex flex-col justify-center px-6 py-7 sm:px-8 md:py-8">
           <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family pack</p>
