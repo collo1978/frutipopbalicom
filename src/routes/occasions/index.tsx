@@ -98,7 +98,7 @@ function OccasionsIndex() {
               src={story.photo.src}
               alt={story.photo.alt}
               loading="lazy"
-              className={`aspect-[4/3] w-full rounded-3xl shadow-lg ${story.position} ${story.imageFirst ? "md:order-1" : undefined}`}
+              className={`aspect-square w-full rounded-3xl shadow-lg ${story.position} ${story.imageFirst ? "md:order-1" : undefined}`}
             />
           </div>
         </section>
@@ -106,7 +106,7 @@ function OccasionsIndex() {
 
       <section className="bg-accent py-10 text-accent-foreground md:py-12">
         <div className="mx-auto grid max-w-5xl items-center gap-6 px-4 md:grid-cols-[1.05fr_0.95fr] md:gap-9">
-          <img src={P.heroCoolerPair.src} alt={P.heroCoolerPair.alt} loading="lazy" className="aspect-[4/3] w-full rounded-3xl object-cover object-center shadow-lg" />
+          <img src={P.heroCoolerPair.src} alt={P.heroCoolerPair.alt} loading="lazy" className="mx-auto aspect-[3/4] w-full max-w-sm rounded-3xl object-cover object-center shadow-lg" />
           <div>
             <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family Pack</p>
             <h2 className="mt-2 text-3xl font-bold md:text-4xl">20 POPS. 20 BIG SMILES!</h2>
