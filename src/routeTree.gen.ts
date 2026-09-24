@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as FlavoursRouteImport } from './routes/flavours'
 import { Route as OccasionsRouteImport } from './routes/occasions'
 import { Route as OurStoryRouteImport } from './routes/our-story'
 import { Route as PacksRouteImport } from './routes/packs'
@@ -37,11 +36,6 @@ const AboutRoute = AboutRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FlavoursRoute = FlavoursRouteImport.update({
-  id: '/flavours',
-  path: '/flavours',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OccasionsRoute = OccasionsRouteImport.update({
@@ -101,7 +95,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/flavours': typeof FlavoursRoute
   '/occasions': typeof OccasionsRouteWithChildren
   '/our-story': typeof OurStoryRoute
   '/packs': typeof PacksRoute
@@ -117,7 +110,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/flavours': typeof FlavoursRoute
   '/our-story': typeof OurStoryRoute
   '/packs': typeof PacksRoute
   '/where-to-buy': typeof WhereToBuyRoute
@@ -133,7 +125,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/flavours': typeof FlavoursRoute
   '/occasions': typeof OccasionsRouteWithChildren
   '/our-story': typeof OurStoryRoute
   '/packs': typeof PacksRoute
@@ -151,7 +142,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/flavours'
     | '/occasions'
     | '/our-story'
     | '/packs'
@@ -167,7 +157,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/flavours'
     | '/our-story'
     | '/packs'
     | '/where-to-buy'
@@ -182,7 +171,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/flavours'
     | '/occasions'
     | '/our-story'
     | '/packs'
@@ -199,7 +187,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  FlavoursRoute: typeof FlavoursRoute
   OccasionsRoute: typeof OccasionsRouteWithChildren
   OurStoryRoute: typeof OurStoryRoute
   PacksRoute: typeof PacksRoute
@@ -228,13 +215,6 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/flavours': {
-      id: '/flavours'
-      path: '/flavours'
-      fullPath: '/flavours'
-      preLoaderRoute: typeof FlavoursRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/occasions': {
@@ -334,7 +314,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  FlavoursRoute: FlavoursRoute,
   OccasionsRoute: OccasionsRouteWithChildren,
   OurStoryRoute: OurStoryRoute,
   PacksRoute: PacksRoute,
