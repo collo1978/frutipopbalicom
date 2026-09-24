@@ -1,6 +1,8 @@
 # Fruti Pop Bali — Website (draft, unpublished)
 
 ## Done
+- Occasions rebuilt as a compact 2 × 2 photo and copy grid, with the page header removed and enquiry behavior preserved.
+- Official colour Instagram and Facebook brand marks added to desktop, mobile and footer navigation.
 - Full site built: Home, Flavours, Packs & Orders, Occasions (+4 pages), Where to Find Us, Our Story, Contact, 404, redirects for old links.
 - All six flavour pack photos wired in (incl. Mango "So Smooth.", Passion Fruit "Sour Punch.").
 - Approved claim "Made with an average of 65% fruit and less added sugar than regular ice pops." on Home + Flavours.
@@ -13,6 +15,3 @@
 ## Open (waiting on owner)
 1. Owner review of flavour/occasion descriptions (Lovable wording).
 
-## Open
-- [ ] Rebuild Occasions as a compact 2 × 2 grid from the supplied reference.
-- [ ] Replace navigation social icons with official Instagram and Facebook brand marks.

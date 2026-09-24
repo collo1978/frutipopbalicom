@@ -3,6 +3,7 @@ import { useState } from "react";
 import { EnquiryForm, btn } from "@/components/site";
 import { P } from "@/lib/photos";
 import { FAMILY_PACK } from "@/lib/site";
+import birthdayParty from "@/assets/birthday-party.jpg.asset.json";
 
 export const Route = createFileRoute("/occasions/")({
   head: () => ({
@@ -38,9 +39,7 @@ function OccasionsIndex() {
       description: "Cake is great. But nothing gets a squeal quite like a cooler full of bright, fruity pops on a hot Bali afternoon.",
       cta: "Plan Your Party →",
       type: "Birthday party",
-      photo: P.heroCoolerGroup,
-      band: "bg-secondary/55",
-      imageFirst: false,
+      photo: { src: birthdayParty.url, alt: "Children celebrating a birthday with Fruti Pops around a cake" },
       position: "object-cover object-center",
     },
     {
@@ -50,9 +49,7 @@ function OccasionsIndex() {
       description: "After all the running, cheering and playing, there's nothing quite like a cold, fruity reward. Big smiles for the whole team.",
       cta: "Treat Your Team →",
       type: "School or sports club",
-      photo: P.footballKidsKiosk,
-      band: "bg-background",
-      imageFirst: true,
+      photo: P.footballPair,
       position: "object-cover object-center",
     },
     {
@@ -62,9 +59,7 @@ function OccasionsIndex() {
       description: "From community gatherings to big celebrations, bring a burst of fruity fun that gets everyone smiling.",
       cta: "Plan Your Event →",
       type: "Event",
-      photo: P.mnm[0]!,
-      band: "bg-mango/20",
-      imageFirst: false,
+      photo: P.mnm[1]!,
       position: "object-cover object-center",
     },
     {
@@ -75,42 +70,35 @@ function OccasionsIndex() {
       cta: "Stock Your Freezer →",
       type: "Villa or poolside",
       photo: P.villaDelivery,
-      band: "bg-primary/10",
-      imageFirst: true,
       position: "object-cover object-center",
     },
   ] as const;
 
   return (
     <>
-      <header className="bg-secondary/60">
-        <div className="mx-auto max-w-6xl px-4 py-10 text-center md:py-12">
-          <p className="font-display text-sm font-semibold uppercase tracking-widest text-primary">Occasions</p>
-          <h1 className="mt-2 text-4xl font-bold text-accent md:text-5xl">Every moment is better with a pop.</h1>
-          <p className="mx-auto mt-3 max-w-xl text-lg text-foreground/80">Find your moment, then tell us what would make the day feel special.</p>
+      <section className="bg-background">
+        <h1 className="sr-only">Occasions with Fruti Pop Bali</h1>
+        <div className="mx-auto grid max-w-[100rem] gap-x-9 gap-y-5 px-4 py-5 lg:grid-cols-2 lg:py-6 xl:px-6">
+          {stories.map((story) => (
+            <article key={story.id} id={story.id} className="scroll-mt-20 grid items-center gap-4 sm:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] lg:gap-5">
+              <img
+                src={story.photo.src}
+                alt={story.photo.alt}
+                loading={story.id === "birthday-parties" ? "eager" : "lazy"}
+                className={`aspect-[1.28/1] h-full max-h-[18rem] min-h-0 w-full rounded-3xl ${story.position}`}
+              />
+              <div className="min-w-0 py-2">
+                <h2 className="text-3xl font-bold leading-[1.02] text-accent xl:text-4xl">{story.label}</h2>
+                <p className="mt-2 font-display text-base font-bold leading-snug text-accent xl:text-lg">{story.headline}</p>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/75 xl:text-base">{story.description}</p>
+                <a href="#enquiry" onClick={(event) => { event.preventDefault(); showEnquiry(story.type); }} className={`${btn.primary} mt-4 px-5`}>
+                  {story.cta}
+                </a>
+              </div>
+            </article>
+          ))}
         </div>
-      </header>
-
-      {stories.map((story) => (
-        <section key={story.id} id={story.id} className={`scroll-mt-20 ${story.band}`}>
-          <div className="mx-auto grid max-w-6xl items-center gap-5 px-4 py-8 md:grid-cols-2 md:gap-10 md:py-10">
-            <div className={story.imageFirst ? "md:order-2" : undefined}>
-              <p className="font-display text-sm font-semibold uppercase tracking-widest text-primary">{story.label}</p>
-              <h2 className="mt-2 text-3xl font-bold text-accent md:text-4xl">{story.headline}</h2>
-              <p className="mt-3 max-w-lg text-lg leading-relaxed text-foreground/80">{story.description}</p>
-              <a href="#enquiry" onClick={(event) => { event.preventDefault(); showEnquiry(story.type); }} className={`${btn.primary} mt-5`}>
-                {story.cta}
-              </a>
-            </div>
-            <img
-              src={story.photo.src}
-              alt={story.photo.alt}
-              loading="lazy"
-              className={`aspect-[4/3] w-full max-h-[calc(100svh-10rem)] rounded-3xl shadow-lg ${story.position} ${story.imageFirst ? "md:order-1" : undefined}`}
-            />
-          </div>
-        </section>
-      ))}
+      </section>
 
       <section className="bg-accent py-8 text-accent-foreground md:py-10">
         <div className="mx-auto grid max-w-5xl items-center gap-6 px-4 md:grid-cols-[1.05fr_0.95fr] md:gap-9">
