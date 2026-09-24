@@ -63,6 +63,7 @@ function Hero() {
             ))}
             <button onClick={() => go(i + 1)} aria-label="Next photo" className="h-9 w-9 rounded-full border-2 border-accent bg-background/85 font-bold text-accent shadow">›</button>
           </div>
+          </div>
         </div>
       </div>
     </section>
