@@ -114,7 +114,7 @@ function OccasionsIndex() {
 
       <section className="bg-accent py-8 text-accent-foreground md:py-10">
         <div className="mx-auto grid max-w-5xl items-center gap-6 px-4 md:grid-cols-[1.05fr_0.95fr] md:gap-9">
-          <img src={P.heroCoolerPair.src} alt={P.heroCoolerPair.alt} loading="lazy" className="mx-auto aspect-[4/5] w-full max-w-[18rem] max-h-[calc(100svh-9rem)] rounded-3xl object-cover object-center shadow-lg" />
+          <img src={P.heroCoolerPair.src} alt={P.heroCoolerPair.alt} loading="lazy" className="mx-auto aspect-[4/5] w-full max-w-[15rem] md:max-w-[17rem] rounded-3xl object-cover object-center shadow-lg" />
           <div>
             <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family Pack</p>
             <h2 className="mt-2 text-3xl font-bold md:text-4xl">20 POPS. 20 BIG SMILES!</h2>
