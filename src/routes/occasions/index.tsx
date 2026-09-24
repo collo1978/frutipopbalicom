@@ -22,6 +22,14 @@ export const Route = createFileRoute("/occasions/")({
 function OccasionsIndex() {
   const [enquiryType, setEnquiryType] = useState("Something else");
 
+  const showEnquiry = (type?: string) => {
+    if (type) setEnquiryType(type);
+    window.history.replaceState(null, "", "#enquiry");
+    window.requestAnimationFrame(() => {
+      document.getElementById("enquiry")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
   const stories = [
     {
       id: "birthday-parties",
@@ -90,7 +98,7 @@ function OccasionsIndex() {
               <p className="font-display text-sm font-semibold uppercase tracking-widest text-primary">{story.label}</p>
               <h2 className="mt-2 text-3xl font-bold text-accent md:text-4xl">{story.headline}</h2>
               <p className="mt-3 max-w-lg text-lg leading-relaxed text-foreground/80">{story.description}</p>
-              <a href="#enquiry" onClick={() => setEnquiryType(story.type)} className={`${btn.primary} mt-5`}>
+              <a href="#enquiry" onClick={(event) => { event.preventDefault(); showEnquiry(story.type); }} className={`${btn.primary} mt-5`}>
                 {story.cta}
               </a>
             </div>
@@ -112,7 +120,7 @@ function OccasionsIndex() {
             <h2 className="mt-2 text-3xl font-bold md:text-4xl">20 POPS. 20 BIG SMILES!</h2>
             <p className="mt-3 font-display text-4xl font-bold text-mango">{FAMILY_PACK.price}</p>
             <p className="mt-2 text-lg font-semibold">Fill the freezer. Bring on the smiles.</p>
-            <a href="#enquiry" className={`${btn.primary} mt-5`}>Get Your Party Pops →</a>
+            <a href="#enquiry" onClick={(event) => { event.preventDefault(); showEnquiry(); }} className={`${btn.primary} mt-5`}>Get Your Party Pops →</a>
           </div>
         </div>
       </section>
