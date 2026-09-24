@@ -34,6 +34,11 @@ const FOOTER_NAV = [
 const linkCls = "rounded-full px-3 py-2 text-sm font-bold text-foreground/80 transition-colors hover:bg-secondary hover:text-accent";
 const activeCls = { className: "bg-secondary text-accent" };
 
+const SOCIAL = [
+  { href: "https://www.instagram.com/frutipop_bali", label: "Fruti Pop Bali on Instagram", Icon: Instagram },
+  { href: "https://www.facebook.com/profile.php?id=61589503270373", label: "Fruti Pop Bali on Facebook", Icon: Facebook },
+] as const;
+
 function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
@@ -48,6 +53,11 @@ function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
+          <div className="hidden items-center gap-1 sm:flex">
+            {SOCIAL.map(({ href, label, Icon }) => (
+              <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-10 w-10 items-center justify-center rounded-full text-accent transition-colors hover:bg-secondary"><Icon className="h-5 w-5" /></a>
+            ))}
+          </div>
           <a href={waLink()} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-primary px-4 text-sm font-bold text-primary-foreground shadow">
             <WhatsAppIcon className="h-4 w-4" /> Order Now<span className="sr-only"> on WhatsApp</span>
           </a>
@@ -61,6 +71,11 @@ function SiteHeader() {
           {NAV.map((item) => (
             <Link key={item.to} to={item.to} onClick={() => setOpen(false)} activeOptions={{ exact: true }} className="block rounded-xl px-3 py-3 font-bold" activeProps={activeCls}>{item.label}</Link>
           ))}
+          <div className="mt-2 flex gap-3 border-t px-3 pt-4">
+            {SOCIAL.map(({ href, label, Icon }) => (
+              <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-accent"><Icon className="h-6 w-6" /></a>
+            ))}
+          </div>
         </nav>
       )}
     </header>

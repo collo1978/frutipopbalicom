@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { EnquiryForm, WhatsAppIcon, btn } from "@/components/site";
 import { OCCASIONS } from "@/lib/occasions";
 import { CONTACT, FAMILY_PACK, mailLink, waLink } from "@/lib/site";
-import freezer from "@/assets/family-pack-freezer.png.asset.json";
+import freezer from "@/assets/family-pack-freezer-home.png.asset.json";
 
 export const Route = createFileRoute("/packs")({
   head: () => ({
@@ -29,14 +29,14 @@ function PacksPage() {
         <h1 className="sr-only">Fill the Freezer: Family Pack, 20 pops for Rp250,000</h1>
         {/* Desktop/tablet: full promo image with real buttons placed over the image's button areas */}
         <div className="relative hidden overflow-hidden rounded-3xl shadow-lg md:block">
-          <img src={freezer.url} alt="A mum and two children opening a freezer full of Fruti Pops. Family Pack, 20 pops, 20 big smiles, Rp250,000." width={1860} height={845} className="block h-auto w-full" />
-          <a href={waLink(FAMILY_MSG)} target="_blank" rel="noopener noreferrer" aria-label="Order the Family Pack on WhatsApp" className="absolute rounded-full focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-mango" style={{ left: "62%", top: "68.5%", width: "23.8%", height: "10.4%" }} />
-          <a href={email} aria-label="Enquire about the Family Pack by email" className="absolute rounded focus-visible:outline-4 focus-visible:outline-mango" style={{ left: "61.8%", top: "81.8%", width: "12.6%", height: "5.2%" }} />
+          <img src={freezer.url} alt="A mum and two children opening a freezer at home full of Fruti Pops. Family Pack, 20 pops, 20 big smiles, Rp250,000." width={1860} height={845} className="block h-auto w-full" />
+          <a href={waLink(FAMILY_MSG)} target="_blank" rel="noopener noreferrer" aria-label="Order the Family Pack on WhatsApp" className="absolute rounded-full focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-mango" style={{ left: "64.2%", top: "71%", width: "27.4%", height: "11.9%" }} />
+          <a href={email} aria-label="Enquire about the Family Pack by email" className="absolute rounded focus-visible:outline-4 focus-visible:outline-mango" style={{ left: "64.4%", top: "85.2%", width: "12.6%", height: "4.6%" }} />
         </div>
         {/* Mobile: photo portion plus real HTML offer */}
         <div className="overflow-hidden rounded-3xl bg-accent text-accent-foreground shadow-lg md:hidden">
-          <div className="aspect-[1084/845] overflow-hidden">
-            <img src={freezer.url} alt="A mum and two children opening a freezer full of Fruti Pops." className="h-full w-full object-cover object-left" />
+          <div className="aspect-[1128/845] overflow-hidden">
+            <img src={freezer.url} alt="A mum and two children opening a freezer at home full of Fruti Pops." className="h-full w-full object-cover object-left" />
           </div>
           <div className="p-6">
             <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family Pack</p>
