@@ -1,63 +1,43 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-
+import { createFileRoute } from "@tanstack/react-router";
+import { FlavourCard, PackSpotlight, WhatsAppButton } from "@/components/site";
 import { FLAVOURS } from "@/lib/flavours";
 
 export const Route = createFileRoute("/flavours")({
   head: () => ({
     meta: [
       { title: "Flavours — Fruti Pop Bali" },
-      {
-        name: "description",
-        content:
-          "Explore Fruti Pop Bali's tropical sorbet pop flavours — mango, dragonfruit, coconut and more. (Draft line-up pending confirmation.)",
-      },
+      { name: "description", content: "Strawberry, Soursop, Pineapple, Piña Colada, Mango and Passion Fruit — meet the Fruti Pop fruit sorbet line-up." },
       { property: "og:title", content: "Flavours — Fruti Pop Bali" },
-      {
-        property: "og:description",
-        content: "Explore Fruti Pop Bali's tropical sorbet pop flavours.",
-      },
+      { property: "og:description", content: "Six fruity sorbet pops: Strawberry, Soursop, Pineapple, Piña Colada, Mango and Passion Fruit." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "/flavours" },
     ],
+    links: [{ rel: "canonical", href: "/flavours" }],
   }),
-  component: Flavours,
+  component: FlavoursPage,
 });
 
-function Flavours() {
+function FlavoursPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 md:py-16">
-      <div className="max-w-2xl">
-        <h1 className="text-3xl font-bold md:text-4xl">Our Flavours</h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Four fruity favourites, 100g each. Little pops. Big smiles.
-        </p>
-      </div>
-
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {FLAVOURS.map((f) => (
-          <div key={f.name} className="overflow-hidden rounded-3xl border bg-card shadow-sm">
-            <div className={`flex h-72 items-center justify-center p-4 ${f.color}`}>
-              <img src={f.img} alt={`Fruti Pop ${f.name} tube`} loading="lazy" className="h-full w-auto object-contain drop-shadow-lg" />
-            </div>
-            <div className="p-4">
-              <p className="text-xs font-bold uppercase tracking-wide text-primary">{f.tagline}</p>
-              <h2 className="mt-1 text-lg font-semibold">{f.name}</h2>
-              <p className="mt-1 text-sm text-muted-foreground">{f.note}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-
-      <div className="mt-12 text-center">
-        <p className="text-muted-foreground">Hungry yet? Find your nearest Fruti Pop.</p>
-        <Link
-          to="/where-to-buy"
-          className="mt-4 inline-block rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-md transition-transform hover:scale-105"
-        >
-          Where to Buy
-        </Link>
-      </div>
-    </div>
+    <>
+      <section className="bg-secondary/60">
+        <div className="mx-auto max-w-6xl px-4 py-12 text-center md:py-16">
+          <p className="font-display text-sm font-semibold uppercase tracking-widest text-primary">Flavours</p>
+          <h1 className="mt-2 text-4xl font-bold text-accent md:text-5xl">Which one's your favourite?</h1>
+          <p className="mx-auto mt-4 max-w-xl text-lg text-foreground/80">
+            Six fruity sorbet pops, each in its own bright 100g tube. Kids pick by colour — grown-ups usually want two.
+          </p>
+        </div>
+      </section>
+      <section className="mx-auto max-w-6xl px-4 py-14">
+        <div className="grid grid-cols-1 gap-5 min-[420px]:grid-cols-2 lg:grid-cols-3">
+          {FLAVOURS.map((f) => <FlavourCard key={f.name} f={f} />)}
+        </div>
+        <div className="mt-10 text-center">
+          <WhatsAppButton message="Hi Fruti Pop! Which flavours do you have available right now?">Ask what's available</WhatsAppButton>
+        </div>
+      </section>
+      <section className="mx-auto max-w-6xl px-4 pb-6"><PackSpotlight /></section>
+    </>
   );
 }
