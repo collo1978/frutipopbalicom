@@ -25,7 +25,7 @@ export function ZoomableFlavourImage({ f }: { f: Flavour }) {
           const r = e.currentTarget.getBoundingClientRect();
           setOrigin(`${(((e.clientX - r.left) / r.width) * 100).toFixed(1)}% ${(((e.clientY - r.top) / r.height) * 100).toFixed(1)}%`);
         }}
-        className="relative h-48 w-full cursor-zoom-in overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40 sm:h-56 md:h-60 lg:h-72"
+        className="relative h-full w-full cursor-zoom-in overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
       >
         <img
           src={f.img!}
