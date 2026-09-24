@@ -51,7 +51,7 @@ function OccasionsIndex() {
       cta: "Treat Your Team →",
       type: "School or sports club",
       photo: P.footballPair,
-      position: "object-cover object-center",
+      position: "object-cover object-top",
     },
     {
       id: "events",
@@ -78,8 +78,10 @@ function OccasionsIndex() {
   return (
     <>
       <section className="bg-background">
-        <h1 className="sr-only">Occasions with Fruti Pop Bali</h1>
-        <div className="mx-auto grid max-w-[100rem] gap-x-9 gap-y-5 px-4 py-5 lg:grid-cols-2 lg:py-6 xl:px-6">
+        <h1 className="pt-5 text-center font-display text-2xl font-bold text-accent md:pt-6 md:text-3xl">
+          Good times start with a pop.
+        </h1>
+        <div className="mx-auto grid max-w-[100rem] gap-x-9 gap-y-5 px-4 py-4 lg:grid-cols-2 lg:py-5 xl:px-6">
           {stories.map((story) => (
             <article key={story.id} id={story.id} className="scroll-mt-20 grid items-center gap-4 sm:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] lg:gap-5">
               <img
