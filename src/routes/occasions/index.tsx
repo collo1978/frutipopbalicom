@@ -78,7 +78,6 @@ function OccasionsIndex() {
   return (
     <>
       <section className="bg-background">
-        <h1 className="sr-only">Occasions with Fruti Pop Bali</h1>
         <h1 className="pt-5 text-center font-display text-2xl font-bold text-accent md:pt-6 md:text-3xl">
           Good times start with a pop.
         </h1>
