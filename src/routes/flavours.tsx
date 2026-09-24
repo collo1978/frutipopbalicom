@@ -28,7 +28,7 @@ function FlavoursPage() {
             Six fruity sorbet pops, each in its own bright 100g tube. Kids pick by colour. Grown-ups usually want two.
           </p>
           <p className="mx-auto mt-4 inline-block rounded-full bg-card px-4 py-2 text-sm font-bold text-primary shadow-sm">
-            Made with an average of 65% fruit and less added sugar than regular ice pops.
+            Made with an average of 65% fruit and less sugar than regular ice pops.
           </p>
         </div>
       </section>

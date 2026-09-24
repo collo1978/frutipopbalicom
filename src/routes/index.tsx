@@ -109,7 +109,7 @@ function Home() {
               <span aria-hidden="true" className="absolute bottom-2 right-14 -z-10 h-8 w-8 rounded-full bg-dragonfruit" />
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                 <strong className="shrink-0 font-display text-4xl font-bold leading-none text-mango sm:text-5xl">65% FRUIT</strong>
-                <p className="max-w-xs text-sm font-bold leading-snug sm:text-base">Less added sugar than regular ice pops.</p>
+                <p className="max-w-xs text-sm font-bold leading-snug sm:text-base">Less sugar than regular ice pops.</p>
               </div>
             </div>
           </div>
