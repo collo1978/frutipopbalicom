@@ -38,7 +38,7 @@ export const OCCASIONS: Occasion[] = [
     hook: "A little joy for a big crowd.",
     intro: "Markets, community nights and celebrations — Fruti Pop brings a splash of colour and a queue of smiling faces.",
     enquiryType: "Event",
-    cover: P.mnm[0],
+    cover: P.mnm[0]!,
     gallery: [P.eventStrawHat, P.eventStrawberry, P.eventNight],
     tips: ["Event date", "Venue or area", "Expected number of guests"],
   },
