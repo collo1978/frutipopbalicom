@@ -70,11 +70,11 @@ function Hero() {
 }
 
 const MOMENTS = [
-  { t: "Hot afternoon cool-down", d: "A cold pop when the Bali sun is high.", p: P.eventStrawHat, to: "/packs" as const },
-  { t: "Birthday party treats", d: "A colourful treat for the celebration.", p: P.kioskGirl, to: "/occasions/birthday-parties" as const },
-  { t: "After football", d: "Final whistle, fruity reward.", p: P.footballPair, to: "/occasions/schools-sports-clubs" as const },
-  { t: "School & community events", d: "A little joy for a big crowd.", p: P.mnm[0]!, to: "/occasions/events" as const },
-  { t: "Villa pool days", d: "A cooler of pops, right to your door.", p: P.villaDelivery, to: "/occasions/villas-poolside" as const },
+  { t: "Hot afternoon cool-down", d: "A cold pop when the Bali sun is high.", p: P.eventStrawHat, hash: "villas-poolside" },
+  { t: "Birthday party treats", d: "A colourful treat for the celebration.", p: P.kioskGirl, hash: "birthday-parties" },
+  { t: "After football", d: "Final whistle, fruity reward.", p: P.footballPair, hash: "schools-sports-clubs" },
+  { t: "School & community events", d: "A little joy for a big crowd.", p: P.mnm[0]!, hash: "events" },
+  { t: "Villa pool days", d: "A cooler of pops, right to your door.", p: P.villaDelivery, hash: "villas-poolside" },
 ];
 
 function Home() {
@@ -87,7 +87,7 @@ function Home() {
         <ul className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-5">
           {MOMENTS.map((m) => (
             <li key={m.t}>
-              <Link to={m.to} className="group block h-full overflow-hidden rounded-3xl border bg-card focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
+              <Link to="/occasions" hash={m.hash} className="group block h-full overflow-hidden rounded-3xl border bg-card focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
                 <img src={m.p.src} alt={m.p.alt} loading="lazy" className="aspect-square w-full object-cover transition duration-300 group-hover:scale-[1.03]" />
                 <div className="p-4">
                   <h3 className="font-bold leading-tight">{m.t}</h3>
@@ -97,6 +97,9 @@ function Home() {
             </li>
           ))}
         </ul>
+        <div className="mt-6 text-center">
+          <Link to="/occasions" className={btn.primary}>Explore All Occasions →</Link>
+        </div>
       </section>
 
       <section id="flavours" className="scroll-mt-16 bg-muted py-8 md:py-9">

@@ -1,14 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { OccasionPage, occasionHead } from "@/components/occasion-page";
-import { getOccasion } from "@/lib/occasions";
-
-const o = getOccasion("schools-sports-clubs");
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/occasions/schools-sports-clubs")({
-  head: () => occasionHead(o),
-  component: SchoolsPage,
+  beforeLoad: () => {
+    throw redirect({ to: "/occasions", hash: "schools-sports-clubs", statusCode: 301 });
+  },
 });
-
-function SchoolsPage() {
-  return <OccasionPage o={o} />;
-}
