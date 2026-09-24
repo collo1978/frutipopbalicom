@@ -44,7 +44,12 @@ function Hero() {
             <p className="text-sm font-bold leading-snug sm:text-base">Less sugar than regular ice pops.</p>
           </div>
           <div className="mt-4 flex flex-wrap gap-3">
-            <a href="#flavours" className={btn.grape}>Explore the Pops</a>
+            <a
+              href="#flavours"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-8 py-3 text-base font-bold text-accent-foreground shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40 active:translate-y-0 md:px-10 md:text-lg"
+            >
+              Explore the Pops <span aria-hidden="true">→</span>
+            </a>
           </div>
         </div>
         <div className="min-w-0">
