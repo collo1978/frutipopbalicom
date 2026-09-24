@@ -20,7 +20,11 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const SLIDES = [P.heroCoolerGroup, P.footballKidsKiosk, P.beachGroup];
+const SLIDES = [
+  { photo: P.heroCoolerGroup, fit: "object-contain object-center" },
+  { photo: P.footballKidsKiosk, fit: "object-contain object-center" },
+  { photo: P.beachGroup, fit: "object-cover object-center" },
+];
 
 function Hero() {
   const [i, setI] = useState(0);
@@ -41,15 +45,15 @@ function Hero() {
           </div>
         </div>
         <div className="min-w-0">
-          <div className="relative h-64 overflow-hidden rounded-3xl shadow-xl sm:h-80 md:h-[min(56vh,29rem)]">
-            {SLIDES.map((s, n) => (
+          <div className="relative h-60 overflow-hidden rounded-3xl bg-primary/10 shadow-xl sm:h-72 md:h-[min(53vh,27rem)]">
+            {SLIDES.map(({ photo, fit }, n) => (
               <img
-                key={s.src}
-                src={s.src}
-                alt={s.alt}
+                key={photo.src}
+                src={photo.src}
+                alt={photo.alt}
                 loading={n === 0 ? "eager" : "lazy"}
                 aria-hidden={n !== i}
-                className={`absolute inset-0 h-full w-full object-cover object-[center_48%] transition-opacity duration-500 ${n === i ? "opacity-100" : "opacity-0"}`}
+                className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${fit} ${n === i ? "opacity-100" : "opacity-0"}`}
               />
             ))}
           </div>
@@ -96,19 +100,27 @@ function Home() {
         </ul>
       </section>
 
-      <section className="bg-muted py-12 md:py-14">
+      <section className="bg-muted py-10 md:py-12">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-3xl font-bold text-accent md:text-4xl">Six fruity favourites</h2>
-          <p className="mt-4 inline-flex items-center rounded-full bg-card px-4 py-2 text-sm font-bold text-primary shadow-sm">
-            Made with an average of 65% fruit and less added sugar than regular ice pops.
-          </p>
-          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+          <div className="grid items-center gap-5 md:grid-cols-[minmax(0,1fr)_minmax(20rem,0.85fr)]">
+            <h2 className="text-3xl font-bold text-accent md:text-4xl">Six fruity favourites</h2>
+            <div className="relative isolate overflow-hidden rounded-3xl bg-accent px-5 py-4 text-accent-foreground shadow-lg md:px-7">
+              <span aria-hidden="true" className="absolute -right-5 -top-7 -z-10 h-24 w-24 rounded-full bg-mango" />
+              <span aria-hidden="true" className="absolute bottom-2 right-14 -z-10 h-8 w-8 rounded-full bg-dragonfruit" />
+              <div className="flex items-center gap-4">
+                <strong className="shrink-0 font-display text-4xl font-bold leading-none text-mango sm:text-5xl">65% FRUIT</strong>
+                <p className="max-w-xs text-sm font-bold leading-snug sm:text-base">Less added sugar than regular ice pops.</p>
+              </div>
+              <p className="mt-2 text-xs font-semibold opacity-80">Average fruit content across all six flavours.</p>
+            </div>
+          </div>
+          <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
             {FLAVOURS.map((f) => <FlavourCard key={f.name} f={f} />)}
           </div>
         </div>
       </section>
 
-      <section className="bg-primary/10 py-12 md:py-14">
+      <section className="bg-primary/10 py-8 md:py-10">
         <div className="mx-auto max-w-6xl px-4"><PackSpotlight photo={P.heroCoolerPair} /></div>
       </section>
 
