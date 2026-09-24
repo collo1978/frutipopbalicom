@@ -99,7 +99,7 @@ function SiteHeader() {
 
 function SiteFooter() {
   return (
-    <footer className="mt-16 bg-palm text-accent-foreground">
+    <footer className="bg-palm text-accent-foreground">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-4">
         <div>
           <img src={logo.url} alt="Fruti Pop" className="h-14 w-auto" />
