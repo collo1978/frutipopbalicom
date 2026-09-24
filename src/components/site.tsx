@@ -49,12 +49,14 @@ export function PageHeader({ eyebrow, title, children, photo }: { eyebrow: strin
 export function FlavourCard({ f }: { f: Flavour }) {
   return (
     <article className={`flex flex-col items-center rounded-3xl p-3 text-center ${f.tint}`}>
-      <div className="flex aspect-[2/3] w-full items-center justify-center">
+      <div className="relative aspect-[1/3] w-full">
         {f.img ? (
-          <img src={f.img} alt={`Fruti Pop ${f.name} sorbet pack`} loading="lazy" className="h-full w-full object-contain drop-shadow-lg" />
+          <img src={f.img} alt={`Fruti Pop ${f.name} sorbet pack`} loading="lazy" className="absolute inset-0 h-full w-full object-contain drop-shadow-lg" />
         ) : (
-          <div className="flex h-48 w-24 items-center justify-center rounded-full border-2 border-dashed border-accent/40 px-2 text-xs font-semibold text-muted-foreground">
-            Pack photo coming soon
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="flex h-48 w-24 items-center justify-center rounded-full border-2 border-dashed border-accent/40 px-2 text-xs font-semibold text-muted-foreground">
+              Pack photo coming soon
+            </div>
           </div>
         )}
       </div>
