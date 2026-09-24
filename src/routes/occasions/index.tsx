@@ -93,7 +93,7 @@ function OccasionsIndex() {
 
       {stories.map((story) => (
         <section key={story.id} id={story.id} className={`scroll-mt-20 ${story.band}`}>
-          <div className="mx-auto grid max-w-6xl items-center gap-7 px-4 py-10 md:grid-cols-2 md:gap-12 md:py-14">
+          <div className="mx-auto grid max-w-6xl items-center gap-5 px-4 py-8 md:grid-cols-2 md:gap-10 md:py-10">
             <div className={story.imageFirst ? "md:order-2" : undefined}>
               <p className="font-display text-sm font-semibold uppercase tracking-widest text-primary">{story.label}</p>
               <h2 className="mt-2 text-3xl font-bold text-accent md:text-4xl">{story.headline}</h2>
@@ -106,15 +106,15 @@ function OccasionsIndex() {
               src={story.photo.src}
               alt={story.photo.alt}
               loading="lazy"
-              className={`aspect-square w-full rounded-3xl shadow-lg ${story.position} ${story.imageFirst ? "md:order-1" : undefined}`}
+              className={`aspect-[4/3] w-full max-h-[calc(100svh-10rem)] rounded-3xl shadow-lg ${story.position} ${story.imageFirst ? "md:order-1" : undefined}`}
             />
           </div>
         </section>
       ))}
 
-      <section className="bg-accent py-10 text-accent-foreground md:py-12">
+      <section className="bg-accent py-8 text-accent-foreground md:py-10">
         <div className="mx-auto grid max-w-5xl items-center gap-6 px-4 md:grid-cols-[1.05fr_0.95fr] md:gap-9">
-          <img src={P.heroCoolerPair.src} alt={P.heroCoolerPair.alt} loading="lazy" className="mx-auto aspect-[3/4] w-full max-w-sm rounded-3xl object-cover object-center shadow-lg" />
+          <img src={P.heroCoolerPair.src} alt={P.heroCoolerPair.alt} loading="lazy" className="mx-auto aspect-[4/5] w-full max-w-[15rem] md:max-w-[17rem] rounded-3xl object-cover object-center shadow-lg" />
           <div>
             <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family Pack</p>
             <h2 className="mt-2 text-3xl font-bold md:text-4xl">20 POPS. 20 BIG SMILES!</h2>
