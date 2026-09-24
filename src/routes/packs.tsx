@@ -7,9 +7,9 @@ import freezer from "@/assets/family-pack-freezer.png.asset.json";
 export const Route = createFileRoute("/packs")({
   head: () => ({
     meta: [
-      { title: "Packs & Orders | Fruti Pop Bali" },
+      { title: "Fill the Freezer | Fruti Pop Bali" },
       { name: "description", content: "Order a Fruti Pop family pack of 20 pops for Rp250,000, or enquire about parties, schools, events and villas via WhatsApp." },
-      { property: "og:title", content: "Packs & Orders | Fruti Pop Bali" },
+      { property: "og:title", content: "Fill the Freezer | Fruti Pop Bali" },
       { property: "og:description", content: "20 pops for Rp250,000. Order or enquire on WhatsApp." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/packs" },
