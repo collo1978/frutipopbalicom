@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 import heroPops from "@/assets/hero-pops.jpg";
 import baliStall from "@/assets/bali-stall.jpg";
-import flavoursGrid from "@/assets/flavours-grid.jpg";
+import { FLAVOURS } from "@/lib/flavours";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -106,20 +106,15 @@ function Home() {
 
       {/* Flavour teaser */}
       <section className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 md:grid-cols-2">
-        <img
-          src={flavoursGrid}
-          alt="Placeholder flat lay of assorted fruit popsicles (replace with real Fruti Pop flavour photos)"
-          width={1280}
-          height={960}
-          loading="lazy"
-          className="w-full rounded-3xl shadow-lg"
-        />
+        <div className="grid grid-cols-4 items-end gap-2 rounded-3xl bg-coconut p-4 shadow-lg">
+          {FLAVOURS.map((f) => (
+            <img key={f.name} src={f.img} alt={`Fruti Pop ${f.name}`} loading="lazy" className="h-56 w-full object-contain md:h-72" />
+          ))}
+        </div>
         <div>
-          <h2 className="text-2xl font-bold md:text-3xl">A rainbow of island flavours</h2>
+          <h2 className="text-2xl font-bold md:text-3xl">Four fruity favourites</h2>
           <p className="mt-3 text-muted-foreground">
-            From sunny mango to electric dragonfruit and creamy coconut, there's a
-            pop for every mood. Flavour names and the final line-up are pending
-            confirmation from the Fruti Pop team.
+            Strawberry, Soursop, Pineapple and Pina Colada — there's a pop for every mood.
           </p>
           <Link
             to="/flavours"

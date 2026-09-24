@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-import flavoursGrid from "@/assets/flavours-grid.jpg";
+import { FLAVOURS } from "@/lib/flavours";
 
 export const Route = createFileRoute("/flavours")({
   head: () => ({
@@ -23,54 +23,31 @@ export const Route = createFileRoute("/flavours")({
   component: Flavours,
 });
 
-// Placeholder line-up: flavour names and availability pending confirmation.
-const FLAVOURS = [
-  { name: "Sunny Mango", color: "bg-mango", emoji: "🥭", note: "Sweet, ripe mango — Bali's favourite." },
-  { name: "Dragonfruit Bright", color: "bg-dragonfruit", emoji: "🐉", note: "Electric pink and gently sweet." },
-  { name: "Creamy Coconut", color: "bg-coconut", emoji: "🥥", note: "Smooth island coconut, dairy-free." },
-  { name: "Passionfruit Zing", color: "bg-secondary", emoji: "🌟", note: "Tangy and tropical with real seeds." },
-  { name: "Watermelon Splash", color: "bg-accent", emoji: "🍉", note: "Light, juicy and super refreshing." },
-];
-
 function Flavours() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 md:py-16">
       <div className="max-w-2xl">
         <h1 className="text-3xl font-bold md:text-4xl">Our Flavours</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          A colourful line-up of real-fruit sorbet pops. Names, recipes and
-          availability are placeholders pending confirmation from the Fruti Pop team.
+          Four fruity favourites, 100g each. Little pops. Big smiles.
         </p>
       </div>
 
-      <img
-        src={flavoursGrid}
-        alt="Placeholder flat lay of assorted fruit popsicles (replace with real Fruti Pop flavour photography)"
-        width={1280}
-        height={960}
-        loading="lazy"
-        className="mt-8 w-full rounded-3xl shadow-lg"
-      />
-      <p className="mt-2 text-xs text-muted-foreground">
-        Placeholder photo — replace with genuine Fruti Pop flavour images.
-      </p>
-
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {FLAVOURS.map((f) => (
-          <div key={f.name} className="overflow-hidden rounded-2xl border bg-card shadow-sm">
-            <div className={`flex h-24 items-center justify-center text-4xl ${f.color}`}>
-              <span aria-hidden>{f.emoji}</span>
+          <div key={f.name} className="overflow-hidden rounded-3xl border bg-card shadow-sm">
+            <div className={`flex h-72 items-center justify-center p-4 ${f.color}`}>
+              <img src={f.img} alt={`Fruti Pop ${f.name} tube`} loading="lazy" className="h-full w-auto object-contain drop-shadow-lg" />
             </div>
             <div className="p-4">
-              <h2 className="text-lg font-semibold">{f.name}</h2>
+              <p className="text-xs font-bold uppercase tracking-wide text-primary">{f.tagline}</p>
+              <h2 className="mt-1 text-lg font-semibold">{f.name}</h2>
               <p className="mt-1 text-sm text-muted-foreground">{f.note}</p>
-              <span className="mt-3 inline-block rounded-full bg-muted px-2 py-0.5 text-xs font-semibold text-muted-foreground">
-                Name pending confirmation
-              </span>
             </div>
           </div>
         ))}
       </div>
+
 
       <div className="mt-12 text-center">
         <p className="text-muted-foreground">Hungry yet? Find your nearest Fruti Pop.</p>
