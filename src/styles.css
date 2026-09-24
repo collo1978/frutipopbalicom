@@ -41,6 +41,8 @@
   --color-dragonfruit: var(--dragonfruit);
   --color-mango: var(--mango);
   --color-palm: var(--palm);
+  --color-leaf: var(--leaf);
+  --color-leaf-foreground: var(--leaf-foreground);
   --color-coconut: var(--coconut);
   --font-display: var(--font-display-family);
   --font-sans: var(--font-sans-family);
@@ -71,6 +73,8 @@
   --dragonfruit: oklch(0.6 0.22 15);
   --mango: oklch(0.87 0.17 95);
   --palm: oklch(0.3 0.12 300);
+  --leaf: oklch(0.94 0.06 145);
+  --leaf-foreground: oklch(0.36 0.1 150);
   --coconut: oklch(0.99 0.008 95);
   --font-display-family: "Fredoka", "Baloo 2", ui-rounded, system-ui, sans-serif;
   --font-sans-family: "Nunito", ui-rounded, system-ui, sans-serif;
@@ -99,6 +103,8 @@
   --dragonfruit: oklch(0.68 0.22 355);
   --mango: oklch(0.8 0.15 80);
   --palm: oklch(0.65 0.1 175);
+  --leaf: oklch(0.33 0.05 150);
+  --leaf-foreground: oklch(0.92 0.09 145);
   --coconut: oklch(0.24 0.04 210);
 }
 
