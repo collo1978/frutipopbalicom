@@ -21,9 +21,9 @@ export const Route = createFileRoute("/")({
 });
 
 const SLIDES = [
-  { photo: P.heroCoolerGroup, fit: "object-cover object-center" },
-  { photo: P.footballKidsKiosk, fit: "object-cover object-center" },
-  { photo: P.beachCouple, fit: "object-cover object-center" },
+  { photo: P.heroCoolerGroup, fit: "object-cover object-center md:object-[50%_28%]" },
+  { photo: P.footballKidsKiosk, fit: "object-cover object-center md:object-[50%_18%]" },
+  { photo: P.beachCouple, fit: "object-cover object-center md:object-[50%_25%]" },
 ];
 
 function Hero() {
@@ -45,7 +45,7 @@ function Hero() {
           </div>
         </div>
         <div className="min-w-0">
-          <div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden rounded-3xl bg-primary/10 shadow-xl md:h-[min(80vh,38rem)] md:w-auto md:max-w-none">
+          <div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden rounded-3xl bg-primary/10 shadow-xl md:aspect-square md:h-[min(76vh,34rem)] md:w-auto md:max-w-none">
             {SLIDES.map(({ photo, fit }, n) => (
               <img
                 key={photo.src}
@@ -56,13 +56,13 @@ function Hero() {
                 className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${fit} ${n === i ? "opacity-100" : "opacity-0"}`}
               />
             ))}
-          </div>
-          <div className="mt-2 flex items-center justify-center gap-3">
-            <button onClick={() => go(i - 1)} aria-label="Previous photo" className="h-9 w-9 rounded-full border-2 border-accent font-bold text-accent">‹</button>
+          <div className="absolute inset-x-0 bottom-3 z-10 flex items-center justify-center gap-3">
+            <button onClick={() => go(i - 1)} aria-label="Previous photo" className="h-9 w-9 rounded-full border-2 border-accent bg-background/85 font-bold text-accent shadow">‹</button>
             {SLIDES.map((_, n) => (
-              <button key={n} onClick={() => setI(n)} aria-label={`Show photo ${n + 1}`} aria-current={n === i} className={`h-3 rounded-full transition-all ${n === i ? "w-8 bg-accent" : "w-3 bg-accent/30"}`} />
+              <button key={n} onClick={() => setI(n)} aria-label={`Show photo ${n + 1}`} aria-current={n === i} className={`h-3 rounded-full shadow transition-all ${n === i ? "w-8 bg-accent" : "w-3 bg-background/85"}`} />
             ))}
-            <button onClick={() => go(i + 1)} aria-label="Next photo" className="h-9 w-9 rounded-full border-2 border-accent font-bold text-accent">›</button>
+            <button onClick={() => go(i + 1)} aria-label="Next photo" className="h-9 w-9 rounded-full border-2 border-accent bg-background/85 font-bold text-accent shadow">›</button>
+          </div>
           </div>
         </div>
       </div>
