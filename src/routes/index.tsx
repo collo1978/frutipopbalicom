@@ -39,7 +39,11 @@ function Hero() {
           <p className="mt-3 max-w-md text-base text-foreground/80 md:text-lg">
             Fruity sorbet pops for kids and grown-ups in Bali. Perfect for hot afternoons, pool days and every little celebration.
           </p>
-          <div className="mt-5 flex flex-wrap gap-3">
+          <div className="mt-4 inline-flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl bg-accent px-4 py-2.5 text-accent-foreground shadow-md sm:px-5 sm:py-3">
+            <strong className="font-display text-2xl font-bold leading-none text-mango sm:text-3xl">65% FRUIT</strong>
+            <p className="text-sm font-bold leading-snug sm:text-base">Less sugar than regular ice pops.</p>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-3">
             <a href="#flavours" className={btn.grape}>Explore the Pops</a>
           </div>
         </div>
@@ -110,14 +114,6 @@ function Home() {
               <p className="mt-2 max-w-2xl text-sm leading-snug text-foreground/80 sm:text-base">
                 Six fruity sorbet pops, each in its own bright 100g tube. Kids pick by colour. Grown-ups usually want two.
               </p>
-            </div>
-            <div className="relative isolate overflow-hidden rounded-3xl bg-accent px-5 py-4 text-accent-foreground shadow-lg md:px-7">
-              <span aria-hidden="true" className="absolute -right-5 -top-7 -z-10 h-24 w-24 rounded-full bg-mango" />
-              <span aria-hidden="true" className="absolute bottom-2 right-14 -z-10 h-8 w-8 rounded-full bg-dragonfruit" />
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                <strong className="shrink-0 font-display text-4xl font-bold leading-none text-mango sm:text-5xl">65% FRUIT</strong>
-                <p className="max-w-xs text-sm font-bold leading-snug sm:text-base">Less sugar than regular ice pops.</p>
-              </div>
             </div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
