@@ -101,7 +101,7 @@ function Home() {
       </section>
 
       <section className="bg-muted py-10 md:py-12">
-        <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-7xl px-4">
           <div className="grid items-center gap-5 md:grid-cols-[minmax(0,1fr)_minmax(20rem,0.85fr)]">
             <h2 className="text-3xl font-bold text-accent md:text-4xl">Six fruity favourites</h2>
             <div className="relative isolate overflow-hidden rounded-3xl bg-accent px-5 py-4 text-accent-foreground shadow-lg md:px-7">
@@ -113,7 +113,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+          <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
             {FLAVOURS.map((f) => <FlavourCard key={f.name} f={f} />)}
           </div>
         </div>
