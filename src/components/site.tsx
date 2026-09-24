@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { CONTACT, ENQUIRY_TYPES, FAMILY_PACK, mailLink, waLink } from "@/lib/site";
 import type { Flavour } from "@/lib/flavours";
+import { ZoomableFlavourImage } from "@/components/flavour-zoom";
 import type { Photo } from "@/lib/photos";
 
 export const btn = {
@@ -51,7 +52,7 @@ export function FlavourCard({ f }: { f: Flavour }) {
     <article className={`flex flex-col items-center rounded-3xl p-2 text-center ${f.tint}`}>
       <div className="relative h-48 w-full sm:h-56 md:h-60 lg:h-72">
         {f.img ? (
-          <img src={f.img} alt={`Fruti Pop ${f.name} sorbet pack`} loading="lazy" className="absolute inset-0 h-full w-full object-contain drop-shadow-lg" />
+          <ZoomableFlavourImage f={f} />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="flex h-32 w-16 items-center justify-center rounded-full border-2 border-dashed border-accent/40 px-2 text-xs font-semibold text-muted-foreground">
