@@ -27,8 +27,8 @@ function PacksPage() {
     <>
       <section className="mx-auto max-w-6xl px-4 pt-6">
         <h1 className="sr-only">Fill the Freezer: Family Pack, 10 pops for Rp250,000</h1>
-        <div className="grid overflow-hidden rounded-3xl bg-accent text-accent-foreground shadow-lg md:grid-cols-[1.35fr_1fr]">
-          <div className="aspect-[1128/845] overflow-hidden md:aspect-auto md:min-h-[27rem]">
+        <div className="grid overflow-hidden rounded-3xl bg-accent text-accent-foreground shadow-lg md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+          <div className="min-w-0 aspect-[1128/845] overflow-hidden md:aspect-auto md:min-h-[27rem]">
             <img src={freezer.url} alt="A mum and two children opening a freezer at home full of Fruti Pops." className="h-full w-full object-cover object-left" />
           </div>
           <div className="flex flex-col justify-center p-6 md:p-9">
