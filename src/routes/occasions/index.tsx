@@ -4,6 +4,7 @@ import { EnquiryForm, btn } from "@/components/site";
 import { P } from "@/lib/photos";
 import { FAMILY_PACK } from "@/lib/site";
 import birthdayParty from "@/assets/birthday-party.jpg.asset.json";
+import eventBoy from "@/assets/event-boy-two-pops.jpg.asset.json";
 
 export const Route = createFileRoute("/occasions/")({
   head: () => ({
@@ -59,7 +60,7 @@ function OccasionsIndex() {
       description: "From community gatherings to big celebrations, bring a burst of fruity fun that gets everyone smiling.",
       cta: "Plan Your Event →",
       type: "Event",
-      photo: P.mnm[1]!,
+      photo: { src: eventBoy.url, alt: "A smiling boy holding two Fruti Pops at an event" },
       position: "object-cover object-center",
     },
     {
