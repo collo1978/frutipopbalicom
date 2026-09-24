@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { btn } from "@/components/site";
 import { P } from "@/lib/photos";
 import { SNOWWAVE } from "@/lib/site";
 
