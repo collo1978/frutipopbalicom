@@ -76,19 +76,27 @@ export function PhotoGrid({ photos, cols = "sm:grid-cols-2 lg:grid-cols-3" }: { 
   );
 }
 
-export function PackSpotlight() {
+export function PackSpotlight({ photo }: { photo?: Photo }) {
   return (
-    <div className="grid items-center gap-6 rounded-[2rem] bg-accent p-8 text-accent-foreground md:grid-cols-[1fr_auto] md:p-12">
-      <div>
+    <div className={`grid items-center overflow-hidden rounded-3xl bg-accent text-accent-foreground ${photo ? "md:grid-cols-[0.9fr_1.15fr_auto]" : "md:grid-cols-[1fr_auto]"}`}>
+      {photo && (
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          loading="lazy"
+          className="h-56 w-full object-cover object-center md:h-full md:min-h-80"
+        />
+      )}
+      <div className="p-7 md:p-9">
         <p className="font-display text-sm font-semibold uppercase tracking-widest text-mango">Family pack</p>
-        <p className="mt-2 font-display text-5xl font-bold md:text-6xl">
+        <p className="mt-2 font-display text-4xl font-bold md:text-5xl">
           {FAMILY_PACK.pops} pops <span className="text-mango">·</span> {FAMILY_PACK.price}
         </p>
         <p className="mt-3 max-w-lg opacity-90">
-          One pack of 20 Fruti Pops, enough to keep the freezer ready for hot afternoons, playdates and little celebrations.
+          Keep a pack ready for hot afternoons, shared treats and little celebrations.
         </p>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 px-7 pb-7 md:px-9 md:pb-0 md:pl-0">
         <WhatsAppButton message={`Hi Fruti Pop! I'd like to order a family pack of ${FAMILY_PACK.pops} pops (${FAMILY_PACK.price}).`} className={btn.primary}>
           Order on WhatsApp
         </WhatsAppButton>
