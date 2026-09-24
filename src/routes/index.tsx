@@ -40,8 +40,9 @@ function Hero() {
           <p className="mt-3 max-w-md text-base text-foreground/80 md:text-lg">
             Fruity sorbet pops for kids and grown-ups in Bali. Perfect for hot afternoons, pool days and every little celebration.
           </p>
-          <div className="mt-4 inline-flex w-full max-w-md items-center justify-center rounded-2xl bg-accent px-5 py-2.5 shadow-md sm:px-6 sm:py-3">
-            <p className="text-center text-sm font-bold leading-snug text-white sm:text-base">Less sugar than regular ice pops.</p>
+          <div className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-leaf px-3 py-1.5">
+            <Leaf aria-hidden="true" size={14} strokeWidth={2.5} className="shrink-0 text-leaf-foreground" />
+            <span className="text-xs font-bold leading-snug text-leaf-foreground sm:text-sm">Less sugar than regular ice pops.</span>
           </div>
           <div className="mt-4 flex flex-wrap gap-3">
             <a
