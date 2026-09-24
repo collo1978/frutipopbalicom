@@ -100,7 +100,7 @@ function Home() {
         </ul>
       </section>
 
-      <section className="bg-muted py-10 md:py-12">
+      <section className="bg-muted py-8 md:py-9">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid items-center gap-5 md:grid-cols-[minmax(0,1fr)_minmax(20rem,0.85fr)]">
             <h2 className="text-3xl font-bold text-accent md:text-4xl">Six fruity favourites</h2>
