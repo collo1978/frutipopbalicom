@@ -78,7 +78,7 @@ function SiteHeader() {
               <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-8 w-8 items-center justify-center rounded-full transition-transform hover:scale-105 sm:h-10 sm:w-10"><SocialBrandIcon brand={brand} className="h-6 w-6" /></a>
             ))}
           </div>
-          <Button asChild className="min-h-10 rounded-full px-3 font-bold sm:px-4"><Link to="/order" onClick={() => setOpen(false)}>Order Now</Link></Button>
+          <Button asChild className="cta-pop cta-pop-sm rounded-full"><Link to="/order" onClick={() => setOpen(false)}>Order Now</Link></Button>
           <Button type="button" variant="outline" size="icon" className="h-10 w-10 rounded-full lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen((v) => !v)}>
             <span aria-hidden className="text-xl">{open ? "✕" : "☰"}</span>
           </Button>
