@@ -81,6 +81,10 @@ function Home() {
         <div className="mx-auto max-w-7xl px-4 text-center">
           <h2 className="fruti-section-heading">Our Flavours</h2>
           <p className="mt-2 text-foreground/80">Six fruity favourites. Which ones take your fancy?</p>
+          <p className="fruti-hint mt-1">
+            <span className="md:hidden">Swipe to explore. Tap to POP!</span>
+            <span className="hidden md:inline">Hover to make them POP!</span>
+          </p>
           <div className="mt-6 text-left"><FlavourCarousel /></div>
           <Button asChild size="lg" className={`mt-6 ${cta}`}><a href="#packs" onClick={toPacks}>Order My Flavours <A /></a></Button>
         </div>
