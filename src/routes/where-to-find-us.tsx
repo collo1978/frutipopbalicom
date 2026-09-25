@@ -12,6 +12,7 @@ export const Route = createFileRoute("/where-to-find-us")({
       { property: "og:description", content: "Find Fruti Pop near you, order packs, or arrange event and villa pops." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/where-to-find-us" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/where-to-find-us" }],
   }),

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { format } from "date-fns";
 import { CalendarIcon, Check, Copy, Minus, Plus } from "lucide-react";
 import { z } from "zod";
@@ -32,7 +32,13 @@ const detailsSchema = z.object({
   name: z.string().trim().min(2, "Enter your name.").max(100, "Name is too long."),
   phone: z.string().trim().regex(/^\+?[0-9][0-9\s()-]{6,20}$/, "Enter a valid phone number with country code."),
   address: z.string().trim().min(8, "Enter your delivery address.").max(400, "Address is too long."),
-  maps: z.union([z.literal(""), z.string().trim().url("Paste a valid Google Maps link.").max(500)]),
+  maps: z.union([
+    z.literal(""),
+    z.string().trim().url("Paste a valid Google Maps link.").max(500).refine((value) => {
+      const hostname = new URL(value).hostname.toLowerCase();
+      return hostname === "maps.app.goo.gl" || hostname === "goo.gl" || hostname === "maps.google.com" || hostname.endsWith(".google.com");
+    }, "Paste a valid Google Maps link."),
+  ]),
   time: z.string().min(1, "Choose a delivery time."),
   payment: z.enum(["QRIS Payment", "Bank Transfer", "Cash on Delivery"], { required_error: "Choose a payment method." }),
   notes: z.string().max(800, "Notes are too long."),
@@ -68,6 +74,10 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
   const pack = packKey ? PACKS[packKey] : undefined;
   const total = useMemo(() => Object.values(quantities).reduce((sum, value) => sum + value, 0), [quantities]);
   const complete = Boolean(pack && total === pack.limit);
+
+  useEffect(() => {
+    setPackKey(initialPack);
+  }, [initialPack]);
 
   const choosePack = (next: PackKey) => {
     const nextLimit = PACKS[next].limit;
@@ -117,10 +127,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length || !pack || !date || !payment) return;
 
-    const lines = FLAVOURS.map((flavour) => {
-      const quantity = quantities[flavour.name] ?? 0;
-      return quantity > 0 ? `${flavourEmoji[flavour.name]} ${flavour.name} Sorbet: ${quantity} pcs` : "";
-    }).filter(Boolean);
+    const lines = FLAVOURS.map((flavour) => `${flavourEmoji[flavour.name]} ${flavour.name} Sorbet: ${quantities[flavour.name] ?? 0} pcs`);
     const message = [
       "Hi Fruti Pop 👋",
       "",

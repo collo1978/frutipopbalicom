@@ -15,6 +15,7 @@ export const Route = createFileRoute("/occasions/")({
       { property: "og:description", content: "Birthday parties, schools, events and villa pool days with Fruti Pop." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/occasions" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/occasions" }],
   }),

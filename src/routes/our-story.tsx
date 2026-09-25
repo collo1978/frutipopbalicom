@@ -12,6 +12,7 @@ export const Route = createFileRoute("/our-story")({
       { property: "og:description", content: "From frozen fruit purée to Fruti Pop. Meet Paul and the team." },
       { property: "og:type", content: "article" },
       { property: "og:url", content: "/our-story" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/our-story" }],
   }),
