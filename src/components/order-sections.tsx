@@ -1,9 +1,12 @@
-import { BadgeCheck, Box, Heart, Leaf, Snowflake, Sun } from "lucide-react";
+import { useRef, useState } from "react";
+import { BadgeCheck, Box, Heart, Leaf, Play, Snowflake, Sun } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { FLAVOURS } from "@/lib/flavours";
 import { P } from "@/lib/photos";
 import { Button } from "@/components/ui/button";
 import farmFields from "@/assets/farm-fields.jpg.asset.json";
+import testimonialVideo from "@/assets/customer-testimonial.mp4.asset.json";
+import testimonialPoster from "@/assets/customer-testimonial-poster.jpg.asset.json";
 
 const benefits = [
   { label: "Healthy Choice", icon: Heart, tone: "bg-dragonfruit/10 text-dragonfruit" },
@@ -23,6 +26,52 @@ export function BenefitsStrip() {
         </li>
       ))}
     </ul>
+  );
+}
+
+export function CustomerTestimonial() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const playVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    void video.play();
+  };
+
+  return (
+    <section aria-labelledby="testimonial-heading" className="py-10 text-center md:py-12">
+      <h3 id="testimonial-heading" className="text-2xl font-bold text-accent md:text-3xl">Don't Just Take Our Word for It!</h3>
+      <p className="mx-auto mt-2 max-w-xl text-foreground/75">A little pop of happiness, straight from our happy customers!</p>
+      <div className="relative mx-auto mt-6 aspect-[9/16] w-full max-w-sm overflow-hidden rounded-2xl bg-muted shadow-sm">
+        <video
+          ref={videoRef}
+          controls
+          playsInline
+          preload="metadata"
+          poster={testimonialPoster.url}
+          aria-label="Child sharing their reaction to a Fruti Pop"
+          className="h-full w-full object-cover"
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          onEnded={() => setIsPlaying(false)}
+        >
+          <source src={testimonialVideo.url} type="video/mp4" />
+          Your browser does not support video playback.
+        </video>
+        {!isPlaying && (
+          <Button
+            type="button"
+            size="icon"
+            onClick={playVideo}
+            aria-label="Play customer testimonial"
+            className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-lg"
+          >
+            <Play aria-hidden="true" className="h-7 w-7 fill-current" />
+          </Button>
+        )}
+      </div>
+    </section>
   );
 }
 
@@ -82,13 +131,14 @@ export function ProductLineup() {
   );
 }
 
-export function WhyFrutiPop({ showCta = false }: { showCta?: boolean }) {
+export function WhyFrutiPop({ showCta = false, showTestimonial = false }: { showCta?: boolean; showTestimonial?: boolean }) {
   return (
     <section className="bg-background py-12 md:py-14">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-3xl font-bold text-accent md:text-4xl">Why Fruti Pop?</h2>
         <div className="mt-6"><BenefitsStrip /></div>
-        <div className="mt-6"><FarmStory showCta={showCta} /></div>
+        {showTestimonial && <CustomerTestimonial />}
+        <div className={showTestimonial ? "" : "mt-6"}><FarmStory showCta={showCta} /></div>
       </div>
     </section>
   );
