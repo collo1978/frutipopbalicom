@@ -45,6 +45,12 @@
   --color-leaf-foreground: var(--leaf-foreground);
   --color-coconut: var(--coconut);
   --color-hero-cream: var(--hero-cream);
+  --color-pastel-pink: var(--pastel-pink);
+  --color-pastel-green: var(--pastel-green);
+  --color-pastel-blue: var(--pastel-blue);
+  --color-pastel-sage: var(--pastel-sage);
+  --color-pastel-yellow: var(--pastel-yellow);
+  --color-pastel-lavender: var(--pastel-lavender);
   --font-display: var(--font-display-family);
   --font-sans: var(--font-sans-family);
 }
@@ -78,6 +84,12 @@
   --leaf-foreground: oklch(0.36 0.1 150);
   --coconut: oklch(0.99 0.008 95);
   --hero-cream: #fff9e6;
+  --pastel-pink: oklch(0.94 0.04 10);
+  --pastel-green: oklch(0.95 0.05 145);
+  --pastel-blue: oklch(0.95 0.035 230);
+  --pastel-sage: oklch(0.93 0.035 150);
+  --pastel-yellow: oklch(0.96 0.07 95);
+  --pastel-lavender: oklch(0.94 0.035 300);
   --font-display-family: "Fredoka", "Baloo 2", ui-rounded, system-ui, sans-serif;
   --font-sans-family: "Nunito", ui-rounded, system-ui, sans-serif;
 }
