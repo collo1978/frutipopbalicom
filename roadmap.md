@@ -9,4 +9,4 @@
 - [x] Simplify Contact page with April photo and direct contact links
 - [x] Improve Our Story text readability
 - [x] Apply latest hero, POP Stars, product zoom, and heading updates
-- [ ] Verify CTA links, navigation, carousel, zoom, and order flow on desktop and mobile
+- [x] Verify CTA links, navigation, carousel, zoom, and order flow on desktop and mobile
