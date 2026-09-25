@@ -81,7 +81,7 @@ function Home() {
         </div>
       </section>
 
-      <WhyFrutiPop showCta />
+      <WhyFrutiPop showCta showTestimonial />
 
       <section className="mx-auto max-w-6xl px-4 py-12 md:py-14">
         <h2 className="text-3xl font-bold text-accent md:text-4xl">What's your pop moment?</h2>
