@@ -29,8 +29,13 @@ function OrderPage() {
       <section className="bg-muted py-4 md:py-5">
         <div className="mx-auto max-w-7xl px-4">
           <h1 className="fruti-section-heading">Order Your Fruti Pops</h1>
+          <p className="fruti-hint mt-2">
+            <span className="md:hidden">Swipe to explore. Tap to POP!</span>
+            <span className="hidden md:inline">Hover to make them POP!</span>
+          </p>
           <div className="mt-3"><FlavourCards /></div>
-          <div className="mx-auto mt-4 max-w-6xl"><OrderForm initialPack={pack} /></div>
+          <h2 className="fruti-form-heading mx-auto max-w-6xl mt-6">Order Form</h2>
+          <div className="mx-auto mt-3 max-w-6xl"><OrderForm initialPack={pack} /></div>
         </div>
       </section>
 
