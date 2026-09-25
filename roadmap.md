@@ -1,4 +1,4 @@
-- [x] Remove Our Story “Meet the flavours” button and all links to standalone Flavours page
-- [x] Delete standalone Flavours page
-- [x] Update every Family Pack reference from 20 pops to 10 pops, retaining Rp250,000
-- [x] Verify links, forms, messages, desktop and mobile views
+- [ ] Replace the homepage hero and reorder the homepage shopping journey
+- [ ] Add the dedicated `/order` page with pack, flavour, delivery, payment, and WhatsApp validation
+- [ ] Connect all homepage shopping actions and preserve the legacy pack URL
+- [ ] Verify the complete desktop and mobile ordering journey
