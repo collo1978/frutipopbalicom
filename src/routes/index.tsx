@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check } from "lucide-react";
+import { Check, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductLineup, WhyFrutiPop } from "@/components/order-sections";
 import { COMMUNITY_NAMES } from "@/lib/occasions";
@@ -15,6 +15,7 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Fruit-packed sorbet pops for kids & grown-ups." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
@@ -25,7 +26,7 @@ function Hero() {
   const promises = ["Less Sugar than regular ice blocks.", "Full of Vitamins.", "Locally Sourced Fruit."];
   return (
     <section className="bg-card">
-      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-8 md:min-h-[calc(100svh-4.0625rem)] md:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] md:py-10">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-8 md:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] md:py-12 lg:py-16">
         <div className="min-w-0">
           <h1 className="text-5xl font-bold leading-[1.02] text-accent md:text-6xl lg:text-7xl">
             Bali's Fruity<br />Sorbet Ice Blocks.
@@ -57,7 +58,7 @@ function Hero() {
             <img src={P.beachGroup.src} alt={P.beachGroup.alt} className="h-full w-full object-cover object-center" />
           </div>
           <span aria-hidden="true" className="absolute left-0 top-[30%] rotate-[-12deg] text-5xl">🍓</span>
-          <span aria-hidden="true" className="absolute right-1 top-[24%] rotate-12 text-5xl text-dragonfruit">♡</span>
+          <Heart aria-hidden="true" className="absolute right-1 top-[24%] h-12 w-12 rotate-12 fill-dragonfruit/10 text-dragonfruit" strokeWidth={3} />
         </div>
       </div>
     </section>

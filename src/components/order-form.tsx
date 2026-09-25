@@ -187,7 +187,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
                 return (
                   <div key={flavour.name} className="grid grid-cols-[minmax(0,1fr)_auto_auto_auto] items-center gap-3 rounded-lg px-2 py-1.5">
                     <div className="flex min-w-0 items-center gap-2">
-                      <span aria-hidden="true" className="text-2xl">{flavourEmoji[flavour.name]}</span>
+                      {flavour.img && <img src={flavour.img} alt="" className="h-10 w-7 shrink-0 object-contain" />}
                       <span className="truncate font-bold text-accent">{flavour.name}</span>
                     </div>
                     <Button type="button" variant="secondary" size="icon" onClick={() => changeQuantity(flavour.name, -1)} disabled={!pack || quantity === 0} aria-label={`Remove one ${flavour.name}`} className="h-10 w-10 rounded-full"><Minus /></Button>
@@ -199,7 +199,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
             </div>
             <div className="mt-4 rounded-xl bg-leaf p-4">
               <div className="flex items-center justify-between gap-4 font-bold text-accent"><span>Total Pops Selected</span><span>{total} / {pack?.limit ?? 0}</span></div>
-              <progress value={total} max={pack?.limit ?? 1} aria-label="Pack completion" className="mt-2 h-3 w-full overflow-hidden rounded-full accent-primary" />
+              <progress value={total} max={pack?.limit ?? 1} aria-label="Pack completion" className="order-progress mt-2 h-3 w-full overflow-hidden rounded-full" />
               {complete && <p className="mt-3 flex items-center gap-2 font-bold text-primary"><Check className="h-5 w-5" /> Your pack is complete! 🎉</p>}
             </div>
             {fieldError("quantities")}
