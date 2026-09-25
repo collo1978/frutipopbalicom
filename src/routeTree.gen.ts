@@ -18,11 +18,6 @@ import { Route as OurStoryRouteImport } from './routes/our-story'
 import { Route as PacksRouteImport } from './routes/packs'
 import { Route as WhereToBuyRouteImport } from './routes/where-to-buy'
 import { Route as WhereToFindUsRouteImport } from './routes/where-to-find-us'
-import { Route as OccasionsIndexRouteImport } from './routes/occasions/index'
-import { Route as OccasionsBirthdayPartiesRouteImport } from './routes/occasions/birthday-parties'
-import { Route as OccasionsEventsRouteImport } from './routes/occasions/events'
-import { Route as OccasionsSchoolsSportsClubsRouteImport } from './routes/occasions/schools-sports-clubs'
-import { Route as OccasionsVillasPoolsideRouteImport } from './routes/occasions/villas-poolside'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -69,81 +64,40 @@ const WhereToFindUsRoute = WhereToFindUsRouteImport.update({
   path: '/where-to-find-us',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OccasionsIndexRoute = OccasionsIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => OccasionsRoute,
-} as any)
-const OccasionsBirthdayPartiesRoute =
-  OccasionsBirthdayPartiesRouteImport.update({
-    id: '/birthday-parties',
-    path: '/birthday-parties',
-    getParentRoute: () => OccasionsRoute,
-  } as any)
-const OccasionsEventsRoute = OccasionsEventsRouteImport.update({
-  id: '/events',
-  path: '/events',
-  getParentRoute: () => OccasionsRoute,
-} as any)
-const OccasionsSchoolsSportsClubsRoute =
-  OccasionsSchoolsSportsClubsRouteImport.update({
-    id: '/schools-sports-clubs',
-    path: '/schools-sports-clubs',
-    getParentRoute: () => OccasionsRoute,
-  } as any)
-const OccasionsVillasPoolsideRoute = OccasionsVillasPoolsideRouteImport.update({
-  id: '/villas-poolside',
-  path: '/villas-poolside',
-  getParentRoute: () => OccasionsRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/occasions': typeof OccasionsRouteWithChildren
+  '/occasions': typeof OccasionsRoute
   '/order': typeof OrderRoute
   '/our-story': typeof OurStoryRoute
   '/packs': typeof PacksRoute
   '/where-to-buy': typeof WhereToBuyRoute
   '/where-to-find-us': typeof WhereToFindUsRoute
-  '/occasions/birthday-parties': typeof OccasionsBirthdayPartiesRoute
-  '/occasions/events': typeof OccasionsEventsRoute
-  '/occasions/schools-sports-clubs': typeof OccasionsSchoolsSportsClubsRoute
-  '/occasions/villas-poolside': typeof OccasionsVillasPoolsideRoute
-  '/occasions/': typeof OccasionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/occasions': typeof OccasionsRoute
   '/order': typeof OrderRoute
   '/our-story': typeof OurStoryRoute
   '/packs': typeof PacksRoute
   '/where-to-buy': typeof WhereToBuyRoute
   '/where-to-find-us': typeof WhereToFindUsRoute
-  '/occasions/birthday-parties': typeof OccasionsBirthdayPartiesRoute
-  '/occasions/events': typeof OccasionsEventsRoute
-  '/occasions/schools-sports-clubs': typeof OccasionsSchoolsSportsClubsRoute
-  '/occasions/villas-poolside': typeof OccasionsVillasPoolsideRoute
-  '/occasions': typeof OccasionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/occasions': typeof OccasionsRouteWithChildren
+  '/occasions': typeof OccasionsRoute
   '/order': typeof OrderRoute
   '/our-story': typeof OurStoryRoute
   '/packs': typeof PacksRoute
   '/where-to-buy': typeof WhereToBuyRoute
   '/where-to-find-us': typeof WhereToFindUsRoute
-  '/occasions/birthday-parties': typeof OccasionsBirthdayPartiesRoute
-  '/occasions/events': typeof OccasionsEventsRoute
-  '/occasions/schools-sports-clubs': typeof OccasionsSchoolsSportsClubsRoute
-  '/occasions/villas-poolside': typeof OccasionsVillasPoolsideRoute
-  '/occasions/': typeof OccasionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -157,26 +111,17 @@ export interface FileRouteTypes {
     | '/packs'
     | '/where-to-buy'
     | '/where-to-find-us'
-    | '/occasions/birthday-parties'
-    | '/occasions/events'
-    | '/occasions/schools-sports-clubs'
-    | '/occasions/villas-poolside'
-    | '/occasions/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/contact'
+    | '/occasions'
     | '/order'
     | '/our-story'
     | '/packs'
     | '/where-to-buy'
     | '/where-to-find-us'
-    | '/occasions/birthday-parties'
-    | '/occasions/events'
-    | '/occasions/schools-sports-clubs'
-    | '/occasions/villas-poolside'
-    | '/occasions'
   id:
     | '__root__'
     | '/'
@@ -188,18 +133,13 @@ export interface FileRouteTypes {
     | '/packs'
     | '/where-to-buy'
     | '/where-to-find-us'
-    | '/occasions/birthday-parties'
-    | '/occasions/events'
-    | '/occasions/schools-sports-clubs'
-    | '/occasions/villas-poolside'
-    | '/occasions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  OccasionsRoute: typeof OccasionsRouteWithChildren
+  OccasionsRoute: typeof OccasionsRoute
   OrderRoute: typeof OrderRoute
   OurStoryRoute: typeof OurStoryRoute
   PacksRoute: typeof PacksRoute
@@ -272,69 +212,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WhereToFindUsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/occasions/': {
-      id: '/occasions/'
-      path: '/'
-      fullPath: '/occasions/'
-      preLoaderRoute: typeof OccasionsIndexRouteImport
-      parentRoute: typeof OccasionsRoute
-    }
-    '/occasions/birthday-parties': {
-      id: '/occasions/birthday-parties'
-      path: '/birthday-parties'
-      fullPath: '/occasions/birthday-parties'
-      preLoaderRoute: typeof OccasionsBirthdayPartiesRouteImport
-      parentRoute: typeof OccasionsRoute
-    }
-    '/occasions/events': {
-      id: '/occasions/events'
-      path: '/events'
-      fullPath: '/occasions/events'
-      preLoaderRoute: typeof OccasionsEventsRouteImport
-      parentRoute: typeof OccasionsRoute
-    }
-    '/occasions/schools-sports-clubs': {
-      id: '/occasions/schools-sports-clubs'
-      path: '/schools-sports-clubs'
-      fullPath: '/occasions/schools-sports-clubs'
-      preLoaderRoute: typeof OccasionsSchoolsSportsClubsRouteImport
-      parentRoute: typeof OccasionsRoute
-    }
-    '/occasions/villas-poolside': {
-      id: '/occasions/villas-poolside'
-      path: '/villas-poolside'
-      fullPath: '/occasions/villas-poolside'
-      preLoaderRoute: typeof OccasionsVillasPoolsideRouteImport
-      parentRoute: typeof OccasionsRoute
-    }
   }
 }
-
-interface OccasionsRouteChildren {
-  OccasionsBirthdayPartiesRoute: typeof OccasionsBirthdayPartiesRoute
-  OccasionsEventsRoute: typeof OccasionsEventsRoute
-  OccasionsSchoolsSportsClubsRoute: typeof OccasionsSchoolsSportsClubsRoute
-  OccasionsVillasPoolsideRoute: typeof OccasionsVillasPoolsideRoute
-  OccasionsIndexRoute: typeof OccasionsIndexRoute
-}
-
-const OccasionsRouteChildren: OccasionsRouteChildren = {
-  OccasionsBirthdayPartiesRoute: OccasionsBirthdayPartiesRoute,
-  OccasionsEventsRoute: OccasionsEventsRoute,
-  OccasionsSchoolsSportsClubsRoute: OccasionsSchoolsSportsClubsRoute,
-  OccasionsVillasPoolsideRoute: OccasionsVillasPoolsideRoute,
-  OccasionsIndexRoute: OccasionsIndexRoute,
-}
-
-const OccasionsRouteWithChildren = OccasionsRoute._addFileChildren(
-  OccasionsRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  OccasionsRoute: OccasionsRouteWithChildren,
+  OccasionsRoute: OccasionsRoute,
   OrderRoute: OrderRoute,
   OurStoryRoute: OurStoryRoute,
   PacksRoute: PacksRoute,
