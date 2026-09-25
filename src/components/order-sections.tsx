@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { FLAVOURS } from "@/lib/flavours";
 import { P } from "@/lib/photos";
 import { Button } from "@/components/ui/button";
+import farmFields from "@/assets/farm-fields.jpg.asset.json";
 
 const benefits = [
   { label: "Healthy Choice", icon: Heart, tone: "bg-dragonfruit/10 text-dragonfruit" },
@@ -29,7 +30,7 @@ export function FarmStory({ showCta = false }: { showCta?: boolean }) {
   return (
     <div>
       <div className="grid overflow-hidden rounded-2xl bg-leaf md:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)]">
-        <img src={P.farm.src} alt={P.farm.alt} loading="lazy" className="aspect-[16/9] h-full w-full object-cover" />
+        <img src={farmFields.url} alt="Fruit-growing fields in Bali" loading="lazy" className="aspect-[16/9] h-full w-full object-cover" />
         <div className="flex flex-col justify-center p-6 md:p-8">
           <div className="flex items-center gap-2 text-leaf-foreground">
             <BadgeCheck aria-hidden="true" className="h-7 w-7" />
