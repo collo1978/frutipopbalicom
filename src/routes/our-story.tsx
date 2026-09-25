@@ -24,10 +24,10 @@ function OurStory() {
     <>
       <section className="bg-secondary/60">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 md:grid-cols-[1.2fr_1fr] md:py-16">
-          <div>
+          <div className="max-w-prose text-left">
             <p className="font-display text-sm font-semibold uppercase tracking-widest text-primary">The Fruti Pop Story</p>
-            <h1 className="mt-2 text-4xl font-bold text-accent md:text-5xl">It started with a taste.</h1>
-            <p className="mt-4 text-lg text-foreground/80">
+            <h1 className="mt-2 font-display text-5xl font-extrabold leading-none text-accent md:text-6xl">It started with a taste.</h1>
+            <p className="mt-5 text-lg leading-[1.65] text-foreground md:text-xl">
               Before there was Fruti Pop, there was fruit. Lots of it. April was making frozen fruit purée samples for
               bars, beach clubs and hotels around Bali.
             </p>
@@ -40,9 +40,11 @@ function OurStory() {
         </div>
       </section>
 
-      <article className="mx-auto max-w-3xl space-y-5 px-4 py-14 text-lg leading-relaxed text-foreground/85">
+      <article className="mx-auto max-w-3xl space-y-6 px-4 py-14 text-left text-base leading-[1.7] text-foreground md:text-xl">
         <p>
-          One day, tasting one of those frozen samples, April had a simple thought: <em>this would make a brilliant pop.</em>{" "}
+          One day, tasting one of those frozen samples, April had a simple thought: <em>this would make a brilliant pop.</em>
+        </p>
+        <p>
           Something fruity and frozen that kids would love, and that grown-ups would secretly want one of too.
         </p>
         <p>That idea became Fruti Pop.</p>
@@ -59,8 +61,8 @@ function OurStory() {
       </figure>
 
       <section className="mx-auto max-w-6xl px-4 pb-4 pt-14">
-        <h2 className="text-center text-3xl font-bold text-accent">The people behind the pops</h2>
-        <p className="mx-auto mt-2 max-w-xl text-center text-foreground/80">A small, cheerful team who love seeing those big smiles.</p>
+        <h2 className="text-center font-display text-4xl font-extrabold leading-none text-accent md:text-5xl">The people behind the pops</h2>
+        <p className="mx-auto mt-4 max-w-xl text-center text-base leading-[1.65] text-foreground md:text-lg">A small, cheerful team who love seeing those big smiles.</p>
         <ul className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
           {P.team.map((t) => (
             <li key={t.src}><img src={t.src} alt={t.alt} loading="lazy" className="aspect-[4/5] w-full rounded-3xl object-cover" /></li>
