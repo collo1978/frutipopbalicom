@@ -182,6 +182,32 @@
   }
 }
 
+/* Playful flavour hint on the order page (desktop: hover, mobile: swipe + tap) */
+@utility fruti-hint {
+  color: var(--color-accent);
+  font-family: var(--font-display-family);
+  font-weight: 700;
+  font-size: 1.25rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
+}
+
+/* "Order Form" heading: same playful purple style, slightly smaller */
+@utility fruti-form-heading {
+  color: var(--color-accent);
+  font-family: var(--font-display-family);
+  font-size: 2.125rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+
+  @media (min-width: 768px) {
+    font-size: 2.75rem;
+  }
+}
+
 @utility nav-pop {
   transition: color 180ms ease, transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
