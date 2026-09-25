@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroDesktop from "@/assets/hero-desktop-trim.png.asset.json";
+import heroDesktop from "@/assets/hero-desktop-new.png.asset.json";
 import heroMobile from "@/assets/hero-mobile-nologo.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { ProductLineup, WhyFrutiPop } from "@/components/order-sections";
@@ -30,8 +30,8 @@ function Hero() {
       <div className="mx-auto max-w-none px-2 pb-6 pt-2 md:px-4 md:pb-4 md:pt-1">
         <div className="md:mx-auto md:w-fit">
         <picture>
-          <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1645} height={885} />
-          <img src={heroMobile.url} alt={alt} width={1024} height={1238} className="mx-auto h-auto w-full max-w-md md:w-[min(90vw,calc((100svh-140px)*1.8588))] md:max-w-none" />
+          <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1774} height={887} />
+          <img src={heroMobile.url} alt={alt} width={1024} height={1238} className="mx-auto h-auto w-full max-w-md md:w-[min(94vw,calc((100svh-150px)*2.0))] md:max-w-none" />
         </picture>
         <div className="mt-2 flex justify-center md:mt-1 md:w-[44%]">
           <Button asChild size="lg" className="min-h-12 rounded-full px-8 text-base font-bold shadow-lg transition-transform hover:-translate-y-0.5 md:min-h-14 md:px-9 md:text-lg"><Link to="/order">Order Now →</Link></Button>
