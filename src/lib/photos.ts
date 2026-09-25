@@ -43,8 +43,8 @@ export const P = {
   eventNight: { src: eventNight, alt: "Two women smiling with Fruti Pops in the evening" },
   kioskGirl: { src: kioskGirl, alt: "A little girl with a strawberry Fruti Pop in front of the flavour banner" },
   streetFriends: { src: streetFriends, alt: "Two friends giving a thumbs up with Fruti Pops in Bali" },
-  paul: { src: paul, alt: "Paul, founder of Fruti Pop Bali, holding three Fruti Pops" },
-  farm: { src: farm, alt: "Paul standing among rows of strawberry plants" },
+  paul: { src: paul, alt: "Holding three Fruti Pops" },
+  farm: { src: farm, alt: "Rows of strawberry plants" },
   team: [
     { src: team1, alt: "Fruti Pop team member holding two pops" },
     { src: team2, alt: "Fruti Pop team member enjoying a pop" },
@@ -57,6 +57,6 @@ export const P = {
     { src: mnmToddlers, alt: "Two young children with Fruti Pops at the Montessori Night Market" },
     { src: mnmGirlMenu, alt: "A girl with a Fruti Pop beside the flavour menu at the Montessori Night Market" },
     { src: mnmGirl, alt: "A girl holding a Fruti Pop at the Montessori Night Market" },
-    { src: mnmStall, alt: "Paul, founder of Fruti Pop, in his straw hat at the Fruti Pop stall at the Montessori Night Market" },
+    { src: mnmStall, alt: "The Fruti Pop stall at the Montessori Night Market" },
   ],
 } satisfies Record<string, Photo | Photo[]>;
