@@ -45,7 +45,7 @@ export function ZoomableFlavourImage({ f }: { f: Flavour }) {
         onClick={() => { setLens(null); setOpen(true); }}
         onMouseMove={(e) => { if (window.matchMedia("(hover: hover)").matches) onMove(e); }}
         onMouseLeave={() => setLens(null)}
-        className="relative h-full w-full cursor-zoom-in overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
+        className="group relative h-full w-full cursor-zoom-in overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
       >
         <img
           ref={imgEl}
@@ -55,7 +55,7 @@ export function ZoomableFlavourImage({ f }: { f: Flavour }) {
           draggable={false}
           className="absolute inset-0 h-full w-full object-contain drop-shadow-lg"
         />
-        <span className="pointer-events-none absolute right-1.5 top-1.5 flex h-7 w-7 items-center justify-center rounded-full bg-card/80 text-accent shadow-sm" aria-hidden="true">
+        <span className="pointer-events-none absolute right-1.5 top-1.5 flex h-7 w-7 items-center justify-center rounded-full bg-card/80 text-accent opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
             <circle cx="11" cy="11" r="7" />
             <path d="m20 20-3.8-3.8M11 8.5v5M8.5 11h5" />
@@ -210,6 +210,19 @@ function FlavourLightbox({ f, onClose }: { f: Flavour; onClose: () => void }) {
     };
   }, [onClose]);
 
+  const zoomBy = (factor: number) => {
+    view.current.scale *= factor;
+    clampView();
+    apply();
+  };
+
+  const resetZoom = () => {
+    view.current.scale = 1;
+    view.current.x = 0;
+    view.current.y = 0;
+    apply();
+  };
+
   return (
     <div
       role="dialog"
@@ -220,16 +233,21 @@ function FlavourLightbox({ f, onClose }: { f: Flavour; onClose: () => void }) {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="flex items-center justify-between px-4 py-3 text-primary-foreground">
+      <div className="flex items-center justify-between gap-3 px-4 py-3 text-primary-foreground">
         <p className="font-display text-lg font-semibold">{f.name}{f.tagline ? ` · ${f.tagline}` : ""}</p>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close enlarged view"
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-card/20 text-2xl leading-none transition hover:bg-card/35 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
-        >
-          ×
-        </button>
+        <div className="flex items-center gap-2">
+          <button type="button" onClick={() => zoomBy(1 / 1.3)} aria-label="Zoom out" className="hidden h-10 w-10 items-center justify-center rounded-full bg-card/20 text-xl font-bold leading-none transition hover:bg-card/35 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40 sm:flex">−</button>
+          <button type="button" onClick={() => zoomBy(1.3)} aria-label="Zoom in" className="hidden h-10 w-10 items-center justify-center rounded-full bg-card/20 text-xl font-bold leading-none transition hover:bg-card/35 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40 sm:flex">+</button>
+          <button type="button" onClick={resetZoom} className="hidden h-10 items-center justify-center rounded-full bg-card/20 px-4 text-sm font-bold transition hover:bg-card/35 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40 sm:flex">Reset</button>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close enlarged view"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-card/20 text-2xl leading-none transition hover:bg-card/35 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
+          >
+            ×
+          </button>
+        </div>
       </div>
       <div
         ref={surfaceRef}

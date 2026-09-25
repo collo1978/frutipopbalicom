@@ -47,10 +47,10 @@ function Hero() {
 }
 
 const MOMENTS = [
-  { t: "Birthday Parties", h: "The moment the cooler opens.", d: "Nothing gets a squeal quite like a cooler full of bright, fruity pops on a hot Bali afternoon.", p: { src: birthdayParty.url, alt: "Excited children around a cooler full of Fruti Pops at a poolside party" }, pos: "object-[50%_58%]" },
-  { t: "Schools & Sports Clubs", h: "The final whistle. The first pop.", d: "After all the running and cheering, a cold, fruity reward. Big smiles for the whole team.", p: P.footballPair, pos: "object-top" },
-  { t: "Events", h: "A little pop. A lot of happy faces.", d: "From community gatherings to big celebrations, a burst of fruity fun that gets everyone smiling.", p: { src: eventBoy.url, alt: "A smiling boy holding two Fruti Pops at an event" }, pos: "object-center" },
-  { t: "Villas & Poolside", h: "Sun's out. Pops out.", d: "Poolside laughs, sunny afternoons and a freezer full of fruity pops.", p: P.villaDelivery, pos: "object-center" },
+  { t: "Birthday Parties", h: "The moment the cooler opens.", d: "Nothing gets a squeal quite like a cooler full of bright, fruity pops on a hot Bali afternoon.", cta: "Order Birthday Pops", p: { src: birthdayParty.url, alt: "Excited children around a cooler full of Fruti Pops at a poolside party" }, pos: "object-[50%_58%]" },
+  { t: "Schools & Sports Clubs", h: "The final whistle. The first pop.", d: "After all the running and cheering, a cold, fruity reward. Big smiles for the whole team.", cta: "Pop the Whole Team", p: P.footballPair, pos: "object-top" },
+  { t: "Events", h: "A little pop. A lot of happy faces.", d: "From community gatherings to big celebrations, a burst of fruity fun that gets everyone smiling.", cta: "Make My Event Pop", p: { src: eventBoy.url, alt: "A smiling boy holding two Fruti Pops at an event" }, pos: "object-center" },
+  { t: "Villas & Poolside", h: "Sun's out. Pops out.", d: "Poolside laughs, sunny afternoons and a freezer full of fruity pops.", cta: "Fill My Freezer", p: P.villaDelivery, pos: "object-center" },
 ];
 
 function PackCard({ name, qty, price, pack, badge }: { name: string; qty: string; price: string; pack: "family" | "jumbo"; badge?: string }) {
@@ -113,7 +113,7 @@ function Home() {
                     <p className="text-sm font-bold text-primary">{m.t}</p>
                     <h3 className="mt-1 text-lg font-bold leading-tight text-accent">{m.h}</h3>
                     <p className="mt-1 flex-1 text-sm text-foreground/75">{m.d}</p>
-                    <Link to="/order" className="mt-3 text-sm font-bold text-primary hover:underline">Order pops <A /></Link>
+                    <Link to="/order" className="mt-3 text-sm font-bold text-primary hover:underline">{m.cta} <A /></Link>
                   </div>
                 </article>
               ))}

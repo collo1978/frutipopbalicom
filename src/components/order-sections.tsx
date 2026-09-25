@@ -111,17 +111,17 @@ export function FarmStory({ showCta = false }: { showCta?: boolean }) {
 
 export function FlavourCards() {
   return (
-    <ul className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto overscroll-x-contain px-4 pb-3 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-6 md:gap-4 md:overflow-visible md:px-0 md:pb-0 md:py-3">
+    <SwipeRow count={FLAVOURS.length} label="Order page flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:py-3" itemClass="w-[78%]">
       {FLAVOURS.map((flavour) => (
-        <li key={flavour.name} className={`flavour-pop flex w-[78%] shrink-0 snap-start flex-col items-center rounded-3xl px-3 pb-4 pt-4 text-center md:w-auto md:min-w-0 ${flavour.tint}`}>
+        <div key={flavour.name} className={`flavour-pop flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 text-center ${flavour.tint}`}>
           <div className="relative h-72 w-full md:h-56 lg:h-72">
             {flavour.img && <ZoomableFlavourImage f={flavour} />}
           </div>
           <h3 className="mt-2 font-display text-lg font-extrabold text-accent">{flavour.name}</h3>
           {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">“{flavour.tagline}”</p>}
-        </li>
+        </div>
       ))}
-    </ul>
+    </SwipeRow>
   );
 }
 
