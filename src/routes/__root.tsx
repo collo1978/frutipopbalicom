@@ -24,8 +24,8 @@ const NAV = [
 
 const FOOTER_NAV = NAV;
 
-const linkCls = "rounded-full px-3 py-2 text-sm font-bold text-foreground/80 transition-colors hover:bg-secondary hover:text-accent";
-const activeCls = { className: "bg-secondary text-accent" };
+const linkCls = "nav-pop rounded-full px-3 py-2 font-display text-base font-extrabold text-accent transition-colors hover:text-dragonfruit xl:text-lg";
+const activeCls = { className: "text-dragonfruit" };
 
 const SOCIAL = [
   { href: "https://www.instagram.com/frutipop_bali", label: "Fruti Pop Bali on Instagram", brand: "instagram" },
@@ -87,7 +87,7 @@ function SiteHeader() {
       {open && (
         <nav id="mobile-nav" aria-label="Mobile" className="max-h-[80vh] overflow-y-auto border-t bg-coconut px-4 pb-4 lg:hidden">
           {NAV.map((item) => (
-            <Link key={item.to} to={item.to} onClick={() => setOpen(false)} activeOptions={{ exact: true }} className="block rounded-xl px-3 py-3 font-bold" activeProps={activeCls}>{item.label}</Link>
+            <Link key={item.to} to={item.to} onClick={() => setOpen(false)} activeOptions={{ exact: true }} className="block rounded-xl px-3 py-3 font-display text-xl font-extrabold text-accent" activeProps={activeCls}>{item.label}</Link>
           ))}
           <div className="mt-2 flex gap-3 border-t px-3 pt-4">
             {SOCIAL.map(({ href, label, brand }) => (

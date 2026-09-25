@@ -79,7 +79,7 @@ function Home() {
 
       <section id="flavours" className="scroll-mt-20 bg-hero-cream py-10 md:py-14">
         <div className="mx-auto max-w-7xl px-4 text-center">
-          <h2 className="font-display text-4xl font-extrabold leading-none text-accent md:text-5xl">Our Flavours</h2>
+          <h2 className="fruti-section-heading">Our Flavours</h2>
           <p className="mt-2 text-foreground/80">Six fruity favourites. Which ones take your fancy?</p>
           <div className="mt-6 text-left"><FlavourCarousel /></div>
           <Button asChild size="lg" className={`mt-6 ${cta}`}><a href="#packs" onClick={toPacks}>Order My Flavours <A /></a></Button>
@@ -88,7 +88,7 @@ function Home() {
 
       <section id="packs" className="scroll-mt-20 bg-secondary/55 py-12 md:py-14">
         <div className="mx-auto max-w-5xl px-4">
-          <h2 className="text-center font-display text-4xl font-extrabold leading-none text-accent md:text-5xl">Packs</h2>
+          <h2 className="fruti-section-heading text-center">Packs</h2>
           <div className="mt-8 grid gap-8 md:grid-cols-2 md:gap-5">
             <PackCard name="Family Pack" qty="10 Pops" price="Rp250,000" pack="family" />
             <PackCard name="Jumbo Pack" qty="20 Pops" price="Rp485,000" pack="jumbo" badge="Save Rp15,000!" />
@@ -101,7 +101,7 @@ function Home() {
       <section id="pop-moments" className="scroll-mt-20 bg-hero-cream py-12 md:py-14">
         <div className="mx-auto max-w-6xl px-4">
           <div className="text-center">
-            <h2 className="font-display text-4xl font-extrabold leading-none text-accent md:text-5xl">What's Your Pop Moment?</h2>
+            <h2 className="fruti-section-heading">Make Your Special Moments POP!</h2>
             <p className="mt-2 text-foreground/80">From sunny afternoons to special celebrations, there's always a reason to pop!</p>
           </div>
           <div className="mt-6">
@@ -125,6 +125,7 @@ function Home() {
 
       <section id="pop-stars" className="scroll-mt-20 bg-hero-cream py-10 md:py-12">
         <div className="mx-auto max-w-7xl px-4">
+          <h2 className="fruti-section-heading mb-5 text-center">Our POP Stars!</h2>
           <picture>
             <source media="(min-width: 768px)" srcSet={popStarsDesktop.url} width={1774} height={887} />
             <img src={popStarsMobile.url} alt={`Our POP Stars. Schools, clubs and communities sharing fruity fun across Bali, including ${COMMUNITY_NAMES.join(", ")}.`} loading="lazy" width={1024} height={1536} className="mx-auto h-auto w-full max-w-4xl" />
