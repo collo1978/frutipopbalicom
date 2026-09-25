@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { P } from "@/lib/photos";
 import farmFields from "@/assets/farm-fields.jpg.asset.json";
+import aprilPhoto from "@/assets/5.jpg.asset.json";
 
 export const Route = createFileRoute("/our-story")({
   head: () => ({
