@@ -51,7 +51,7 @@ function baliCurrentTime() {
   return new Intl.DateTimeFormat("en-GB", { timeZone: BALI_TIME_ZONE, hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date());
 }
 
-export function OrderForm({ initialPack }: { initialPack?: PackKey }) {
+export function OrderForm({ initialPack }: { initialPack: PackKey | undefined }) {
   const [packKey, setPackKey] = useState<PackKey | undefined>(initialPack);
   const [quantities, setQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
   const [name, setName] = useState("");
@@ -104,11 +104,11 @@ export function OrderForm({ initialPack }: { initialPack?: PackKey }) {
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
     const nextErrors: Record<string, string> = {};
-    if (!pack) nextErrors.pack = "Choose a pack.";
-    if (!pack || total !== pack.limit) nextErrors.quantities = pack ? `Choose exactly ${pack.limit} pops.` : "Choose a pack first.";
-    if (!date) nextErrors.date = "Choose a delivery date.";
-    if (date && isPastDate(date)) nextErrors.date = "Choose today or a future date.";
-    if (timeIsPast) nextErrors.time = "Choose a future time in Bali.";
+    if (!pack) nextErrors["pack"] = "Choose a pack.";
+    if (!pack || total !== pack.limit) nextErrors["quantities"] = pack ? `Choose exactly ${pack.limit} pops.` : "Choose a pack first.";
+    if (!date) nextErrors["date"] = "Choose a delivery date.";
+    if (date && isPastDate(date)) nextErrors["date"] = "Choose today or a future date.";
+    if (timeIsPast) nextErrors["time"] = "Choose a future time in Bali.";
 
     const details = detailsSchema.safeParse({ name, phone, address, maps, time, payment, notes });
     if (!details.success) {
@@ -234,7 +234,7 @@ export function OrderForm({ initialPack }: { initialPack?: PackKey }) {
 
           <fieldset className="mt-7">
             <legend className="text-xl font-bold text-accent">4. Payment Method</legend>
-            <RadioGroup value={payment} onValueChange={setPayment} className="mt-3">
+            <RadioGroup value={payment ?? ""} onValueChange={setPayment} className="mt-3">
               {["QRIS Payment", "Bank Transfer", "Cash on Delivery"].map((method) => <label key={method} className="flex cursor-pointer items-center gap-3 text-sm font-semibold"><RadioGroupItem value={method} />{method}</label>)}
             </RadioGroup>
             {fieldError("payment")}
