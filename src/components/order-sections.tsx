@@ -99,8 +99,8 @@ export function FarmStory({ showCta = false }: { showCta?: boolean }) {
       </div>
       {showCta && (
         <div className="mt-6 text-center">
-          <Button asChild size="lg" className="min-h-12 rounded-full px-8 font-bold">
-            <Link to="/order">Order Now →</Link>
+          <Button asChild size="lg" className="cta-pop rounded-full shadow-md">
+            <Link to="/order">Order Now <span className="cta-arrow" aria-hidden="true">→</span></Link>
           </Button>
         </div>
       )}
@@ -205,9 +205,9 @@ export function SwipeRow({ children, count, label, desktopClass, itemClass = "w-
 
 export function FlavourCarousel() {
   return (
-    <SwipeRow count={FLAVOURS.length} label="Our flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4">
+    <SwipeRow count={FLAVOURS.length} label="Our flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:py-3" itemClass="w-[78%]">
       {FLAVOURS.map((f) => (
-        <div key={f.name} className={`flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 ${f.tint}`}>
+        <div key={f.name} className={`flavour-pop flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 ${f.tint}`}>
           {f.img && <img src={f.img} alt={`${f.name} Fruti Pop`} loading="lazy" className="h-72 w-full object-contain md:h-56 lg:h-72" />}
           <h3 className="mt-2 text-lg font-bold text-accent">{f.name}</h3>
         </div>

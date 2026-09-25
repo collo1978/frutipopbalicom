@@ -6,7 +6,7 @@ import type { Photo } from "@/lib/photos";
 
 export const btn = {
   primary:
-    "inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 font-bold text-primary-foreground shadow-md transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40",
+    "cta-pop inline-flex items-center justify-center gap-2 rounded-full bg-primary py-2.5 text-primary-foreground shadow-md transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40",
   grape:
     "inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent px-6 py-2.5 font-bold text-accent-foreground shadow-md transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40",
   outline:

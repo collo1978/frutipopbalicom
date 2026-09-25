@@ -26,7 +26,8 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const cta = "min-h-12 rounded-full px-10 text-base font-bold shadow-md transition-transform motion-safe:hover:-translate-y-0.5 md:min-h-14 md:px-12 md:text-lg";
+const cta = "cta-pop rounded-full shadow-md";
+const A = () => <span className="cta-arrow" aria-hidden="true">→</span>;
 
 function Hero() {
   const alt = "Bali's Fruity Sorbet Ice Blocks. Six refreshing flavours. A little pop of happiness. Less sugar than regular ice blocks, full of vitamins, packed with fruit.";
@@ -38,7 +39,7 @@ function Hero() {
           <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto w-full max-w-[min(28rem,calc((100svh-150px)*0.667))] md:w-[min(94vw,calc((100svh-160px)*2.34))] md:max-w-none" />
         </picture>
         <div className="mt-2 flex justify-center md:mt-1">
-          <Button asChild size="lg" className={cta}><Link to="/order">Order My Pops →</Link></Button>
+          <Button asChild size="lg" className={cta}><Link to="/order">Order My Pops <A /></Link></Button>
         </div>
       </div>
     </section>
@@ -62,7 +63,7 @@ function PackCard({ name, qty, price, pack, badge }: { name: string; qty: string
       <h3 className="mt-1 text-4xl font-bold text-accent">{qty}</h3>
       <p className="mt-2 text-2xl font-bold">{price}</p>
       <p className="mt-2 text-foreground/75">Mix & match your favourite flavours.</p>
-      <Button asChild size="lg" className={`mt-5 ${cta}`}><Link to="/order" search={{ pack }}>Fill My Freezer →</Link></Button>
+      <Button asChild size="lg" className={`mt-5 ${cta}`}><Link to="/order" search={{ pack }}>Fill My Freezer <A /></Link></Button>
     </article>
   );
 }
@@ -81,7 +82,7 @@ function Home() {
           <h2 className="text-3xl font-bold text-accent md:text-4xl">Our Flavours</h2>
           <p className="mt-2 text-foreground/80">Six fruity favourites. Which ones take your fancy?</p>
           <div className="mt-6 text-left"><FlavourCarousel /></div>
-          <Button asChild size="lg" className={`mt-6 ${cta}`}><a href="#packs" onClick={toPacks}>Order My Flavours →</a></Button>
+          <Button asChild size="lg" className={`mt-6 ${cta}`}><a href="#packs" onClick={toPacks}>Order My Flavours <A /></a></Button>
         </div>
       </section>
 
@@ -112,7 +113,7 @@ function Home() {
                     <p className="text-sm font-bold text-primary">{m.t}</p>
                     <h3 className="mt-1 text-lg font-bold leading-tight text-accent">{m.h}</h3>
                     <p className="mt-1 flex-1 text-sm text-foreground/75">{m.d}</p>
-                    <Link to="/order" className="mt-3 text-sm font-bold text-primary hover:underline">Order pops →</Link>
+                    <Link to="/order" className="mt-3 text-sm font-bold text-primary hover:underline">Order pops <A /></Link>
                   </div>
                 </article>
               ))}
@@ -144,7 +145,7 @@ function Home() {
         <div className="mx-auto max-w-3xl px-4 text-center">
           <h2 className="text-3xl font-bold md:text-4xl">Ready to Fill Your Freezer?</h2>
           <p className="mt-2 opacity-90">Six refreshing flavours. Pick your favourites and keep the good times popping!</p>
-          <Button asChild size="lg" className={`mt-6 ${cta}`}><Link to="/order">Fill My Freezer →</Link></Button>
+          <Button asChild size="lg" className={`mt-6 ${cta}`}><Link to="/order">Fill My Freezer <A /></Link></Button>
         </div>
       </section>
     </>

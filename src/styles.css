@@ -168,3 +168,40 @@
     border-radius: 9999px;
   }
 }
+
+/* Playful CTA buttons: bigger, bolder, grow + lift on hover, press on tap */
+.cta-pop {
+  font-family: var(--font-display-family);
+  font-weight: 700;
+  font-size: 1.125rem;
+  padding-inline: 2.25rem;
+  min-height: 3.25rem;
+  max-width: 100%;
+  white-space: normal;
+  transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 220ms ease, filter 220ms ease;
+}
+@media (min-width: 768px) {
+  .cta-pop { font-size: 1.25rem; padding-inline: 3.25rem; min-height: 3.75rem; }
+}
+.cta-pop .cta-arrow { display: inline-block; transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .cta-pop:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 12px 24px -8px color-mix(in oklab, var(--color-primary) 60%, transparent); }
+  .cta-pop:hover .cta-arrow { transform: translateX(5px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cta-pop:active { transform: scale(0.95); transition-duration: 90ms; }
+}
+.cta-pop-sm { font-size: 1rem; padding-inline: 1rem; min-height: 2.5rem; }
+@media (min-width: 640px) { .cta-pop-sm { padding-inline: 1.25rem; } }
+@media (min-width: 768px) { .cta-pop-sm { font-size: 1.0625rem; min-height: 2.75rem; padding-inline: 1.5rem; } }
+
+/* Flavour cards: playful hover/tap */
+.flavour-pop { transition: transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 260ms ease; }
+.flavour-pop img { transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .flavour-pop:hover { transform: translateY(-6px) scale(1.04); box-shadow: 0 16px 28px -12px rgb(0 0 0 / 0.25); z-index: 1; position: relative; }
+  .flavour-pop:hover img { transform: scale(1.08); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .flavour-pop:active { transform: scale(0.96); transition-duration: 120ms; }
+}
