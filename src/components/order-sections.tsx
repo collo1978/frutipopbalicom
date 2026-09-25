@@ -54,10 +54,10 @@ export function FarmStory({ showCta = false }: { showCta?: boolean }) {
 
 export function FlavourCards() {
   return (
-    <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+    <ul className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-6 md:overflow-visible md:px-0 md:pb-0">
       {FLAVOURS.map((flavour) => (
-        <li key={flavour.name} className={`flex min-w-0 flex-col items-center rounded-xl p-3 text-center ${flavour.tint}`}>
-          {flavour.img && <img src={flavour.img} alt={`${flavour.name} Fruti Pop pack`} loading="lazy" className="h-48 w-full object-contain sm:h-56" />}
+        <li key={flavour.name} className={`flex w-[42%] shrink-0 snap-start flex-col items-center rounded-xl p-3 md:w-auto md:min-w-0 text-center ${flavour.tint}`}>
+          {flavour.img && <img src={flavour.img} alt={`${flavour.name} Fruti Pop pack`} loading="lazy" className="h-36 w-full object-contain md:h-44" />}
           <h3 className="mt-2 text-base font-bold text-accent">{flavour.name}</h3>
           {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">“{flavour.tagline}”</p>}
         </li>
