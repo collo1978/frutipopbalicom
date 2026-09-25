@@ -18,6 +18,7 @@ import { Route as OurStoryRouteImport } from './routes/our-story'
 import { Route as PacksRouteImport } from './routes/packs'
 import { Route as WhereToBuyRouteImport } from './routes/where-to-buy'
 import { Route as WhereToFindUsRouteImport } from './routes/where-to-find-us'
+import { Route as OccasionsSplatRouteImport } from './routes/occasions.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,40 +65,48 @@ const WhereToFindUsRoute = WhereToFindUsRouteImport.update({
   path: '/where-to-find-us',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OccasionsSplatRoute = OccasionsSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => OccasionsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/occasions': typeof OccasionsRoute
+  '/occasions': typeof OccasionsRouteWithChildren
   '/order': typeof OrderRoute
   '/our-story': typeof OurStoryRoute
   '/packs': typeof PacksRoute
   '/where-to-buy': typeof WhereToBuyRoute
   '/where-to-find-us': typeof WhereToFindUsRoute
+  '/occasions/$': typeof OccasionsSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/occasions': typeof OccasionsRoute
+  '/occasions': typeof OccasionsRouteWithChildren
   '/order': typeof OrderRoute
   '/our-story': typeof OurStoryRoute
   '/packs': typeof PacksRoute
   '/where-to-buy': typeof WhereToBuyRoute
   '/where-to-find-us': typeof WhereToFindUsRoute
+  '/occasions/$': typeof OccasionsSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/occasions': typeof OccasionsRoute
+  '/occasions': typeof OccasionsRouteWithChildren
   '/order': typeof OrderRoute
   '/our-story': typeof OurStoryRoute
   '/packs': typeof PacksRoute
   '/where-to-buy': typeof WhereToBuyRoute
   '/where-to-find-us': typeof WhereToFindUsRoute
+  '/occasions/$': typeof OccasionsSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/packs'
     | '/where-to-buy'
     | '/where-to-find-us'
+    | '/occasions/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/packs'
     | '/where-to-buy'
     | '/where-to-find-us'
+    | '/occasions/$'
   id:
     | '__root__'
     | '/'
@@ -133,13 +144,14 @@ export interface FileRouteTypes {
     | '/packs'
     | '/where-to-buy'
     | '/where-to-find-us'
+    | '/occasions/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  OccasionsRoute: typeof OccasionsRoute
+  OccasionsRoute: typeof OccasionsRouteWithChildren
   OrderRoute: typeof OrderRoute
   OurStoryRoute: typeof OurStoryRoute
   PacksRoute: typeof PacksRoute
@@ -212,14 +224,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WhereToFindUsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/occasions/$': {
+      id: '/occasions/$'
+      path: '/$'
+      fullPath: '/occasions/$'
+      preLoaderRoute: typeof OccasionsSplatRouteImport
+      parentRoute: typeof OccasionsRoute
+    }
   }
 }
+
+interface OccasionsRouteChildren {
+  OccasionsSplatRoute: typeof OccasionsSplatRoute
+}
+
+const OccasionsRouteChildren: OccasionsRouteChildren = {
+  OccasionsSplatRoute: OccasionsSplatRoute,
+}
+
+const OccasionsRouteWithChildren = OccasionsRoute._addFileChildren(
+  OccasionsRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  OccasionsRoute: OccasionsRoute,
+  OccasionsRoute: OccasionsRouteWithChildren,
   OrderRoute: OrderRoute,
   OurStoryRoute: OurStoryRoute,
   PacksRoute: PacksRoute,
