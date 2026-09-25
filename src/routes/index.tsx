@@ -39,7 +39,7 @@ function Hero() {
           <ul className="order-5 grid w-full grid-cols-3 gap-2 md:mt-6">
             {promises.map((promise, index) => (
               <li key={promise} className="text-center text-[11px] font-bold leading-tight text-leaf-foreground sm:text-sm">
-                <span className={`mx-auto mb-1 flex h-7 w-7 md:mb-2 md:h-10 md:w-10 items-center justify-center rounded-full ${index === 1 ? "bg-dragonfruit/10" : index === 2 ? "bg-mango/25" : "bg-leaf"}`}><Check className="h-4 w-4 md:h-6 md:w-6" strokeWidth={3} /></span>
+                <span className={`mx-auto mb-1 flex h-9 w-9 items-center justify-center rounded-full border-2 border-primary/70 md:mb-2 md:h-10 md:w-10 md:border-0 ${index === 1 ? "md:bg-dragonfruit/10" : index === 2 ? "md:bg-mango/25" : "md:bg-leaf"}`}><Check className="h-5 w-5 text-primary md:h-6 md:w-6 md:text-leaf-foreground" strokeWidth={3} /></span>
                 {promise}
               </li>
             ))}
@@ -48,19 +48,22 @@ function Hero() {
             <Button asChild size="lg" className="min-h-12 rounded-full px-8 text-base md:min-h-14 md:px-9 md:text-lg font-bold shadow-lg transition-transform hover:-translate-y-0.5"><Link to="/order">Order Now →</Link></Button>
           </div>
         </div>
-        <div className="relative order-4 mx-auto w-full max-w-sm pb-3 pt-1 md:order-none md:max-w-2xl md:pb-5 md:pt-3">
-          <div className="relative ml-auto aspect-[5/4] w-[88%] rotate-1 overflow-hidden rounded-xl border-[7px] border-card bg-muted shadow-xl">
+        <div className="relative order-4 mx-auto w-full max-w-sm pb-1 pt-1 md:order-none md:max-w-2xl md:pb-5 md:pt-3">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border-[6px] border-card bg-muted shadow-lg md:ml-auto md:aspect-[5/4] md:w-[88%] md:rotate-1 md:border-[7px] md:shadow-xl">
             <img src={P.kioskGirl.src} alt={P.kioskGirl.alt} className="h-full w-full object-cover object-center" />
           </div>
-          <div className="absolute bottom-0 left-0 aspect-[4/3] w-[47%] -rotate-2 overflow-hidden rounded-lg border-[6px] border-card bg-muted shadow-lg">
-            <img src={P.heroCoolerGroup.src} alt={P.heroCoolerGroup.alt} className="h-full w-full object-cover object-center" />
+          <div className="mt-2 grid grid-cols-2 gap-2 md:mt-0 md:block">
+            <div className="aspect-[4/3] overflow-hidden rounded-lg border-[6px] border-card bg-muted shadow-lg md:absolute md:bottom-0 md:left-0 md:w-[47%] md:-rotate-2">
+              <img src={P.heroCoolerGroup.src} alt={P.heroCoolerGroup.alt} className="h-full w-full object-cover object-center" />
+            </div>
+            <div className="aspect-[4/3] overflow-hidden rounded-lg border-[6px] border-card bg-muted shadow-lg md:absolute md:bottom-1 md:right-0 md:w-[45%] md:rotate-2">
+              <img src={P.beachGroup.src} alt={P.beachGroup.alt} className="h-full w-full object-cover object-center" />
+            </div>
           </div>
-          <div className="absolute bottom-1 right-0 aspect-[4/3] w-[45%] rotate-2 overflow-hidden rounded-lg border-[6px] border-card bg-muted shadow-lg">
-            <img src={P.beachGroup.src} alt={P.beachGroup.alt} className="h-full w-full object-cover object-center" />
-          </div>
-          <span aria-hidden="true" className="absolute left-1 top-[30%] h-8 w-7 md:h-11 md:w-9 rotate-[-12deg] rounded-[45%] bg-dragonfruit shadow-sm"><Leaf className="absolute -top-3 left-1 h-5 w-7 fill-primary text-primary" /></span>
-          <Heart aria-hidden="true" className="absolute right-1 top-[24%] h-8 w-8 md:h-12 md:w-12 rotate-12 fill-dragonfruit/10 text-dragonfruit" strokeWidth={3} />
+          <span aria-hidden="true" className="absolute left-1 top-[34%] h-10 w-8 md:top-[30%] md:h-11 md:w-9 rotate-[-12deg] rounded-[45%] bg-dragonfruit shadow-sm"><Leaf className="absolute -top-3 left-1 h-5 w-7 fill-primary text-primary" /></span>
+          <Heart aria-hidden="true" className="absolute right-1 top-[30%] h-10 w-10 md:top-[24%] md:h-12 md:w-12 rotate-12 fill-dragonfruit/10 text-dragonfruit" strokeWidth={3} />
         </div>
+
       </div>
     </section>
   );
