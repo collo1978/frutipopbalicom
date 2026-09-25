@@ -1,4 +1,6 @@
-- [ ] Replace the homepage hero and reorder the homepage shopping journey
-- [ ] Add the dedicated `/order` page with pack, flavour, delivery, payment, and WhatsApp validation
-- [ ] Connect all homepage shopping actions and preserve the legacy pack URL
-- [ ] Verify the complete desktop and mobile ordering journey
+# Roadmap
+
+- [x] Replace the homepage hero and reorder the homepage shopping journey
+- [x] Add the dedicated `/order` page with pack, flavour, delivery, payment, and WhatsApp validation
+- [x] Connect all homepage shopping actions and preserve the legacy pack URL
+- [x] Verify the complete desktop and mobile ordering journey

@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as OccasionsRouteImport } from './routes/occasions'
+import { Route as OrderRouteImport } from './routes/order'
 import { Route as OurStoryRouteImport } from './routes/our-story'
 import { Route as PacksRouteImport } from './routes/packs'
 import { Route as WhereToBuyRouteImport } from './routes/where-to-buy'
@@ -41,6 +42,11 @@ const ContactRoute = ContactRouteImport.update({
 const OccasionsRoute = OccasionsRouteImport.update({
   id: '/occasions',
   path: '/occasions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrderRoute = OrderRouteImport.update({
+  id: '/order',
+  path: '/order',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OurStoryRoute = OurStoryRouteImport.update({
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/occasions': typeof OccasionsRouteWithChildren
+  '/order': typeof OrderRoute
   '/our-story': typeof OurStoryRoute
   '/packs': typeof PacksRoute
   '/where-to-buy': typeof WhereToBuyRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/order': typeof OrderRoute
   '/our-story': typeof OurStoryRoute
   '/packs': typeof PacksRoute
   '/where-to-buy': typeof WhereToBuyRoute
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/occasions': typeof OccasionsRouteWithChildren
+  '/order': typeof OrderRoute
   '/our-story': typeof OurStoryRoute
   '/packs': typeof PacksRoute
   '/where-to-buy': typeof WhereToBuyRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/occasions'
+    | '/order'
     | '/our-story'
     | '/packs'
     | '/where-to-buy'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/order'
     | '/our-story'
     | '/packs'
     | '/where-to-buy'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/occasions'
+    | '/order'
     | '/our-story'
     | '/packs'
     | '/where-to-buy'
@@ -188,6 +200,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   OccasionsRoute: typeof OccasionsRouteWithChildren
+  OrderRoute: typeof OrderRoute
   OurStoryRoute: typeof OurStoryRoute
   PacksRoute: typeof PacksRoute
   WhereToBuyRoute: typeof WhereToBuyRoute
@@ -222,6 +235,13 @@ declare module '@tanstack/react-router' {
       path: '/occasions'
       fullPath: '/occasions'
       preLoaderRoute: typeof OccasionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/order': {
+      id: '/order'
+      path: '/order'
+      fullPath: '/order'
+      preLoaderRoute: typeof OrderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/our-story': {
@@ -315,6 +335,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   OccasionsRoute: OccasionsRouteWithChildren,
+  OrderRoute: OrderRoute,
   OurStoryRoute: OurStoryRoute,
   PacksRoute: PacksRoute,
   WhereToBuyRoute: WhereToBuyRoute,

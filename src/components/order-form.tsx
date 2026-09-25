@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { format } from "date-fns";
 import { CalendarIcon, Check, Copy, Minus, Plus } from "lucide-react";
 import { z } from "zod";
@@ -32,7 +32,13 @@ const detailsSchema = z.object({
   name: z.string().trim().min(2, "Enter your name.").max(100, "Name is too long."),
   phone: z.string().trim().regex(/^\+?[0-9][0-9\s()-]{6,20}$/, "Enter a valid phone number with country code."),
   address: z.string().trim().min(8, "Enter your delivery address.").max(400, "Address is too long."),
-  maps: z.union([z.literal(""), z.string().trim().url("Paste a valid Google Maps link.").max(500)]),
+  maps: z.union([
+    z.literal(""),
+    z.string().trim().url("Paste a valid Google Maps link.").max(500).refine((value) => {
+      const hostname = new URL(value).hostname.toLowerCase();
+      return hostname === "maps.app.goo.gl" || hostname === "goo.gl" || hostname === "maps.google.com" || hostname.endsWith(".google.com");
+    }, "Paste a valid Google Maps link."),
+  ]),
   time: z.string().min(1, "Choose a delivery time."),
   payment: z.enum(["QRIS Payment", "Bank Transfer", "Cash on Delivery"], { required_error: "Choose a payment method." }),
   notes: z.string().max(800, "Notes are too long."),
@@ -51,7 +57,7 @@ function baliCurrentTime() {
   return new Intl.DateTimeFormat("en-GB", { timeZone: BALI_TIME_ZONE, hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date());
 }
 
-export function OrderForm({ initialPack }: { initialPack?: PackKey }) {
+export function OrderForm({ initialPack }: { initialPack: PackKey | undefined }) {
   const [packKey, setPackKey] = useState<PackKey | undefined>(initialPack);
   const [quantities, setQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
   const [name, setName] = useState("");
@@ -68,6 +74,10 @@ export function OrderForm({ initialPack }: { initialPack?: PackKey }) {
   const pack = packKey ? PACKS[packKey] : undefined;
   const total = useMemo(() => Object.values(quantities).reduce((sum, value) => sum + value, 0), [quantities]);
   const complete = Boolean(pack && total === pack.limit);
+
+  useEffect(() => {
+    setPackKey(initialPack);
+  }, [initialPack]);
 
   const choosePack = (next: PackKey) => {
     const nextLimit = PACKS[next].limit;
@@ -104,11 +114,11 @@ export function OrderForm({ initialPack }: { initialPack?: PackKey }) {
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
     const nextErrors: Record<string, string> = {};
-    if (!pack) nextErrors.pack = "Choose a pack.";
-    if (!pack || total !== pack.limit) nextErrors.quantities = pack ? `Choose exactly ${pack.limit} pops.` : "Choose a pack first.";
-    if (!date) nextErrors.date = "Choose a delivery date.";
-    if (date && isPastDate(date)) nextErrors.date = "Choose today or a future date.";
-    if (timeIsPast) nextErrors.time = "Choose a future time in Bali.";
+    if (!pack) nextErrors["pack"] = "Choose a pack.";
+    if (!pack || total !== pack.limit) nextErrors["quantities"] = pack ? `Choose exactly ${pack.limit} pops.` : "Choose a pack first.";
+    if (!date) nextErrors["date"] = "Choose a delivery date.";
+    if (date && isPastDate(date)) nextErrors["date"] = "Choose today or a future date.";
+    if (timeIsPast) nextErrors["time"] = "Choose a future time in Bali.";
 
     const details = detailsSchema.safeParse({ name, phone, address, maps, time, payment, notes });
     if (!details.success) {
@@ -117,10 +127,7 @@ export function OrderForm({ initialPack }: { initialPack?: PackKey }) {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length || !pack || !date || !payment) return;
 
-    const lines = FLAVOURS.map((flavour) => {
-      const quantity = quantities[flavour.name] ?? 0;
-      return quantity > 0 ? `${flavourEmoji[flavour.name]} ${flavour.name} Sorbet: ${quantity} pcs` : "";
-    }).filter(Boolean);
+    const lines = FLAVOURS.map((flavour) => `${flavourEmoji[flavour.name]} ${flavour.name} Sorbet: ${quantities[flavour.name] ?? 0} pcs`);
     const message = [
       "Hi Fruti Pop 👋",
       "",
@@ -187,7 +194,7 @@ export function OrderForm({ initialPack }: { initialPack?: PackKey }) {
                 return (
                   <div key={flavour.name} className="grid grid-cols-[minmax(0,1fr)_auto_auto_auto] items-center gap-3 rounded-lg px-2 py-1.5">
                     <div className="flex min-w-0 items-center gap-2">
-                      <span aria-hidden="true" className="text-2xl">{flavourEmoji[flavour.name]}</span>
+                      {flavour.img && <img src={flavour.img} alt="" className="h-10 w-7 shrink-0 object-contain" />}
                       <span className="truncate font-bold text-accent">{flavour.name}</span>
                     </div>
                     <Button type="button" variant="secondary" size="icon" onClick={() => changeQuantity(flavour.name, -1)} disabled={!pack || quantity === 0} aria-label={`Remove one ${flavour.name}`} className="h-10 w-10 rounded-full"><Minus /></Button>
@@ -199,7 +206,7 @@ export function OrderForm({ initialPack }: { initialPack?: PackKey }) {
             </div>
             <div className="mt-4 rounded-xl bg-leaf p-4">
               <div className="flex items-center justify-between gap-4 font-bold text-accent"><span>Total Pops Selected</span><span>{total} / {pack?.limit ?? 0}</span></div>
-              <div className="mt-2 h-3 overflow-hidden rounded-full bg-card"><div className="h-full rounded-full bg-primary transition-[width]" style={{ width: `${pack ? Math.min(100, (total / pack.limit) * 100) : 0}%` }} /></div>
+              <progress value={total} max={pack?.limit ?? 1} aria-label="Pack completion" className="order-progress mt-2 h-3 w-full overflow-hidden rounded-full" />
               {complete && <p className="mt-3 flex items-center gap-2 font-bold text-primary"><Check className="h-5 w-5" /> Your pack is complete! 🎉</p>}
             </div>
             {fieldError("quantities")}
@@ -234,7 +241,7 @@ export function OrderForm({ initialPack }: { initialPack?: PackKey }) {
 
           <fieldset className="mt-7">
             <legend className="text-xl font-bold text-accent">4. Payment Method</legend>
-            <RadioGroup value={payment} onValueChange={setPayment} className="mt-3">
+            <RadioGroup value={payment ?? ""} onValueChange={setPayment} className="mt-3">
               {["QRIS Payment", "Bank Transfer", "Cash on Delivery"].map((method) => <label key={method} className="flex cursor-pointer items-center gap-3 text-sm font-semibold"><RadioGroupItem value={method} />{method}</label>)}
             </RadioGroup>
             {fieldError("payment")}

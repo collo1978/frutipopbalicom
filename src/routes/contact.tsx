@@ -11,6 +11,7 @@ export const Route = createFileRoute("/contact")({
       { property: "og:description", content: "Get in touch with Fruti Pop Bali on WhatsApp, phone or email." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/contact" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
   }),

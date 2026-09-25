@@ -1,78 +1,64 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { Leaf } from "lucide-react";
-import { FlavourCard, PackSpotlight, WhatsAppButton, btn } from "@/components/site";
-import { FLAVOURS } from "@/lib/flavours";
+import { Check, Heart, Leaf } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ProductLineup, WhyFrutiPop } from "@/components/order-sections";
 import { COMMUNITY_NAMES } from "@/lib/occasions";
 import { P } from "@/lib/photos";
+import { btn } from "@/components/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Fruti Pop Bali | Little pops. Big smiles." },
-      { name: "description", content: "Fruity sorbet pops for kids and grown-ups in Bali. Family packs, birthday parties, schools, events and villa pool days." },
+      { name: "description", content: "Fruit-packed sorbet pops for kids & grown-ups. Order mixed Family and Jumbo Packs for delivery in Bali." },
       { property: "og:title", content: "Fruti Pop Bali | Little pops. Big smiles." },
-      { property: "og:description", content: "Fruity sorbet pops for kids and grown-ups in Bali." },
+      { property: "og:description", content: "Fruit-packed sorbet pops for kids & grown-ups." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
   component: Home,
 });
 
-const SLIDES = [
-  { photo: P.heroCoolerGroup, fit: "object-cover object-center md:object-[50%_28%]" },
-  { photo: P.footballKidsKiosk, fit: "object-cover object-center md:object-[50%_18%]" },
-  { photo: P.beachCouple, fit: "object-cover object-center md:object-[50%_25%]" },
-];
-
 function Hero() {
-  const [i, setI] = useState(0);
-  const go = (n: number) => setI((n + SLIDES.length) % SLIDES.length);
+  const promises = ["Less Sugar than regular ice blocks.", "Full of Vitamins.", "Locally Sourced Fruit."];
   return (
-    <section className="bg-secondary/70" aria-roledescription="carousel" aria-label="Fruti Pop moments">
-      <div className="mx-auto grid max-w-6xl items-center gap-5 px-4 py-6 md:min-h-[calc(100svh-4.0625rem)] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-8 md:py-5">
+    <section className="bg-card">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-8 md:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] md:py-12 lg:py-16">
         <div className="min-w-0">
           <h1 className="text-5xl font-bold leading-[1.02] text-accent md:text-6xl lg:text-7xl">
-            Little pops.<br /><span className="text-primary">Big smiles.</span>
+            Bali's Fruity<br />Sorbet Ice Blocks.
           </h1>
-          <p className="mt-3 max-w-md text-base text-foreground/80 md:text-lg">
-            Fruity sorbet pops for kids and grown-ups in Bali. Perfect for hot afternoons, pool days and every little celebration.
+          <div className="mt-2 h-2 w-4/5 max-w-sm rounded-full bg-mango" />
+          <p className="mt-4 max-w-md text-xl font-bold text-accent md:text-2xl">
+            Fruit-packed sorbet pops for kids & grown-ups.
           </p>
-          <div className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-leaf px-3 py-1.5">
-            <Leaf aria-hidden="true" size={14} strokeWidth={2.5} className="shrink-0 text-leaf-foreground" />
-            <span className="text-xs font-bold leading-snug text-leaf-foreground sm:text-sm">Less sugar than regular ice pops.</span>
-          </div>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <a
-              href="#flavours"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-8 py-3 text-base font-bold text-accent-foreground shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40 active:translate-y-0 md:px-10 md:text-lg"
-            >
-              Explore the Pops <span aria-hidden="true">→</span>
-            </a>
+          <ul className="mt-6 grid grid-cols-3 gap-2">
+            {promises.map((promise, index) => (
+              <li key={promise} className="text-center text-xs font-bold leading-tight text-leaf-foreground sm:text-sm">
+                <span className={`mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full ${index === 1 ? "bg-dragonfruit/10" : index === 2 ? "bg-mango/25" : "bg-leaf"}`}><Check className="h-6 w-6" strokeWidth={3} /></span>
+                {promise}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6">
+            <Button asChild size="lg" className="min-h-14 rounded-full px-9 text-lg font-bold shadow-lg transition-transform hover:-translate-y-0.5"><Link to="/order">Order Now →</Link></Button>
           </div>
         </div>
-        <div className="min-w-0">
-          <div className="relative mx-auto aspect-[5/6] w-full max-w-sm overflow-hidden rounded-3xl bg-primary/10 shadow-xl md:aspect-square md:h-[min(calc(100svh-11.5rem),34rem)] md:w-auto md:max-w-none">
-            {SLIDES.map(({ photo, fit }, n) => (
-              <img
-                key={photo.src}
-                src={photo.src}
-                alt={photo.alt}
-                loading={n === 0 ? "eager" : "lazy"}
-                aria-hidden={n !== i}
-                className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${fit} ${n === i ? "opacity-100" : "opacity-0"}`}
-              />
-            ))}
+        <div className="relative mx-auto w-full max-w-2xl pb-5 pt-3">
+          <div className="relative ml-auto aspect-[5/4] w-[88%] rotate-1 overflow-hidden rounded-xl border-[7px] border-card bg-muted shadow-xl">
+            <img src={P.kioskGirl.src} alt={P.kioskGirl.alt} className="h-full w-full object-cover object-center" />
           </div>
-          <div className="mt-3 flex items-center justify-center gap-3">
-            <button onClick={() => go(i - 1)} aria-label="Previous photo" className="h-9 w-9 rounded-full border-2 border-accent bg-background font-bold text-accent shadow">‹</button>
-            {SLIDES.map((_, n) => (
-              <button key={n} onClick={() => setI(n)} aria-label={`Show photo ${n + 1}`} aria-current={n === i} className={`h-3 rounded-full transition-all ${n === i ? "w-8 bg-accent" : "w-3 bg-primary/30"}`} />
-            ))}
-            <button onClick={() => go(i + 1)} aria-label="Next photo" className="h-9 w-9 rounded-full border-2 border-accent bg-background font-bold text-accent shadow">›</button>
+          <div className="absolute bottom-0 left-0 aspect-[4/3] w-[47%] -rotate-2 overflow-hidden rounded-lg border-[6px] border-card bg-muted shadow-lg">
+            <img src={P.heroCoolerGroup.src} alt={P.heroCoolerGroup.alt} className="h-full w-full object-cover object-center" />
           </div>
+          <div className="absolute bottom-1 right-0 aspect-[4/3] w-[45%] rotate-2 overflow-hidden rounded-lg border-[6px] border-card bg-muted shadow-lg">
+            <img src={P.beachGroup.src} alt={P.beachGroup.alt} className="h-full w-full object-cover object-center" />
+          </div>
+          <span aria-hidden="true" className="absolute left-1 top-[30%] h-11 w-9 rotate-[-12deg] rounded-[45%] bg-dragonfruit shadow-sm"><Leaf className="absolute -top-3 left-1 h-5 w-7 fill-primary text-primary" /></span>
+          <Heart aria-hidden="true" className="absolute right-1 top-[24%] h-12 w-12 rotate-12 fill-dragonfruit/10 text-dragonfruit" strokeWidth={3} />
         </div>
       </div>
     </section>
@@ -92,92 +78,56 @@ function Home() {
     <>
       <Hero />
 
+      <section className="bg-muted py-12 md:py-14">
+        <div className="mx-auto max-w-6xl px-4 text-center">
+          <h2 className="text-3xl font-bold text-accent md:text-4xl">Our Flavours</h2>
+          <p className="mt-2 text-foreground/80">Six fruity favourites. Which ones take your fancy?</p>
+          <div className="mt-6"><ProductLineup /></div>
+          <Button asChild size="lg" className="mt-6 min-h-12 rounded-full px-8 font-bold"><Link to="/order">Order Now →</Link></Button>
+        </div>
+      </section>
+
+      <section className="bg-secondary/55 py-12 md:py-14">
+        <div className="mx-auto max-w-5xl px-4">
+          <h2 className="text-center text-3xl font-bold text-accent md:text-4xl">Choose Your Pack</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <article className="rounded-2xl border bg-card p-6 text-center shadow-sm">
+              <p className="font-bold text-primary">Family Pack</p><h3 className="mt-1 text-3xl font-bold text-accent">10 Pops</h3><p className="mt-2 text-2xl font-bold">Rp250,000</p><p className="mt-2 text-foreground/75">Mix & match your favourite flavours.</p>
+              <Button asChild size="lg" className="mt-5 min-h-12 rounded-full px-8 font-bold"><Link to="/order" search={{ pack: "family" }}>Order Now →</Link></Button>
+            </article>
+            <article className="relative rounded-2xl border bg-card p-6 text-center shadow-sm">
+              <span className="absolute right-3 top-3 rounded-md bg-mango px-2 py-1 text-xs font-bold text-accent">Save Rp15,000!</span>
+              <p className="font-bold text-primary">Jumbo Pack</p><h3 className="mt-1 text-3xl font-bold text-accent">20 Pops</h3><p className="mt-2 text-2xl font-bold">Rp485,000</p><p className="mt-2 text-foreground/75">Mix & match your favourite flavours.</p>
+              <Button asChild size="lg" className="mt-5 min-h-12 rounded-full px-8 font-bold"><Link to="/order" search={{ pack: "jumbo" }}>Order Now →</Link></Button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <WhyFrutiPop showCta />
+
       <section className="mx-auto max-w-6xl px-4 py-12 md:py-14">
         <h2 className="text-3xl font-bold text-accent md:text-4xl">What's your pop moment?</h2>
         <ul className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-5">
           {MOMENTS.map((m) => (
             <li key={m.t}>
-              <Link to="/occasions" hash={m.hash} className="group block h-full overflow-hidden rounded-3xl border bg-card focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
+              <Link to="/occasions" hash={m.hash} className="group block h-full overflow-hidden rounded-2xl border bg-card focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
                 <img src={m.p.src} alt={m.p.alt} loading="lazy" className="aspect-square w-full object-cover transition duration-300 group-hover:scale-[1.03]" />
-                <div className="p-4">
-                  <h3 className="font-bold leading-tight">{m.t}</h3>
-                  <p className="mt-1 text-sm text-foreground/75">{m.d}</p>
-                </div>
+                <div className="p-4"><h3 className="font-bold leading-tight">{m.t}</h3><p className="mt-1 text-sm text-foreground/75">{m.d}</p></div>
               </Link>
             </li>
           ))}
         </ul>
-        <div className="mt-6 text-center">
-          <Link to="/occasions" className={btn.primary}>Explore All Occasions →</Link>
-        </div>
-      </section>
-
-      <section id="flavours" className="scroll-mt-16 bg-muted py-8 md:py-9">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="grid items-center gap-4 md:grid-cols-[minmax(0,1fr)_minmax(20rem,0.85fr)] md:gap-5">
-            <div>
-              <h2 className="text-3xl font-bold text-accent md:text-4xl">Which one's your favourite?</h2>
-              <p className="mt-2 max-w-2xl text-sm leading-snug text-foreground/80 sm:text-base">
-                Six fruity sorbet pops, each in its own bright 100g tube. Kids pick by colour. Grown-ups usually want two.
-              </p>
-            </div>
-          </div>
-          <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-            {FLAVOURS.map((f) => <FlavourCard key={f.name} f={f} />)}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-primary/10 py-8 md:py-10">
-        <div className="mx-auto max-w-6xl px-4"><PackSpotlight photo={P.heroCoolerPair} /></div>
-      </section>
-
-      <section className="bg-secondary/45 py-12 md:py-14">
-        <div className="mx-auto grid max-w-6xl items-center gap-7 px-4 md:grid-cols-2">
-          <img src={P.farm.src} alt={P.farm.alt} loading="lazy" className="aspect-[16/10] w-full rounded-3xl object-cover" />
-          <div>
-            <p className="font-display text-sm font-semibold uppercase tracking-widest text-primary">The Fruti Pop Story</p>
-            <h2 className="mt-2 text-3xl font-bold text-accent md:text-4xl">One frozen fruit sample sparked a much bigger smile.</h2>
-            <p className="mt-3 text-foreground/80">
-              Paul was making frozen fruit purée for Bali's bars and hotels when he saw the possibility of a fruity frozen pop for kids and grown-ups.
-            </p>
-            <Link to="/our-story" className={`${btn.outline} mt-5`}>Read our story</Link>
-          </div>
-        </div>
+        <div className="mt-6 text-center"><Link to="/occasions" className={btn.primary}>Explore All Occasions →</Link></div>
+        <p className="mt-6 text-center text-sm text-muted-foreground">Enjoyed by school and club communities including {COMMUNITY_NAMES.slice(0, -1).join(", ")} and {COMMUNITY_NAMES.at(-1)}.</p>
       </section>
 
       <section className="bg-accent py-12 text-accent-foreground md:py-14">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-3xl font-bold md:text-4xl">Real moments around Bali</h2>
-          <p className="mt-2 max-w-xl opacity-90">Every photo holds a real moment, from a school market to the football pitch and the beach.</p>
-          <ul className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {[
-              { p: P.mnm[1]!, caption: "First bite at the Montessori Night Market" },
-              { p: P.footballPair, caption: "Cooling down after football" },
-              { p: P.mnm[3]!, caption: "Choosing a favourite at the market" },
-              { p: P.beachGroup, caption: "A cool treat by the Bali beach" },
-            ].map(({ p, caption }) => (
-              <li key={p.src}>
-                <img src={p.src} alt={p.alt} loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />
-                <p className="mt-2 text-sm font-semibold leading-snug">{caption}</p>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 text-sm opacity-90">
-            Enjoyed by school and club communities including {COMMUNITY_NAMES.slice(0, -1).join(", ")} and {COMMUNITY_NAMES.at(-1)}.
-          </p>
-          <Link to="/occasions" className={`${btn.primary} mt-5`}>Plan your occasion</Link>
-        </div>
-      </section>
-
-      <section className="bg-mango/25 py-12 text-center md:py-14">
-        <div className="mx-auto max-w-6xl px-4">
-        <h2 className="text-3xl font-bold text-accent md:text-4xl">Want some pops?</h2>
-        <p className="mx-auto mt-3 max-w-md text-foreground/80">Ask where to find us, order a pack or tell us about your event.</p>
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <WhatsAppButton>Order on WhatsApp</WhatsAppButton>
-          <Link to="/where-to-find-us" className={btn.outline}>Where to find us</Link>
-        </div>
+          <div className="grid items-center gap-6 md:grid-cols-[minmax(0,1fr)_auto]">
+            <div><h2 className="text-3xl font-bold md:text-4xl">Ready to build your pack?</h2><p className="mt-2 opacity-90">Choose your size, mix your flavours and send your order when you are ready.</p></div>
+            <Button asChild size="lg" className="min-h-12 rounded-full bg-primary px-8 font-bold text-primary-foreground"><Link to="/order">Order Now →</Link></Button>
+          </div>
         </div>
       </section>
     </>
