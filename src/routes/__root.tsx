@@ -12,12 +12,12 @@ import { useEffect, useState, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import logo from "@/assets/fruti-pop-logo.png.asset.json";
-import { WhatsAppIcon } from "@/components/site";
 import { CONTACT, SNOWWAVE, waLink } from "@/lib/site";
+import { Button } from "@/components/ui/button";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/packs", label: "Fill the Freezer" },
+  { to: "/order", label: "Order" },
   { to: "/occasions", label: "Occasions" },
   { to: "/where-to-find-us", label: "Where to Find Us" },
   { to: "/our-story", label: "Our Story" },
@@ -80,12 +80,10 @@ function SiteHeader() {
               <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-10 w-10 items-center justify-center rounded-full transition-transform hover:scale-105"><SocialBrandIcon brand={brand} className="h-6 w-6" /></a>
             ))}
           </div>
-          <a href={waLink()} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-primary px-4 text-sm font-bold text-primary-foreground shadow">
-            <WhatsAppIcon className="h-4 w-4" /> Order Now<span className="sr-only"> on WhatsApp</span>
-          </a>
-          <button className="flex h-10 w-10 items-center justify-center rounded-full border lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen((v) => !v)}>
+          <Button asChild className="min-h-10 rounded-full px-4 font-bold"><Link to="/order" onClick={() => setOpen(false)}>Order Now</Link></Button>
+          <Button type="button" variant="outline" size="icon" className="h-10 w-10 rounded-full lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen((v) => !v)}>
             <span aria-hidden className="text-xl">{open ? "✕" : "☰"}</span>
-          </button>
+          </Button>
         </div>
       </div>
       {open && (
@@ -110,7 +108,7 @@ function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-4">
         <div>
           <img src={logo.url} alt="Fruti Pop" className="h-14 w-auto" />
-          <p className="mt-3 text-sm opacity-90">Little pops. Big smiles. Fruity sorbet pops in Bali.</p>
+          <p className="mt-3 text-sm opacity-90">Fruit-packed sorbet pops for kids & grown-ups.</p>
           <div className="mt-4 flex gap-2">
             <a
               href="https://www.facebook.com/profile.php?id=61589503270373"
@@ -197,15 +195,15 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           Something went wrong on our end. You can try refreshing or head back home.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
+          <Button
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90"
+            className="rounded-full"
           >
             Try again
-          </button>
+          </Button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-full border border-input bg-background px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"

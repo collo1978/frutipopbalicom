@@ -199,7 +199,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
             </div>
             <div className="mt-4 rounded-xl bg-leaf p-4">
               <div className="flex items-center justify-between gap-4 font-bold text-accent"><span>Total Pops Selected</span><span>{total} / {pack?.limit ?? 0}</span></div>
-              <div className="mt-2 h-3 overflow-hidden rounded-full bg-card"><div className="h-full rounded-full bg-primary transition-[width]" style={{ width: `${pack ? Math.min(100, (total / pack.limit) * 100) : 0}%` }} /></div>
+              <progress value={total} max={pack?.limit ?? 1} aria-label="Pack completion" className="mt-2 h-3 w-full overflow-hidden rounded-full accent-primary" />
               {complete && <p className="mt-3 flex items-center gap-2 font-bold text-primary"><Check className="h-5 w-5" /> Your pack is complete! 🎉</p>}
             </div>
             {fieldError("quantities")}
