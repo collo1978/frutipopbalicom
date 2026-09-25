@@ -1,4 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import strawberryArt from "@/assets/benefits/strawberry.png";
+import sugarArt from "@/assets/benefits/sugar.png";
+import iceArt from "@/assets/benefits/ice.png";
+import leafArt from "@/assets/benefits/leaf.png";
+import mangoArt from "@/assets/benefits/mango.png";
+import popsArt from "@/assets/benefits/pops.png";
 import { BadgeCheck, Box, Heart, Leaf, Play, Snowflake, Sun } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { FLAVOURS } from "@/lib/flavours";
@@ -42,7 +48,7 @@ export function CustomerTestimonial() {
   return (
     <section aria-labelledby="testimonial-heading" className="py-10 text-center md:py-12">
       <h3 id="testimonial-heading" className="text-2xl font-bold text-accent md:text-3xl">Don't Just Take Our Word for It!</h3>
-      <p className="mx-auto mt-2 max-w-xl text-foreground/75">A little pop of happiness, straight from our happy customers!</p>
+      <p className="mx-auto mt-2 max-w-xl text-foreground/75">Real smiles. Real fruity happiness.</p>
       <div className="relative mx-auto mt-6 aspect-[9/16] w-full max-w-sm overflow-hidden rounded-2xl bg-muted shadow-sm">
         <video
           ref={videoRef}
@@ -131,14 +137,96 @@ export function ProductLineup() {
   );
 }
 
+const BENEFIT_CARDS = [
+  { t: "Fruity Goodness!", d: "A deliciously fruity treat.", img: strawberryArt, bg: "bg-pastel-pink" },
+  { t: "Less Sugar!", d: "Less sugar than regular ice blocks.", img: sugarArt, bg: "bg-pastel-green" },
+  { t: "Cool Down!", d: "A refreshing escape from the Bali heat.", img: iceArt, bg: "bg-pastel-blue" },
+  { t: "Plant-Powered!", d: "Vegan & dairy free.", img: leafArt, bg: "bg-pastel-sage" },
+  { t: "Vitamin Goodness!", d: "Fruity flavour with vitamins.", img: mangoArt, bg: "bg-pastel-yellow" },
+  { t: "Big Smiles!", d: "Loved by kids and grown-ups alike.", img: popsArt, bg: "bg-pastel-lavender" },
+] as const;
+
+export function BenefitCards() {
+  return (
+    <ul className="grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 md:grid-cols-3 md:gap-5">
+      {BENEFIT_CARDS.map((b) => (
+        <li
+          key={b.t}
+          tabIndex={0}
+          className={`group relative flex h-full flex-col items-center overflow-hidden rounded-3xl px-3 pb-4 pt-3 text-center outline-none transition duration-200 ease-out focus-visible:ring-4 focus-visible:ring-ring/30 motion-safe:hover:-translate-y-1.5 motion-safe:hover:shadow-md motion-safe:active:scale-[0.97] md:px-6 md:pb-6 ${b.bg}`}
+        >
+          <span aria-hidden="true" className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-card/40" />
+          <span aria-hidden="true" className="absolute -bottom-5 -left-5 h-14 w-14 rounded-full bg-card/30" />
+          <img src={b.img} alt="" width={816} height={816} loading="lazy" className="relative h-24 w-24 object-contain transition-transform duration-200 ease-out motion-safe:group-hover:rotate-[-4deg] motion-safe:group-hover:scale-110 motion-safe:group-active:rotate-[4deg] md:h-36 md:w-36" />
+          <h3 className="relative mt-1 text-lg font-bold leading-tight text-accent md:text-2xl">{b.t}</h3>
+          <p className="relative mt-1 text-sm leading-snug text-foreground/80 md:text-base">{b.d}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Mobile swipe row with snap and pagination dots. On md+ children are laid out by `desktopClass`. */
+export function SwipeRow({ children, count, label, desktopClass, itemClass = "w-[80%]" }: { children: ReactNode[]; count: number; label: string; desktopClass: string; itemClass?: string }) {
+  const ref = useRef<HTMLUListElement>(null);
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onScroll = () => {
+      const first = el.firstElementChild as HTMLElement | null;
+      if (!first) return;
+      const step = first.offsetWidth + 12;
+      setActive(Math.min(count - 1, Math.max(0, Math.round(el.scrollLeft / step))));
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [count]);
+  const go = (i: number) => {
+    const el = ref.current;
+    const item = el?.children[i] as HTMLElement | undefined;
+    if (el && item) el.scrollTo({ left: item.offsetLeft - el.offsetLeft - 16, behavior: "smooth" });
+  };
+  return (
+    <div>
+      <ul ref={ref} aria-label={label} className={`-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto overscroll-x-contain px-4 pb-1 [scrollbar-width:none] md:mx-0 md:overflow-visible md:px-0 ${desktopClass}`}>
+        {children.map((c, i) => (
+          <li key={i} className={`${itemClass} shrink-0 snap-start md:w-auto md:min-w-0`}>{c}</li>
+        ))}
+      </ul>
+      <div className="mt-3 flex justify-center gap-1.5 md:hidden">
+        {Array.from({ length: count }, (_, i) => (
+          <button key={i} type="button" aria-label={`Show item ${i + 1}`} aria-current={i === active} onClick={() => go(i)} className={`h-2 rounded-full transition-all ${i === active ? "w-5 bg-accent" : "w-2 bg-accent/25"}`} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function FlavourCarousel() {
+  return (
+    <SwipeRow count={FLAVOURS.length} label="Our flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4">
+      {FLAVOURS.map((f) => (
+        <div key={f.name} className={`flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 ${f.tint}`}>
+          {f.img && <img src={f.img} alt={`${f.name} Fruti Pop`} loading="lazy" className="h-72 w-full object-contain md:h-56 lg:h-72" />}
+          <h3 className="mt-2 text-lg font-bold text-accent">{f.name}</h3>
+        </div>
+      ))}
+    </SwipeRow>
+  );
+}
+
 export function WhyFrutiPop({ showCta = false, showTestimonial = false }: { showCta?: boolean; showTestimonial?: boolean }) {
   return (
     <section className="bg-background py-12 md:py-14">
       <div className="mx-auto max-w-6xl px-4">
-        <h2 className="text-3xl font-bold text-accent md:text-4xl">Why Fruti Pop?</h2>
-        <div className="mt-6"><BenefitsStrip /></div>
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-accent md:text-4xl">Why Fruti Pop?</h2>
+          <p className="mt-2 text-foreground/80">A little goodness in every pop!</p>
+        </div>
+        <div className="mt-6"><BenefitCards /></div>
         {showTestimonial && <CustomerTestimonial />}
-        <div className={showTestimonial ? "" : "mt-6"}><FarmStory showCta={showCta} /></div>
+        <div className={showTestimonial ? "" : "mt-8"}><FarmStory showCta={showCta} /></div>
       </div>
     </section>
   );
