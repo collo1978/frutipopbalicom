@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, Heart, Leaf } from "lucide-react";
+import heroDesktop from "@/assets/hero-desktop.png.asset.json";
+import heroMobile from "@/assets/hero-mobile.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { ProductLineup, WhyFrutiPop } from "@/components/order-sections";
 import { COMMUNITY_NAMES } from "@/lib/occasions";
@@ -23,47 +24,17 @@ export const Route = createFileRoute("/")({
 });
 
 function Hero() {
-  const promises = ["Less Sugar than regular ice blocks.", "Full of Vitamins.", "Locally Sourced Fruit."];
+  const alt = "Fruti Pop. Bali's Fruity Sorbet Ice Blocks. Real fruit. Refreshing flavours. Less sugar than regular ice blocks, full of vitamins, locally sourced fruit.";
   return (
     <section className="bg-card">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-4 pb-6 pt-4 md:grid md:items-center md:gap-8 md:py-12 lg:py-16 md:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] md:py-12 lg:py-16">
-        <div className="contents min-w-0 md:block">
-          <h1 className="order-1 text-center text-[2.1rem] md:text-left md:text-5xl font-bold leading-[1.02] text-accent md:leading-[1.02] md:text-6xl lg:text-7xl">
-            Bali's Fruity<br />Sorbet Ice Blocks.
-          </h1>
-          <div className="order-2 -mt-2 h-1.5 w-3/5 max-w-sm rounded-full bg-mango md:mt-2 md:h-2 md:w-4/5" />
-          <p className="order-3 text-center text-base font-bold text-accent md:hidden">Real fruit. Refreshing flavours.</p>
-          <p className="mt-4 hidden max-w-md text-xl font-bold text-accent md:block md:text-2xl">
-            Fruit-packed sorbet pops for kids & grown-ups.
-          </p>
-          <ul className="order-5 grid w-full grid-cols-3 gap-2 md:mt-6">
-            {promises.map((promise, index) => (
-              <li key={promise} className="text-center text-[11px] font-bold leading-tight text-leaf-foreground sm:text-sm">
-                <span className={`mx-auto mb-1 flex h-9 w-9 items-center justify-center rounded-full border-2 border-primary/70 md:mb-2 md:h-10 md:w-10 md:border-0 ${index === 1 ? "md:bg-dragonfruit/10" : index === 2 ? "md:bg-mango/25" : "md:bg-leaf"}`}><Check className="h-5 w-5 text-primary md:h-6 md:w-6 md:text-leaf-foreground" strokeWidth={3} /></span>
-                {promise}
-              </li>
-            ))}
-          </ul>
-          <div className="order-6 md:mt-6">
-            <Button asChild size="lg" className="min-h-12 rounded-full px-8 text-base md:min-h-14 md:px-9 md:text-lg font-bold shadow-lg transition-transform hover:-translate-y-0.5"><Link to="/order">Order Now →</Link></Button>
-          </div>
+      <div className="mx-auto max-w-7xl px-2 pb-6 pt-2 md:px-4 md:pb-10 md:pt-4">
+        <picture>
+          <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1677} height={938} />
+          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto w-full max-w-md md:max-w-full" />
+        </picture>
+        <div className="mt-2 flex justify-center md:-mt-4 md:w-[44%] md:justify-center">
+          <Button asChild size="lg" className="min-h-12 rounded-full px-8 text-base font-bold shadow-lg transition-transform hover:-translate-y-0.5 md:min-h-14 md:px-9 md:text-lg"><Link to="/order">Order Now →</Link></Button>
         </div>
-        <div className="relative order-4 mx-auto w-full max-w-sm pb-1 pt-1 md:order-none md:max-w-2xl md:pb-5 md:pt-3">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border-[6px] border-card bg-muted shadow-lg md:ml-auto md:aspect-[5/4] md:w-[88%] md:rotate-1 md:border-[7px] md:shadow-xl">
-            <img src={P.kioskGirl.src} alt={P.kioskGirl.alt} className="h-full w-full object-cover object-center" />
-          </div>
-          <div className="mt-2 grid grid-cols-2 gap-2 md:mt-0 md:block">
-            <div className="aspect-[4/3] overflow-hidden rounded-lg border-[6px] border-card bg-muted shadow-lg md:absolute md:bottom-0 md:left-0 md:w-[47%] md:-rotate-2">
-              <img src={P.heroCoolerGroup.src} alt={P.heroCoolerGroup.alt} className="h-full w-full object-cover object-center" />
-            </div>
-            <div className="aspect-[4/3] overflow-hidden rounded-lg border-[6px] border-card bg-muted shadow-lg md:absolute md:bottom-1 md:right-0 md:w-[45%] md:rotate-2">
-              <img src={P.beachGroup.src} alt={P.beachGroup.alt} className="h-full w-full object-cover object-center" />
-            </div>
-          </div>
-          <span aria-hidden="true" className="absolute left-1 top-[34%] h-10 w-8 md:top-[30%] md:h-11 md:w-9 rotate-[-12deg] rounded-[45%] bg-dragonfruit shadow-sm"><Leaf className="absolute -top-3 left-1 h-5 w-7 fill-primary text-primary" /></span>
-          <Heart aria-hidden="true" className="absolute right-1 top-[30%] h-10 w-10 md:top-[24%] md:h-12 md:w-12 rotate-12 fill-dragonfruit/10 text-dragonfruit" strokeWidth={3} />
-        </div>
-
       </div>
     </section>
   );
