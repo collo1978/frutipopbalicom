@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, Heart } from "lucide-react";
+import { Check, Heart, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductLineup, WhyFrutiPop } from "@/components/order-sections";
 import { COMMUNITY_NAMES } from "@/lib/occasions";
@@ -57,7 +57,7 @@ function Hero() {
           <div className="absolute bottom-1 right-0 aspect-[4/3] w-[45%] rotate-2 overflow-hidden rounded-lg border-[6px] border-card bg-muted shadow-lg">
             <img src={P.beachGroup.src} alt={P.beachGroup.alt} className="h-full w-full object-cover object-center" />
           </div>
-          <span aria-hidden="true" className="absolute left-0 top-[30%] rotate-[-12deg] text-5xl">🍓</span>
+          <span aria-hidden="true" className="absolute left-1 top-[30%] h-11 w-9 rotate-[-12deg] rounded-[45%] bg-dragonfruit shadow-sm"><Leaf className="absolute -top-3 left-1 h-5 w-7 fill-primary text-primary" /></span>
           <Heart aria-hidden="true" className="absolute right-1 top-[24%] h-12 w-12 rotate-12 fill-dragonfruit/10 text-dragonfruit" strokeWidth={3} />
         </div>
       </div>
