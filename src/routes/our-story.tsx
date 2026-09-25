@@ -23,7 +23,7 @@ function OurStory() {
   return (
     <>
       <section className="bg-secondary/60">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 md:py-16">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 md:grid-cols-[1.2fr_1fr] md:py-16">
           <div>
             <p className="font-display text-sm font-semibold uppercase tracking-widest text-primary">The Fruti Pop Story</p>
             <h1 className="mt-2 text-4xl font-bold text-accent md:text-5xl">It started with a taste.</h1>
@@ -32,6 +32,11 @@ function OurStory() {
               bars, beach clubs and hotels around Bali.
             </p>
           </div>
+          <img
+            src={aprilPhoto.url}
+            alt="April smiling and holding two Fruti Pop sorbet pops"
+            className="mx-auto w-full max-w-sm rounded-3xl md:max-w-none"
+          />
         </div>
       </section>
 
