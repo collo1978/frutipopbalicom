@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroDesktop from "@/assets/hero-desktop-pop-stars.png.asset.json";
-import heroMobile from "@/assets/hero-mobile-pop-stars.png.asset.json";
+import heroDesktop from "@/assets/hero-desktop-v3.webp.asset.json";
+import heroMobile from "@/assets/hero-mobile-v3.webp.asset.json";
 import popStarsDesktop from "@/assets/pop-stars-desktop.png.asset.json";
 import popStarsMobile from "@/assets/pop-stars-mobile.png.asset.json";
 import birthdayParty from "@/assets/birthday-pool-party.png.asset.json";
