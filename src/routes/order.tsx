@@ -26,19 +26,11 @@ function OrderPage() {
   const { pack } = Route.useSearch();
   return (
     <>
-      <section className="bg-muted py-6 md:py-8">
+      <section className="bg-muted py-4 md:py-5">
         <div className="mx-auto max-w-7xl px-4">
-          <h1 className="font-display text-4xl font-extrabold leading-none text-accent md:text-5xl">Our Flavours</h1>
-          <p className="mt-2 text-foreground/80">Six fruity sorbet pops, each in its own bright 100g tube.</p>
-          <div className="mt-4"><FlavourCards /></div>
-        </div>
-      </section>
-
-      <section className="bg-coconut py-6 md:py-10">
-        <div className="mx-auto max-w-6xl px-4">
-          <h2 className="font-display text-4xl font-extrabold leading-none text-accent md:text-6xl">Order Your Fruti Pops</h2>
-          <p className="mt-2 max-w-2xl text-foreground/80">Choose your pack, mix and match your favourite flavours, and get them delivered!</p>
-          <div className="mt-6"><OrderForm initialPack={pack} /></div>
+          <h1 className="fruti-section-heading">Order Your Fruti Pops</h1>
+          <div className="mt-3"><FlavourCards /></div>
+          <div className="mx-auto mt-4 max-w-6xl"><OrderForm initialPack={pack} /></div>
         </div>
       </section>
 

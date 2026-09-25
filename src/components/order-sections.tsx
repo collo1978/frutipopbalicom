@@ -48,7 +48,7 @@ export function CustomerTestimonial() {
 
   return (
     <section aria-labelledby="testimonial-heading" className="py-10 text-center md:py-12">
-      <h3 id="testimonial-heading" className="font-display text-3xl font-extrabold leading-none text-accent md:text-4xl">Don't Just Take Our Word for It!</h3>
+      <h3 id="testimonial-heading" className="fruti-section-heading">Don't Just Take Our Word for It!</h3>
       <p className="mx-auto mt-2 max-w-xl text-foreground/75">Real smiles. Real fruity happiness.</p>
       <div className="relative mx-auto mt-6 aspect-[9/16] w-full max-w-sm overflow-hidden rounded-2xl bg-muted shadow-sm">
         <video
@@ -110,12 +110,13 @@ export function FarmStory({ showCta = false }: { showCta?: boolean }) {
 }
 
 export function FlavourCards() {
+  const [activeFlavour, setActiveFlavour] = useState<string | null>(null);
   return (
     <SwipeRow count={FLAVOURS.length} label="Order page flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:py-3" itemClass="w-[78%]">
       {FLAVOURS.map((flavour) => (
-        <div key={flavour.name} className={`flavour-pop flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 text-center ${flavour.tint}`}>
+        <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 text-center ${flavour.tint}`}>
           <div className="relative h-72 w-full md:h-56 lg:h-72">
-            {flavour.img && <ZoomableFlavourImage f={flavour} />}
+            {flavour.img && <ZoomableFlavourImage f={flavour} active={activeFlavour === flavour.name} onToggle={() => setActiveFlavour((current) => current === flavour.name ? null : flavour.name)} />}
           </div>
           <h3 className="mt-2 font-display text-lg font-extrabold text-accent">{flavour.name}</h3>
           {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">“{flavour.tagline}”</p>}
@@ -207,12 +208,13 @@ export function SwipeRow({ children, count, label, desktopClass, itemClass = "w-
 }
 
 export function FlavourCarousel() {
+  const [activeFlavour, setActiveFlavour] = useState<string | null>(null);
   return (
     <SwipeRow count={FLAVOURS.length} label="Our flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:py-3" itemClass="w-[78%]">
       {FLAVOURS.map((f) => (
-        <div key={f.name} className={`flavour-pop flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 ${f.tint}`}>
+        <div key={f.name} className={`flavour-pop relative flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 ${f.tint}`}>
           <div className="relative h-72 w-full md:h-56 lg:h-72">
-            {f.img && <ZoomableFlavourImage f={f} />}
+            {f.img && <ZoomableFlavourImage f={f} active={activeFlavour === f.name} onToggle={() => setActiveFlavour((current) => current === f.name ? null : f.name)} />}
           </div>
           <h3 className="mt-2 font-display text-lg font-extrabold text-accent">{f.name}</h3>
         </div>
@@ -226,7 +228,7 @@ export function WhyFrutiPop({ showCta = false, showTestimonial = false }: { show
     <section className="bg-background py-12 md:py-14">
       <div className="mx-auto max-w-6xl px-4">
         <div className="text-center">
-          <h2 className="font-display text-4xl font-extrabold leading-none text-accent md:text-5xl">Why Fruti Pop?</h2>
+          <h2 className="fruti-section-heading">Why Fruti Pop?</h2>
           <p className="mt-2 text-foreground/80">A little goodness in every pop!</p>
         </div>
         <div className="mt-6"><BenefitCards /></div>
