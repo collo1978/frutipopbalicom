@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { EnquiryForm, WhatsAppButton, btn } from "@/components/site";
+import aprilPhoto from "@/assets/5.jpg.asset.json";
+import { Button } from "@/components/ui/button";
+import { WhatsAppIcon } from "@/components/site";
 import { CONTACT, mailLink } from "@/lib/site";
 
 export const Route = createFileRoute("/contact")({
@@ -19,32 +21,45 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const whatsappHref = "https://wa.me/6287841480116?text=Hi%20Fruti%20Pop!%20I%27d%20like%20to%20order%20some%20pops.";
+
   return (
-    <>
-      <section className="bg-secondary/60">
-        <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
+    <section className="bg-hero-cream">
+      <div className="mx-auto grid max-w-6xl items-center gap-9 px-4 py-10 md:grid-cols-[1fr_0.9fr] md:gap-12 md:py-14">
+        <div className="max-w-xl text-left">
           <p className="font-display text-sm font-semibold uppercase tracking-widest text-primary">Contact</p>
-          <h1 className="mt-2 text-4xl font-bold text-accent md:text-5xl">Say hello!</h1>
-          <p className="mt-4 max-w-xl text-lg text-foreground/80">WhatsApp is the fastest way to reach us.</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <WhatsAppButton>WhatsApp us</WhatsAppButton>
-            <a href={CONTACT.phoneHref} className={btn.outline}>Call {CONTACT.phoneDisplay}</a>
-            <a href={mailLink("Hello Fruti Pop")} className={btn.outline}>Email us</a>
+          <h1 className="mt-2 font-display text-5xl font-extrabold leading-none text-accent md:text-6xl">Say hello!</h1>
+          <p className="mt-5 text-lg font-semibold leading-relaxed text-foreground md:text-xl">WhatsApp is the fastest way to reach us.</p>
+
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Button asChild size="lg" className="cta-pop rounded-full shadow-md">
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon /> WhatsApp Us <span className="cta-arrow" aria-hidden="true">→</span>
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="rounded-full border-2 border-accent bg-card font-display text-lg font-bold text-accent">
+              <a href={CONTACT.phoneHref}>Call {CONTACT.phoneDisplay}</a>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="rounded-full border-2 border-accent bg-card font-display text-lg font-bold text-accent">
+              <a href={mailLink("Hello Fruti Pop")}>Email Us</a>
+            </Button>
+          </div>
+
+          <div className="mt-8 rounded-3xl bg-card p-5 shadow-sm">
+            <h2 className="font-display text-2xl font-extrabold text-accent">Business address</h2>
+            <address className="mt-3 text-base not-italic leading-relaxed text-foreground md:text-lg">
+              {CONTACT.address}
+            </address>
+            <p className="mt-2 text-sm font-semibold text-muted-foreground">(Office, not a walk-in shop)</p>
           </div>
         </div>
-      </section>
-      <section className="mx-auto grid max-w-6xl gap-8 px-4 py-14 md:grid-cols-[1fr_1.4fr]">
-        <div className="space-y-4">
-          <h2 className="text-3xl font-bold text-accent">Enquiries</h2>
-          <p className="text-foreground/80">Family packs, birthday parties, schools & sports clubs, events or villa pool days. Choose one and send us the details.</p>
-          <dl className="space-y-3 text-sm">
-            <div><dt className="font-bold">Email</dt><dd><a className="text-accent underline" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></dd></div>
-            <div><dt className="font-bold">Phone / WhatsApp</dt><dd><a className="text-accent underline" href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a></dd></div>
-            <div><dt className="font-bold">Business address</dt><dd>{CONTACT.address}<br /><span className="text-muted-foreground">(office, not a walk-in shop)</span></dd></div>
-          </dl>
-        </div>
-        <EnquiryForm />
-      </section>
-    </>
+
+        <img
+          src={aprilPhoto.url}
+          alt="April smiling and holding two Fruti Pop sorbet pops"
+          className="mx-auto w-full max-w-md rounded-3xl object-cover shadow-lg md:max-w-none"
+        />
+      </div>
+    </section>
   );
 }

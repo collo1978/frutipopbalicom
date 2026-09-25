@@ -28,7 +28,7 @@ function OrderPage() {
     <>
       <section className="bg-muted py-6 md:py-8">
         <div className="mx-auto max-w-7xl px-4">
-          <h1 className="text-3xl font-bold text-accent md:text-4xl">Our Flavours</h1>
+          <h1 className="font-display text-4xl font-extrabold leading-none text-accent md:text-5xl">Our Flavours</h1>
           <p className="mt-2 text-foreground/80">Six fruity sorbet pops, each in its own bright 100g tube.</p>
           <div className="mt-4"><FlavourCards /></div>
         </div>
@@ -36,7 +36,7 @@ function OrderPage() {
 
       <section className="bg-coconut py-6 md:py-10">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-3xl font-bold text-accent md:text-5xl">Order Your Fruti Pops</h2>
+          <h2 className="font-display text-4xl font-extrabold leading-none text-accent md:text-6xl">Order Your Fruti Pops</h2>
           <p className="mt-2 max-w-2xl text-foreground/80">Choose your pack, mix and match your favourite flavours, and get them delivered!</p>
           <div className="mt-6"><OrderForm initialPack={pack} /></div>
         </div>

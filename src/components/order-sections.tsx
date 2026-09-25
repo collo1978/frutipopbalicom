@@ -10,6 +10,7 @@ import { Link } from "@tanstack/react-router";
 import { FLAVOURS } from "@/lib/flavours";
 import { P } from "@/lib/photos";
 import { Button } from "@/components/ui/button";
+import { ZoomableFlavourImage } from "@/components/flavour-zoom";
 import farmFields from "@/assets/farm-fields.jpg.asset.json";
 import testimonialVideo from "@/assets/customer-testimonial.mp4.asset.json";
 import testimonialPoster from "@/assets/customer-testimonial-poster.jpg.asset.json";
@@ -47,7 +48,7 @@ export function CustomerTestimonial() {
 
   return (
     <section aria-labelledby="testimonial-heading" className="py-10 text-center md:py-12">
-      <h3 id="testimonial-heading" className="text-2xl font-bold text-accent md:text-3xl">Don't Just Take Our Word for It!</h3>
+      <h3 id="testimonial-heading" className="font-display text-3xl font-extrabold leading-none text-accent md:text-4xl">Don't Just Take Our Word for It!</h3>
       <p className="mx-auto mt-2 max-w-xl text-foreground/75">Real smiles. Real fruity happiness.</p>
       <div className="relative mx-auto mt-6 aspect-[9/16] w-full max-w-sm overflow-hidden rounded-2xl bg-muted shadow-sm">
         <video
@@ -89,7 +90,7 @@ export function FarmStory({ showCta = false }: { showCta?: boolean }) {
         <div className="flex flex-col justify-center p-6 md:p-8">
           <div className="flex items-center gap-2 text-leaf-foreground">
             <BadgeCheck aria-hidden="true" className="h-7 w-7" />
-            <h3 className="text-2xl font-bold">Locally Sourced Fruit</h3>
+            <h3 className="font-display text-3xl font-extrabold leading-none">Locally Sourced Fruit</h3>
           </div>
           <p className="mt-3 font-bold text-leaf-foreground">Fruit hand-picked from local farms in Bedugul, Bali & East Java.</p>
           <p className="mt-2 text-sm leading-relaxed text-leaf-foreground/85">
@@ -110,15 +111,17 @@ export function FarmStory({ showCta = false }: { showCta?: boolean }) {
 
 export function FlavourCards() {
   return (
-    <ul className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-6 md:overflow-visible md:px-0 md:pb-0">
+    <SwipeRow count={FLAVOURS.length} label="Order page flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:py-3" itemClass="w-[78%]">
       {FLAVOURS.map((flavour) => (
-        <li key={flavour.name} className={`flex w-[42%] shrink-0 snap-start flex-col items-center rounded-xl p-3 md:w-auto md:min-w-0 text-center ${flavour.tint}`}>
-          {flavour.img && <img src={flavour.img} alt={`${flavour.name} Fruti Pop pack`} loading="lazy" className="h-36 w-full object-contain md:h-44" />}
-          <h3 className="mt-2 text-base font-bold text-accent">{flavour.name}</h3>
+        <div key={flavour.name} className={`flavour-pop flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 text-center ${flavour.tint}`}>
+          <div className="relative h-72 w-full md:h-56 lg:h-72">
+            {flavour.img && <ZoomableFlavourImage f={flavour} />}
+          </div>
+          <h3 className="mt-2 font-display text-lg font-extrabold text-accent">{flavour.name}</h3>
           {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">“{flavour.tagline}”</p>}
-        </li>
+        </div>
       ))}
-    </ul>
+    </SwipeRow>
   );
 }
 
@@ -158,7 +161,7 @@ export function BenefitCards() {
           <span aria-hidden="true" className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-card/40" />
           <span aria-hidden="true" className="absolute -bottom-5 -left-5 h-14 w-14 rounded-full bg-card/30" />
           <img src={b.img} alt="" width={816} height={816} loading="lazy" className="relative h-24 w-24 object-contain transition-transform duration-200 ease-out motion-safe:group-hover:rotate-[-4deg] motion-safe:group-hover:scale-110 motion-safe:group-active:rotate-[4deg] md:h-36 md:w-36" />
-          <h3 className="relative mt-1 text-lg font-bold leading-tight text-accent md:text-2xl">{b.t}</h3>
+          <h3 className="relative mt-1 font-display text-lg font-extrabold leading-tight text-accent md:text-2xl">{b.t}</h3>
           <p className="relative mt-1 text-sm leading-snug text-foreground/80 md:text-base">{b.d}</p>
         </li>
       ))}
@@ -208,8 +211,10 @@ export function FlavourCarousel() {
     <SwipeRow count={FLAVOURS.length} label="Our flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:py-3" itemClass="w-[78%]">
       {FLAVOURS.map((f) => (
         <div key={f.name} className={`flavour-pop flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 ${f.tint}`}>
-          {f.img && <img src={f.img} alt={`${f.name} Fruti Pop`} loading="lazy" className="h-72 w-full object-contain md:h-56 lg:h-72" />}
-          <h3 className="mt-2 text-lg font-bold text-accent">{f.name}</h3>
+          <div className="relative h-72 w-full md:h-56 lg:h-72">
+            {f.img && <ZoomableFlavourImage f={f} />}
+          </div>
+          <h3 className="mt-2 font-display text-lg font-extrabold text-accent">{f.name}</h3>
         </div>
       ))}
     </SwipeRow>
@@ -221,7 +226,7 @@ export function WhyFrutiPop({ showCta = false, showTestimonial = false }: { show
     <section className="bg-background py-12 md:py-14">
       <div className="mx-auto max-w-6xl px-4">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-accent md:text-4xl">Why Fruti Pop?</h2>
+          <h2 className="font-display text-4xl font-extrabold leading-none text-accent md:text-5xl">Why Fruti Pop?</h2>
           <p className="mt-2 text-foreground/80">A little goodness in every pop!</p>
         </div>
         <div className="mt-6"><BenefitCards /></div>

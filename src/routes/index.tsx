@@ -1,14 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroDesktop from "@/assets/hero-desktop-v3.png.asset.json";
-import heroMobile from "@/assets/hero-mobile-final.png.asset.json";
+import heroDesktop from "@/assets/hero-desktop-pop-stars.png.asset.json";
+import heroMobile from "@/assets/hero-mobile-pop-stars.png.asset.json";
+import popStarsDesktop from "@/assets/pop-stars-desktop.png.asset.json";
+import popStarsMobile from "@/assets/pop-stars-mobile.png.asset.json";
 import birthdayParty from "@/assets/birthday-pool-party.png.asset.json";
 import eventBoy from "@/assets/event-boy-two-pops.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 import { FlavourCarousel, SwipeRow, WhyFrutiPop } from "@/components/order-sections";
-import { WhatsAppButton } from "@/components/site";
 import { COMMUNITY_NAMES } from "@/lib/occasions";
 import { P } from "@/lib/photos";
-import { CONTACT } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,10 +47,10 @@ function Hero() {
 }
 
 const MOMENTS = [
-  { t: "Birthday Parties", h: "The moment the cooler opens.", d: "Nothing gets a squeal quite like a cooler full of bright, fruity pops on a hot Bali afternoon.", p: { src: birthdayParty.url, alt: "Excited children around a cooler full of Fruti Pops at a poolside party" }, pos: "object-[50%_58%]" },
-  { t: "Schools & Sports Clubs", h: "The final whistle. The first pop.", d: "After all the running and cheering, a cold, fruity reward. Big smiles for the whole team.", p: P.footballPair, pos: "object-top" },
-  { t: "Events", h: "A little pop. A lot of happy faces.", d: "From community gatherings to big celebrations, a burst of fruity fun that gets everyone smiling.", p: { src: eventBoy.url, alt: "A smiling boy holding two Fruti Pops at an event" }, pos: "object-center" },
-  { t: "Villas & Poolside", h: "Sun's out. Pops out.", d: "Poolside laughs, sunny afternoons and a freezer full of fruity pops.", p: P.villaDelivery, pos: "object-center" },
+  { t: "Birthday Parties", h: "The moment the cooler opens.", d: "Nothing gets a squeal quite like a cooler full of bright, fruity pops on a hot Bali afternoon.", cta: "Order Birthday Pops", p: { src: birthdayParty.url, alt: "Excited children around a cooler full of Fruti Pops at a poolside party" }, pos: "object-[50%_58%]" },
+  { t: "Schools & Sports Clubs", h: "The final whistle. The first pop.", d: "After all the running and cheering, a cold, fruity reward. Big smiles for the whole team.", cta: "Pop the Whole Team", p: P.footballPair, pos: "object-top" },
+  { t: "Events", h: "A little pop. A lot of happy faces.", d: "From community gatherings to big celebrations, a burst of fruity fun that gets everyone smiling.", cta: "Make My Event Pop", p: { src: eventBoy.url, alt: "A smiling boy holding two Fruti Pops at an event" }, pos: "object-center" },
+  { t: "Villas & Poolside", h: "Sun's out. Pops out.", d: "Poolside laughs, sunny afternoons and a freezer full of fruity pops.", cta: "Fill My Freezer", p: P.villaDelivery, pos: "object-center" },
 ];
 
 function PackCard({ name, qty, price, pack, badge }: { name: string; qty: string; price: string; pack: "family" | "jumbo"; badge?: string }) {
@@ -79,7 +79,7 @@ function Home() {
 
       <section id="flavours" className="scroll-mt-20 bg-hero-cream py-10 md:py-14">
         <div className="mx-auto max-w-7xl px-4 text-center">
-          <h2 className="text-3xl font-bold text-accent md:text-4xl">Our Flavours</h2>
+          <h2 className="font-display text-4xl font-extrabold leading-none text-accent md:text-5xl">Our Flavours</h2>
           <p className="mt-2 text-foreground/80">Six fruity favourites. Which ones take your fancy?</p>
           <div className="mt-6 text-left"><FlavourCarousel /></div>
           <Button asChild size="lg" className={`mt-6 ${cta}`}><a href="#packs" onClick={toPacks}>Order My Flavours <A /></a></Button>
@@ -88,7 +88,7 @@ function Home() {
 
       <section id="packs" className="scroll-mt-20 bg-secondary/55 py-12 md:py-14">
         <div className="mx-auto max-w-5xl px-4">
-          <h2 className="text-center text-3xl font-bold text-accent md:text-4xl">Packs</h2>
+          <h2 className="text-center font-display text-4xl font-extrabold leading-none text-accent md:text-5xl">Packs</h2>
           <div className="mt-8 grid gap-8 md:grid-cols-2 md:gap-5">
             <PackCard name="Family Pack" qty="10 Pops" price="Rp250,000" pack="family" />
             <PackCard name="Jumbo Pack" qty="20 Pops" price="Rp485,000" pack="jumbo" badge="Save Rp15,000!" />
@@ -101,7 +101,7 @@ function Home() {
       <section id="pop-moments" className="scroll-mt-20 bg-hero-cream py-12 md:py-14">
         <div className="mx-auto max-w-6xl px-4">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-accent md:text-4xl">What's Your Pop Moment?</h2>
+            <h2 className="font-display text-4xl font-extrabold leading-none text-accent md:text-5xl">What's Your Pop Moment?</h2>
             <p className="mt-2 text-foreground/80">From sunny afternoons to special celebrations, there's always a reason to pop!</p>
           </div>
           <div className="mt-6">
@@ -113,7 +113,7 @@ function Home() {
                     <p className="text-sm font-bold text-primary">{m.t}</p>
                     <h3 className="mt-1 text-lg font-bold leading-tight text-accent">{m.h}</h3>
                     <p className="mt-1 flex-1 text-sm text-foreground/75">{m.d}</p>
-                    <Link to="/order" className="mt-3 text-sm font-bold text-primary hover:underline">Order pops <A /></Link>
+                    <Link to="/order" className="mt-3 text-sm font-bold text-primary hover:underline">{m.cta} <A /></Link>
                   </div>
                 </article>
               ))}
@@ -123,29 +123,12 @@ function Home() {
         </div>
       </section>
 
-      <section id="where-to-find-us" className="scroll-mt-20 bg-background py-12 md:py-14">
-        <div className="mx-auto max-w-5xl px-4">
-          <h2 className="text-center text-3xl font-bold text-accent md:text-4xl">Where to Find Us</h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <div className="flex flex-col rounded-3xl bg-pastel-green p-6">
-              <h3 className="text-xl font-bold text-accent">Where can I buy one?</h3>
-              <p className="mt-2 flex-1 text-foreground/80">Where Fruti Pop is sold changes as we pop up around Bali, so the quickest way to find one is to ask us.</p>
-              <div className="mt-4"><WhatsAppButton message="Hi Fruti Pop! Where can I buy Fruti Pops near me? I'm in:">Ask on WhatsApp</WhatsAppButton></div>
-            </div>
-            <div className="rounded-3xl bg-pastel-lavender p-6">
-              <h3 className="text-xl font-bold text-accent">Business contact</h3>
-              <address className="mt-2 not-italic text-foreground/85">{CONTACT.address}</address>
-              <p className="mt-2 text-sm text-muted-foreground">This is our business address, not a walk-in shop, so please message us before visiting.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-accent py-12 text-accent-foreground md:py-14">
-        <div className="mx-auto max-w-3xl px-4 text-center">
-          <h2 className="text-3xl font-bold md:text-4xl">Ready to Fill Your Freezer?</h2>
-          <p className="mt-2 opacity-90">Six refreshing flavours. Pick your favourites and keep the good times popping!</p>
-          <Button asChild size="lg" className={`mt-6 ${cta}`}><Link to="/order">Fill My Freezer <A /></Link></Button>
+      <section id="pop-stars" className="scroll-mt-20 bg-hero-cream py-10 md:py-12">
+        <div className="mx-auto max-w-7xl px-4">
+          <picture>
+            <source media="(min-width: 768px)" srcSet={popStarsDesktop.url} width={1774} height={887} />
+            <img src={popStarsMobile.url} alt={`Our POP Stars. Schools, clubs and communities sharing fruity fun across Bali, including ${COMMUNITY_NAMES.join(", ")}.`} loading="lazy" width={1024} height={1536} className="mx-auto h-auto w-full max-w-4xl" />
+          </picture>
         </div>
       </section>
     </>
