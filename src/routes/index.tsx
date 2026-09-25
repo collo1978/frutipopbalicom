@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroDesktop from "@/assets/hero-desktop-pop-stars.png.asset.json";
-import heroMobile from "@/assets/hero-mobile-pop-stars.png.asset.json";
+import heroDesktop from "@/assets/hero-desktop-v3.webp.asset.json";
+import heroMobile from "@/assets/hero-mobile-v3.webp.asset.json";
 import popStarsDesktop from "@/assets/pop-stars-desktop.png.asset.json";
 import popStarsMobile from "@/assets/pop-stars-mobile.png.asset.json";
 import birthdayParty from "@/assets/birthday-pool-party.png.asset.json";
@@ -35,8 +35,8 @@ function Hero() {
     <section className="bg-hero-cream">
       <div className="mx-auto px-3 pb-6 pt-1 md:px-4 md:pb-5 md:pt-2">
         <picture>
-          <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1918} height={820} />
-          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto w-full max-w-[min(28rem,calc((100svh-150px)*0.667))] md:w-[min(94vw,calc((100svh-160px)*2.34))] md:max-w-none" />
+          <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1690} height={931} />
+          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto w-full max-w-[min(28rem,calc((100svh-150px)*0.667))] md:w-[min(94vw,calc((100svh-160px)*1.815))] md:max-w-none" />
         </picture>
         <div className="mt-2 flex justify-center md:mt-1">
           <Button asChild size="lg" className={cta}><Link to="/order">Order My Pops <A /></Link></Button>
