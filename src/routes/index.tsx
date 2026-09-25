@@ -36,6 +36,7 @@ function Hero() {
         <div className="mt-2 flex justify-center md:-mt-2 md:w-[44%]">
           <Button asChild size="lg" className="min-h-12 rounded-full px-8 text-base font-bold shadow-lg transition-transform hover:-translate-y-0.5 md:min-h-14 md:px-9 md:text-lg"><Link to="/order">Order Now →</Link></Button>
         </div>
+        </div>
       </div>
     </section>
   );
