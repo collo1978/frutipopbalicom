@@ -40,7 +40,7 @@ const detailsSchema = z.object({
     }, "Paste a valid Google Maps link."),
   ]),
   time: z.string().min(1, "Choose a delivery time."),
-  payment: z.enum(["QRIS Payment", "Bank Transfer", "Cash on Delivery"], { required_error: "Choose a payment method." }),
+  payment: z.enum(["Bank Transfer", "Cash on Delivery"], { required_error: "Choose a payment method." }),
   notes: z.string().max(800, "Notes are too long."),
 });
 
@@ -242,10 +242,9 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
           <fieldset className="mt-7">
             <legend className="text-xl font-bold text-accent">4. Payment Method</legend>
             <RadioGroup value={payment ?? ""} onValueChange={setPayment} className="mt-3">
-              {["QRIS Payment", "Bank Transfer", "Cash on Delivery"].map((method) => <label key={method} className="flex cursor-pointer items-center gap-3 text-sm font-semibold"><RadioGroupItem value={method} />{method}</label>)}
+              {["Bank Transfer", "Cash on Delivery"].map((method) => <label key={method} className="flex cursor-pointer items-center gap-3 text-sm font-semibold"><RadioGroupItem value={method} />{method}</label>)}
             </RadioGroup>
             {fieldError("payment")}
-            {payment === "QRIS Payment" && <p className="mt-3 rounded-lg bg-leaf p-3 text-sm font-semibold text-leaf-foreground">QRIS payment details will be shared on WhatsApp.</p>}
             {payment === "Bank Transfer" && (
               <div className="mt-3 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-lg bg-leaf p-3 text-sm text-leaf-foreground">
                 <p><strong>Bank: Mandiri</strong><br />Account Name: Nuansa Fruit Bali<br /><span className="font-bold">Account Number: 1750004760129</span></p>
