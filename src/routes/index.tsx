@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroDesktop from "@/assets/hero-desktop.png.asset.json";
-import heroMobile from "@/assets/hero-mobile.png.asset.json";
+import heroDesktop from "@/assets/hero-desktop-nologo.png.asset.json";
+import heroMobile from "@/assets/hero-mobile-nologo.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { ProductLineup, WhyFrutiPop } from "@/components/order-sections";
 import { COMMUNITY_NAMES } from "@/lib/occasions";
