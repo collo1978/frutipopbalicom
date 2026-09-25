@@ -33,7 +33,7 @@ function Hero() {
           <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1933} height={718} />
           <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto w-full max-w-[min(28rem,calc((100svh-150px)*0.667))] md:w-[min(94vw,calc((100svh-150px)*2.69))] md:max-w-none" />
         </picture>
-        <div className="mt-2 flex justify-center md:mt-1 md:w-[44%]">
+        <div className="mt-2 flex justify-center md:mt-1 md:w-[57%]">
           <Button asChild size="lg" className="min-h-12 rounded-full px-8 text-base font-bold shadow-lg transition-transform hover:-translate-y-0.5 md:min-h-14 md:px-9 md:text-lg"><Link to="/order">Order Now →</Link></Button>
         </div>
         </div>
