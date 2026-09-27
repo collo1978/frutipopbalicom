@@ -6,7 +6,7 @@ import popStarsMobile from "@/assets/pop-stars-mobile.png.asset.json";
 import birthdayParty from "@/assets/birthday-pool-party.png.asset.json";
 import eventBoy from "@/assets/event-boy-two-pops.jpg.asset.json";
 import { Button } from "@/components/ui/button";
-import { FlavourCarousel, SwipeRow, WhyFrutiPop } from "@/components/order-sections";
+import { FlavourDiscovery, SwipeRow, WhyFrutiPop } from "@/components/order-sections";
 import { COMMUNITY_NAMES } from "@/lib/occasions";
 import { P } from "@/lib/photos";
 
@@ -80,12 +80,8 @@ function Home() {
       <section id="flavours" className="scroll-mt-20 bg-hero-cream py-10 md:py-14">
         <div className="mx-auto max-w-7xl px-4 text-center">
           <h2 className="fruti-section-heading">Our Flavours</h2>
-          <p className="mt-2 text-foreground/80">Six fruity favourites. Which ones take your fancy?</p>
-          <p className="fruti-hint mt-1">
-            <span className="md:hidden">Swipe to explore. Tap to POP!</span>
-            <span className="hidden md:inline">Hover to make them POP!</span>
-          </p>
-          <div className="mt-6 text-left"><FlavourCarousel /></div>
+          <p className="mt-2 text-foreground/80">Six fruity favourites. Which one takes your fancy?</p>
+          <div className="mt-8 text-left"><FlavourDiscovery /></div>
           <Button asChild size="lg" className={`mt-6 ${cta}`}><a href="#packs" onClick={toPacks}>Order My Flavours <A /></a></Button>
         </div>
       </section>

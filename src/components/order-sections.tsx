@@ -5,12 +5,12 @@ import iceArt from "@/assets/benefits/ice.png";
 import leafArt from "@/assets/benefits/leaf.png";
 import mangoArt from "@/assets/benefits/mango.png";
 import popsArt from "@/assets/benefits/pops.png";
-import { BadgeCheck, Box, Heart, Leaf, Play, Snowflake, Sun } from "lucide-react";
+import { BadgeCheck, Box, Dices, Heart, Leaf, Play, Search, Snowflake, Star, Sun, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { FLAVOURS } from "@/lib/flavours";
+import { ORDER_FLAVOURS } from "@/lib/order-flavours";
 import { P } from "@/lib/photos";
 import { Button } from "@/components/ui/button";
-import { ZoomableFlavourImage } from "@/components/flavour-zoom";
 import farmFields from "@/assets/farm-fields.jpg.asset.json";
 import testimonialVideo from "@/assets/customer-testimonial.mp4.asset.json";
 import testimonialPoster from "@/assets/customer-testimonial-poster.jpg.asset.json";
@@ -109,20 +109,89 @@ export function FarmStory({ showCta = false }: { showCta?: boolean }) {
   );
 }
 
-export function FlavourCards() {
-  const [activeFlavour, setActiveFlavour] = useState<string | null>(null);
+/** Shared Best Seller badge: sits in the card UI above the artwork, never over it. */
+export function BestSellerBadge({ className = "" }: { className?: string }) {
   return (
-    <SwipeRow count={FLAVOURS.length} label="Order page flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:pb-3 md:pt-24" itemClass="w-[78%]">
-      {FLAVOURS.map((flavour) => (
-        <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 text-center ${flavour.tint}`}>
-          <div className="relative h-72 w-full md:h-56 lg:h-72">
-            {flavour.img && <ZoomableFlavourImage f={flavour} active={activeFlavour === flavour.name} onToggle={() => setActiveFlavour((current) => current === flavour.name ? null : flavour.name)} />}
-          </div>
-          <h3 className="mt-2 font-display text-lg font-extrabold text-accent">{flavour.name}</h3>
-          {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">“{flavour.tagline}”</p>}
+    <span className={`inline-flex -rotate-2 items-center gap-1 whitespace-nowrap rounded-full bg-mango px-3 py-1 font-display text-xs font-bold text-accent shadow-sm md:text-sm ${className}`}>
+      <Star aria-hidden="true" className="h-3.5 w-3.5 fill-current" /> BEST SELLER
+    </span>
+  );
+}
+
+/** Small magnifying-glass control that opens the real product tube. Ordering controls never trigger it. */
+export function SeeThePopButton({ name, onClick }: { name: string; onClick: () => void }) {
+  return (
+    <span className="group relative inline-flex">
+      <button type="button" onClick={onClick} aria-label={`See the actual Fruti Pop ${name} tube`} className="flex h-10 w-10 items-center justify-center rounded-full bg-card text-accent shadow-md transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
+        <Search aria-hidden="true" className="h-5 w-5" />
+      </button>
+      <span aria-hidden="true" className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-accent px-2 py-1 font-display text-[11px] font-bold text-accent-foreground opacity-0 shadow transition-opacity duration-150 group-hover:opacity-100">See the Pop</span>
+    </span>
+  );
+}
+
+/** Clean enlarged viewer for the real high-resolution product tube. */
+export function TubeViewer({ tube, onClose }: { tube: { name: string; img: string | null } | null; onClose: () => void }) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!tube) return;
+    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    window.setTimeout(() => closeRef.current?.focus(), 30);
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, [tube, onClose]);
+  if (!tube) return null;
+  return (
+    <div role="dialog" aria-modal="true" aria-label={`The real Fruti Pop ${tube.name} tube`} className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4" onClick={onClose}>
+      <div className="relative" onClick={(event) => event.stopPropagation()}>
+        <div className="flex flex-col items-center">
+          {tube.img && <img src={tube.img} alt={`The real Fruti Pop ${tube.name} sorbet tube`} className="max-h-[76vh] w-auto max-w-[84vw] rounded-2xl bg-white object-contain shadow-2xl" />}
+          <p className="mt-3 text-center text-sm font-bold text-white">{tube.name} · 100g tube</p>
         </div>
-      ))}
-    </SwipeRow>
+        <button ref={closeRef} type="button" onClick={onClose} aria-label="Close tube preview" className="absolute -right-2 -top-2 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-lg transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
+          <X aria-hidden="true" className="h-5 w-5" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/** Homepage Our Flavours: large original artwork cards with a 🔍 tube peek and a Mystery POP teaser. */
+export function FlavourDiscovery() {
+  const [viewTube, setViewTube] = useState<string | null>(null);
+  const tube = ORDER_FLAVOURS.find((f) => f.name === viewTube) ?? null;
+  return (
+    <>
+      <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Our flavours" desktopClass="md:grid md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[86%]">
+        {[
+          ...ORDER_FLAVOURS.map((flavour) => (
+            <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col overflow-hidden rounded-3xl ${flavour.tint}`}>
+              <div className="flex h-10 items-center justify-center pt-2">
+                {flavour.name === "Strawberry" && <BestSellerBadge />}
+              </div>
+              {flavour.art && <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="aspect-[2/3] w-full select-none object-cover" />}
+              <div className="flex flex-1 flex-col items-center px-3 pb-4 pt-3 text-center">
+                <h3 className="font-display text-xl font-extrabold text-accent md:text-2xl">{flavour.name}</h3>
+                <div className="mt-auto pt-3"><SeeThePopButton name={flavour.name} onClick={() => setViewTube(flavour.name)} /></div>
+              </div>
+            </div>
+          )),
+          <div key="mystery" className="relative flex h-full min-h-[24rem] flex-col items-center justify-center rounded-3xl bg-accent/15 px-4 pb-6 pt-6 text-center">
+            <span aria-hidden="true" className="flex h-20 w-20 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-lg">
+              <Dices className="h-10 w-10" />
+            </span>
+            <h3 className="mt-3 font-display text-xl font-extrabold text-accent md:text-2xl">Feeling lucky?</h3>
+            <p className="mt-1 text-sm font-semibold text-foreground/70">Can't decide? Let fate decide!</p>
+            <p className="mt-1 text-sm font-semibold text-foreground/70">Try a Mystery POP when you order.</p>
+            <Button asChild size="sm" className="cta-pop cta-pop-sm mt-4 whitespace-nowrap rounded-full">
+              <Link to="/order" search={{ mystery: true }}>Pick a Mystery Pop</Link>
+            </Button>
+          </div>,
+        ]}
+      </SwipeRow>
+      <TubeViewer tube={tube} onClose={() => setViewTube(null)} />
+    </>
   );
 }
 
@@ -207,21 +276,6 @@ export function SwipeRow({ children, count, label, desktopClass, itemClass = "w-
   );
 }
 
-export function FlavourCarousel() {
-  const [activeFlavour, setActiveFlavour] = useState<string | null>(null);
-  return (
-    <SwipeRow count={FLAVOURS.length} label="Our flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:pb-3 md:pt-24" itemClass="w-[78%]">
-      {FLAVOURS.map((f) => (
-        <div key={f.name} className={`flavour-pop relative flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 ${f.tint}`}>
-          <div className="relative h-72 w-full md:h-56 lg:h-72">
-            {f.img && <ZoomableFlavourImage f={f} active={activeFlavour === f.name} onToggle={() => setActiveFlavour((current) => current === f.name ? null : f.name)} />}
-          </div>
-          <h3 className="mt-2 font-display text-lg font-extrabold text-accent">{f.name}</h3>
-        </div>
-      ))}
-    </SwipeRow>
-  );
-}
 
 export function WhyFrutiPop({ showCta = false, showTestimonial = false }: { showCta?: boolean; showTestimonial?: boolean }) {
   return (

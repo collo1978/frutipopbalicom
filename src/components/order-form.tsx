@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
-import { CalendarIcon, Copy, Dices, Eye, Minus, PartyPopper, Plus, RefreshCw, X } from "lucide-react";
-import { SwipeRow } from "@/components/order-sections";
+import { CalendarIcon, Copy, Dices, Minus, PartyPopper, Plus, RefreshCw } from "lucide-react";
+import { BestSellerBadge, SeeThePopButton, SwipeRow, TubeViewer } from "@/components/order-sections";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -59,7 +59,7 @@ function baliCurrentTime() {
   return new Intl.DateTimeFormat("en-GB", { timeZone: BALI_TIME_ZONE, hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date());
 }
 
-export function OrderForm({ initialPack }: { initialPack: PackKey | undefined }) {
+export function OrderForm({ initialPack, openMystery = false }: { initialPack: PackKey | undefined; openMystery?: boolean | undefined }) {
   const [packKey, setPackKey] = useState<PackKey | undefined>(initialPack);
   const [quantities, setQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
   const [extraQuantities, setExtraQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
@@ -202,21 +202,25 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
   useEffect(() => { if (showPayment) scrollTo(paymentRef.current); }, [showPayment]);
   useEffect(() => { mounted.current = true; }, []);
 
-  const [viewTube, setViewTube] = useState<OrderFlavour | null>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
+  const mysteryRef = useRef<HTMLDivElement>(null);
+  const mysteryHandled = useRef(false);
+  const [mysteryHighlight, setMysteryHighlight] = useState(false);
   useEffect(() => {
-    if (!viewTube) return;
-    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") setViewTube(null); };
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    window.setTimeout(() => closeRef.current?.focus(), 30);
-    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
-  }, [viewTube]);
+    if (!showFlavours || !openMystery || mysteryHandled.current) return;
+    mysteryHandled.current = true;
+    window.setTimeout(() => {
+      mysteryRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      setMysteryHighlight(true);
+      window.setTimeout(() => setMysteryHighlight(false), 3500);
+    }, 350);
+  }, [showFlavours, openMystery]);
+
+  const [viewTube, setViewTube] = useState<OrderFlavour | null>(null);
   const remaining = pack ? Math.max(0, pack.limit - total) : 0;
   const full = Boolean(pack && total >= pack.limit);
 
   const fieldError = (key: string) => errors[key] ? <p className="mt-1 text-sm font-semibold text-destructive">{errors[key]}</p> : null;
-  const legend = "scroll-mt-24 font-display text-2xl font-extrabold text-accent md:text-3xl";
+  const legend = "scroll-mt-24 font-display text-3xl font-extrabold text-accent md:text-4xl";
 
   return (
     <form onSubmit={submit} noValidate className="space-y-6">
@@ -247,34 +251,35 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
         <fieldset ref={flavourRef} className="min-w-0 order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
           <legend className="sr-only">2. Pick Your Flavours</legend>
           <h2 className={legend} aria-hidden="true">2. Pick Your Flavours</h2>
-          <p className="fruti-hint mt-1">See the Pop to meet the real tube!</p>
-          <div className="mt-2">
-            <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Pick your flavours" tightTop desktopClass="md:grid md:grid-cols-4 md:gap-4 xl:grid-cols-7" itemClass="w-[78%]">
+          <div className="mt-3">
+            <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Pick your flavours" tightTop desktopClass="md:grid md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[86%]">
               {[
                 ...ORDER_FLAVOURS.map((flavour) => {
                   const quantity = quantities[flavour.name] ?? 0;
                   return (
                     <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col overflow-hidden rounded-3xl ${flavour.tint}`}>
-                      <div className="relative w-full">
-                        {flavour.art && (
-                          <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="mx-auto aspect-[2/3] w-full max-w-[240px] select-none object-cover" />
-                        )}
-                        <button type="button" onClick={() => setViewTube(flavour)} aria-label={`See the actual Fruti Pop ${flavour.name} tube`} className="absolute right-2 top-2 flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1.5 text-[11px] font-bold text-accent shadow-md transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
-                          <Eye className="h-3.5 w-3.5" aria-hidden="true" /> See the Pop
-                        </button>
+                      <div className="flex h-10 items-center justify-center pt-2">
+                        {flavour.name === "Strawberry" && <BestSellerBadge />}
                       </div>
-                      <div className="flex flex-1 flex-col items-center px-3 pb-4 pt-2 text-center">
-                        <h3 className="font-display text-lg font-extrabold text-accent">{flavour.name}</h3>
-                        <div className="mt-auto flex items-center gap-2 pt-2">
+                      {flavour.art && (
+                        <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="aspect-[2/3] w-full select-none object-cover" />
+                      )}
+                      <div className="flex flex-1 flex-col items-center px-3 pb-4 pt-3 text-center">
+                        <h3 className="font-display text-xl font-extrabold text-accent md:text-2xl">{flavour.name}</h3>
+                        <div className="mt-auto flex items-center gap-2 pt-3">
                           <Button type="button" variant="secondary" size="icon" onClick={() => changeQuantity(flavour.name, -1)} disabled={quantity === 0} aria-label={`Remove one ${flavour.name}`} className="h-10 w-10 rounded-full"><Minus /></Button>
                           <output aria-label={`${flavour.name} quantity`} className="w-7 text-center text-lg font-bold">{quantity}</output>
                           <Button type="button" size="icon" onClick={() => changeQuantity(flavour.name, 1)} disabled={full && !extrasEnabled} aria-label={`Add one ${flavour.name}`} className="h-10 w-10 rounded-full"><Plus /></Button>
+                          <span aria-hidden="true" className="mx-1 h-7 w-px bg-accent/25" />
+                          <SeeThePopButton name={flavour.name} onClick={() => setViewTube(flavour)} />
                         </div>
                       </div>
                     </div>
                   );
                 }),
-                <MysteryPop key="mystery" full={full} extrasEnabled={extrasEnabled} onAdd={(n) => changeQuantity(n, 1)} />,
+                <div key="mystery" ref={mysteryRef} className={cn("h-full rounded-3xl transition-shadow duration-300", mysteryHighlight && "ring-4 ring-primary ring-offset-4 ring-offset-card")}>
+                  <MysteryPop full={full} extrasEnabled={extrasEnabled} onAdd={(n) => changeQuantity(n, 1)} />
+                </div>,
               ]}
             </SwipeRow>
           </div>
@@ -378,19 +383,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
         </div>
       )}
 
-      {viewTube && (
-        <div role="dialog" aria-modal="true" aria-label={`The real Fruti Pop ${viewTube.name} tube`} className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4" onClick={() => setViewTube(null)}>
-          <div className="relative" onClick={(event) => event.stopPropagation()}>
-            <div className="flex flex-col items-center">
-              {viewTube.img && <img src={viewTube.img} alt={`The real Fruti Pop ${viewTube.name} sorbet tube`} className="max-h-[76vh] w-auto max-w-[84vw] rounded-2xl bg-white object-contain shadow-2xl" />}
-              <p className="mt-3 text-center text-sm font-bold text-white">{viewTube.name} · 100g tube</p>
-            </div>
-            <button ref={closeRef} type="button" onClick={() => setViewTube(null)} aria-label="Close tube preview" className="absolute -right-2 -top-2 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-lg transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
-              <X className="h-5 w-5" aria-hidden="true" />
-            </button>
-          </div>
-        </div>
-      )}
+      <TubeViewer tube={viewTube} onClose={() => setViewTube(null)} />
     </form>
   );
 }
@@ -426,7 +419,7 @@ function MysteryPop({ full, extrasEnabled, onAdd }: { full: boolean; extrasEnabl
           <h3 className="flex items-center gap-1.5 font-display text-lg font-extrabold text-accent"><Dices className="h-5 w-5" aria-hidden="true" /> Mystery POP</h3>
           <p className="mt-1 text-xs font-semibold text-foreground/70">Can't decide? Let fate decide!</p>
           <span aria-hidden="true" className="mt-4 flex h-32 w-32 items-center justify-center rounded-full bg-accent font-display text-7xl font-extrabold text-accent-foreground shadow-lg md:h-28 md:w-28">?</span>
-          <Button type="button" size="sm" onClick={shuffle} className="cta-pop mt-auto rounded-full">Pick My Pop</Button>
+          <Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm mt-auto whitespace-nowrap rounded-full">PICK MY POP</Button>
         </div>
       )}
       {phase === "shuffling" && (
