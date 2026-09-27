@@ -228,7 +228,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
             <span className="hidden md:inline">Hover to make them POP!</span>
           </p>
           <div className="mt-2">
-            <SwipeRow count={FLAVOURS.length + 1} label="Pick your flavours" desktopClass="md:grid md:grid-cols-4 md:gap-4 md:py-3 xl:grid-cols-7" itemClass="w-[78%]">
+            <SwipeRow count={FLAVOURS.length + 1} label="Pick your flavours" desktopClass="md:grid md:grid-cols-4 md:gap-4 md:pb-3 md:pt-24 xl:grid-cols-7" itemClass="w-[78%]">
               {[
                 ...FLAVOURS.map((flavour) => {
                   const quantity = quantities[flavour.name] ?? 0;

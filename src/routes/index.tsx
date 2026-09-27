@@ -109,7 +109,7 @@ function Home() {
             <p className="mt-2 text-foreground/80">From sunny afternoons to special celebrations, there's always a reason to pop!</p>
           </div>
           <div className="mt-6">
-            <SwipeRow count={MOMENTS.length} label="Pop moments" desktopClass="md:grid md:grid-cols-2 md:gap-5 lg:grid-cols-4">
+            <SwipeRow count={MOMENTS.length} label="Pop moments" desktopClass="md:grid md:grid-cols-2 md:gap-5 md:pt-0 lg:grid-cols-4">
               {MOMENTS.map((m) => (
                 <article key={m.t} className="flex h-full flex-col overflow-hidden rounded-3xl bg-card shadow-sm">
                   <img src={m.p.src} alt={m.p.alt} loading="lazy" className={`aspect-[4/3.4] w-full object-cover ${m.pos}`} />
