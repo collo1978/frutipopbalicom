@@ -250,7 +250,7 @@ export function MysteryPopGame({ onAdd, homepage = false }: MysteryPopGameProps)
                 type="button"
                 size="sm"
                 onClick={shuffle}
-                className="cta-pop !whitespace-nowrap rounded-full !px-14
+                className="cta-pop !whitespace-nowrap rounded-full !px-10
               !text-sm font-extrabold"
               >
                 PICK MY POP
