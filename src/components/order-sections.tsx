@@ -276,21 +276,6 @@ export function SwipeRow({ children, count, label, desktopClass, itemClass = "w-
   );
 }
 
-export function FlavourCarousel() {
-  const [activeFlavour, setActiveFlavour] = useState<string | null>(null);
-  return (
-    <SwipeRow count={FLAVOURS.length} label="Our flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:pb-3 md:pt-24" itemClass="w-[78%]">
-      {FLAVOURS.map((f) => (
-        <div key={f.name} className={`flavour-pop relative flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 ${f.tint}`}>
-          <div className="relative h-72 w-full md:h-56 lg:h-72">
-            {f.img && <ZoomableFlavourImage f={f} active={activeFlavour === f.name} onToggle={() => setActiveFlavour((current) => current === f.name ? null : f.name)} />}
-          </div>
-          <h3 className="mt-2 font-display text-lg font-extrabold text-accent">{f.name}</h3>
-        </div>
-      ))}
-    </SwipeRow>
-  );
-}
 
 export function WhyFrutiPop({ showCta = false, showTestimonial = false }: { showCta?: boolean; showTestimonial?: boolean }) {
   return (
