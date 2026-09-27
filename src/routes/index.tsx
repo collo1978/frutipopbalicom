@@ -35,10 +35,10 @@ function Hero() {
   const alt = "Bali's Fruity Sorbet Ice Blocks. Refreshing flavours and a little pop of happiness.";
   return (
     <section className="overflow-x-clip bg-hero-cream">
-      <div className="flex flex-col items-center px-2 pb-3 pt-2 md:px-4 md:pb-4 md:pt-2">
+      <div className="flex flex-col items-center px-2 pb-3 pt-2 md:px-4 md:pb-4 md:pt-1">
         <picture className="flex w-full items-center justify-center">
           <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1312} height={1199} />
-          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto max-h-[calc(100svh-12rem)] w-auto max-w-full object-contain md:max-h-none md:w-full md:max-w-[min(1510px,120svh)]" />
+          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto max-h-[calc(100svh-12rem)] w-auto max-w-full object-contain md:max-h-[calc(100svh-10rem)] md:w-auto md:max-w-[min(1400px,130svh)]" />
         </picture>
         <div className="-mt-5 flex w-full flex-col items-center gap-2.5 md:-mt-8 md:gap-3">
           <Button asChild size="lg" className={`${cta} w-[calc(100%-1rem)] max-w-md md:w-auto md:px-12 md:text-lg`}>
