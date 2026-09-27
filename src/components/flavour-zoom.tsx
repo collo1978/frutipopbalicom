@@ -56,7 +56,7 @@ export function ZoomableFlavourImage({ f, active: controlledActive, onToggle }: 
         alt={`Fruti Pop ${f.name} sorbet pack`}
         loading="lazy"
         draggable={false}
-        className="flavour-product-pop-img absolute inset-0 h-full w-full select-none object-contain drop-shadow-lg"
+        className="flavour-product-pop-img pointer-events-none absolute inset-0 h-full w-full select-none object-contain drop-shadow-lg"
         style={{ objectPosition: "center bottom" }}
       />
     </button>
