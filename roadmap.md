@@ -47,3 +47,5 @@
 - [x] Verify the updated mobile headings and desktop flavour layout
 - [x] Replace Piña Colada artwork and refine the desktop flavour section cards and CTA
 - [x] Verify the updated artwork, desktop alignment, and mobile presentation
+- [x] Align Piña Colada and Mystery Pop with the shared flavour-card family
+- [x] Increase only the mobile Flavours heading and verify both breakpoints
