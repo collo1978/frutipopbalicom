@@ -186,13 +186,13 @@
 @utility fruti-flavours-heading {
   color: var(--color-accent);
   font-family: var(--font-display-family);
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   font-weight: 900;
   letter-spacing: 0;
   line-height: 1.05;
 
   @media (min-width: 420px) {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   @media (min-width: 768px) {
