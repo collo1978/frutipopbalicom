@@ -173,8 +173,8 @@ export function MysteryPopGame({ onAdd, homepage = false }: MysteryPopGameProps)
       {phase === "idle" && (
         <MysteryPopIdle homepage={homepage} action={
           <div className="relative">
-            <span aria-hidden="true" className="absolute -right-12 -top-20 z-20 flex h-20 w-20 rotate-12 items-center justify-center bg-mango px-2 text-center font-display text-[13px] font-black leading-[1.05] text-accent shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] md:-right-16 md:-top-24 md:h-24 md:w-24 md:px-2.5 md:text-[16px]">
-              LET THE KIDS PRESS!
+            <span aria-hidden="true" className="absolute -bottom-10 -right-16 z-20 flex h-28 w-28 -rotate-6 items-center justify-center bg-dragonfruit px-2.5 text-center font-display text-[15px] font-black leading-[1.08] text-primary-foreground shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] md:-bottom-12 md:-right-20 md:h-36 md:w-36 md:px-3 md:text-[19px]">
+              LET THE KIDS TRY!
             </span>
             <Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full px-5 font-extrabold md:px-6">PICK MY POP</Button>
           </div>
