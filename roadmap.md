@@ -22,4 +22,4 @@
 - [x] Auto-open pack completion choices and add a compact live flavour breakdown to the sticky tracker
 - [x] Enlarge and tighten the Mystery Pop question-mark composition without increasing card height
 - [x] Apply Rp30,000 extra-Pop pricing with automatic Family-to-Jumbo best pricing
-- [ ] Preserve vertical position for Add More and Mystery Pop modal choices, then verify mobile and desktop
+- [x] Preserve vertical position for Add More and Mystery Pop modal choices, then verify mobile and desktop
