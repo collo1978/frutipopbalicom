@@ -180,21 +180,21 @@ export function FlavourDiscovery() {
   const tube = ORDER_FLAVOURS.find((f) => f.name === viewTube) ?? null;
   return (
     <>
-      <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Our flavours" desktopClass="md:grid md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[86%]" tightTop>
+      <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Our flavours" desktopClass="md:grid md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[82%]" tightTop>
         {[
           ...ORDER_FLAVOURS.map((flavour) => (
             <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col overflow-hidden rounded-3xl ${flavour.tint}`}>
-              <div className="flex h-14 items-center justify-center pt-2 md:h-16">
-                {flavour.name === "Strawberry" && <BestSellerBadge />}
+              <div className="flex h-10 items-center justify-center pt-1 md:h-16 md:pt-2">
+                {flavour.name === "Strawberry" && <BestSellerBadge className="px-3 py-1 text-xs md:px-5 md:py-2 md:text-base [&_svg]:h-3.5 [&_svg]:w-3.5 md:[&_svg]:h-[1.125rem] md:[&_svg]:w-[1.125rem]" />}
               </div>
-              {flavour.art && <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="aspect-[2/3] w-full select-none object-cover" />}
-              <div className="flex flex-1 flex-col items-center px-3 pb-4 pt-3 text-center">
-                <h3 className="font-display text-xl font-extrabold text-accent md:text-2xl">{flavour.name}</h3>
-                <div className="mt-auto pt-3"><SeeThePopButton name={flavour.name} onClick={() => setViewTube(flavour.name)} /></div>
+              {flavour.art && <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="h-[17rem] w-full select-none object-contain md:aspect-[2/3] md:h-auto md:object-cover" />}
+              <div className="flex flex-1 flex-col items-center px-3 pb-3 pt-2 text-center md:pb-4 md:pt-3">
+                <h3 className="font-display text-lg font-extrabold text-accent md:text-2xl">{flavour.name}</h3>
+                <div className="mt-auto pt-2 md:pt-3"><SeeThePopButton name={flavour.name} onClick={() => setViewTube(flavour.name)} /></div>
               </div>
             </div>
           )),
-          <div key="mystery" className="relative flex h-full min-h-[24rem] flex-col items-center rounded-3xl bg-pastel-lavender px-4 pb-6 pt-6 text-center">
+          <div key="mystery" className="relative flex h-full min-h-[23rem] flex-col items-center rounded-3xl bg-pastel-lavender px-4 pb-4 pt-4 text-center md:min-h-[24rem] md:pb-6 md:pt-6">
             <MysteryPopIdle action={
               <Button asChild size="sm" className="cta-pop cta-pop-sm whitespace-nowrap rounded-full">
                 <Link to="/order" search={{ mystery: true }}>PICK MY POP</Link>

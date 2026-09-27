@@ -18,3 +18,5 @@
 - [x] Keep live pack progress sticky during flavour selection with a compact completed state
 - [x] Remove every “Sister business” label and update the Snow Wave Bali description
 - [x] Verify the requested desktop and mobile layouts and ordering interaction
+- [x] Reduce only the mobile homepage flavour carousel and preserve the desktop and Order-page card sizes
+- [x] Auto-open pack completion choices and add a compact live flavour breakdown to the sticky tracker
