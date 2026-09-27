@@ -126,10 +126,10 @@ export function MysteryPopIdle({ action, homepage = false }: { action: ReactNode
         <h3 className="font-display text-2xl font-black uppercase leading-none text-accent md:text-3xl">Mystery POP</h3>
       </div>
       <div className={`relative w-full overflow-hidden ${homepage ? "h-80 md:aspect-[2/3] md:h-auto" : "aspect-[2/2.55] md:aspect-[2/3]"}`}>
-        <p className="absolute left-0 right-0 top-2 z-20 text-sm font-bold text-foreground/75 md:top-3 md:text-base">Can't decide on a flavour?</p>
+        <p className="absolute left-0 right-0 top-2 z-30 px-2 text-sm font-bold leading-tight text-foreground/75 md:top-3 md:text-base">Can't decide on a flavour?</p>
         <img src={strawberryArt} alt="" aria-hidden="true" className="absolute -bottom-2 -left-[13%] w-[73%] -rotate-12 object-contain drop-shadow-md md:-bottom-3 md:-left-[11%] md:w-[70%]" />
         <img src={mangoArt} alt="" aria-hidden="true" className="absolute -bottom-3 -right-[14%] w-[73%] rotate-12 object-contain drop-shadow-md md:-bottom-4 md:-right-[12%] md:w-[70%]" />
-        <span aria-hidden="true" className={`absolute left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 rotate-3 items-center justify-center font-display font-black leading-none text-accent drop-shadow-md md:top-[40%] md:h-64 md:w-48 md:text-[22rem] ${homepage ? "top-[39%] h-56 w-44 text-[19rem]" : "top-[46%] h-48 w-36 text-[16rem]"}`}>?</span>
+        <span aria-hidden="true" className={`absolute left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 rotate-3 items-center justify-center font-display font-black leading-none text-accent drop-shadow-md md:top-[48%] md:h-52 md:w-40 md:text-[17rem] ${homepage ? "top-[46%] h-48 w-36 text-[16rem]" : "top-[48%] h-44 w-32 text-[15rem]"}`}>?</span>
         <img src={popsArt} alt="" aria-hidden="true" className="absolute -bottom-1 left-1/2 z-20 w-[50%] -translate-x-1/2 object-contain drop-shadow-md md:w-[47%]" />
       </div>
       <div className={`relative flex min-h-20 w-full flex-1 items-center justify-center px-3 text-center @max-[250px]:min-h-28 @max-[250px]:items-start @max-[250px]:pt-2 md:min-h-24 ${homepage ? "pb-3 pt-1 md:pb-4 md:pt-2" : "pb-3 pt-2 md:px-3 md:pb-4 md:pt-3"}`}>
