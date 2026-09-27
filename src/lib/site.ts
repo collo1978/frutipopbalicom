@@ -10,7 +10,7 @@ export const CONTACT = {
 export const SNOWWAVE = {
   url: "https://thesnowwavebali.com/",
   label: "Snowwave Bali: Frozen Fruit & Fruit Purées",
-  blurb: "for hospitality, wholesale, villas and poolside",
+  blurb: "Specialises in producing premium fruit purées for creating beautiful cocktails, made for beach clubs, nightclubs, hotels, resorts and more.",
 };
 
 export const FAMILY_PACK = { pops: 10, price: "Rp250,000" };
