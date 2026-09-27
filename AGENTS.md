@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - The Order page uses a dedicated full-resolution product image set, while shared flavour data retains lighter assets for other pages; this preserves packaging readability without increasing homepage media weight.
+- Homepage and Order Mystery Pop use one configurable game component so their shuffle and reveal behaviour stay consistent.

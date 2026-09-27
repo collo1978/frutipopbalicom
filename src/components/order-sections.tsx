@@ -167,7 +167,7 @@ export function MysteryPopGame({ onAdd, homepage = false }: MysteryPopGameProps)
   if (!flavour) return null;
 
   return (
-    <div className={`flavour-pop relative flex h-full flex-col items-center overflow-visible rounded-3xl bg-pastel-lavender px-2 pb-3 pt-3 text-center md:pb-4 md:pt-4 ${homepage ? "min-h-[23rem] md:min-h-[24rem]" : "min-h-[19rem] md:min-h-[26rem]"}`}>
+    <div className={`flavour-pop relative flex h-full flex-col items-center rounded-3xl bg-pastel-lavender px-2 pb-3 pt-3 text-center md:pb-4 md:pt-4 ${homepage ? "min-h-[23rem] overflow-visible md:min-h-[24rem]" : "min-h-[19rem] overflow-hidden md:min-h-[26rem]"}`}>
       {phase === "idle" && (
         <MysteryPopIdle action={
           <div className="relative">
