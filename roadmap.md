@@ -17,4 +17,4 @@
 - [x] Remove the homepage community sentence, strengthen all four occasion CTAs, and tighten the POP Stars transition
 - [x] Keep live pack progress sticky during flavour selection with a compact completed state
 - [x] Remove every “Sister business” label and update the Snow Wave Bali description
-- [ ] Verify the requested desktop and mobile layouts and ordering interaction
+- [x] Verify the requested desktop and mobile layouts and ordering interaction
