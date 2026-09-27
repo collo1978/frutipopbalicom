@@ -1,5 +1,6 @@
 # Roadmap
 
+- [x] Replace the desktop hero with the supplied extra-wide transparent artwork and preserve the one-screen layout
 - [x] Replace the homepage hero and reorder the homepage shopping journey
 - [x] Add the dedicated `/order` page with pack, flavour, delivery, payment, and WhatsApp validation
 - [x] Connect all homepage shopping actions and preserve the legacy pack URL
