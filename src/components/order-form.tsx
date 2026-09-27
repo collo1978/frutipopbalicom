@@ -258,33 +258,33 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
         <fieldset ref={flavourRef} className="min-w-0 order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
           <legend className="sr-only">2. Pick Your Flavours</legend>
           <h2 className={legend} aria-hidden="true">2. Pick Your Flavours</h2>
-          <div className={cn("sticky top-[4.5rem] z-40 mt-3 rounded-xl border border-primary/20 bg-leaf/95 px-3 py-2.5 shadow-md backdrop-blur sm:px-4", complete && "ring-2 ring-primary/30")} aria-live="polite">
+          <div className={cn("sticky top-[4.5rem] z-40 mt-3 rounded-xl border border-primary/20 bg-leaf/95 px-3 py-1.5 shadow-md sm:py-2.5 backdrop-blur sm:px-4", complete && "ring-2 ring-primary/30")} aria-live="polite">
             <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
               <p className="text-sm font-bold text-accent sm:text-base">
                 {extraTotal > 0
                   ? <>{pack.name} · {pack.limit} Pops + {extraTotal} {extraTotal === 1 ? "Extra" : "Extras"}</>
                   : <>Your {pack.name} · {total} / {pack.limit} Pops · {complete ? <span className="text-primary">Your pack is ready! 🎉</span> : <span>{remaining} more to go!</span>}</>}
               </p>
-              {complete && <Button type="button" size="sm" onClick={() => scrollTo(deliveryRef.current)} className="h-9 rounded-full px-4">Continue <span aria-hidden="true">→</span></Button>}
+              {complete && <Button type="button" size="sm" onClick={() => scrollTo(deliveryRef.current)} className="h-8 rounded-full px-3 sm:h-9 sm:px-4">Continue <span aria-hidden="true">→</span></Button>}
             </div>
-            <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className="order-progress mt-1.5 h-2.5 w-full overflow-hidden rounded-full" />
+            <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className="order-progress mt-1 h-2 w-full sm:mt-1.5 sm:h-2.5 overflow-hidden rounded-full" />
           </div>
           <div className="mt-3">
-            <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Pick your flavours" tightTop desktopClass="md:grid md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[86%]">
+            <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Pick your flavours" tightTop desktopClass="md:grid md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[64%] md:w-auto">
               {[
                 ...ORDER_FLAVOURS.map((flavour) => {
                   const quantity = quantities[flavour.name] ?? 0;
                   return (
                     <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col overflow-hidden rounded-3xl ${flavour.tint}`}>
-                      <div className="flex h-10 items-center justify-center pt-2">
+                      <div className="flex h-8 items-center justify-center pt-1.5 md:h-10 md:pt-2">
                         {flavour.name === "Strawberry" && <BestSellerBadge />}
                       </div>
                       {flavour.art && (
                         <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="aspect-[2/3] w-full select-none object-cover" />
                       )}
-                      <div className="flex flex-1 flex-col items-center px-3 pb-4 pt-3 text-center">
-                        <h3 className="font-display text-xl font-extrabold text-accent md:text-2xl">{flavour.name}</h3>
-                        <div className="mt-auto flex items-center gap-2 pt-3">
+                      <div className="flex flex-1 flex-col items-center px-2 pb-3 pt-2 text-center md:px-3 md:pb-4 md:pt-3">
+                        <h3 className="font-display text-lg font-extrabold text-accent md:text-2xl">{flavour.name}</h3>
+                        <div className="mt-auto flex items-center gap-1.5 pt-2 md:gap-2 md:pt-3">
                           <Button type="button" variant="secondary" size="icon" onClick={() => changeQuantity(flavour.name, -1)} disabled={quantity === 0} aria-label={`Remove one ${flavour.name}`} className="h-10 w-10 rounded-full"><Minus /></Button>
                           <output aria-label={`${flavour.name} quantity`} className="w-7 text-center text-lg font-bold">{quantity}</output>
                           <Button type="button" size="icon" onClick={() => changeQuantity(flavour.name, 1)} disabled={full && !extrasEnabled} aria-label={`Add one ${flavour.name}`} className="h-10 w-10 rounded-full"><Plus /></Button>
@@ -425,20 +425,20 @@ function MysteryPop({ full, extrasEnabled, onAdd }: { full: boolean; extrasEnabl
   const flavour = ORDER_FLAVOURS[index];
   if (!flavour) return null;
   return (
-    <div className="flavour-pop relative flex h-full min-h-[26rem] flex-col items-center overflow-hidden rounded-3xl bg-pastel-lavender px-3 pb-4 pt-5 text-center">
+    <div className="flavour-pop relative flex h-full min-h-[19rem] flex-col items-center overflow-hidden rounded-3xl bg-pastel-lavender px-3 pb-3 pt-4 md:min-h-[26rem] md:pb-4 md:pt-5 text-center">
       {phase === "idle" && (
         <MysteryPopIdle action={<Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full">PICK MY POP</Button>} />
       )}
       {phase === "shuffling" && (
         <div className="flex flex-1 flex-col items-center justify-center">
-          {flavour.art && <img src={flavour.art} alt="" className="mystery-shuffle-img max-h-52 w-auto select-none rounded-2xl object-contain opacity-80" draggable={false} />}
+          {flavour.art && <img src={flavour.art} alt="" className="mystery-shuffle-img max-h-40 md:max-h-52 w-auto select-none rounded-2xl object-contain opacity-80" draggable={false} />}
           <h3 className="mt-3 font-display text-lg font-extrabold text-accent">Shuffling...</h3>
         </div>
       )}
       {phase === "result" && (
         <>
           <div className="mystery-reveal flex flex-1 flex-col items-center justify-center">
-            {flavour.art && <img src={flavour.art} alt={`Fruti Pop ${flavour.name} flavour artwork`} loading="lazy" draggable={false} className="max-h-64 w-auto select-none rounded-2xl object-contain shadow-md" />}
+            {flavour.art && <img src={flavour.art} alt={`Fruti Pop ${flavour.name} flavour artwork`} loading="lazy" draggable={false} className="max-h-44 w-auto select-none rounded-2xl object-contain shadow-md md:max-h-64" />}
             <h3 className="mt-3 flex items-center gap-1.5 font-display text-lg font-extrabold text-accent" aria-live="polite"><PartyPopper className="h-5 w-5" aria-hidden="true" /> It's {flavour.name}!</h3>
             {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">{flavour.tagline}</p>}
           </div>

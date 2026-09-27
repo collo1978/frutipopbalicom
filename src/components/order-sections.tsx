@@ -124,10 +124,10 @@ export function MysteryPopIdle({ action }: { action: ReactNode }) {
     <div className="flex h-full w-full flex-col items-center text-center">
       <h3 className="font-display text-2xl font-black uppercase leading-none text-accent md:text-3xl">Mystery POP</h3>
       <p className="mt-2 text-sm font-bold text-foreground/75 md:text-base">Can't decide on a flavour?</p>
-      <div className="relative my-3 min-h-48 w-full flex-1 overflow-hidden md:min-h-52">
+      <div className="relative my-2 min-h-32 w-full flex-1 overflow-hidden md:my-3 md:min-h-52">
         <img src={strawberryArt} alt="" aria-hidden="true" className="absolute -bottom-3 -left-[11%] w-[66%] -rotate-12 object-contain drop-shadow-md" />
         <img src={mangoArt} alt="" aria-hidden="true" className="absolute -bottom-4 -right-[12%] w-[66%] rotate-12 object-contain drop-shadow-md" />
-        <span aria-hidden="true" className="absolute left-1/2 top-[46%] z-10 flex h-36 w-28 -translate-x-1/2 -translate-y-1/2 rotate-3 items-center justify-center font-display text-[10rem] font-black leading-none text-accent drop-shadow-md md:h-40 md:w-32 md:text-[11rem]">?</span>
+        <span aria-hidden="true" className="absolute left-1/2 top-[46%] z-10 flex h-24 w-20 -translate-x-1/2 -translate-y-1/2 rotate-3 items-center justify-center font-display text-[6.5rem] font-black leading-none text-accent drop-shadow-md md:h-40 md:w-32 md:text-[11rem]">?</span>
         <img src={popsArt} alt="" aria-hidden="true" className="absolute -bottom-2 left-1/2 z-20 w-[43%] -translate-x-1/2 object-contain drop-shadow-md" />
       </div>
       <div className="mt-auto flex justify-center">{action}</div>
