@@ -1,5 +1,5 @@
 import strawberry from "@/assets/strawberry-pop-card.webp.asset.json";
-import soursop from "@/assets/soursop-pop-card.webp.asset.json";
+import lemon from "@/assets/order-originals/lemon-sorbet-original.png.asset.json";
 import pineapple from "@/assets/pineapple-pop-card.webp.asset.json";
 import pinaColada from "@/assets/pina-colada-pop-card.webp.asset.json";
 import mango from "@/assets/mango-pop-card.webp.asset.json";
@@ -10,7 +10,7 @@ export type Flavour = { name: string; tagline?: string; img: string | null; tint
 
 export const FLAVOURS: Flavour[] = [
   { name: "Strawberry", tagline: "Super Fresh.", img: strawberry.url, tint: "bg-dragonfruit/12" },
-  { name: "Soursop", tagline: "Tropical Taste.", img: soursop.url, tint: "bg-primary/12" },
+  { name: "Lemon Sorbet", tagline: "Super Fresh", img: lemon.url, tint: "bg-mango/25" },
   { name: "Pineapple", tagline: "Golden Bite.", img: pineapple.url, tint: "bg-mango/30" },
   { name: "Piña Colada", tagline: "Perfection.", img: pinaColada.url, tint: "bg-secondary" },
   { name: "Mango", tagline: "So Smooth.", img: mango.url, tint: "bg-mango/20" },

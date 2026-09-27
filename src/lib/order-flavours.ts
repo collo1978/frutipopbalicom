@@ -1,11 +1,11 @@
 import strawberry from "@/assets/order-originals/strawberry-original.png.asset.json";
-import soursop from "@/assets/order-originals/soursop-original.png.asset.json";
+import lemon from "@/assets/order-originals/lemon-sorbet-original.png.asset.json";
 import pineapple from "@/assets/order-originals/pineapple-original.png.asset.json";
 import pinaColada from "@/assets/order-originals/pina-colada-original.png.asset.json";
 import mango from "@/assets/order-originals/mango-original.png.asset.json";
 import passionFruit from "@/assets/order-originals/passion-fruit-original.png.asset.json";
 import strawberryArt from "@/assets/flavour-artwork/strawberry-art.jpg.asset.json";
-import soursopArt from "@/assets/flavour-artwork/soursop-art.png.asset.json";
+import lemonArt from "@/assets/flavour-artwork/lemon-sorbet-artwork.png.asset.json";
 import pineappleArt from "@/assets/flavour-artwork/pineapple-art.png.asset.json";
 import pinaColadaArt from "@/assets/flavour-artwork/pina-colada-art.jpg.asset.json";
 import mangoArt from "@/assets/flavour-artwork/mango-art.jpg.asset.json";
@@ -14,7 +14,7 @@ import { FLAVOURS, type Flavour } from "@/lib/flavours";
 
 const originalImages: Record<string, string> = {
   Strawberry: strawberry.url,
-  Soursop: soursop.url,
+  "Lemon Sorbet": lemon.url,
   Pineapple: pineapple.url,
   "Piña Colada": pinaColada.url,
   Mango: mango.url,
@@ -23,7 +23,7 @@ const originalImages: Record<string, string> = {
 
 const artworkImages: Record<string, string> = {
   Strawberry: strawberryArt.url,
-  Soursop: soursopArt.url,
+  "Lemon Sorbet": lemonArt.url,
   Pineapple: pineappleArt.url,
   "Piña Colada": pinaColadaArt.url,
   Mango: mangoArt.url,

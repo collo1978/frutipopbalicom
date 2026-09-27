@@ -27,8 +27,8 @@
 - [x] Add the homepage Mystery Pop game, larger flavour artwork, and playful starburst
 - [x] Keep the mobile page and flavour carousel fixed during quantity changes
 - [x] Add and verify the Mystery Pop starburst on the Order card
-- [ ] Replace desktop and mobile hero artwork with the supplied approved images
-- [ ] Replace Soursop with Lemon Sorbet across every flavour and ordering experience
-- [ ] Update Our Story wording and bold the Fruti Pop origin line
-- [ ] Keep Finish Order visible after choosing Add More Flavours and verify best-pack pricing
+- [x] Replace desktop and mobile hero artwork with the supplied approved images
+- [x] Replace Soursop with Lemon Sorbet across every flavour and ordering experience
+- [x] Update Our Story wording and bold the Fruti Pop origin line
+- [x] Keep Finish Order visible after choosing Add More Flavours and verify best-pack pricing
 - [ ] Verify the complete update on mobile and desktop
