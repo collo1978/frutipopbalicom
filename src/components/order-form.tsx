@@ -99,6 +99,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     }
     if (effectiveKey !== "jumbo") setUpgradeNotice(false);
     prevKey.current = effectiveKey;
+    return undefined;
   }, [effectiveKey, packKey]);
 
   useEffect(() => {
