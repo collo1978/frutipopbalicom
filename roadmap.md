@@ -40,4 +40,4 @@
 
 - [x] Replace the desktop hero with the new wide transparent artwork
 - [x] Compact the mobile Our Flavours carousel without changing desktop
-- [ ] Verify desktop hero and mobile flavour interactions
+- [x] Verify desktop hero and mobile flavour interactions
