@@ -78,7 +78,7 @@ function Home() {
     <>
       <Hero />
 
-      <section id="flavours" className="scroll-mt-20 bg-hero-cream py-5 md:py-14">
+      <section id="flavours" className="scroll-mt-20 bg-hero-cream pb-5 pt-10 md:py-14">
         <div className="mx-auto max-w-7xl px-2 text-center md:px-4">
           <h2 className="fruti-flavours-heading flex justify-center overflow-hidden"><span className="inline-block shrink-0 origin-center scale-x-[0.82] whitespace-nowrap min-[360px]:scale-x-90 md:scale-x-100">Flavours That Make You <span className="font-black text-dragonfruit text-[1.12em] leading-none">POP!</span></span></h2>
           <div className="mt-3 text-left md:mt-8">
