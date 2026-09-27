@@ -83,7 +83,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
       io.observe(el);
     }
     return () => { window.removeEventListener("resize", measure); io?.disconnect(); };
-  }, []);
+  }, [packKey]);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("+62");
   const [address, setAddress] = useState("");
