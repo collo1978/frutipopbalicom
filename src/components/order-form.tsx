@@ -173,7 +173,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length || !pack || !date || !payment) return;
 
-    const packLines = FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((flavour) => `${flavourEmoji[flavour.name]} ${flavour.name} Sorbet: ${quantities[flavour.name]} pcs`);
+    const packLines = FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((flavour) => `${flavourEmoji[flavour.name]} ${flavour.name}${flavour.name.endsWith("Sorbet") ? "" : " Sorbet"}: ${quantities[flavour.name]} pcs`);
     const message = [
       "Hi Fruti Pop 👋",
       "",
