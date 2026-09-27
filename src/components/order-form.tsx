@@ -353,7 +353,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
                         {flavour.name === "Strawberry" && <BestSellerBadge />}
                       </div>
                       {flavour.art && (
-                        <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="aspect-[2/3] w-full select-none object-cover" />
+                        <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className={cn("aspect-[2/3] w-full select-none", flavour.name === "Piña Colada" ? "object-contain p-3 md:p-4" : "object-cover")} />
                       )}
                       <div className="flex flex-1 flex-col items-center px-2 pb-3 pt-2 text-center md:px-3 md:pb-4 md:pt-3">
                         <h3 className="font-display text-lg font-extrabold text-accent md:text-2xl">{flavour.name}</h3>
