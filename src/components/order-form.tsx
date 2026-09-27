@@ -419,15 +419,15 @@ function MysteryPop({ full, extrasEnabled, onAdd }: { full: boolean; extrasEnabl
       )}
       {phase === "shuffling" && (
         <div className="flex flex-1 flex-col items-center justify-center">
-          {flavour.img && <img src={flavour.img} alt="" className="mystery-shuffle-img max-h-44 w-auto object-contain opacity-80" />}
+          {flavour.art && <img src={flavour.art} alt="" className="mystery-shuffle-img max-h-52 w-auto select-none rounded-2xl object-contain opacity-80" draggable={false} />}
           <h3 className="mt-3 font-display text-lg font-extrabold text-accent">Shuffling...</h3>
         </div>
       )}
       {phase === "result" && (
         <>
           <div className="mystery-reveal flex flex-1 flex-col items-center justify-center">
-            {flavour.img && <img src={flavour.img} alt={`Fruti Pop ${flavour.name} sorbet tube`} loading="lazy" className="max-h-44 w-auto object-contain" />}
-            <h3 className="mt-2 flex items-center gap-1.5 font-display text-lg font-extrabold text-accent" aria-live="polite"><PartyPopper className="h-5 w-5" aria-hidden="true" /> It's {flavour.name}!</h3>
+            {flavour.art && <img src={flavour.art} alt={`Fruti Pop ${flavour.name} flavour artwork`} loading="lazy" draggable={false} className="max-h-64 w-auto select-none rounded-2xl object-contain shadow-md" />}
+            <h3 className="mt-3 flex items-center gap-1.5 font-display text-lg font-extrabold text-accent" aria-live="polite"><PartyPopper className="h-5 w-5" aria-hidden="true" /> It's {flavour.name}!</h3>
             {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">{flavour.tagline}</p>}
           </div>
           <div className="mt-auto flex w-full flex-col gap-2 pt-2">
