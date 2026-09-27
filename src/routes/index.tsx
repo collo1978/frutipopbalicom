@@ -83,7 +83,7 @@ function Home() {
           <h2 className="fruti-flavours-heading">Flavours That Make You <span className="font-black text-dragonfruit text-[1.12em] leading-none">POP!</span></h2>
           <div className="mt-3 text-left md:mt-8">
             <FlavourDiscovery desktopEndcap={
-              <Button asChild size="lg" className={`${cta} max-w-[13rem] text-center`}>
+              <Button asChild size="lg" className={`${cta} w-full !whitespace-nowrap px-3 text-base lg:px-5 lg:text-lg`}>
                 <Link to="/order">Order My Flavours <A /></Link>
               </Button>
             } />
