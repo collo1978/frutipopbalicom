@@ -78,12 +78,11 @@ function Home() {
     <>
       <Hero />
 
-      <section id="flavours" className="scroll-mt-20 bg-hero-cream py-10 md:py-14">
+      <section id="flavours" className="scroll-mt-20 bg-hero-cream py-5 md:py-14">
         <div className="mx-auto max-w-7xl px-4 text-center">
-          <h2 className="fruti-section-heading">Our Flavours</h2>
-          <p className="mt-2 text-lg font-semibold text-foreground/80 md:text-2xl">Six fruity favourites. Which one takes your fancy?</p>
+          <h2 className="fruti-flavours-heading">Flavours That Make You <span className="font-black text-dragonfruit text-[1.12em] leading-none">POP!</span></h2>
           <div className="mt-3 text-left md:mt-10"><FlavourDiscovery /></div>
-          <Button asChild size="lg" className={`mt-6 ${cta}`}><Link to="/order">Order My Flavours <A /></Link></Button>
+          <Button asChild size="lg" className={`mt-3 ${cta} md:mt-8`}><Link to="/order">Order My Flavours <A /></Link></Button>
         </div>
       </section>
 
