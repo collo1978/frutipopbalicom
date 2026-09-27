@@ -10,7 +10,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { FLAVOURS } from "@/lib/flavours";
-import { ORDER_FLAVOURS } from "@/lib/order-flavours";
+import { ORDER_FLAVOURS, type OrderFlavour } from "@/lib/order-flavours";
 import { waLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -375,6 +375,20 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
             {Object.values(errors).some(Boolean) && <p className="mt-3 text-sm font-semibold text-destructive">Please check the highlighted details above.</p>}
             <Button type="submit" size="lg" className="mt-5 min-h-12 w-full rounded-full text-base font-bold">Send Order on WhatsApp</Button>
           </section>
+        </div>
+      )}
+
+      {viewTube && (
+        <div role="dialog" aria-modal="true" aria-label={`The real Fruti Pop ${viewTube.name} tube`} className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4" onClick={() => setViewTube(null)}>
+          <div className="relative" onClick={(event) => event.stopPropagation()}>
+            <div className="flex flex-col items-center">
+              {viewTube.img && <img src={viewTube.img} alt={`The real Fruti Pop ${viewTube.name} sorbet tube`} className="max-h-[76vh] w-auto max-w-[84vw] rounded-2xl bg-white object-contain shadow-2xl" />}
+              <p className="mt-3 text-center text-sm font-bold text-white">{viewTube.name} · 100g tube</p>
+            </div>
+            <button ref={closeRef} type="button" onClick={() => setViewTube(null)} aria-label="Close tube preview" className="absolute -right-2 -top-2 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-lg transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
+              <X className="h-5 w-5" aria-hidden="true" />
+            </button>
+          </div>
         </div>
       )}
     </form>
