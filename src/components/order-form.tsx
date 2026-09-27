@@ -196,7 +196,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
 
   return (
     <form onSubmit={submit} noValidate className="space-y-6">
-      <fieldset className="rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
+      <fieldset className="min-w-0 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
         <legend className="sr-only">1. Choose Your Pack</legend>
         <h2 className={legend} aria-hidden="true">1. Choose Your Pack</h2>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -220,7 +220,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
       </fieldset>
 
       {showFlavours && pack && (
-        <fieldset ref={flavourRef} className="order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
+        <fieldset ref={flavourRef} className="min-w-0 order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
           <legend className="sr-only">2. Pick Your Flavours</legend>
           <h2 className={legend} aria-hidden="true">2. Pick Your Flavours</h2>
           <p className="fruti-hint mt-1">
@@ -263,7 +263,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
       )}
 
       {showDelivery && (
-        <fieldset ref={deliveryRef} className="order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
+        <fieldset ref={deliveryRef} className="min-w-0 order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
           <legend className="sr-only">3. Delivery Details</legend>
           <h2 className={legend} aria-hidden="true">3. Delivery Details</h2>
           <div className="mt-3 grid gap-4 sm:grid-cols-2">
@@ -294,7 +294,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
 
       {showPayment && (
         <div ref={paymentRef} className="order-step-reveal scroll-mt-24 space-y-6">
-          <fieldset className="rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
+          <fieldset className="min-w-0 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
             <legend className="sr-only">4. Payment Method</legend>
             <h2 className={legend} aria-hidden="true">4. Payment Method</h2>
             <RadioGroup value={payment ?? ""} onValueChange={setPayment} className="mt-3">
