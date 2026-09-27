@@ -129,7 +129,7 @@ export function MysteryPopIdle({ action, homepage = false }: { action: ReactNode
         <p className="absolute left-0 right-0 top-2 z-20 text-sm font-bold text-foreground/75 md:top-3 md:text-base">Can't decide on a flavour?</p>
         <img src={strawberryArt} alt="" aria-hidden="true" className="absolute -bottom-2 -left-[13%] w-[73%] -rotate-12 object-contain drop-shadow-md md:-bottom-3 md:-left-[11%] md:w-[70%]" />
         <img src={mangoArt} alt="" aria-hidden="true" className="absolute -bottom-3 -right-[14%] w-[73%] rotate-12 object-contain drop-shadow-md md:-bottom-4 md:-right-[12%] md:w-[70%]" />
-        <span aria-hidden="true" className="absolute left-1/2 top-[39%] z-10 flex h-56 w-44 -translate-x-1/2 -translate-y-1/2 rotate-3 items-center justify-center font-display text-[19rem] font-black leading-none text-accent drop-shadow-md md:top-[40%] md:h-64 md:w-48 md:text-[22rem]">?</span>
+        <span aria-hidden="true" className={`absolute left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 rotate-3 items-center justify-center font-display font-black leading-none text-accent drop-shadow-md md:top-[40%] md:h-64 md:w-48 md:text-[22rem] ${homepage ? "top-[39%] h-56 w-44 text-[19rem]" : "top-[44%] h-52 w-40 text-[17rem]"}`}>?</span>
         <img src={popsArt} alt="" aria-hidden="true" className="absolute -bottom-1 left-1/2 z-20 w-[50%] -translate-x-1/2 object-contain drop-shadow-md md:w-[47%]" />
       </div>
       <div className={`flex w-full flex-1 items-center justify-center px-3 text-center ${homepage ? "pb-3 pt-1 md:pb-4 md:pt-2" : "pb-3 pt-2 md:px-3 md:pb-4 md:pt-3"}`}>{action}</div>

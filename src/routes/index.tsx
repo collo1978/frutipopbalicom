@@ -35,7 +35,7 @@ function Hero() {
   const alt = "Bali's Fruity Sorbet Ice Blocks. Refreshing flavours and a little pop of happiness.";
   return (
     <section className="overflow-x-clip bg-hero-cream">
-      <div className="flex flex-col items-center px-2 pb-3 pt-2 md:px-4 md:pb-2 md:pt-0">
+      <div className="flex flex-col items-center px-2 pb-8 pt-2 md:px-4 md:pb-2 md:pt-0">
         <picture className="flex w-full items-center justify-center">
           <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1920} height={768} />
           <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto max-h-[calc(100svh-12rem)] w-auto max-w-full object-contain md:max-h-[calc(100svh-10rem)] md:w-[90vw] md:max-w-[1920px]" />
