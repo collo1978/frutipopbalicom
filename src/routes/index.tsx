@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroDesktop from "@/assets/hero-desktop-september.png.asset.json";
-import heroMobile from "@/assets/hero-mobile-september.png.asset.json";
+import heroDesktop from "@/assets/hero-desktop-oct.png.asset.json";
+import heroMobile from "@/assets/hero-mobile-oct.png.asset.json";
 import popStarsDesktop from "@/assets/pop-stars-desktop.png.asset.json";
 import popStarsMobile from "@/assets/pop-stars-mobile.png.asset.json";
 import birthdayParty from "@/assets/birthday-pool-party.png.asset.json";
@@ -37,7 +37,7 @@ function Hero() {
     <section className="overflow-x-clip bg-hero-cream">
       <div className="mx-auto flex min-h-[calc(100svh-4.5rem)] flex-col items-center justify-center px-2 pb-5 pt-1 md:min-h-0 md:px-4 md:pb-5 md:pt-1">
         <picture className="flex min-h-0 w-full items-center justify-center">
-          <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1690} height={931} />
+          <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1312} height={1199} />
           <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto max-h-[calc(100svh-12rem)] w-auto max-w-full object-contain md:max-h-[calc(100svh-12rem)] md:w-auto md:max-w-[1510px] xl:max-h-[calc(100svh-10rem)]" />
         </picture>
         <div className="-mt-5 flex w-full flex-col items-center gap-2.5 md:-mt-8 md:gap-3">
