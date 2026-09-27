@@ -5,7 +5,7 @@ import iceArt from "@/assets/benefits/ice.png";
 import leafArt from "@/assets/benefits/leaf.png";
 import mangoArt from "@/assets/benefits/mango.png";
 import popsArt from "@/assets/benefits/pops.png";
-import { BadgeCheck, Box, Heart, Leaf, Play, Search, Snowflake, Star, Sun, X } from "lucide-react";
+import { BadgeCheck, Box, Heart, Leaf, PartyPopper, Play, RefreshCw, Search, Snowflake, Star, Sun, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { FLAVOURS } from "@/lib/flavours";
 import { ORDER_FLAVOURS } from "@/lib/order-flavours";
@@ -135,6 +135,80 @@ export function MysteryPopIdle({ action }: { action: ReactNode }) {
   );
 }
 
+type MysteryPopGameProps = {
+  onAdd?: (name: string) => void;
+  homepage?: boolean;
+};
+
+/** One Mystery POP game shared by the homepage discovery and Order picker. */
+export function MysteryPopGame({ onAdd, homepage = false }: MysteryPopGameProps) {
+  const [phase, setPhase] = useState<"idle" | "shuffling" | "result">("idle");
+  const [index, setIndex] = useState(0);
+  const timers = useRef<number[]>([]);
+  useEffect(() => () => timers.current.forEach((timer) => window.clearTimeout(timer)), []);
+
+  const shuffle = () => {
+    if (phase === "shuffling") return;
+    timers.current.forEach((timer) => window.clearTimeout(timer));
+    timers.current = [];
+    setPhase("shuffling");
+    const final = Math.floor(Math.random() * ORDER_FLAVOURS.length);
+    const steps = 12;
+    let delay = 0;
+    for (let step = 0; step < steps; step += 1) {
+      delay += 70 + step * 12;
+      const nextIndex = step === steps - 1 ? final : (final + step + 1) % ORDER_FLAVOURS.length;
+      timers.current.push(window.setTimeout(() => setIndex(nextIndex), delay));
+    }
+    timers.current.push(window.setTimeout(() => setPhase("result"), delay + 120));
+  };
+
+  const flavour = ORDER_FLAVOURS[index];
+  if (!flavour) return null;
+
+  return (
+    <div className={`flavour-pop relative flex h-full flex-col items-center rounded-3xl bg-pastel-lavender px-2 pb-3 pt-3 text-center md:pb-4 md:pt-4 ${homepage ? "min-h-[23rem] overflow-visible md:min-h-[24rem]" : "min-h-[19rem] overflow-hidden md:min-h-[26rem]"}`}>
+      {phase === "idle" && (
+        <MysteryPopIdle action={
+          <div className="relative">
+            {homepage && (
+              <span aria-hidden="true" className="absolute -right-16 -top-10 z-20 flex h-16 w-16 rotate-12 items-center justify-center bg-mango px-2 text-center font-display text-[10px] font-black leading-[0.9] text-accent shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] md:-right-20 md:-top-12 md:h-20 md:w-20 md:text-xs">
+                LET THE KIDS PRESS!
+              </span>
+            )}
+            <Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full">PICK MY POP</Button>
+          </div>
+        } />
+      )}
+      {phase === "shuffling" && (
+        <div className="flex flex-1 flex-col items-center justify-center">
+          {flavour.art && <img src={flavour.art} alt="" className="mystery-shuffle-img max-h-64 w-auto max-w-full select-none rounded-2xl object-contain opacity-80 md:max-h-80" draggable={false} />}
+          <h3 className="mt-3 font-display text-lg font-extrabold text-accent">Shuffling...</h3>
+        </div>
+      )}
+      {phase === "result" && (
+        <>
+          <div className="mystery-reveal flex flex-1 flex-col items-center justify-center">
+            {flavour.art && <img src={flavour.art} alt={`Fruti Pop ${flavour.name} flavour artwork`} loading="lazy" draggable={false} className="max-h-64 w-auto max-w-full select-none rounded-2xl object-contain shadow-md md:max-h-96" />}
+            <h3 className="mt-3 flex items-center gap-1.5 font-display text-lg font-extrabold text-accent" aria-live="polite"><PartyPopper className="h-5 w-5" aria-hidden="true" /> It's {flavour.name}!</h3>
+            {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">{flavour.tagline}</p>}
+          </div>
+          <div className="mt-auto flex w-full flex-col gap-2 pt-2">
+            {homepage ? (
+              <Button asChild type="button" size="sm" className="h-auto min-h-9 whitespace-normal rounded-full">
+                <Link to="/order">Order This Flavour →</Link>
+              </Button>
+            ) : (
+              <Button type="button" size="sm" onClick={() => onAdd?.(flavour.name)} className="h-auto min-h-9 whitespace-normal rounded-full">+ Add {flavour.name} to My Pack</Button>
+            )}
+            <Button type="button" size="sm" variant="outline" onClick={shuffle} className="rounded-full"><RefreshCw /> Pick Again</Button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 /** Small magnifying-glass control that opens the real product tube. Ordering controls never trigger it. */
 export function SeeThePopButton({ name, onClick }: { name: string; onClick: () => void }) {
   return (
@@ -187,20 +261,14 @@ export function FlavourDiscovery() {
               <div className="flex h-10 items-center justify-center pt-1 md:h-16 md:pt-2">
                 {flavour.name === "Strawberry" && <BestSellerBadge className="px-3 py-1 text-xs md:px-5 md:py-2 md:text-base [&_svg]:h-3.5 [&_svg]:w-3.5 md:[&_svg]:h-[1.125rem] md:[&_svg]:w-[1.125rem]" />}
               </div>
-              {flavour.art && <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="h-[17rem] w-full select-none object-contain md:aspect-[2/3] md:h-auto md:object-cover" />}
-              <div className="flex flex-1 flex-col items-center px-3 pb-3 pt-2 text-center md:pb-4 md:pt-3">
+              {flavour.art && <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="h-[19.5rem] w-full select-none object-contain md:aspect-[3/5] md:h-auto md:object-contain" />}
+              <div className="flex flex-1 flex-col items-center px-3 pb-3 pt-1 text-center md:pb-4 md:pt-2">
                 <h3 className="font-display text-lg font-extrabold text-accent md:text-2xl">{flavour.name}</h3>
                 <div className="mt-auto pt-2 md:pt-3"><SeeThePopButton name={flavour.name} onClick={() => setViewTube(flavour.name)} /></div>
               </div>
             </div>
           )),
-          <div key="mystery" className="relative flex h-full min-h-[23rem] flex-col items-center rounded-3xl bg-pastel-lavender px-4 pb-4 pt-4 text-center md:min-h-[24rem] md:pb-6 md:pt-6">
-            <MysteryPopIdle action={
-              <Button asChild size="sm" className="cta-pop cta-pop-sm whitespace-nowrap rounded-full">
-                <Link to="/order" search={{ mystery: true }}>PICK MY POP</Link>
-              </Button>
-            } />
-          </div>,
+          <div key="mystery" className="h-full"><MysteryPopGame homepage /></div>,
         ]}
       </SwipeRow>
       <TubeViewer tube={tube} onClose={() => setViewTube(null)} />

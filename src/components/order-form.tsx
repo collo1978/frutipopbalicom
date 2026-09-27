@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
-import { CalendarIcon, Copy, Minus, PartyPopper, Plus, RefreshCw } from "lucide-react";
-import { BestSellerBadge, MysteryPopIdle, SeeThePopButton, SwipeRow, TubeViewer } from "@/components/order-sections";
+import { CalendarIcon, Copy, Minus, Plus } from "lucide-react";
+import { BestSellerBadge, MysteryPopGame, SeeThePopButton, SwipeRow, TubeViewer } from "@/components/order-sections";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -296,25 +296,27 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
           <legend className="sr-only">2. Pick Your Flavours</legend>
           <h2 className={legend} aria-hidden="true">2. Pick Your Flavours</h2>
           <div ref={trackerSentinel} aria-hidden="true" className="h-px" />
-          <div className={cn("sticky z-40 mt-3 rounded-xl border border-primary/20 bg-leaf/95 shadow-md backdrop-blur transition-all duration-200", stuck ? "px-2.5 py-1.5 sm:px-4 sm:py-2" : "px-3 py-2.5 sm:px-4 sm:py-3", complete && "ring-2 ring-primary/30")} style={{ top: headerH }} aria-live="polite">
+          <div className={cn("sticky z-40 mt-3 h-32 overflow-hidden rounded-xl border border-primary/20 bg-leaf/95 px-2.5 py-2 shadow-md backdrop-blur sm:px-4 md:h-28", complete && "ring-2 ring-primary/30")} style={{ top: headerH }} aria-live="polite">
             <p className={cn("font-bold leading-tight text-accent", stuck ? "text-xs sm:text-sm" : "text-sm sm:text-base")}>
               {extraTotal > 0
                 ? <>Your {pack.name} · {total} Pops · <span className="text-primary">Pack complete ✓</span></>
                 : <>Your {pack.name} · {total}/{pack.limit} · {complete ? <span className="text-primary">Pack full! 🎉</span> : <span>{remaining} to go!</span>}</>}
             </p>
+            <div className="h-[4.25rem] md:h-12">
             {total > 0 && (
-              <ul aria-label="Flavours in your pack" className={cn("flex flex-wrap items-center gap-x-2.5 gap-y-0.5", stuck ? "mt-0.5" : "mt-1.5")}>
+              <ul aria-label="Flavours in your pack" className="mt-1 grid grid-cols-3 gap-x-1 gap-y-0.5 md:grid-cols-6 md:gap-x-2">
                 {ORDER_FLAVOURS.filter((flavour) => (quantities[flavour.name] ?? 0) > 0).map((flavour) => (
-                  <li key={flavour.name} aria-label={`${flavour.name} × ${quantities[flavour.name]}`} className="flex items-center gap-1">
-                    <FruitIcon name={flavour.name} className={cn("shrink-0 drop-shadow-sm", stuck ? "h-6 w-6 sm:h-7 sm:w-7" : "h-8 w-8 sm:h-9 sm:w-9")} />
-                    <span className={cn("font-extrabold text-accent", stuck ? "text-[11px] sm:text-xs" : "text-xs sm:text-sm")}>
+                  <li key={flavour.name} aria-label={`${flavour.name} × ${quantities[flavour.name]}`} className="flex min-w-0 items-center gap-0.5">
+                    <FruitIcon name={flavour.name} className="h-7 w-7 shrink-0 drop-shadow-sm md:h-8 md:w-8" />
+                    <span className="truncate text-[10px] font-extrabold text-accent sm:text-xs">
                       {flavour.name} <span className="tabular-nums">×{quantities[flavour.name]}</span>
                     </span>
                   </li>
                 ))}
               </ul>
             )}
-            <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className={cn("order-progress w-full overflow-hidden rounded-full", stuck ? "mt-1 h-1" : "mt-1.5 h-1.5 sm:h-2")} />
+            </div>
+            <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className="order-progress mt-1 h-1.5 w-full overflow-hidden rounded-full sm:h-2" />
             {upgradeNotice && (
               <p role="status" className="order-step-reveal mt-1.5 text-xs font-bold text-primary sm:text-sm">🎉 You’ve unlocked the Jumbo Pack! <span className="font-semibold text-leaf-foreground">We’ve automatically applied the better 20-Pop price.</span></p>
             )}
@@ -346,7 +348,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
                   );
                 }),
                 <div key="mystery" ref={mysteryRef} className={cn("h-full rounded-3xl transition-shadow duration-300", mysteryHighlight && "ring-4 ring-primary ring-offset-4 ring-offset-card")}>
-                  <MysteryPop onAdd={(n) => changeQuantity(n, 1)} />
+                  <MysteryPopGame onAdd={(n) => changeQuantity(n, 1)} />
                 </div>,
               ]}
             </SwipeRow>
@@ -453,54 +455,3 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
   );
 }
 
-function MysteryPop({ onAdd }: { onAdd: (name: string) => void }) {
-  const [phase, setPhase] = useState<"idle" | "shuffling" | "result">("idle");
-  const [index, setIndex] = useState(0);
-  const timers = useRef<number[]>([]);
-  useEffect(() => () => timers.current.forEach((t) => window.clearTimeout(t)), []);
-
-  const shuffle = () => {
-    if (phase === "shuffling") return;
-    timers.current.forEach((t) => window.clearTimeout(t));
-    timers.current = [];
-    setPhase("shuffling");
-    const final = Math.floor(Math.random() * ORDER_FLAVOURS.length);
-    const steps = 12;
-    let delay = 0;
-    for (let i = 0; i < steps; i++) {
-      delay += 70 + i * 12;
-      const idx = i === steps - 1 ? final : (final + i + 1) % ORDER_FLAVOURS.length;
-      timers.current.push(window.setTimeout(() => setIndex(idx), delay));
-    }
-    timers.current.push(window.setTimeout(() => setPhase("result"), delay + 120));
-  };
-
-  const flavour = ORDER_FLAVOURS[index];
-  if (!flavour) return null;
-  return (
-    <div className="flavour-pop relative flex h-full min-h-[19rem] flex-col items-center overflow-hidden rounded-3xl bg-pastel-lavender px-2 pb-3 pt-3 md:min-h-[26rem] md:pb-4 md:pt-4 text-center">
-      {phase === "idle" && (
-        <MysteryPopIdle action={<Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full">PICK MY POP</Button>} />
-      )}
-      {phase === "shuffling" && (
-        <div className="flex flex-1 flex-col items-center justify-center">
-          {flavour.art && <img src={flavour.art} alt="" className="mystery-shuffle-img max-h-64 md:max-h-80 w-auto max-w-full select-none rounded-2xl object-contain opacity-80" draggable={false} />}
-          <h3 className="mt-3 font-display text-lg font-extrabold text-accent">Shuffling...</h3>
-        </div>
-      )}
-      {phase === "result" && (
-        <>
-          <div className="mystery-reveal flex flex-1 flex-col items-center justify-center">
-            {flavour.art && <img src={flavour.art} alt={`Fruti Pop ${flavour.name} flavour artwork`} loading="lazy" draggable={false} className="max-h-64 w-auto max-w-full select-none rounded-2xl object-contain shadow-md md:max-h-96" />}
-            <h3 className="mt-3 flex items-center gap-1.5 font-display text-lg font-extrabold text-accent" aria-live="polite"><PartyPopper className="h-5 w-5" aria-hidden="true" /> It's {flavour.name}!</h3>
-            {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">{flavour.tagline}</p>}
-          </div>
-          <div className="mt-auto flex w-full flex-col gap-2 pt-2">
-            <Button type="button" size="sm" onClick={() => onAdd(flavour.name)} className="h-auto min-h-9 whitespace-normal rounded-full">+ Add {flavour.name} to My Pack</Button>
-            <Button type="button" size="sm" variant="outline" onClick={shuffle} className="rounded-full"><RefreshCw /> Pick Again</Button>
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
