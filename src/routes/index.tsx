@@ -35,13 +35,16 @@ function Hero() {
   const alt = "Bali's Fruity Sorbet Ice Blocks. Six refreshing flavours. A little pop of happiness. Less sugar than regular ice blocks, full of vitamins, packed with fruit.";
   return (
     <section className="bg-hero-cream">
-      <div className="mx-auto px-3 pb-6 pt-1 md:px-4 md:pb-5 md:pt-2">
+      <div className="mx-auto px-[2vw] pb-6 pt-1 md:px-4 md:pb-6 md:pt-2">
         <picture>
           <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1690} height={931} />
-          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto w-full max-w-[min(28rem,calc((100svh-150px)*0.667))] md:w-[min(94vw,calc((100svh-160px)*1.815))] md:max-w-none" />
+          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto w-[96vw] max-w-[36rem] md:w-full md:max-w-[1350px]" />
         </picture>
-        <div className="mt-2 flex justify-center md:mt-1">
-          <Button asChild size="lg" className={cta}><Link to="/order">Order My Pops <A /></Link></Button>
+        <div className="mt-3 flex flex-col items-center gap-2 md:mt-2">
+          <Button asChild size="lg" className={`${cta} w-full max-w-md md:w-auto md:px-10 md:text-lg`}>
+            <a href="#flavours" onClick={(e) => { e.preventDefault(); document.getElementById("flavours")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>Pick Your Flavours <A /></a>
+          </Button>
+          <p className="text-sm font-semibold text-foreground/70">Made in Bali • Real fruit • Less sugar</p>
         </div>
       </div>
     </section>
