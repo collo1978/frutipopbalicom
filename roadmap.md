@@ -32,3 +32,6 @@
 - [x] Update Our Story wording and bold the Fruti Pop origin line
 - [x] Keep Finish Order visible after choosing Add More Flavours and verify best-pack pricing
 - [x] Verify the complete update on mobile and desktop
+- [ ] Match the homepage Lemon card to the working Order-card presentation
+- [ ] Fix full-pack Mystery Pop navigation and persistent Finish Order access
+- [ ] Run full desktop and mobile interaction QA and fix related regressions
