@@ -211,7 +211,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
   );
   const [reached, setReached] = useState({ delivery: false, payment: false });
   const [choiceOpen, setChoiceOpen] = useState(false);
-  const [finishAvailable, setFinishAvailable] = useState(false);
+  const finishAvailable = total >= PACKS.family.limit;
   const previousTotal = useRef(total);
   useEffect(() => {
     if (pack && previousTotal.current < pack.limit && total >= pack.limit) setChoiceOpen(true);
@@ -265,20 +265,18 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     else setReached((r) => ({ ...r, delivery: true }));
   };
   const goFlavours = () => {
-    setFinishAvailable(true);
     setChoiceOpen(false);
   };
   const goMystery = () => {
-    const pageY = window.scrollY;
     setChoiceOpen(false);
     window.setTimeout(() => {
       const item = mysteryRef.current?.parentElement;
       const carousel = item?.parentElement;
       if (item && carousel) carousel.scrollTo({ left: item.offsetLeft - carousel.offsetLeft - 16, behavior: "smooth" });
-      window.scrollTo({ top: pageY, behavior: "instant" });
+      mysteryRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
       setMysteryHighlight(true);
       window.setTimeout(() => setMysteryHighlight(false), 3000);
-    }, 80);
+    }, 120);
   };
 
   const fieldError = (key: string) => errors[key] ? <p className="mt-1 text-sm font-semibold text-destructive">{errors[key]}</p> : null;
