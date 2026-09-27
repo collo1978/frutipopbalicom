@@ -25,3 +25,5 @@
 - [x] Preserve vertical position for Add More and Mystery Pop modal choices, then verify mobile and desktop
 - [x] Stabilize the pack tracker while quantities change and verify card positions
 - [x] Add the homepage Mystery Pop game, larger flavour artwork, and playful starburst
+- [x] Keep the mobile page and flavour carousel fixed during quantity changes
+- [x] Add and verify the Mystery Pop starburst on the Order card
