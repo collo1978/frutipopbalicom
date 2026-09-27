@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
-import { CalendarIcon, Copy, Dices, Eye, Minus, PartyPopper, Plus, RefreshCw, X } from "lucide-react";
-import { SwipeRow } from "@/components/order-sections";
+import { CalendarIcon, Copy, Dices, Minus, PartyPopper, Plus, RefreshCw } from "lucide-react";
+import { BestSellerBadge, SeeThePopButton, SwipeRow, TubeViewer } from "@/components/order-sections";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -59,7 +59,7 @@ function baliCurrentTime() {
   return new Intl.DateTimeFormat("en-GB", { timeZone: BALI_TIME_ZONE, hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date());
 }
 
-export function OrderForm({ initialPack }: { initialPack: PackKey | undefined }) {
+export function OrderForm({ initialPack, openMystery = false }: { initialPack: PackKey | undefined; openMystery?: boolean }) {
   const [packKey, setPackKey] = useState<PackKey | undefined>(initialPack);
   const [quantities, setQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
   const [extraQuantities, setExtraQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
@@ -202,21 +202,25 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
   useEffect(() => { if (showPayment) scrollTo(paymentRef.current); }, [showPayment]);
   useEffect(() => { mounted.current = true; }, []);
 
-  const [viewTube, setViewTube] = useState<OrderFlavour | null>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
+  const mysteryRef = useRef<HTMLDivElement>(null);
+  const mysteryHandled = useRef(false);
+  const [mysteryHighlight, setMysteryHighlight] = useState(false);
   useEffect(() => {
-    if (!viewTube) return;
-    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") setViewTube(null); };
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    window.setTimeout(() => closeRef.current?.focus(), 30);
-    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
-  }, [viewTube]);
+    if (!showFlavours || !openMystery || mysteryHandled.current) return;
+    mysteryHandled.current = true;
+    window.setTimeout(() => {
+      mysteryRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      setMysteryHighlight(true);
+      window.setTimeout(() => setMysteryHighlight(false), 3500);
+    }, 350);
+  }, [showFlavours, openMystery]);
+
+  const [viewTube, setViewTube] = useState<OrderFlavour | null>(null);
   const remaining = pack ? Math.max(0, pack.limit - total) : 0;
   const full = Boolean(pack && total >= pack.limit);
 
   const fieldError = (key: string) => errors[key] ? <p className="mt-1 text-sm font-semibold text-destructive">{errors[key]}</p> : null;
-  const legend = "scroll-mt-24 font-display text-2xl font-extrabold text-accent md:text-3xl";
+  const legend = "scroll-mt-24 font-display text-3xl font-extrabold text-accent md:text-4xl";
 
   return (
     <form onSubmit={submit} noValidate className="space-y-6">
