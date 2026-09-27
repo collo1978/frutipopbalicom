@@ -38,7 +38,7 @@ function Hero() {
       <div className="flex flex-col items-center px-2 pb-3 pt-2 md:px-4 md:pb-4 md:pt-1">
         <picture className="flex w-full items-center justify-center">
           <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1672} height={941} />
-          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto max-h-[calc(100svh-12rem)] w-auto max-w-full object-contain md:h-[calc(100svh-12rem)] md:max-h-[52rem] md:w-full md:max-w-[1672px]" />
+          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto max-h-[calc(100svh-12rem)] w-auto max-w-full object-contain md:h-[calc(100svh-9rem)] md:max-h-[58rem] md:w-full md:max-w-[1672px]" />
         </picture>
         <div className="-mt-5 flex w-full flex-col items-center gap-2.5 md:mt-0 md:gap-3">
           <Button asChild size="lg" className={`${cta} w-[calc(100%-1rem)] max-w-md md:w-auto md:px-12 md:text-lg`}>
