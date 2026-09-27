@@ -247,12 +247,12 @@ export function TubeViewer({ tube, onClose }: { tube: { name: string; img: strin
 }
 
 /** Homepage Our Flavours: large original artwork cards with a 🔍 tube peek and a Mystery POP teaser. */
-export function FlavourDiscovery() {
+export function FlavourDiscovery({ desktopEndcap }: { desktopEndcap?: ReactNode }) {
   const [viewTube, setViewTube] = useState<string | null>(null);
   const tube = ORDER_FLAVOURS.find((f) => f.name === viewTube) ?? null;
   return (
     <>
-      <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Our flavours" desktopClass="md:grid md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[84%]" tightTop>
+      <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Our flavours" desktopClass="md:grid md:grid-cols-4 md:gap-x-5 md:gap-y-4" itemClass="w-[84%]" tightTop desktopEndcap={desktopEndcap}>
         {[
           ...ORDER_FLAVOURS.map((flavour) => (
             <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col overflow-hidden rounded-3xl ${flavour.tint}`}>
@@ -319,7 +319,7 @@ export function BenefitCards() {
 }
 
 /** Mobile swipe row with snap and pagination dots. On md+ children are laid out by `desktopClass`. */
-export function SwipeRow({ children, count, label, desktopClass, itemClass = "w-[80%]", tightTop = false }: { children: ReactNode[]; count: number; label: string; desktopClass: string; itemClass?: string; tightTop?: boolean }) {
+export function SwipeRow({ children, count, label, desktopClass, itemClass = "w-[80%]", tightTop = false, desktopEndcap }: { children: ReactNode[]; count: number; label: string; desktopClass: string; itemClass?: string; tightTop?: boolean; desktopEndcap?: ReactNode }) {
   const ref = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
   useEffect(() => {
@@ -345,6 +345,7 @@ export function SwipeRow({ children, count, label, desktopClass, itemClass = "w-
         {children.map((c, i) => (
           <li key={i} className={`${itemClass} shrink-0 snap-start md:w-auto md:min-w-0`}>{c}</li>
         ))}
+        {desktopEndcap && <li className="hidden min-h-full items-center justify-center md:flex">{desktopEndcap}</li>}
       </ul>
       <div className="mt-3 flex justify-center gap-1.5 md:hidden">
         {Array.from({ length: count }, (_, i) => (
@@ -361,7 +362,7 @@ export function WhyFrutiPop({ showCta = false, showTestimonial = false }: { show
     <section className="bg-background py-8 md:py-10">
       <div className="mx-auto max-w-6xl px-4">
         <div className="text-center">
-          <h2 className="font-display text-[1.75rem] font-black leading-none text-accent md:text-[2.25rem]">Why Fruti Pop?</h2>
+          <h2 className="font-display text-[2.5rem] font-black leading-[0.92] text-accent md:text-[2.25rem] md:leading-none">Why Fruti Pop?</h2>
           <p className="mt-1.5 text-base font-medium text-foreground/70 md:text-lg">A little goodness in every pop!</p>
         </div>
         <div className="mt-4 md:mt-5"><BenefitCards /></div>

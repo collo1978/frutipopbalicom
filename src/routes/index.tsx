@@ -81,8 +81,14 @@ function Home() {
       <section id="flavours" className="scroll-mt-20 bg-hero-cream py-5 md:py-14">
         <div className="mx-auto max-w-7xl px-4 text-center">
           <h2 className="fruti-flavours-heading">Flavours That Make You <span className="font-black text-dragonfruit text-[1.12em] leading-none">POP!</span></h2>
-          <div className="mt-3 text-left md:mt-10"><FlavourDiscovery /></div>
-          <Button asChild size="lg" className={`mt-3 ${cta} md:mt-8`}><Link to="/order">Order My Flavours <A /></Link></Button>
+          <div className="mt-3 text-left md:mt-8">
+            <FlavourDiscovery desktopEndcap={
+              <Button asChild size="lg" className={`${cta} max-w-[13rem] text-center`}>
+                <Link to="/order">Order My Flavours <A /></Link>
+              </Button>
+            } />
+          </div>
+          <Button asChild size="lg" className={`mt-3 ${cta} md:hidden`}><Link to="/order">Order My Flavours <A /></Link></Button>
         </div>
       </section>
 
@@ -101,7 +107,7 @@ function Home() {
       <section id="pop-moments" className="scroll-mt-20 bg-hero-cream py-12 md:py-14">
         <div className="mx-auto max-w-6xl px-4">
           <div className="text-center">
-            <h2 className="fruti-section-heading">Make Your Special Moments POP!</h2>
+            <h2 className="fruti-section-heading">Make Your Special Moments <span className="text-dragonfruit">POP!</span></h2>
             <p className="mt-2 text-foreground/80">From sunny afternoons to special celebrations, there's always a reason to pop!</p>
           </div>
           <div className="mt-6">
