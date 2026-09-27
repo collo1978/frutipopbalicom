@@ -112,7 +112,7 @@ export function FarmStory({ showCta = false }: { showCta?: boolean }) {
 export function FlavourCards() {
   const [activeFlavour, setActiveFlavour] = useState<string | null>(null);
   return (
-    <SwipeRow count={FLAVOURS.length} label="Order page flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:py-3" itemClass="w-[78%]">
+    <SwipeRow count={FLAVOURS.length} label="Order page flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:pb-3 md:pt-24" itemClass="w-[78%]">
       {FLAVOURS.map((flavour) => (
         <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 text-center ${flavour.tint}`}>
           <div className="relative h-72 w-full md:h-56 lg:h-72">
@@ -210,7 +210,7 @@ export function SwipeRow({ children, count, label, desktopClass, itemClass = "w-
 export function FlavourCarousel() {
   const [activeFlavour, setActiveFlavour] = useState<string | null>(null);
   return (
-    <SwipeRow count={FLAVOURS.length} label="Our flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:py-3" itemClass="w-[78%]">
+    <SwipeRow count={FLAVOURS.length} label="Our flavours" desktopClass="md:grid md:grid-cols-6 md:gap-4 md:pb-3 md:pt-24" itemClass="w-[78%]">
       {FLAVOURS.map((f) => (
         <div key={f.name} className={`flavour-pop relative flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 ${f.tint}`}>
           <div className="relative h-72 w-full md:h-56 lg:h-72">
