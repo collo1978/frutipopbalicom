@@ -34,7 +34,7 @@ const A = () => <span className="cta-arrow" aria-hidden="true">→</span>;
 function Hero() {
   const alt = "Bali's Fruity Sorbet Ice Blocks. Refreshing flavours and a little pop of happiness.";
   return (
-    <section className="overflow-x-clip bg-hero-cream">
+    <section className="min-h-[calc(100svh-4rem)] overflow-x-clip bg-hero-cream md:min-h-0">
       <div className="flex flex-col items-center px-2 pb-8 pt-2 md:px-4 md:pb-2 md:pt-0">
         <picture className="flex w-full items-center justify-center">
           <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1920} height={768} />
