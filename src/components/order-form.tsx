@@ -104,19 +104,15 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
       setErrors((current) => ({ ...current, pack: "Choose a pack first." }));
       return;
     }
-    setQuantities((current) => {
-      const currentValue = current[flavour] ?? 0;
-      const nextValue = Math.max(0, currentValue + amount);
-      const currentTotal = Object.values(current).reduce((sum, value) => sum + value, 0);
-      if (amount > 0 && currentTotal >= pack.limit && !extrasEnabled) return current;
-      if (amount > 0 && currentTotal >= pack.limit && extrasEnabled) {
-        setExtraQuantities((extras) => ({ ...extras, [flavour]: (extras[flavour] ?? 0) + 1 }));
-      }
-      if (amount < 0 && (extraQuantities[flavour] ?? 0) > 0) {
-        setExtraQuantities((extras) => ({ ...extras, [flavour]: Math.max(0, (extras[flavour] ?? 0) - 1) }));
-      }
-      return { ...current, [flavour]: nextValue };
-    });
+    const currentValue = quantities[flavour] ?? 0;
+    if (amount < 0 && currentValue === 0) return;
+    if (amount > 0 && total >= pack.limit && !extrasEnabled) return;
+    if (amount > 0 && total >= pack.limit) {
+      setExtraQuantities((current) => ({ ...current, [flavour]: (current[flavour] ?? 0) + 1 }));
+    } else if (amount < 0 && (extraQuantities[flavour] ?? 0) > 0) {
+      setExtraQuantities((current) => ({ ...current, [flavour]: Math.max(0, (current[flavour] ?? 0) - 1) }));
+    }
+    setQuantities((current) => ({ ...current, [flavour]: Math.max(0, (current[flavour] ?? 0) + amount) }));
     setErrors((current) => ({ ...current, quantities: "" }));
   };
 
@@ -283,10 +279,12 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
                   <>
                     <p className="mt-1 text-sm font-semibold text-leaf-foreground">Want a few more? Add extra pops to your order.</p>
                     <Button type="button" size="sm" onClick={() => setExtrasEnabled(true)} className="mt-3 rounded-full"><Plus /> Add Extra Pops</Button>
-                    <p className="mt-2 text-sm font-semibold text-accent">One more? Let Mystery POP choose it.</p>
                   </>
                 ) : (
-                  <p className="mt-1 text-sm font-semibold text-leaf-foreground">Extra pops are open. Add as many as you like, including with Mystery POP.</p>
+                  <>
+                    <p className="mt-1 text-sm font-semibold text-leaf-foreground">Extra pops are open. Add as many as you like.</p>
+                    <p className="mt-1 text-sm font-semibold text-accent">One more? Let Mystery POP choose it.</p>
+                  </>
                 )}
               </div>
             )}
