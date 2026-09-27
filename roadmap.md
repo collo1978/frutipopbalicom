@@ -56,3 +56,4 @@
 - [x] Keep payment choices visible before delivery fields are complete and clarify final confirmation
 - [x] Add a clean mobile hero ending after the trust line
 - [x] Test the complete desktop and mobile order journey
+- [x] Contain and align the Mystery Pop starburst across homepage and Order layouts
