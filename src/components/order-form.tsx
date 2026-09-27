@@ -420,35 +420,33 @@ function MysteryPop({ full, extrasEnabled, onAdd }: { full: boolean; extrasEnabl
   const flavour = ORDER_FLAVOURS[index];
   if (!flavour) return null;
   return (
-    <div className="flavour-pop relative flex h-full flex-col items-center rounded-3xl bg-accent/15 px-3 pb-4 pt-4 text-center">
-      <div className="relative h-64 w-full md:h-52">
-        {phase === "idle" && (
-          <button type="button" onClick={shuffle} aria-label="Reveal a Mystery POP flavour" className="flex h-full w-full items-center justify-center rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
-            <span aria-hidden="true" className="flex h-32 w-32 items-center justify-center rounded-full bg-accent font-display text-7xl font-extrabold text-accent-foreground shadow-lg transition-transform hover:scale-110 hover:rotate-6 md:h-28 md:w-28">?</span>
-          </button>
-        )}
-        {phase === "shuffling" && flavour.img && (
-          <img src={flavour.img} alt="" className="mystery-shuffle-img absolute inset-0 h-full w-full object-contain opacity-80" />
-        )}
-        {phase === "result" && (
-          <div className="mystery-reveal absolute inset-0 flex items-center justify-center overflow-hidden">
-            {flavour.img && <img src={flavour.img} alt={`Fruti Pop ${flavour.name} sorbet pack`} className="h-full w-full object-contain" />}
-          </div>
-        )}
-      </div>
-      <h3 className="mt-2 font-display text-lg font-extrabold text-accent" aria-live="polite">
-        {phase === "result" ? `It's ${flavour.name}!` : phase === "shuffling" ? "Shuffling..." : "Mystery POP"}
-      </h3>
-      {phase !== "result" ? (
-        <>
-          <p className="text-xs font-semibold text-foreground/70">Can't decide? Let fate pick!</p>
-          <Button type="button" size="sm" onClick={shuffle} disabled={phase === "shuffling"} className="mt-auto rounded-full">Tap to reveal</Button>
-        </>
-      ) : (
-        <div className="mt-auto flex w-full flex-col gap-2 pt-2">
-          <Button type="button" size="sm" onClick={() => onAdd(flavour.name)} disabled={full && !extrasEnabled} className="h-auto min-h-9 whitespace-normal rounded-full">+ Add {flavour.name} to My Pack</Button>
-          <Button type="button" size="sm" variant="outline" onClick={shuffle} className="rounded-full"><RefreshCw /> Pick Again</Button>
+    <div className="flavour-pop relative flex h-full min-h-[26rem] flex-col items-center overflow-hidden rounded-3xl bg-accent/15 px-3 pb-4 pt-5 text-center">
+      {phase === "idle" && (
+        <div className="flex flex-1 flex-col items-center">
+          <h3 className="flex items-center gap-1.5 font-display text-lg font-extrabold text-accent"><Dices className="h-5 w-5" aria-hidden="true" /> Mystery POP</h3>
+          <p className="mt-1 text-xs font-semibold text-foreground/70">Can't decide? Let fate decide!</p>
+          <span aria-hidden="true" className="mt-4 flex h-32 w-32 items-center justify-center rounded-full bg-accent font-display text-7xl font-extrabold text-accent-foreground shadow-lg md:h-28 md:w-28">?</span>
+          <Button type="button" size="sm" onClick={shuffle} className="cta-pop mt-auto rounded-full">Pick My Pop</Button>
         </div>
+      )}
+      {phase === "shuffling" && (
+        <div className="flex flex-1 flex-col items-center justify-center">
+          {flavour.img && <img src={flavour.img} alt="" className="mystery-shuffle-img max-h-44 w-auto object-contain opacity-80" />}
+          <h3 className="mt-3 font-display text-lg font-extrabold text-accent">Shuffling...</h3>
+        </div>
+      )}
+      {phase === "result" && (
+        <>
+          <div className="mystery-reveal flex flex-1 flex-col items-center justify-center">
+            {flavour.img && <img src={flavour.img} alt={`Fruti Pop ${flavour.name} sorbet tube`} loading="lazy" className="max-h-44 w-auto object-contain" />}
+            <h3 className="mt-2 flex items-center gap-1.5 font-display text-lg font-extrabold text-accent" aria-live="polite"><PartyPopper className="h-5 w-5" aria-hidden="true" /> It's {flavour.name}!</h3>
+            {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">{flavour.tagline}</p>}
+          </div>
+          <div className="mt-auto flex w-full flex-col gap-2 pt-2">
+            <Button type="button" size="sm" onClick={() => onAdd(flavour.name)} disabled={full && !extrasEnabled} className="h-auto min-h-9 whitespace-normal rounded-full">+ Add {flavour.name} to My Pack</Button>
+            <Button type="button" size="sm" variant="outline" onClick={shuffle} className="rounded-full"><RefreshCw /> Pick Again</Button>
+          </div>
+        </>
       )}
     </div>
   );
