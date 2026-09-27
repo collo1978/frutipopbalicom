@@ -252,7 +252,7 @@ export function FlavourDiscovery({ desktopEndcap }: { desktopEndcap?: ReactNode 
   const tube = ORDER_FLAVOURS.find((f) => f.name === viewTube) ?? null;
   return (
     <>
-      <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Our flavours" desktopClass="md:grid md:grid-cols-4 md:gap-x-5 md:gap-y-4" itemClass="w-[84%]" tightTop desktopEndcap={desktopEndcap}>
+      <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Our flavours" desktopClass="md:grid md:auto-rows-fr md:grid-cols-4 md:gap-x-5 md:gap-y-4" itemClass="w-[84%]" tightTop desktopEndcap={desktopEndcap}>
         {[
           ...ORDER_FLAVOURS.map((flavour) => (
             <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col overflow-hidden rounded-3xl ${flavour.tint}`}>
@@ -343,7 +343,7 @@ export function SwipeRow({ children, count, label, desktopClass, itemClass = "w-
     <div>
       <ul ref={ref} aria-label={label} className={`-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto overscroll-x-contain px-4 ${tightTop ? "pt-1 pb-4" : "pt-16 pb-6 -mt-10"} [scrollbar-width:none] md:mx-0 md:mt-0 md:pb-1 md:overflow-visible md:px-0 ${desktopClass}`}>
         {children.map((c, i) => (
-          <li key={i} className={`${itemClass} shrink-0 snap-start md:w-auto md:min-w-0`}>{c}</li>
+          <li key={i} className={`${itemClass} shrink-0 snap-start md:h-full md:w-auto md:min-w-0`}>{c}</li>
         ))}
         {desktopEndcap && <li className="hidden min-h-full items-center justify-center md:flex">{desktopEndcap}</li>}
       </ul>
