@@ -7,8 +7,10 @@ import birthdayParty from "@/assets/birthday-pool-party.png.asset.json";
 import eventBoy from "@/assets/event-boy-two-pops.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 import { FlavourDiscovery, SwipeRow, WhyFrutiPop } from "@/components/order-sections";
+import { WhatsAppIcon } from "@/components/site";
 import { COMMUNITY_NAMES } from "@/lib/occasions";
 import { P } from "@/lib/photos";
+import { waLink } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -80,8 +82,8 @@ function Home() {
       <section id="flavours" className="scroll-mt-20 bg-hero-cream py-10 md:py-14">
         <div className="mx-auto max-w-7xl px-4 text-center">
           <h2 className="fruti-section-heading">Our Flavours</h2>
-          <p className="mt-2 text-foreground/80">Six fruity favourites. Which one takes your fancy?</p>
-          <div className="mt-8 text-left"><FlavourDiscovery /></div>
+          <p className="mt-2 text-lg font-semibold text-foreground/80 md:text-2xl">Six fruity favourites. Which one takes your fancy?</p>
+          <div className="mt-3 text-left md:mt-5"><FlavourDiscovery /></div>
           <Button asChild size="lg" className={`mt-6 ${cta}`}><a href="#packs" onClick={toPacks}>Order My Flavours <A /></a></Button>
         </div>
       </section>
@@ -125,11 +127,17 @@ function Home() {
 
       <section id="pop-stars" className="scroll-mt-20 bg-hero-cream py-10 md:py-12">
         <div className="mx-auto max-w-7xl px-4">
-          <h2 className="fruti-section-heading mb-5 text-center">Our POP Stars!</h2>
           <picture>
             <source media="(min-width: 768px)" srcSet={popStarsDesktop.url} width={1774} height={887} />
             <img src={popStarsMobile.url} alt={`Our POP Stars. Schools, clubs and communities sharing fruity fun across Bali, including ${COMMUNITY_NAMES.join(", ")}.`} loading="lazy" width={1024} height={1536} className="mx-auto h-auto w-full max-w-4xl" />
           </picture>
+          <div className="mt-4 flex justify-center md:mt-5">
+            <Button asChild size="lg" className="cta-pop rounded-full bg-accent px-6 text-accent-foreground shadow-md">
+              <a href={waLink("Hi! I'd love to know more about Fruti Pop 😊")} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon /> Chat With Us on WhatsApp <A />
+              </a>
+            </Button>
+          </div>
         </div>
       </section>
     </>

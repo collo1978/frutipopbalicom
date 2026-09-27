@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
-import { CalendarIcon, Copy, Dices, Minus, PartyPopper, Plus, RefreshCw } from "lucide-react";
-import { BestSellerBadge, SeeThePopButton, SwipeRow, TubeViewer } from "@/components/order-sections";
+import { CalendarIcon, Copy, Minus, PartyPopper, Plus, RefreshCw } from "lucide-react";
+import { BestSellerBadge, MysteryPopIdle, SeeThePopButton, SwipeRow, TubeViewer } from "@/components/order-sections";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -413,14 +413,9 @@ function MysteryPop({ full, extrasEnabled, onAdd }: { full: boolean; extrasEnabl
   const flavour = ORDER_FLAVOURS[index];
   if (!flavour) return null;
   return (
-    <div className="flavour-pop relative flex h-full min-h-[26rem] flex-col items-center overflow-hidden rounded-3xl bg-accent/15 px-3 pb-4 pt-5 text-center">
+    <div className="flavour-pop relative flex h-full min-h-[26rem] flex-col items-center overflow-hidden rounded-3xl bg-pastel-lavender px-3 pb-4 pt-5 text-center">
       {phase === "idle" && (
-        <div className="flex flex-1 flex-col items-center">
-          <h3 className="flex items-center gap-1.5 font-display text-lg font-extrabold text-accent"><Dices className="h-5 w-5" aria-hidden="true" /> Mystery POP</h3>
-          <p className="mt-1 text-xs font-semibold text-foreground/70">Can't decide? Let fate decide!</p>
-          <span aria-hidden="true" className="mt-4 flex h-32 w-32 items-center justify-center rounded-full bg-accent font-display text-7xl font-extrabold text-accent-foreground shadow-lg md:h-28 md:w-28">?</span>
-          <Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm mt-auto whitespace-nowrap rounded-full">PICK MY POP</Button>
-        </div>
+        <MysteryPopIdle action={<Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full">PICK MY POP</Button>} />
       )}
       {phase === "shuffling" && (
         <div className="flex flex-1 flex-col items-center justify-center">
