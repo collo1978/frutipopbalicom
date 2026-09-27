@@ -299,11 +299,13 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
                 : <>Your {pack.name} · {total}/{pack.limit} · {complete ? <span className="text-primary">Pack full! 🎉</span> : <span>{remaining} to go!</span>}</>}
             </p>
             {total > 0 && (
-              <ul aria-label="Flavours in your pack" className={cn("flex flex-wrap items-center gap-x-3 gap-y-0.5", stuck ? "mt-0.5" : "mt-1.5")}>
+              <ul aria-label="Flavours in your pack" className={cn("flex flex-wrap items-center gap-x-2.5 gap-y-0.5", stuck ? "mt-0.5" : "mt-1.5")}>
                 {ORDER_FLAVOURS.filter((flavour) => (quantities[flavour.name] ?? 0) > 0).map((flavour) => (
-                  <li key={flavour.name} title={flavour.name} aria-label={`${flavour.name} × ${quantities[flavour.name]}`} className="flex items-center gap-0.5 text-xs font-extrabold text-accent sm:text-sm">
-                    <FruitIcon name={flavour.name} className={cn("shrink-0", stuck ? "h-5 w-5 sm:h-6 sm:w-6" : "h-6 w-6 sm:h-7 sm:w-7")} />
-                    <span>×{quantities[flavour.name]}</span>
+                  <li key={flavour.name} aria-label={`${flavour.name} × ${quantities[flavour.name]}`} className="flex items-center gap-1">
+                    <FruitIcon name={flavour.name} className={cn("shrink-0 drop-shadow-sm", stuck ? "h-6 w-6 sm:h-7 sm:w-7" : "h-8 w-8 sm:h-9 sm:w-9")} />
+                    <span className={cn("font-extrabold text-accent", stuck ? "text-[11px] sm:text-xs" : "text-xs sm:text-sm")}>
+                      {flavour.name} <span className="tabular-nums">×{quantities[flavour.name]}</span>
+                    </span>
                   </li>
                 ))}
               </ul>
