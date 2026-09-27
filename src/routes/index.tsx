@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroDesktop from "@/assets/hero-desktop-wide-september.png.asset.json";
+import heroDesktop from "@/assets/hero-desktop-extra-wide.png.asset.json";
 import heroMobile from "@/assets/hero-mobile-oct.png.asset.json";
 import popStarsDesktop from "@/assets/pop-stars-desktop.png.asset.json";
 import popStarsMobile from "@/assets/pop-stars-mobile.png.asset.json";
@@ -37,8 +37,8 @@ function Hero() {
     <section className="overflow-x-clip bg-hero-cream">
       <div className="flex flex-col items-center px-2 pb-3 pt-2 md:px-4 md:pb-2 md:pt-0">
         <picture className="flex w-full items-center justify-center">
-          <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1672} height={941} />
-          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto max-h-[calc(100svh-12rem)] w-auto max-w-full object-contain md:h-[calc(100svh-10rem)] md:max-h-[56rem] md:w-full md:max-w-[1672px]" />
+          <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1920} height={768} />
+          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto max-h-[calc(100svh-12rem)] w-auto max-w-full object-contain md:max-h-[calc(100svh-10rem)] md:w-[90vw] md:max-w-[1920px]" />
         </picture>
         <div className="-mt-5 flex w-full flex-col items-center gap-2.5 md:mt-0 md:gap-2">
           <Button asChild size="lg" className={`${cta} w-[calc(100%-1rem)] max-w-md md:w-auto md:px-12 md:text-lg`}>
