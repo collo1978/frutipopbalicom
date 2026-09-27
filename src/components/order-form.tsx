@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
-import { CalendarIcon, Copy, Minus, PartyPopper, Plus, RefreshCw } from "lucide-react";
+import { CalendarIcon, Copy, Dices, Eye, Minus, PartyPopper, Plus, RefreshCw, X } from "lucide-react";
 import { SwipeRow } from "@/components/order-sections";
-import { ZoomableFlavourImage } from "@/components/flavour-zoom";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -11,7 +10,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { FLAVOURS } from "@/lib/flavours";
-import { ORDER_FLAVOURS } from "@/lib/order-flavours";
+import { ORDER_FLAVOURS, type OrderFlavour } from "@/lib/order-flavours";
 import { waLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -203,7 +202,16 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
   useEffect(() => { if (showPayment) scrollTo(paymentRef.current); }, [showPayment]);
   useEffect(() => { mounted.current = true; }, []);
 
-  const [activeFlavour, setActiveFlavour] = useState<string | null>(null);
+  const [viewTube, setViewTube] = useState<OrderFlavour | null>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!viewTube) return;
+    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") setViewTube(null); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    window.setTimeout(() => closeRef.current?.focus(), 30);
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, [viewTube]);
   const remaining = pack ? Math.max(0, pack.limit - total) : 0;
   const full = Boolean(pack && total >= pack.limit);
 
@@ -239,25 +247,29 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
         <fieldset ref={flavourRef} className="min-w-0 order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
           <legend className="sr-only">2. Pick Your Flavours</legend>
           <h2 className={legend} aria-hidden="true">2. Pick Your Flavours</h2>
-          <p className="fruti-hint mt-1">
-            <span className="md:hidden">Swipe to explore. Tap to POP!</span>
-            <span className="hidden md:inline">Hover to make them POP!</span>
-          </p>
-          <div className="order-flavour-picker mt-2">
-            <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Pick your flavours" desktopClass="md:grid md:grid-cols-4 md:gap-4 md:pb-3 md:pt-24 xl:grid-cols-7" itemClass="w-[78%]">
+          <p className="fruti-hint mt-1">See the Pop to meet the real tube!</p>
+          <div className="mt-2">
+            <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Pick your flavours" tightTop desktopClass="md:grid md:grid-cols-4 md:gap-4 xl:grid-cols-7" itemClass="w-[78%]">
               {[
                 ...ORDER_FLAVOURS.map((flavour) => {
                   const quantity = quantities[flavour.name] ?? 0;
                   return (
-                    <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 text-center ${flavour.tint}`}>
-                      <div className="relative h-64 w-full md:h-52">
-                        {flavour.img && <ZoomableFlavourImage f={flavour} active={activeFlavour === flavour.name} onToggle={() => setActiveFlavour((c) => c === flavour.name ? null : flavour.name)} />}
+                    <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col overflow-hidden rounded-3xl ${flavour.tint}`}>
+                      <div className="relative w-full">
+                        {flavour.art && (
+                          <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="mx-auto aspect-[2/3] w-full max-w-[240px] select-none object-cover" />
+                        )}
+                        <button type="button" onClick={() => setViewTube(flavour)} aria-label={`See the actual Fruti Pop ${flavour.name} tube`} className="absolute right-2 top-2 flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1.5 text-[11px] font-bold text-accent shadow-md transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
+                          <Eye className="h-3.5 w-3.5" aria-hidden="true" /> See the Pop
+                        </button>
                       </div>
-                      <h3 className="mt-2 font-display text-lg font-extrabold text-accent">{flavour.name}</h3>
-                      <div className="mt-auto flex items-center gap-2 pt-2">
-                        <Button type="button" variant="secondary" size="icon" onClick={() => changeQuantity(flavour.name, -1)} disabled={quantity === 0} aria-label={`Remove one ${flavour.name}`} className="h-10 w-10 rounded-full"><Minus /></Button>
-                        <output aria-label={`${flavour.name} quantity`} className="w-7 text-center text-lg font-bold">{quantity}</output>
-                        <Button type="button" size="icon" onClick={() => changeQuantity(flavour.name, 1)} disabled={full && !extrasEnabled} aria-label={`Add one ${flavour.name}`} className="h-10 w-10 rounded-full"><Plus /></Button>
+                      <div className="flex flex-1 flex-col items-center px-3 pb-4 pt-2 text-center">
+                        <h3 className="font-display text-lg font-extrabold text-accent">{flavour.name}</h3>
+                        <div className="mt-auto flex items-center gap-2 pt-2">
+                          <Button type="button" variant="secondary" size="icon" onClick={() => changeQuantity(flavour.name, -1)} disabled={quantity === 0} aria-label={`Remove one ${flavour.name}`} className="h-10 w-10 rounded-full"><Minus /></Button>
+                          <output aria-label={`${flavour.name} quantity`} className="w-7 text-center text-lg font-bold">{quantity}</output>
+                          <Button type="button" size="icon" onClick={() => changeQuantity(flavour.name, 1)} disabled={full && !extrasEnabled} aria-label={`Add one ${flavour.name}`} className="h-10 w-10 rounded-full"><Plus /></Button>
+                        </div>
                       </div>
                     </div>
                   );
@@ -365,6 +377,20 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
           </section>
         </div>
       )}
+
+      {viewTube && (
+        <div role="dialog" aria-modal="true" aria-label={`The real Fruti Pop ${viewTube.name} tube`} className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4" onClick={() => setViewTube(null)}>
+          <div className="relative" onClick={(event) => event.stopPropagation()}>
+            <div className="flex flex-col items-center">
+              {viewTube.img && <img src={viewTube.img} alt={`The real Fruti Pop ${viewTube.name} sorbet tube`} className="max-h-[76vh] w-auto max-w-[84vw] rounded-2xl bg-white object-contain shadow-2xl" />}
+              <p className="mt-3 text-center text-sm font-bold text-white">{viewTube.name} · 100g tube</p>
+            </div>
+            <button ref={closeRef} type="button" onClick={() => setViewTube(null)} aria-label="Close tube preview" className="absolute -right-2 -top-2 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-lg transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
+              <X className="h-5 w-5" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+      )}
     </form>
   );
 }
@@ -394,35 +420,33 @@ function MysteryPop({ full, extrasEnabled, onAdd }: { full: boolean; extrasEnabl
   const flavour = ORDER_FLAVOURS[index];
   if (!flavour) return null;
   return (
-    <div className="flavour-pop relative flex h-full flex-col items-center rounded-3xl bg-accent/15 px-3 pb-4 pt-4 text-center">
-      <div className="relative h-64 w-full md:h-52">
-        {phase === "idle" && (
-          <button type="button" onClick={shuffle} aria-label="Reveal a Mystery POP flavour" className="flex h-full w-full items-center justify-center rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
-            <span aria-hidden="true" className="flex h-32 w-32 items-center justify-center rounded-full bg-accent font-display text-7xl font-extrabold text-accent-foreground shadow-lg transition-transform hover:scale-110 hover:rotate-6 md:h-28 md:w-28">?</span>
-          </button>
-        )}
-        {phase === "shuffling" && flavour.img && (
-          <img src={flavour.img} alt="" className="mystery-shuffle-img absolute inset-0 h-full w-full object-contain opacity-80" />
-        )}
-        {phase === "result" && (
-          <div className="mystery-reveal absolute inset-0 flex items-center justify-center overflow-hidden">
-            {flavour.img && <img src={flavour.img} alt={`Fruti Pop ${flavour.name} sorbet pack`} className="h-full w-full object-contain" />}
-          </div>
-        )}
-      </div>
-      <h3 className="mt-2 font-display text-lg font-extrabold text-accent" aria-live="polite">
-        {phase === "result" ? `It's ${flavour.name}!` : phase === "shuffling" ? "Shuffling..." : "Mystery POP"}
-      </h3>
-      {phase !== "result" ? (
-        <>
-          <p className="text-xs font-semibold text-foreground/70">Can't decide? Let fate pick!</p>
-          <Button type="button" size="sm" onClick={shuffle} disabled={phase === "shuffling"} className="mt-auto rounded-full">Tap to reveal</Button>
-        </>
-      ) : (
-        <div className="mt-auto flex w-full flex-col gap-2 pt-2">
-          <Button type="button" size="sm" onClick={() => onAdd(flavour.name)} disabled={full && !extrasEnabled} className="h-auto min-h-9 whitespace-normal rounded-full">+ Add {flavour.name} to My Pack</Button>
-          <Button type="button" size="sm" variant="outline" onClick={shuffle} className="rounded-full"><RefreshCw /> Pick Again</Button>
+    <div className="flavour-pop relative flex h-full min-h-[26rem] flex-col items-center overflow-hidden rounded-3xl bg-accent/15 px-3 pb-4 pt-5 text-center">
+      {phase === "idle" && (
+        <div className="flex flex-1 flex-col items-center">
+          <h3 className="flex items-center gap-1.5 font-display text-lg font-extrabold text-accent"><Dices className="h-5 w-5" aria-hidden="true" /> Mystery POP</h3>
+          <p className="mt-1 text-xs font-semibold text-foreground/70">Can't decide? Let fate decide!</p>
+          <span aria-hidden="true" className="mt-4 flex h-32 w-32 items-center justify-center rounded-full bg-accent font-display text-7xl font-extrabold text-accent-foreground shadow-lg md:h-28 md:w-28">?</span>
+          <Button type="button" size="sm" onClick={shuffle} className="cta-pop mt-auto rounded-full">Pick My Pop</Button>
         </div>
+      )}
+      {phase === "shuffling" && (
+        <div className="flex flex-1 flex-col items-center justify-center">
+          {flavour.img && <img src={flavour.img} alt="" className="mystery-shuffle-img max-h-44 w-auto object-contain opacity-80" />}
+          <h3 className="mt-3 font-display text-lg font-extrabold text-accent">Shuffling...</h3>
+        </div>
+      )}
+      {phase === "result" && (
+        <>
+          <div className="mystery-reveal flex flex-1 flex-col items-center justify-center">
+            {flavour.img && <img src={flavour.img} alt={`Fruti Pop ${flavour.name} sorbet tube`} loading="lazy" className="max-h-44 w-auto object-contain" />}
+            <h3 className="mt-2 flex items-center gap-1.5 font-display text-lg font-extrabold text-accent" aria-live="polite"><PartyPopper className="h-5 w-5" aria-hidden="true" /> It's {flavour.name}!</h3>
+            {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">{flavour.tagline}</p>}
+          </div>
+          <div className="mt-auto flex w-full flex-col gap-2 pt-2">
+            <Button type="button" size="sm" onClick={() => onAdd(flavour.name)} disabled={full && !extrasEnabled} className="h-auto min-h-9 whitespace-normal rounded-full">+ Add {flavour.name} to My Pack</Button>
+            <Button type="button" size="sm" variant="outline" onClick={shuffle} className="rounded-full"><RefreshCw /> Pick Again</Button>
+          </div>
+        </>
       )}
     </div>
   );

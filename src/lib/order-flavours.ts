@@ -4,6 +4,12 @@ import pineapple from "@/assets/order-originals/pineapple-original.png.asset.jso
 import pinaColada from "@/assets/order-originals/pina-colada-original.png.asset.json";
 import mango from "@/assets/order-originals/mango-original.png.asset.json";
 import passionFruit from "@/assets/order-originals/passion-fruit-original.png.asset.json";
+import strawberryArt from "@/assets/flavour-artwork/strawberry-art.jpg.asset.json";
+import soursopArt from "@/assets/flavour-artwork/soursop-art.png.asset.json";
+import pineappleArt from "@/assets/flavour-artwork/pineapple-art.png.asset.json";
+import pinaColadaArt from "@/assets/flavour-artwork/pina-colada-art.jpg.asset.json";
+import mangoArt from "@/assets/flavour-artwork/mango-art.jpg.asset.json";
+import passionFruitArt from "@/assets/flavour-artwork/passion-fruit-art.jpg.asset.json";
 import { FLAVOURS, type Flavour } from "@/lib/flavours";
 
 const originalImages: Record<string, string> = {
@@ -15,7 +21,19 @@ const originalImages: Record<string, string> = {
   "Passion Fruit": passionFruit.url,
 };
 
-export const ORDER_FLAVOURS: Flavour[] = FLAVOURS.map((flavour) => ({
+const artworkImages: Record<string, string> = {
+  Strawberry: strawberryArt.url,
+  Soursop: soursopArt.url,
+  Pineapple: pineappleArt.url,
+  "Piña Colada": pinaColadaArt.url,
+  Mango: mangoArt.url,
+  "Passion Fruit": passionFruitArt.url,
+};
+
+export type OrderFlavour = Flavour & { art: string };
+
+export const ORDER_FLAVOURS: OrderFlavour[] = FLAVOURS.map((flavour) => ({
   ...flavour,
   img: originalImages[flavour.name] ?? flavour.img,
+  art: artworkImages[flavour.name] ?? "",
 }));
