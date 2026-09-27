@@ -49,3 +49,6 @@
 - [x] Verify the updated artwork, desktop alignment, and mobile presentation
 - [x] Align Piña Colada and Mystery Pop with the shared flavour-card family
 - [x] Increase only the mobile Flavours heading and verify both breakpoints
+- [x] Replace Piña Colada with the supplied edge-to-edge artwork across homepage and Order cards
+- [x] Add a clear mobile break between the hero trust line and the Flavours heading
+- [x] Verify Piña Colada framing, mobile heading spacing, and zoom controls at mobile and desktop sizes

@@ -7,7 +7,7 @@ import passionFruit from "@/assets/order-originals/passion-fruit-original.png.as
 import strawberryArt from "@/assets/flavour-artwork-new/strawberry-sorbet.png.asset.json";
 import lemonArt from "@/assets/flavour-artwork-new/lemon-sorbet.png.asset.json";
 import pineappleArt from "@/assets/flavour-artwork-new/pineapple-sorbet.png.asset.json";
-import pinaColadaArt from "@/assets/flavour-artwork-new/pina-colada-sorbet-improved.png.asset.json";
+import pinaColadaArt from "@/assets/flavour-artwork-new/pina-colada-sorbet-edge-to-edge.png.asset.json";
 import mangoArt from "@/assets/flavour-artwork-new/mango-sorbet.png.asset.json";
 import passionFruitArt from "@/assets/flavour-artwork-new/passion-fruit-sorbet.png.asset.json";
 import { FLAVOURS, type Flavour } from "@/lib/flavours";
