@@ -79,7 +79,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     const el = trackerSentinel.current;
     let io: IntersectionObserver | undefined;
     if (el) {
-      io = new IntersectionObserver(([entry]) => setStuck(!entry.isIntersecting && entry.boundingClientRect.top < window.innerHeight / 2), { rootMargin: `-${(header?.getBoundingClientRect().height ?? 72) + 1}px 0px 0px 0px` });
+      io = new IntersectionObserver(([entry]) => entry && setStuck(!entry.isIntersecting && entry.boundingClientRect.top < window.innerHeight / 2), { rootMargin: `-${(header?.getBoundingClientRect().height ?? 72) + 1}px 0px 0px 0px` });
       io.observe(el);
     }
     return () => { window.removeEventListener("resize", measure); io?.disconnect(); };
