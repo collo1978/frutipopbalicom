@@ -251,6 +251,8 @@
 .flavour-product-pop-img { transition: transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 280ms ease; transform-origin: center bottom; }
 /* Pop grows upward from the bottom of its own card so it never covers the row below */
 .flavour-product-pop[data-active="true"] .flavour-product-pop-img { transform: scale(1.42) translateY(-3%); filter: drop-shadow(0 1.35rem 1rem rgb(0 0 0 / 0.24)); }
+.flavour-pop h3 { transition: transform 280ms ease; transform-origin: center top; }
+.flavour-pop:has(.flavour-product-pop[data-active="true"]) h3 { transform: scale(1.18); }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .flavour-pop:hover { z-index: 20; }
   .flavour-pop:hover .flavour-product-pop-img,
