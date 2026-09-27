@@ -180,6 +180,11 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
   );
   const [reached, setReached] = useState({ delivery: false, payment: false });
   const [choiceOpen, setChoiceOpen] = useState(false);
+  const previousTotal = useRef(total);
+  useEffect(() => {
+    if (pack && previousTotal.current < pack.limit && total >= pack.limit) setChoiceOpen(true);
+    previousTotal.current = total;
+  }, [pack, total]);
   useEffect(() => {
     if (deliveryValid && reached.delivery && !reached.payment) setReached((r) => ({ ...r, payment: true }));
   }, [deliveryValid, reached.delivery, reached.payment]);
@@ -269,16 +274,23 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
         <fieldset ref={flavourRef} className="min-w-0 order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
           <legend className="sr-only">2. Pick Your Flavours</legend>
           <h2 className={legend} aria-hidden="true">2. Pick Your Flavours</h2>
-          <div className={cn("sticky top-[4.5rem] z-40 mt-3 rounded-xl border border-primary/20 bg-leaf/95 px-3 py-1.5 shadow-md sm:py-2.5 backdrop-blur sm:px-4", complete && "ring-2 ring-primary/30")} aria-live="polite">
-            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
-              <p className="text-sm font-bold text-accent sm:text-base">
-                {extraTotal > 0
-                  ? <>Your {pack.name} · {total} Pops · <span className="text-primary">Pack complete ✓</span></>
-                  : <>Your {pack.name} · {total} / {pack.limit} Pops · {complete ? <span className="text-primary">Your pack is ready! 🎉</span> : <span>{remaining} more to go!</span>}</>}
-              </p>
-              {complete && <Button type="button" size="sm" onClick={() => setChoiceOpen(true)} className="h-8 rounded-full px-3 sm:h-9 sm:px-4">Continue <span aria-hidden="true">→</span></Button>}
-            </div>
-            <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className="order-progress mt-1 h-2 w-full sm:mt-1.5 sm:h-2.5 overflow-hidden rounded-full" />
+          <div className={cn("sticky top-[4.5rem] z-40 mt-3 rounded-xl border border-primary/20 bg-leaf/95 px-3 py-2 shadow-md backdrop-blur sm:px-4 sm:py-2.5", complete && "ring-2 ring-primary/30")} aria-live="polite">
+            <p className="text-sm font-bold leading-tight text-accent sm:text-base">
+              {extraTotal > 0
+                ? <>Your {pack.name} · {total} Pops · <span className="text-primary">Pack complete ✓</span></>
+                : <>Your {pack.name} · {total}/{pack.limit} · {complete ? <span className="text-primary">Pack full! 🎉</span> : <span>{remaining} to go!</span>}</>}
+            </p>
+            {total > 0 && (
+              <ul aria-label="Flavours in your pack" className="mt-1 flex min-h-7 flex-wrap items-center gap-x-2 gap-y-1 sm:mt-1.5">
+                {ORDER_FLAVOURS.filter((flavour) => (quantities[flavour.name] ?? 0) > 0).map((flavour) => (
+                  <li key={flavour.name} aria-label={`${flavour.name} × ${quantities[flavour.name]}`} className="flex items-center gap-0.5 text-xs font-extrabold text-accent sm:text-sm">
+                    <img src={flavour.art} alt="" aria-hidden="true" className="h-6 w-6 shrink-0 rounded-full bg-card object-cover sm:h-7 sm:w-7" />
+                    <span>×{quantities[flavour.name]}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className="order-progress mt-1 h-1.5 w-full overflow-hidden rounded-full sm:mt-1.5 sm:h-2" />
             {upgradeNotice && (
               <p role="status" className="order-step-reveal mt-1.5 text-xs font-bold text-primary sm:text-sm">🎉 You've unlocked the Jumbo Pack! <span className="font-semibold text-leaf-foreground">We've automatically applied the better 20-Pop price.</span></p>
             )}
