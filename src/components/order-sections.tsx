@@ -193,7 +193,7 @@ export function SwipeRow({ children, count, label, desktopClass, itemClass = "w-
   };
   return (
     <div>
-      <ul ref={ref} aria-label={label} className={`-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto overscroll-x-contain px-4 pt-16 pb-6 -mt-10 [scrollbar-width:none] md:mx-0 md:mt-0 md:pt-0 md:pb-1 md:overflow-visible md:px-0 ${desktopClass}`}>
+      <ul ref={ref} aria-label={label} className={`-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto overscroll-x-contain px-4 pt-16 pb-6 -mt-10 [scrollbar-width:none] md:mx-0 md:mt-0 md:pb-1 md:overflow-visible md:px-0 ${desktopClass}`}>
         {children.map((c, i) => (
           <li key={i} className={`${itemClass} shrink-0 snap-start md:w-auto md:min-w-0`}>{c}</li>
         ))}
