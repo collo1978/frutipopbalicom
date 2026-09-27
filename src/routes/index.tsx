@@ -74,10 +74,6 @@ function PackCard({ name, qty, price, pack, badge }: { name: string; qty: string
 }
 
 function Home() {
-  const toPacks = (e: React.MouseEvent) => {
-    e.preventDefault();
-    document.getElementById("packs")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
   return (
     <>
       <Hero />
@@ -87,7 +83,7 @@ function Home() {
           <h2 className="fruti-section-heading">Our Flavours</h2>
           <p className="mt-2 text-lg font-semibold text-foreground/80 md:text-2xl">Six fruity favourites. Which one takes your fancy?</p>
           <div className="mt-3 text-left md:mt-10"><FlavourDiscovery /></div>
-          <Button asChild size="lg" className={`mt-6 ${cta}`}><a href="#packs" onClick={toPacks}>Order My Flavours <A /></a></Button>
+          <Button asChild size="lg" className={`mt-6 ${cta}`}><Link to="/order">Order My Flavours <A /></Link></Button>
         </div>
       </section>
 

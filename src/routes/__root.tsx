@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import logo from "@/assets/fruti-pop-logo.png.asset.json";
 import { CONTACT, SNOWWAVE, waLink } from "@/lib/site";
+import snowWaveLogo from "@/assets/snow-wave-bali-logo.png.asset.json";
 import { Button } from "@/components/ui/button";
 
 const NAV = [
@@ -143,10 +144,11 @@ function SiteFooter() {
           </ul>
         </div>
         <div>
-          <a href={SNOWWAVE.url} target="_blank" rel="noopener noreferrer" className="block text-sm hover:underline">
-            <span className="font-display font-semibold text-mango">{SNOWWAVE.label}</span><br />
-            {SNOWWAVE.blurb} ↗
+          <a href={SNOWWAVE.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 hover:underline">
+            <img src={snowWaveLogo.url} alt="Snow Wave Bali logo" className="h-14 w-auto rounded-lg bg-card p-1" loading="lazy" />
+            <span className="font-display text-lg font-semibold text-mango">Snow Wave Bali ↗</span>
           </a>
+          <p className="mt-2 text-sm">{SNOWWAVE.blurb}</p>
         </div>
       </div>
       <p className="border-t border-accent-foreground/20 py-4 text-center text-xs opacity-80">© {new Date().getFullYear()} Fruti Pop Bali</p>

@@ -200,7 +200,14 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
   useEffect(() => { if (showFlavours) scrollTo(flavourRef.current); }, [showFlavours]);
   useEffect(() => { if (showDelivery) scrollTo(deliveryRef.current); }, [showDelivery]);
   useEffect(() => { if (showPayment) scrollTo(paymentRef.current); }, [showPayment]);
-  useEffect(() => { mounted.current = true; }, []);
+  useEffect(() => {
+    mounted.current = true;
+    if (initialPack && !openMystery) {
+      const t = window.setTimeout(() => flavourRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 300);
+      return () => window.clearTimeout(t);
+    }
+    return undefined;
+  }, []);
 
   const mysteryRef = useRef<HTMLDivElement>(null);
   const mysteryHandled = useRef(false);
