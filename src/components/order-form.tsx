@@ -202,7 +202,16 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
   useEffect(() => { if (showPayment) scrollTo(paymentRef.current); }, [showPayment]);
   useEffect(() => { mounted.current = true; }, []);
 
-  const [activeFlavour, setActiveFlavour] = useState<string | null>(null);
+  const [viewTube, setViewTube] = useState<OrderFlavour | null>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!viewTube) return;
+    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") setViewTube(null); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    window.setTimeout(() => closeRef.current?.focus(), 30);
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, [viewTube]);
   const remaining = pack ? Math.max(0, pack.limit - total) : 0;
   const full = Boolean(pack && total >= pack.limit);
 
