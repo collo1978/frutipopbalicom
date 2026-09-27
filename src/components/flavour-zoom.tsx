@@ -19,6 +19,15 @@ export function ZoomableFlavourImage({ f, active: controlledActive, onToggle }: 
   };
 
   return (
+    <>
+      {active && (
+        <button
+          type="button"
+          aria-label="Close the popped flavour"
+          onClick={toggle}
+          className="fixed inset-0 z-10 cursor-default bg-transparent"
+        />
+      )}
     <button
       type="button"
       aria-label={`Pop the Fruti Pop ${f.name} pack forward`}
@@ -48,7 +57,9 @@ export function ZoomableFlavourImage({ f, active: controlledActive, onToggle }: 
         loading="lazy"
         draggable={false}
         className="flavour-product-pop-img absolute inset-0 h-full w-full select-none object-contain drop-shadow-lg"
+        style={{ objectPosition: "center bottom" }}
       />
     </button>
+    </>
   );
 }
