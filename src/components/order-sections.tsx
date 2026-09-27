@@ -134,7 +134,7 @@ export function MysteryPopIdle({ action, homepage = false }: { action: ReactNode
       </div>
       <div className={`relative flex min-h-20 w-full flex-1 items-center justify-center px-3 text-center @max-[250px]:min-h-28 @max-[250px]:items-start @max-[250px]:pt-2 md:min-h-24 ${homepage ? "pb-3 pt-1 md:pb-4 md:pt-2" : "pb-3 pt-2 md:px-3 md:pb-4 md:pt-3"}`}>
         {action}
-        <span aria-hidden="true" className="absolute bottom-2 right-2 z-20 flex h-16 w-16 -rotate-6 items-center justify-center bg-dragonfruit px-1.5 text-center font-display text-[11px] font-black leading-[1.02] text-primary-foreground shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] @max-[270px]:h-14 @max-[270px]:w-14 @max-[270px]:px-1 @max-[270px]:text-[10px]">
+        <span aria-hidden="true" className="absolute bottom-2 right-2 z-20 flex h-16 w-16 items-center justify-center bg-dragonfruit px-1.5 text-center font-display text-[11px] font-black leading-[1.02] text-primary-foreground shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] @max-[270px]:h-14 @max-[270px]:w-14 @max-[270px]:px-1 @max-[270px]:text-[10px]">
           LET THE KIDS TRY!
         </span>
       </div>
