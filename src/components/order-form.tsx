@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
 import { CalendarIcon, Copy, Minus, Plus } from "lucide-react";
 import { BestSellerBadge, MysteryPopGame, SeeThePopButton, SwipeRow, TubeViewer } from "@/components/order-sections";
@@ -83,7 +83,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
       io.observe(el);
     }
     return () => { window.removeEventListener("resize", measure); io?.disconnect(); };
-  });
+  }, []);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("+62");
   const [address, setAddress] = useState("");
@@ -128,6 +128,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     setErrors((current) => ({ ...current, pack: "", quantities: "" }));
   };
 
+  const positionBeforeQuantityChange = useRef<{ pageY: number; carousel: HTMLElement | null; carouselLeft: number } | null>(null);
   const changeQuantity = (flavour: string, amount: number) => {
     if (!pack) {
       setErrors((current) => ({ ...current, pack: "Choose a pack first." }));
@@ -135,9 +136,22 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     }
     const currentValue = quantities[flavour] ?? 0;
     if (amount < 0 && currentValue === 0) return;
+    const carousel = document.querySelector<HTMLElement>('ul[aria-label="Pick your flavours"]');
+    positionBeforeQuantityChange.current = {
+      pageY: window.scrollY,
+      carousel,
+      carouselLeft: carousel?.scrollLeft ?? 0,
+    };
     setQuantities((current) => ({ ...current, [flavour]: Math.max(0, (current[flavour] ?? 0) + amount) }));
     setErrors((current) => ({ ...current, quantities: "" }));
   };
+  useLayoutEffect(() => {
+    const position = positionBeforeQuantityChange.current;
+    if (!position) return;
+    window.scrollTo({ top: position.pageY, behavior: "instant" });
+    if (position.carousel) position.carousel.scrollLeft = position.carouselLeft;
+    positionBeforeQuantityChange.current = null;
+  }, [quantities]);
 
   const selectedDate = date ? format(date, "yyyy-MM-dd") : "";
   const isPastDate = (candidate: Date) => format(candidate, "yyyy-MM-dd") < baliToday();

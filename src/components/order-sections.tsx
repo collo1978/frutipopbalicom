@@ -167,15 +167,13 @@ export function MysteryPopGame({ onAdd, homepage = false }: MysteryPopGameProps)
   if (!flavour) return null;
 
   return (
-    <div className={`flavour-pop relative flex h-full flex-col items-center rounded-3xl bg-pastel-lavender px-2 pb-3 pt-3 text-center md:pb-4 md:pt-4 ${homepage ? "min-h-[23rem] overflow-visible md:min-h-[24rem]" : "min-h-[19rem] overflow-hidden md:min-h-[26rem]"}`}>
+    <div className={`flavour-pop relative flex h-full flex-col items-center overflow-visible rounded-3xl bg-pastel-lavender px-2 pb-3 pt-3 text-center md:pb-4 md:pt-4 ${homepage ? "min-h-[23rem] md:min-h-[24rem]" : "min-h-[19rem] md:min-h-[26rem]"}`}>
       {phase === "idle" && (
         <MysteryPopIdle action={
           <div className="relative">
-            {homepage && (
-              <span aria-hidden="true" className="absolute -right-16 -top-10 z-20 flex h-16 w-16 rotate-12 items-center justify-center bg-mango px-2 text-center font-display text-[10px] font-black leading-[0.9] text-accent shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] md:-right-20 md:-top-12 md:h-20 md:w-20 md:text-xs">
-                LET THE KIDS PRESS!
-              </span>
-            )}
+            <span aria-hidden="true" className="absolute -right-10 -top-9 z-20 flex h-14 w-14 rotate-12 items-center justify-center bg-mango px-1.5 text-center font-display text-[9px] font-black leading-[0.9] text-accent shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] md:-right-14 md:-top-11 md:h-16 md:w-16 md:text-[10px]">
+              LET THE KIDS PRESS!
+            </span>
             <Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full">PICK MY POP</Button>
           </div>
         } />
