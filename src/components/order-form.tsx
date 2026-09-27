@@ -334,7 +334,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
               <p role="status" className="order-step-reveal mt-1.5 text-xs font-bold text-primary sm:text-sm">🎉 You’ve unlocked the Jumbo Pack! <span className="font-semibold text-leaf-foreground">We’ve automatically applied the better 20-Pop price.</span></p>
             )}
           </div>
-          <div className="mt-3" style={{ scrollMarginTop: headerH + 90 }}>
+          <div className="mt-6 md:mt-3" style={{ scrollMarginTop: headerH + 90 }}>
             <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Pick your flavours" tightTop desktopClass="md:grid md:auto-rows-fr md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[64%] md:w-auto">
               {[
                 ...ORDER_FLAVOURS.map((flavour) => {
