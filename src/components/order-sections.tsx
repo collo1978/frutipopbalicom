@@ -172,7 +172,7 @@ export function MysteryPopGame({ onAdd, homepage = false }: MysteryPopGameProps)
     <div className="flavour-pop relative flex h-full flex-col items-center overflow-visible rounded-3xl bg-pastel-lavender text-center">
       {phase === "idle" && (
         <>
-          <span aria-hidden="true" className="absolute -bottom-3 -right-3 z-20 flex h-28 w-28 -rotate-6 items-center justify-center bg-dragonfruit px-2.5 text-center font-display text-[15px] font-black leading-[1.08] text-primary-foreground shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] md:-bottom-4 md:-right-4 md:h-36 md:w-36 md:px-3 md:text-[19px]">
+          <span aria-hidden="true" className="absolute -bottom-5 -right-4 z-20 flex h-28 w-28 -rotate-6 items-center justify-center bg-dragonfruit px-2.5 text-center font-display text-[15px] font-black leading-[1.08] text-primary-foreground shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] md:-bottom-6 md:-right-8 md:h-32 md:w-32 md:px-3 md:text-[18px]">
             LET THE KIDS TRY!
           </span>
           <MysteryPopIdle homepage={homepage} action={
