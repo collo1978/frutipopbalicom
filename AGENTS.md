@@ -9,5 +9,5 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- The Order page uses a dedicated full-resolution product image set, while shared flavour data retains lighter assets for other pages; this preserves packaging readability without increasing homepage media weight.
+- Homepage and Order flavour cards use the same six supplied 1024×1536 artwork files with a consistent 2:3 cover treatment; this keeps every flavour equally clear and aligned.
 - Homepage and Order Mystery Pop use one configurable game component so their shuffle and reveal behaviour stay consistent.
