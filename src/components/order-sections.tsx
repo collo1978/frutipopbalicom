@@ -5,7 +5,7 @@ import iceArt from "@/assets/benefits/ice.png";
 import leafArt from "@/assets/benefits/leaf.png";
 import mangoArt from "@/assets/benefits/mango.png";
 import popsArt from "@/assets/benefits/pops.png";
-import { BadgeCheck, Box, Dices, Heart, Leaf, Play, Search, Snowflake, Star, Sun } from "lucide-react";
+import { BadgeCheck, Box, Dices, Heart, Leaf, Play, Search, Snowflake, Star, Sun, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { FLAVOURS } from "@/lib/flavours";
 import { ORDER_FLAVOURS } from "@/lib/order-flavours";

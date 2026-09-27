@@ -59,7 +59,7 @@ function baliCurrentTime() {
   return new Intl.DateTimeFormat("en-GB", { timeZone: BALI_TIME_ZONE, hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date());
 }
 
-export function OrderForm({ initialPack, openMystery = false }: { initialPack: PackKey | undefined; openMystery?: boolean }) {
+export function OrderForm({ initialPack, openMystery = false }: { initialPack: PackKey | undefined; openMystery?: boolean | undefined }) {
   const [packKey, setPackKey] = useState<PackKey | undefined>(initialPack);
   const [quantities, setQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
   const [extraQuantities, setExtraQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
