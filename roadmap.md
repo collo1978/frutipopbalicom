@@ -12,3 +12,4 @@
 - [x] Verify CTA links, navigation, carousel, zoom, and order flow on desktop and mobile
 - [x] Separate regular flavour inspection from Mystery POP discovery on the Order page
 - [x] Add an explicit extra-pops flow with separate summary and WhatsApp details
+- [x] Replace Order page products with the six original full-resolution PNG files

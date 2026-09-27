@@ -11,6 +11,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { FLAVOURS } from "@/lib/flavours";
+import { ORDER_FLAVOURS } from "@/lib/order-flavours";
 import { waLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -243,9 +244,9 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
             <span className="hidden md:inline">Hover to make them POP!</span>
           </p>
           <div className="order-flavour-picker mt-2">
-            <SwipeRow count={FLAVOURS.length + 1} label="Pick your flavours" desktopClass="md:grid md:grid-cols-4 md:gap-4 md:pb-3 md:pt-24 xl:grid-cols-7" itemClass="w-[78%]">
+            <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Pick your flavours" desktopClass="md:grid md:grid-cols-4 md:gap-4 md:pb-3 md:pt-24 xl:grid-cols-7" itemClass="w-[78%]">
               {[
-                ...FLAVOURS.map((flavour) => {
+                ...ORDER_FLAVOURS.map((flavour) => {
                   const quantity = quantities[flavour.name] ?? 0;
                   return (
                     <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col items-center rounded-3xl px-3 pb-4 pt-4 text-center ${flavour.tint}`}>
@@ -379,18 +380,19 @@ function MysteryPop({ full, extrasEnabled, onAdd }: { full: boolean; extrasEnabl
     timers.current.forEach((t) => window.clearTimeout(t));
     timers.current = [];
     setPhase("shuffling");
-    const final = Math.floor(Math.random() * FLAVOURS.length);
+    const final = Math.floor(Math.random() * ORDER_FLAVOURS.length);
     const steps = 12;
     let delay = 0;
     for (let i = 0; i < steps; i++) {
       delay += 70 + i * 12;
-      const idx = i === steps - 1 ? final : (final + i + 1) % FLAVOURS.length;
+      const idx = i === steps - 1 ? final : (final + i + 1) % ORDER_FLAVOURS.length;
       timers.current.push(window.setTimeout(() => setIndex(idx), delay));
     }
     timers.current.push(window.setTimeout(() => setPhase("result"), delay + 120));
   };
 
-  const flavour = FLAVOURS[index]!;
+  const flavour = ORDER_FLAVOURS[index];
+  if (!flavour) return null;
   return (
     <div className="flavour-pop relative flex h-full flex-col items-center rounded-3xl bg-accent/15 px-3 pb-4 pt-4 text-center">
       <div className="relative h-64 w-full md:h-52">

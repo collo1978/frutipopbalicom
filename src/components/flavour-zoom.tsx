@@ -19,15 +19,6 @@ export function ZoomableFlavourImage({ f, active: controlledActive, onToggle }: 
   };
 
   return (
-    <>
-      {active && (
-        <button
-          type="button"
-          aria-label="Close the popped flavour"
-          onClick={toggle}
-          className="fixed inset-0 z-10 cursor-default bg-transparent"
-        />
-      )}
     <button
       type="button"
       aria-label={`Pop the Fruti Pop ${f.name} pack forward`}
@@ -49,18 +40,17 @@ export function ZoomableFlavourImage({ f, active: controlledActive, onToggle }: 
         }
         toggle();
       }}
-      className="flavour-product-pop relative h-full w-full touch-pan-x overflow-visible rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
+      className="flavour-product-pop relative mx-auto h-full w-[46%] touch-pan-x overflow-visible rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
     >
-      <span aria-hidden="true" className="flavour-product-pop-backdrop pointer-events-none absolute -inset-x-6 -top-10 bottom-0 rounded-3xl bg-white/95 shadow-xl" />
+      <span aria-hidden="true" className="flavour-product-pop-backdrop pointer-events-none absolute -inset-x-8 -top-10 bottom-0 rounded-3xl bg-white/95 shadow-xl" />
       <img
         src={f.img ?? ""}
         alt={`Fruti Pop ${f.name} sorbet pack`}
         loading="lazy"
         draggable={false}
-        className="flavour-product-pop-img pointer-events-none absolute inset-0 h-full w-full select-none object-contain drop-shadow-lg"
+        className="flavour-product-pop-img pointer-events-none absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 select-none object-contain drop-shadow-lg"
         style={{ objectPosition: "center bottom" }}
       />
     </button>
-    </>
   );
 }
