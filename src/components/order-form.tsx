@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
-import { Dices, Eye, Minus, PartyPopper, Plus, RefreshCw, X } from "lucide-react";
+import { CalendarIcon, Copy, Dices, Eye, Minus, PartyPopper, Plus, RefreshCw, X } from "lucide-react";
 import { SwipeRow } from "@/components/order-sections";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
