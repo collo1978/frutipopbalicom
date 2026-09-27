@@ -182,6 +182,28 @@
   }
 }
 
+/* Flavours section heading: longer text, sized to stay on one line */
+@utility fruti-flavours-heading {
+  color: var(--color-accent);
+  font-family: var(--font-display-family);
+  font-size: 1.7rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.05;
+
+  @media (min-width: 420px) {
+    font-size: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 3.5rem;
+  }
+}
+
 /* Playful flavour hint on the order page (desktop: hover, mobile: swipe + tap) */
 @utility fruti-hint {
   color: var(--color-accent);
