@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
-import { CalendarIcon, Check, Copy, Minus, Plus, RefreshCw } from "lucide-react";
+import { CalendarIcon, Copy, Minus, PartyPopper, Plus, RefreshCw } from "lucide-react";
 import { SwipeRow } from "@/components/order-sections";
 import { ZoomableFlavourImage } from "@/components/flavour-zoom";
 import { z } from "zod";
@@ -62,6 +62,8 @@ function baliCurrentTime() {
 export function OrderForm({ initialPack }: { initialPack: PackKey | undefined }) {
   const [packKey, setPackKey] = useState<PackKey | undefined>(initialPack);
   const [quantities, setQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
+  const [extraQuantities, setExtraQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
+  const [extrasEnabled, setExtrasEnabled] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("+62");
   const [address, setAddress] = useState("");
@@ -75,7 +77,8 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
 
   const pack = packKey ? PACKS[packKey] : undefined;
   const total = useMemo(() => Object.values(quantities).reduce((sum, value) => sum + value, 0), [quantities]);
-  const complete = Boolean(pack && total === pack.limit);
+  const extraTotal = useMemo(() => Object.values(extraQuantities).reduce((sum, value) => sum + value, 0), [extraQuantities]);
+  const complete = Boolean(pack && total >= pack.limit);
 
   useEffect(() => {
     setPackKey(initialPack);
@@ -84,6 +87,8 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
   const choosePack = (next: PackKey) => {
     const nextLimit = PACKS[next].limit;
     setPackKey(next);
+    setExtrasEnabled(false);
+    setExtraQuantities(Object.fromEntries(FLAVOURS.map((flavour) => [flavour.name, 0])));
     setErrors((current) => ({ ...current, pack: "", quantities: "" }));
     if (total <= nextLimit) return;
     let remaining = nextLimit;
@@ -99,13 +104,15 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
       setErrors((current) => ({ ...current, pack: "Choose a pack first." }));
       return;
     }
-    setQuantities((current) => {
-      const currentValue = current[flavour] ?? 0;
-      const nextValue = Math.max(0, currentValue + amount);
-      const currentTotal = Object.values(current).reduce((sum, value) => sum + value, 0);
-      if (amount > 0 && currentTotal >= pack.limit) return current;
-      return { ...current, [flavour]: nextValue };
-    });
+    const currentValue = quantities[flavour] ?? 0;
+    if (amount < 0 && currentValue === 0) return;
+    if (amount > 0 && total >= pack.limit && !extrasEnabled) return;
+    if (amount > 0 && total >= pack.limit) {
+      setExtraQuantities((current) => ({ ...current, [flavour]: (current[flavour] ?? 0) + 1 }));
+    } else if (amount < 0 && (extraQuantities[flavour] ?? 0) > 0) {
+      setExtraQuantities((current) => ({ ...current, [flavour]: Math.max(0, (current[flavour] ?? 0) - 1) }));
+    }
+    setQuantities((current) => ({ ...current, [flavour]: Math.max(0, (current[flavour] ?? 0) + amount) }));
     setErrors((current) => ({ ...current, quantities: "" }));
   };
 
@@ -117,7 +124,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
     event.preventDefault();
     const nextErrors: Record<string, string> = {};
     if (!pack) nextErrors["pack"] = "Choose a pack.";
-    if (!pack || total !== pack.limit) nextErrors["quantities"] = pack ? `Choose exactly ${pack.limit} pops.` : "Choose a pack first.";
+    if (!pack || total < pack.limit) nextErrors["quantities"] = pack ? `Choose at least ${pack.limit} pops.` : "Choose a pack first.";
     if (!date) nextErrors["date"] = "Choose a delivery date.";
     if (date && isPastDate(date)) nextErrors["date"] = "Choose today or a future date.";
     if (timeIsPast) nextErrors["time"] = "Choose a future time in Bali.";
@@ -129,7 +136,13 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length || !pack || !date || !payment) return;
 
-    const lines = FLAVOURS.map((flavour) => `${flavourEmoji[flavour.name]} ${flavour.name} Sorbet: ${quantities[flavour.name] ?? 0} pcs`);
+    const packLines = FLAVOURS.map((flavour) => {
+      const packQuantity = (quantities[flavour.name] ?? 0) - (extraQuantities[flavour.name] ?? 0);
+      return `${flavourEmoji[flavour.name]} ${flavour.name} Sorbet: ${packQuantity} pcs`;
+    });
+    const extraLines = FLAVOURS
+      .filter((flavour) => (extraQuantities[flavour.name] ?? 0) > 0)
+      .map((flavour) => `${flavourEmoji[flavour.name]} ${flavour.name} Sorbet: ${extraQuantities[flavour.name]} extra`);
     const message = [
       "Hi Fruti Pop 👋",
       "",
@@ -137,10 +150,12 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
       "",
       `Pack: ${pack.name}`,
       "",
-      ...lines,
+      ...packLines,
+      ...(extraLines.length ? ["", "Extra Pops (price to be confirmed):", ...extraLines] : []),
       "",
       `📦 Total Order: ${total} pcs`,
       `💰 Pack Price: ${pack.price}`,
+      ...(extraLines.length ? ["Extra Pop Price: To be confirmed"] : []),
       "",
       "Delivery Details:",
       "",
@@ -188,7 +203,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
   useEffect(() => { mounted.current = true; }, []);
 
   const [activeFlavour, setActiveFlavour] = useState<string | null>(null);
-  const remaining = pack ? pack.limit - total : 0;
+  const remaining = pack ? Math.max(0, pack.limit - total) : 0;
   const full = Boolean(pack && total >= pack.limit);
 
   const fieldError = (key: string) => errors[key] ? <p className="mt-1 text-sm font-semibold text-destructive">{errors[key]}</p> : null;
@@ -227,7 +242,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
             <span className="md:hidden">Swipe to explore. Tap to POP!</span>
             <span className="hidden md:inline">Hover to make them POP!</span>
           </p>
-          <div className="mt-2">
+          <div className="order-flavour-picker mt-2">
             <SwipeRow count={FLAVOURS.length + 1} label="Pick your flavours" desktopClass="md:grid md:grid-cols-4 md:gap-4 md:pb-3 md:pt-24 xl:grid-cols-7" itemClass="w-[78%]">
               {[
                 ...FLAVOURS.map((flavour) => {
@@ -241,22 +256,38 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
                       <div className="mt-auto flex items-center gap-2 pt-2">
                         <Button type="button" variant="secondary" size="icon" onClick={() => changeQuantity(flavour.name, -1)} disabled={quantity === 0} aria-label={`Remove one ${flavour.name}`} className="h-10 w-10 rounded-full"><Minus /></Button>
                         <output aria-label={`${flavour.name} quantity`} className="w-7 text-center text-lg font-bold">{quantity}</output>
-                        <Button type="button" size="icon" onClick={() => changeQuantity(flavour.name, 1)} disabled={full} aria-label={`Add one ${flavour.name}`} className="h-10 w-10 rounded-full"><Plus /></Button>
+                        <Button type="button" size="icon" onClick={() => changeQuantity(flavour.name, 1)} disabled={full && !extrasEnabled} aria-label={`Add one ${flavour.name}`} className="h-10 w-10 rounded-full"><Plus /></Button>
                       </div>
                     </div>
                   );
                 }),
-                <MysteryPop key="mystery" full={full} onAdd={(n) => changeQuantity(n, 1)} />,
+                <MysteryPop key="mystery" full={full} extrasEnabled={extrasEnabled} onAdd={(n) => changeQuantity(n, 1)} />,
               ]}
             </SwipeRow>
           </div>
           <div className="mt-4 rounded-xl bg-leaf p-4" aria-live="polite">
             <p className="font-bold text-accent">
-              Your {pack.name} · {total} / {pack.limit} Pops{" "}
-              {complete ? <span className="text-primary">· Complete! 🎉</span> : <span>· {remaining} more to go!</span>}
+              {extraTotal > 0
+                ? <>{pack.name} · {pack.limit} Pops + {extraTotal} {extraTotal === 1 ? "Extra" : "Extras"}</>
+                : <>Your {pack.name} · {total} / {pack.limit} Pops {complete ? <span className="text-primary">· Complete!</span> : <span>· {remaining} more to go!</span>}</>}
             </p>
-            <progress value={total} max={pack.limit} aria-label="Pack completion" className="order-progress mt-2 h-3 w-full overflow-hidden rounded-full" />
-            {complete && <p className="mt-3 flex items-center gap-2 font-bold text-primary"><Check className="h-5 w-5" /> Your pack is full. Now tell us where to deliver!</p>}
+            <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className="order-progress mt-2 h-3 w-full overflow-hidden rounded-full" />
+            {complete && (
+              <div className="mt-3">
+                <p className="flex items-center gap-2 font-bold text-primary" aria-label="Your pack is full!"><PartyPopper className="h-5 w-5" /> Your pack is full!</p>
+                {!extrasEnabled ? (
+                  <>
+                    <p className="mt-1 text-sm font-semibold text-leaf-foreground">Want a few more? Add extra pops to your order.</p>
+                    <Button type="button" size="sm" onClick={() => setExtrasEnabled(true)} className="mt-3 rounded-full"><Plus /> Add Extra Pops</Button>
+                  </>
+                ) : (
+                  <>
+                    <p className="mt-1 text-sm font-semibold text-leaf-foreground">Extra pops are open. Add as many as you like.</p>
+                    <p className="mt-1 text-sm font-semibold text-accent">One more? Let Mystery POP choose it.</p>
+                  </>
+                )}
+              </div>
+            )}
           </div>
           {fieldError("quantities")}
         </fieldset>
@@ -317,7 +348,16 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
               <div className="flex justify-between gap-3"><dt>Total pops</dt><dd className="font-bold">{total}</dd></div>
               <div className="flex justify-between gap-3"><dt>Payment</dt><dd className="font-bold">{payment ?? "Not selected"}</dd></div>
             </dl>
-            <ul className="mt-3 flex flex-wrap gap-2 text-xs font-bold text-accent">{FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((f) => <li key={f.name} className="rounded-md bg-secondary px-2 py-1">{f.name} × {quantities[f.name]}</li>)}</ul>
+            <div className="mt-3">
+              <p className="text-xs font-bold uppercase text-muted-foreground">Pack flavours</p>
+              <ul className="mt-1 flex flex-wrap gap-2 text-xs font-bold text-accent">{FLAVOURS.filter((f) => (quantities[f.name] ?? 0) - (extraQuantities[f.name] ?? 0) > 0).map((f) => <li key={f.name} className="rounded-md bg-secondary px-2 py-1">{f.name} × {(quantities[f.name] ?? 0) - (extraQuantities[f.name] ?? 0)}</li>)}</ul>
+            </div>
+            {extraTotal > 0 && (
+              <div className="mt-3 rounded-lg bg-leaf p-3">
+                <p className="text-xs font-bold uppercase text-leaf-foreground">Extra pops · Price to be confirmed</p>
+                <ul className="mt-1 flex flex-wrap gap-2 text-xs font-bold text-accent">{FLAVOURS.filter((f) => (extraQuantities[f.name] ?? 0) > 0).map((f) => <li key={f.name} className="rounded-md bg-card px-2 py-1">{f.name} × {extraQuantities[f.name]}</li>)}</ul>
+              </div>
+            )}
             <p className="mt-3 text-sm text-muted-foreground">Delivery fee and final total confirmed on WhatsApp.</p>
             {Object.values(errors).some(Boolean) && <p className="mt-3 text-sm font-semibold text-destructive">Please check the highlighted details above.</p>}
             <Button type="submit" size="lg" className="mt-5 min-h-12 w-full rounded-full text-base font-bold">Send Order on WhatsApp</Button>
@@ -328,7 +368,7 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
   );
 }
 
-function MysteryPop({ full, onAdd }: { full: boolean; onAdd: (name: string) => void }) {
+function MysteryPop({ full, extrasEnabled, onAdd }: { full: boolean; extrasEnabled: boolean; onAdd: (name: string) => void }) {
   const [phase, setPhase] = useState<"idle" | "shuffling" | "result">("idle");
   const [index, setIndex] = useState(0);
   const timers = useRef<number[]>([]);
@@ -363,8 +403,8 @@ function MysteryPop({ full, onAdd }: { full: boolean; onAdd: (name: string) => v
           <img src={flavour.img} alt="" className="mystery-shuffle-img absolute inset-0 h-full w-full object-contain opacity-80" />
         )}
         {phase === "result" && (
-          <div className="mystery-reveal absolute inset-0">
-            <ZoomableFlavourImage f={flavour} active onToggle={() => {}} />
+          <div className="mystery-reveal absolute inset-0 flex items-center justify-center overflow-hidden">
+            {flavour.img && <img src={flavour.img} alt={`Fruti Pop ${flavour.name} sorbet pack`} className="h-full w-full object-contain" />}
           </div>
         )}
       </div>
@@ -378,7 +418,7 @@ function MysteryPop({ full, onAdd }: { full: boolean; onAdd: (name: string) => v
         </>
       ) : (
         <div className="mt-auto flex w-full flex-col gap-2 pt-2">
-          <Button type="button" size="sm" onClick={() => onAdd(flavour.name)} disabled={full} className="h-auto min-h-9 whitespace-normal rounded-full">+ Add {flavour.name} to My Pack</Button>
+          <Button type="button" size="sm" onClick={() => onAdd(flavour.name)} disabled={full && !extrasEnabled} className="h-auto min-h-9 whitespace-normal rounded-full">+ Add {flavour.name} to My Pack</Button>
           <Button type="button" size="sm" variant="outline" onClick={shuffle} className="rounded-full"><RefreshCw /> Pick Again</Button>
         </div>
       )}
