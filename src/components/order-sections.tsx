@@ -171,14 +171,16 @@ export function MysteryPopGame({ onAdd, homepage = false }: MysteryPopGameProps)
   return (
     <div className="flavour-pop relative flex h-full flex-col items-center overflow-visible rounded-3xl bg-pastel-lavender text-center">
       {phase === "idle" && (
-        <MysteryPopIdle homepage={homepage} action={
-          <div className="relative">
-            <span aria-hidden="true" className="absolute -right-12 -top-20 z-20 flex h-20 w-20 rotate-12 items-center justify-center bg-mango px-2 text-center font-display text-[13px] font-black leading-[1.05] text-accent shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] md:-right-16 md:-top-24 md:h-24 md:w-24 md:px-2.5 md:text-[16px]">
-              LET THE KIDS PRESS!
-            </span>
-            <Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full px-5 font-extrabold md:px-6">PICK MY POP</Button>
-          </div>
-        } />
+        <>
+          <span aria-hidden="true" className={`absolute -bottom-11 right-0 z-20 flex h-24 w-24 -rotate-6 items-center justify-center bg-dragonfruit px-2 text-center font-display text-[14px] font-black leading-[1.1] text-primary-foreground shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] md:-bottom-6 md:h-32 md:w-32 md:px-3 md:text-[18px] ${homepage ? "md:-right-8" : "md:-right-12"}`}>
+            LET THE KIDS TRY!
+          </span>
+          <MysteryPopIdle homepage={homepage} action={
+            <div className="relative z-30">
+              <Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full px-5 font-extrabold md:px-6">PICK MY POP</Button>
+            </div>
+          } />
+        </>
       )}
       {phase === "shuffling" && (
         <div className="flex min-h-[26rem] flex-1 flex-col items-center justify-center px-2 py-4">
