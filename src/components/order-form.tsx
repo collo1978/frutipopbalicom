@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
-import { CalendarIcon, Check, Copy, Minus, Plus, RefreshCw } from "lucide-react";
+import { CalendarIcon, Copy, Minus, PartyPopper, Plus, RefreshCw } from "lucide-react";
 import { SwipeRow } from "@/components/order-sections";
 import { ZoomableFlavourImage } from "@/components/flavour-zoom";
 import { z } from "zod";
@@ -269,12 +269,12 @@ export function OrderForm({ initialPack }: { initialPack: PackKey | undefined })
             <p className="font-bold text-accent">
               {extraTotal > 0
                 ? <>{pack.name} · {pack.limit} Pops + {extraTotal} {extraTotal === 1 ? "Extra" : "Extras"}</>
-                : <>Your {pack.name} · {total} / {pack.limit} Pops {complete ? <span className="text-primary">· Complete! 🎉</span> : <span>· {remaining} more to go!</span>}</>}
+                : <>Your {pack.name} · {total} / {pack.limit} Pops {complete ? <span className="text-primary">· Complete!</span> : <span>· {remaining} more to go!</span>}</>}
             </p>
             <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className="order-progress mt-2 h-3 w-full overflow-hidden rounded-full" />
             {complete && (
               <div className="mt-3">
-                <p className="flex items-center gap-2 font-bold text-primary"><Check className="h-5 w-5" /> 🎉 Your pack is full!</p>
+                <p className="flex items-center gap-2 font-bold text-primary" aria-label="Your pack is full!"><PartyPopper className="h-5 w-5" /> Your pack is full!</p>
                 {!extrasEnabled ? (
                   <>
                     <p className="mt-1 text-sm font-semibold text-leaf-foreground">Want a few more? Add extra pops to your order.</p>
