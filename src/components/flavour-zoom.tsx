@@ -53,7 +53,7 @@ export function ZoomableFlavourImage({ f, active: controlledActive, onToggle }: 
     >
       <span aria-hidden="true" className="flavour-product-pop-backdrop pointer-events-none absolute -inset-x-6 -top-10 bottom-0 rounded-3xl bg-white/95 shadow-xl" />
       <img
-        src={f.img!}
+        src={f.img ?? ""}
         alt={`Fruti Pop ${f.name} sorbet pack`}
         loading="lazy"
         draggable={false}

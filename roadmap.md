@@ -10,3 +10,5 @@
 - [x] Improve Our Story text readability
 - [x] Apply latest hero, POP Stars, product zoom, and heading updates
 - [x] Verify CTA links, navigation, carousel, zoom, and order flow on desktop and mobile
+- [x] Separate regular flavour inspection from Mystery POP discovery on the Order page
+- [x] Add an explicit extra-pops flow with separate summary and WhatsApp details
