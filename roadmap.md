@@ -28,7 +28,7 @@
 - [x] Keep the mobile page and flavour carousel fixed during quantity changes
 - [x] Add and verify the Mystery Pop starburst on the Order card
 - [x] Replace desktop and mobile hero artwork with the supplied approved images
-- [x] Replace Soursop with Lemon Sorbet across every flavour and ordering experience
+- [x] Replace the retired flavour with Lemon Sorbet across every flavour and ordering experience
 - [x] Update Our Story wording and bold the Fruti Pop origin line
 - [x] Keep Finish Order visible after choosing Add More Flavours and verify best-pack pricing
-- [ ] Verify the complete update on mobile and desktop
+- [x] Verify the complete update on mobile and desktop
