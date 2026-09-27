@@ -26,7 +26,7 @@ function OurStory() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 md:grid-cols-[1.2fr_1fr] md:py-16">
           <div className="max-w-prose text-left">
             <p className="font-display text-sm font-semibold uppercase tracking-widest text-primary">The Fruti Pop Story</p>
-            <h1 className="mt-2 font-display text-5xl font-extrabold leading-none text-accent md:text-6xl">It started with a taste.</h1>
+            <h1 className="mt-2 font-display text-5xl font-extrabold leading-none text-accent md:text-6xl">It started with a taste and a journey beyond.</h1>
             <p className="mt-5 text-lg leading-[1.65] text-foreground md:text-xl">
               Before there was Fruti Pop, there was fruit. Lots of it. April was making frozen fruit purée samples for
               bars, beach clubs and hotels around Bali.
@@ -47,7 +47,7 @@ function OurStory() {
         <p>
           Something fruity and frozen that kids would love, and that grown-ups would secretly want one of too.
         </p>
-        <p>That idea became Fruti Pop.</p>
+        <p><strong>That idea became Fruti Pop.</strong></p>
         <p>
           Today, Fruti Pop turns up where Bali's best little moments happen: birthday parties by the pool, the end of
           football training, school fun days, night markets and lazy villa afternoons. The part we love most isn't the

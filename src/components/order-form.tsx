@@ -33,7 +33,7 @@ const flavourEmoji: Record<string, string> = {
   Pineapple: "🍍",
   "Piña Colada": "🥥",
   "Passion Fruit": "💜",
-  Soursop: "💚",
+  "Lemon Sorbet": "🍋",
 };
 
 const detailsSchema = z.object({
@@ -173,7 +173,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length || !pack || !date || !payment) return;
 
-    const packLines = FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((flavour) => `${flavourEmoji[flavour.name]} ${flavour.name} Sorbet: ${quantities[flavour.name]} pcs`);
+    const packLines = FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((flavour) => `${flavourEmoji[flavour.name]} ${flavour.name}${flavour.name.endsWith("Sorbet") ? "" : " Sorbet"}: ${quantities[flavour.name]} pcs`);
     const message = [
       "Hi Fruti Pop 👋",
       "",
@@ -211,6 +211,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
   );
   const [reached, setReached] = useState({ delivery: false, payment: false });
   const [choiceOpen, setChoiceOpen] = useState(false);
+  const [finishAvailable, setFinishAvailable] = useState(false);
   const previousTotal = useRef(total);
   useEffect(() => {
     if (pack && previousTotal.current < pack.limit && total >= pack.limit) setChoiceOpen(true);
@@ -263,7 +264,10 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     if (reached.delivery) scrollTo(deliveryRef.current);
     else setReached((r) => ({ ...r, delivery: true }));
   };
-  const goFlavours = () => setChoiceOpen(false);
+  const goFlavours = () => {
+    setFinishAvailable(true);
+    setChoiceOpen(false);
+  };
   const goMystery = () => {
     const pageY = window.scrollY;
     setChoiceOpen(false);
@@ -311,11 +315,16 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
           <h2 className={legend} aria-hidden="true">2. Pick Your Flavours</h2>
           <div ref={trackerSentinel} aria-hidden="true" className="h-px" />
           <div className={cn("sticky z-40 mt-3 h-32 overflow-hidden rounded-xl border border-primary/20 bg-leaf/95 px-2.5 py-2 shadow-md backdrop-blur sm:px-4 md:h-28", complete && "ring-2 ring-primary/30")} style={{ top: headerH }} aria-live="polite">
-            <p className={cn("font-bold leading-tight text-accent", stuck ? "text-xs sm:text-sm" : "text-sm sm:text-base")}>
+            <p className={cn("font-bold leading-tight text-accent", finishAvailable && complete && "pr-28 sm:pr-32", stuck ? "text-xs sm:text-sm" : "text-sm sm:text-base")}>
               {extraTotal > 0
                 ? <>Your {pack.name} · {total} Pops · <span className="text-primary">Pack complete ✓</span></>
                 : <>Your {pack.name} · {total}/{pack.limit} · {complete ? <span className="text-primary">Pack full! 🎉</span> : <span>{remaining} to go!</span>}</>}
             </p>
+            {finishAvailable && complete && (
+              <Button type="button" size="sm" onClick={goDelivery} className="absolute right-2 top-2 h-8 rounded-full px-3 text-xs font-extrabold shadow-sm sm:right-3 sm:text-sm">
+                Finish Order →
+              </Button>
+            )}
             <div className="h-[4.25rem] md:h-12">
             {total > 0 && (
               <ul aria-label="Flavours in your pack" className="mt-1 grid grid-cols-3 gap-x-1 gap-y-0.5 md:grid-cols-6 md:gap-x-2">

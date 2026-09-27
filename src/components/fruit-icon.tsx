@@ -92,27 +92,19 @@ export function FruitIcon({ name, className = "h-6 w-6" }: Props) {
           <ellipse cx="14" cy="21.5" rx="2.4" ry="4" fill="#FFFFFF" opacity="0.3" transform="rotate(-25 14 21.5)" />
         </svg>
       );
-    case "Soursop":
+    case "Lemon Sorbet":
       return (
         <svg {...common}>
-          {/* body */}
+          {/* whole lemon */}
           <path
-            d="M24 8.5c8.5 0 15 5.5 15 13.5 0 9-6.5 18-15 21-8.5-3-15-12-15-21 0-8 6.5-13.5 15-13.5Z"
-            fill="#71B84C" stroke="#3E7A28" strokeWidth="1.6" strokeLinejoin="round"
+            d="M8 22c1.2-8.2 8.4-14.5 17-14 8.2.5 14.8 7.5 14.4 15.6-.4 8.5-7.8 15.1-16.4 14.6-8.1-.5-14.4-7.3-15-16.2Z"
+            fill="#FFD735" stroke="#C59400" strokeWidth="1.8" strokeLinejoin="round"
           />
-          {/* shading */}
-          <path d="M24 43c8.5-3 15-12 15-21 0-2-.4-3.8-1.1-5.4C39.5 26 33.5 36 26 40c-1 1.5-1.5 2.4-2 3Z" fill="#4E9032" opacity="0.6" />
-          {/* spikes */}
-          <g fill="#3E7A28">
-            <path d="M24 10l2 4h-4z" /><path d="M14 13l1.8 3.6-4 .6z" /><path d="M34 13l-1.8 3.6 4 .6z" />
-            <path d="M9.5 22l3.6 1.6-3 2.8z" /><path d="M38.5 22l-3.6 1.6 3 2.8z" />
-            <path d="M11 31l4-.4-1.6 3.8z" /><path d="M37 31l-4-.4 1.6 3.8z" />
-            <path d="M17.5 40.5l2.6-3 1.6 3.8z" /><path d="M30.5 40.5l-2.6-3-1.6 3.8z" />
-          </g>
-          {/* highlight */}
-          <ellipse cx="17" cy="18" rx="3" ry="4.5" fill="#FFFFFF" opacity="0.3" transform="rotate(-20 17 18)" />
-          {/* stem */}
-          <path d="M24 8.5c-.3-2.5.4-4.5 2-6" stroke="#6B4423" strokeWidth="2" fill="none" strokeLinecap="round" />
+          <ellipse cx="16" cy="17" rx="3.2" ry="5" fill="#FFFFFF" opacity="0.5" transform="rotate(38 16 17)" />
+          <circle cx="30" cy="29" r="10.5" fill="#FFF8A8" stroke="#C59400" strokeWidth="1.5" />
+          <circle cx="30" cy="29" r="7.7" fill="#FFE04A" stroke="#FFFFFF" strokeWidth="1" />
+          <g stroke="#FFFFFF" strokeWidth="1.2"><path d="M30 21.3v15.4M22.3 29h15.4M24.6 23.6l10.8 10.8M35.4 23.6 24.6 34.4" /></g>
+          <path d="M24 8c3-4.2 8.8-5 13-2-3 4.3-8.8 5.3-13 2Z" fill="#3FA34D" stroke="#2E7D3B" strokeWidth="1.3" strokeLinejoin="round" />
         </svg>
       );
     case "Piña Colada":
