@@ -197,7 +197,7 @@ export function MysteryPopIdle({ action, homepage = false }: { action: ReactNode
         {action}
         <span
           aria-hidden="true"
-          className="absolute bottom-0 right-0 z-20 flex h-24 w-24 items-center justify-center bg-dragonfruit px-3 text-center font-display text-[13px] font-black leading-[1.08] text-primary-foreground shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] @max-[270px]:h-20 @max-[270px]:w-20 @max-[270px]:px-2 @max-[270px]:text-[12px] md:h-28 md:w-28 md:px-4 md:text-[16px]"
+          className=absolute bottom-0 -right-4 z-20 flex h-28 w-28 items-center justify-center bg-dragonfruit px-3 text-center font-display text-[16px] font-black leading-[1.05] text-primary-foreground shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)]
         >
           LET THE
           <br />
