@@ -11,3 +11,4 @@
 
 - Homepage and Order flavour cards use the same six supplied 1024×1536 artwork files with a consistent 2:3 cover treatment; this keeps every flavour equally clear and aligned.
 - Homepage and Order Mystery Pop use one configurable game component so their shuffle and reveal behaviour stay consistent.
+- The homepage hero uses separate supplied transparent artwork for desktop and mobile; preserve the breakpoint-specific files and never crop either image.

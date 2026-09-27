@@ -259,7 +259,7 @@ export function FlavourDiscovery() {
               <div className="flex h-10 items-center justify-center pt-1 md:h-16 md:pt-2">
                 {flavour.name === "Strawberry" && <BestSellerBadge className="px-3 py-1 text-xs md:px-5 md:py-2 md:text-base [&_svg]:h-3.5 [&_svg]:w-3.5 md:[&_svg]:h-[1.125rem] md:[&_svg]:w-[1.125rem]" />}
               </div>
-              {flavour.art && <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="aspect-[2/3] w-full select-none object-cover" />}
+              {flavour.art && <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="h-[21.5rem] w-full select-none object-contain md:aspect-[2/3] md:h-auto md:object-cover" />}
               <div className="flex flex-1 flex-col items-center px-3 pb-3 pt-1 text-center md:pb-4 md:pt-2">
                 <h3 className="font-display text-lg font-extrabold text-accent md:text-2xl">{flavour.name}</h3>
                 <div className="mt-auto pt-2 md:pt-3"><SeeThePopButton name={flavour.name} onClick={() => setViewTube(flavour.name)} /></div>
