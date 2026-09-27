@@ -178,7 +178,7 @@ export function MysteryPopGame({ onAdd, homepage = false }: MysteryPopGameProps)
       {phase === "idle" && (
         <MysteryPopIdle homepage={homepage} action={
           <div className="relative z-30">
-            <Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full px-4 font-extrabold md:px-5">PICK MY POP</Button>
+            <Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full px-4 font-extrabold md:!px-3 md:!text-sm">PICK MY POP</Button>
           </div>
         } />
       )}
