@@ -383,19 +383,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
         </div>
       )}
 
-      {viewTube && (
-        <div role="dialog" aria-modal="true" aria-label={`The real Fruti Pop ${viewTube.name} tube`} className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4" onClick={() => setViewTube(null)}>
-          <div className="relative" onClick={(event) => event.stopPropagation()}>
-            <div className="flex flex-col items-center">
-              {viewTube.img && <img src={viewTube.img} alt={`The real Fruti Pop ${viewTube.name} sorbet tube`} className="max-h-[76vh] w-auto max-w-[84vw] rounded-2xl bg-white object-contain shadow-2xl" />}
-              <p className="mt-3 text-center text-sm font-bold text-white">{viewTube.name} · 100g tube</p>
-            </div>
-            <button ref={closeRef} type="button" onClick={() => setViewTube(null)} aria-label="Close tube preview" className="absolute -right-2 -top-2 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-lg transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40">
-              <X className="h-5 w-5" aria-hidden="true" />
-            </button>
-          </div>
-        </div>
-      )}
+      <TubeViewer tube={viewTube} onClose={() => setViewTube(null)} />
     </form>
   );
 }
@@ -431,7 +419,7 @@ function MysteryPop({ full, extrasEnabled, onAdd }: { full: boolean; extrasEnabl
           <h3 className="flex items-center gap-1.5 font-display text-lg font-extrabold text-accent"><Dices className="h-5 w-5" aria-hidden="true" /> Mystery POP</h3>
           <p className="mt-1 text-xs font-semibold text-foreground/70">Can't decide? Let fate decide!</p>
           <span aria-hidden="true" className="mt-4 flex h-32 w-32 items-center justify-center rounded-full bg-accent font-display text-7xl font-extrabold text-accent-foreground shadow-lg md:h-28 md:w-28">?</span>
-          <Button type="button" size="sm" onClick={shuffle} className="cta-pop mt-auto rounded-full">Pick My Pop</Button>
+          <Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm mt-auto whitespace-nowrap rounded-full">PICK MY POP</Button>
         </div>
       )}
       {phase === "shuffling" && (
