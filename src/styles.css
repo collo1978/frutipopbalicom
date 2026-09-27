@@ -258,3 +258,11 @@
 @media (prefers-reduced-motion: reduce) {
   .flavour-product-pop-img { transition: none; }
 }
+
+/* Mystery POP shuffle + reveal */
+.mystery-shuffle-img { animation: mystery-jiggle 110ms ease-in-out infinite alternate; }
+@keyframes mystery-jiggle { from { transform: rotate(-6deg) scale(0.9); } to { transform: rotate(6deg) scale(0.95); } }
+.mystery-reveal { animation: mystery-reveal 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+@keyframes mystery-reveal { from { transform: scale(0.5); opacity: 0.4; } to { transform: scale(1); opacity: 1; } }
+.order-step-reveal { animation: fade-in 0.45s ease-out both; }
+@media (prefers-reduced-motion: reduce) { .mystery-shuffle-img, .mystery-reveal, .order-step-reveal { animation: none; } }
