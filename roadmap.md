@@ -35,3 +35,5 @@
 - [x] Match the homepage Lemon card to the working Order-card presentation
 - [x] Fix full-pack Mystery Pop navigation and persistent Finish Order access
 - [x] Run full desktop and mobile interaction QA and fix related regressions
+- [x] Replace all six homepage and Order flavour artworks with the supplied clearer matching set
+- [x] Verify all six artworks, cards, carousel, and Mystery Pop on mobile and desktop
