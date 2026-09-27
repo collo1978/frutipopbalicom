@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroDesktop from "@/assets/hero-desktop-v3.webp.asset.json";
-import heroMobile from "@/assets/hero-mobile-v3.webp.asset.json";
+import heroDesktop from "@/assets/hero-horizontal-approved.png.asset.json";
+import heroMobile from "@/assets/hero-vertical-approved.png.asset.json";
 import popStarsDesktop from "@/assets/pop-stars-desktop.png.asset.json";
 import popStarsMobile from "@/assets/pop-stars-mobile.png.asset.json";
 import birthdayParty from "@/assets/birthday-pool-party.png.asset.json";
@@ -32,19 +32,19 @@ const cta = "cta-pop rounded-full shadow-md";
 const A = () => <span className="cta-arrow" aria-hidden="true">→</span>;
 
 function Hero() {
-  const alt = "Bali's Fruity Sorbet Ice Blocks. Six refreshing flavours. A little pop of happiness. Less sugar than regular ice blocks, full of vitamins, packed with fruit.";
+  const alt = "Bali's Fruity Sorbet Ice Blocks. Refreshing flavours and a little pop of happiness.";
   return (
     <section className="bg-hero-cream">
-      <div className="mx-auto px-[2vw] pb-6 pt-1 md:px-4 md:pb-6 md:pt-2">
-        <picture>
+      <div className="mx-auto flex min-h-[calc(100svh-4.5rem)] flex-col items-center justify-center px-2 pb-3 pt-1 md:min-h-0 md:px-4 md:pb-4 md:pt-1">
+        <picture className="flex min-h-0 w-full items-center justify-center">
           <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1690} height={931} />
-          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto w-[96vw] max-w-[36rem] md:w-full md:max-w-[1350px]" />
+          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto max-h-[calc(100svh-12rem)] w-auto max-w-full object-contain md:max-h-[calc(100svh-10.5rem)] md:w-full md:max-w-[1350px]" />
         </picture>
-        <div className="mt-3 flex flex-col items-center gap-2 md:mt-2">
-          <Button asChild size="lg" className={`${cta} w-full max-w-md md:w-auto md:px-10 md:text-lg`}>
-            <a href="#flavours" onClick={(e) => { e.preventDefault(); document.getElementById("flavours")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>Pick Your Flavours <A /></a>
+        <div className="mt-1 flex w-full flex-col items-center gap-1.5 md:mt-1">
+          <Button asChild size="lg" className={`${cta} w-[calc(100%-1rem)] max-w-md md:w-auto md:px-12 md:text-lg`}>
+            <Link to="/order">Order My Pops <A /></Link>
           </Button>
-          <p className="text-sm font-semibold text-foreground/70">Made in Bali • Real fruit • Less sugar</p>
+          <p className="text-center text-xs font-semibold text-foreground/65 sm:text-sm">Less Sugar • Full of Vitamins • Packed with Fruit</p>
         </div>
       </div>
     </section>
