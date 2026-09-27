@@ -52,7 +52,7 @@
 - [x] Replace Piña Colada with the supplied edge-to-edge artwork across homepage and Order cards
 - [x] Add a clear mobile break between the hero trust line and the Flavours heading
 - [x] Verify Piña Colada framing, mobile heading spacing, and zoom controls at mobile and desktop sizes
-- [ ] Refine mobile Mystery Pop spacing and desktop pack-card hover contrast
-- [ ] Keep payment choices visible before delivery fields are complete and clarify final confirmation
-- [ ] Add a clean mobile hero ending after the trust line
-- [ ] Test the complete desktop and mobile order journey
+- [x] Refine mobile Mystery Pop spacing and desktop pack-card hover contrast
+- [x] Keep payment choices visible before delivery fields are complete and clarify final confirmation
+- [x] Add a clean mobile hero ending after the trust line
+- [x] Test the complete desktop and mobile order journey
