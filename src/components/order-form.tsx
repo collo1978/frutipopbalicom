@@ -205,11 +205,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     window.open(waLink(message), "_blank", "noopener,noreferrer");
   };
 
-  const deliveryValid = Boolean(
-    detailsSchema.pick({ name: true, phone: true, address: true, maps: true, time: true }).safeParse({ name, phone, address, maps, time }).success
-    && date && !isPastDate(date) && !timeIsPast,
-  );
-  const [reached, setReached] = useState({ delivery: false, payment: false });
+  const [reachedDelivery, setReachedDelivery] = useState(false);
   const [choiceOpen, setChoiceOpen] = useState(false);
   const finishAvailable = total >= PACKS.family.limit;
   const previousTotal = useRef(total);
@@ -217,12 +213,9 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     if (pack && previousTotal.current < pack.limit && total >= pack.limit) setChoiceOpen(true);
     previousTotal.current = total;
   }, [pack, total]);
-  useEffect(() => {
-    if (deliveryValid && reached.delivery && !reached.payment) setReached((r) => ({ ...r, payment: true }));
-  }, [deliveryValid, reached.delivery, reached.payment]);
   const showFlavours = Boolean(pack);
-  const showDelivery = showFlavours && reached.delivery;
-  const showPayment = showDelivery && reached.payment;
+  const showDelivery = showFlavours && reachedDelivery;
+  const showPayment = showDelivery;
 
   const flavourRef = useRef<HTMLFieldSetElement>(null);
   const deliveryRef = useRef<HTMLFieldSetElement>(null);
@@ -234,7 +227,6 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
   };
   useEffect(() => { if (showFlavours) scrollTo(flavourRef.current); }, [showFlavours]);
   useEffect(() => { if (showDelivery) scrollTo(deliveryRef.current); }, [showDelivery]);
-  useEffect(() => { if (showPayment) scrollTo(paymentRef.current); }, [showPayment]);
   useEffect(() => {
     mounted.current = true;
     if (initialPack && !openMystery) {
@@ -261,8 +253,8 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
   const remaining = pack ? Math.max(0, pack.limit - total) : 0;
   const goDelivery = () => {
     setChoiceOpen(false);
-    if (reached.delivery) scrollTo(deliveryRef.current);
-    else setReached((r) => ({ ...r, delivery: true }));
+    if (reachedDelivery) scrollTo(deliveryRef.current);
+    else setReachedDelivery(true);
   };
   const goFlavours = () => {
     setChoiceOpen(false);
@@ -292,14 +284,14 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
             const option = PACKS[key];
             const selected = packKey === key;
             return (
-              <Button key={key} type="button" variant="outline" aria-pressed={selected} onClick={() => choosePack(key)} className={cn("relative h-auto min-h-28 justify-start rounded-xl p-4 text-left whitespace-normal", selected && "border-primary bg-leaf ring-2 ring-primary/20")}>
-                <span className={cn("mr-2 h-5 w-5 shrink-0 rounded-full border-2 border-primary", selected && "border-[6px]")} />
+              <Button key={key} type="button" variant="outline" aria-pressed={selected} onClick={() => choosePack(key)} className={cn("group relative h-auto min-h-28 justify-start rounded-xl p-4 text-left whitespace-normal transition-colors md:hover:border-accent md:hover:bg-accent md:hover:text-accent-foreground", selected && "border-primary bg-leaf ring-2 ring-primary/20")}>
+                <span className={cn("mr-2 h-5 w-5 shrink-0 rounded-full border-2 border-primary md:group-hover:border-accent-foreground", selected && "border-[6px]")} />
                 <span>
-                  <span className="block font-bold text-foreground">{option.name}</span>
-                  <span className="block text-sm text-muted-foreground">{option.limit} Pops</span>
-                  <span className="block text-lg font-bold text-accent">{option.price}</span>
+                  <span className="block font-bold text-foreground md:group-hover:text-accent-foreground">{option.name}</span>
+                  <span className="block text-sm text-muted-foreground md:group-hover:text-accent-foreground/85">{option.limit} Pops</span>
+                  <span className="block text-lg font-bold text-accent md:group-hover:text-accent-foreground">{option.price}</span>
                 </span>
-                {key === "jumbo" && <span className="absolute right-2 top-2 rounded-md bg-primary/10 px-2 py-1 text-xs font-bold text-primary">Save Rp15,000!</span>}
+                {key === "jumbo" && <span className="absolute right-2 top-2 rounded-md bg-primary/10 px-2 py-1 text-xs font-bold text-primary md:group-hover:bg-card/20 md:group-hover:text-accent-foreground">Save Rp15,000!</span>}
               </Button>
             );
           })}
@@ -416,7 +408,6 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
             </label>
             <label className="text-sm font-bold sm:col-span-2">Additional Notes (optional)<Textarea value={notes} onChange={(e) => setNotes(e.target.value)} maxLength={800} rows={3} placeholder="Delivery instructions or special requests" className="mt-1" />{fieldError("notes")}</label>
           </div>
-          {!showPayment && <p className="mt-3 text-sm text-muted-foreground">Fill in the required details (*) to choose how you'd like to pay.</p>}
         </fieldset>
       )}
 
@@ -437,7 +428,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
             )}
           </fieldset>
 
-          <section className="rounded-2xl border bg-muted p-5 shadow-lg" aria-labelledby="order-summary-heading">
+          {payment && <section className="order-step-reveal rounded-2xl border bg-muted p-5 shadow-lg" aria-labelledby="order-summary-heading">
             <h2 id="order-summary-heading" className="text-xl font-bold text-accent">Order Summary</h2>
             <dl className="mt-3 grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
               <div className="flex justify-between gap-3"><dt>Pack</dt><dd className="font-bold">{pack ? `${pack.name} · ${pack.limit} Pops` : "Not selected"}</dd></div>
@@ -453,8 +444,8 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
             </div>
             <p className="mt-3 text-sm text-muted-foreground">Delivery fee and final total confirmed on WhatsApp.</p>
             {Object.values(errors).some(Boolean) && <p className="mt-3 text-sm font-semibold text-destructive">Please check the highlighted details above.</p>}
-            <Button type="submit" size="lg" className="mt-5 min-h-12 w-full rounded-full text-base font-bold">Send Order on WhatsApp</Button>
-          </section>
+            <Button type="submit" size="lg" className="mt-5 min-h-12 w-full rounded-full text-base font-bold">Confirm Order on WhatsApp</Button>
+          </section>}
         </div>
       )}
 
