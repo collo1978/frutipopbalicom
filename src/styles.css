@@ -259,23 +259,6 @@
   .flavour-product-pop:hover .flavour-product-pop-backdrop { opacity: 1; transform: scale(1); }
 }
 
-/* Order-page inspection is intentionally larger so the full tube copy can be read. */
-.order-flavour-picker .flavour-pop { overflow: visible; }
-.order-flavour-picker .flavour-product-pop[data-active="true"] .flavour-product-pop-img {
-  transform: scale(1.9) translateY(-7%);
-}
-.order-flavour-picker .flavour-pop:has(.flavour-product-pop[data-active="true"]) { z-index: 50; }
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .order-flavour-picker .flavour-pop:hover .flavour-product-pop-img,
-  .order-flavour-picker .flavour-product-pop:hover .flavour-product-pop-img {
-    transform: scale(1.9) translateY(-7%);
-  }
-}
-@media (max-width: 767px) {
-  .order-flavour-picker .flavour-product-pop[data-active="true"] .flavour-product-pop-img {
-    transform: scale(1.85) translateY(-6%);
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   .flavour-product-pop-img { transition: none; }
 }
