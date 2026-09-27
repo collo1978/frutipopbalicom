@@ -125,14 +125,14 @@ export function MysteryPopIdle({ action, homepage = false }: { action: ReactNode
       <div className={`flex w-full items-center justify-center px-2 ${homepage ? "h-9 pt-1 md:h-16 md:pt-2" : "h-7 pt-1 md:h-10 md:pt-2"}`}>
         <h3 className="font-display text-2xl font-black uppercase leading-none text-accent md:text-3xl">Mystery POP</h3>
       </div>
-      <div className={`relative w-full overflow-hidden ${homepage ? "h-80 md:aspect-[2/3] md:h-auto" : "aspect-[2/2.85] md:aspect-[2/3]"}`}>
+      <div className={`relative w-full overflow-hidden ${homepage ? "h-80 md:aspect-[2/3] md:h-auto" : "aspect-[2/2.55] md:aspect-[2/3]"}`}>
         <p className="absolute left-0 right-0 top-2 z-20 text-sm font-bold text-foreground/75 md:top-3 md:text-base">Can't decide on a flavour?</p>
         <img src={strawberryArt} alt="" aria-hidden="true" className="absolute -bottom-2 -left-[13%] w-[73%] -rotate-12 object-contain drop-shadow-md md:-bottom-3 md:-left-[11%] md:w-[70%]" />
         <img src={mangoArt} alt="" aria-hidden="true" className="absolute -bottom-3 -right-[14%] w-[73%] rotate-12 object-contain drop-shadow-md md:-bottom-4 md:-right-[12%] md:w-[70%]" />
         <span aria-hidden="true" className={`absolute left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 rotate-3 items-center justify-center font-display font-black leading-none text-accent drop-shadow-md md:top-[40%] md:h-64 md:w-48 md:text-[22rem] ${homepage ? "top-[39%] h-56 w-44 text-[19rem]" : "top-[46%] h-48 w-36 text-[16rem]"}`}>?</span>
         <img src={popsArt} alt="" aria-hidden="true" className="absolute -bottom-1 left-1/2 z-20 w-[50%] -translate-x-1/2 object-contain drop-shadow-md md:w-[47%]" />
       </div>
-      <div className={`relative flex min-h-20 w-full flex-1 items-center justify-center px-3 text-center md:min-h-24 ${homepage ? "pb-3 pt-1 md:pb-4 md:pt-2" : "pb-3 pt-2 md:px-3 md:pb-4 md:pt-3"}`}>
+      <div className={`relative flex min-h-20 w-full flex-1 items-center justify-center px-3 text-center @max-[250px]:min-h-28 @max-[250px]:items-start @max-[250px]:pt-2 md:min-h-24 ${homepage ? "pb-3 pt-1 md:pb-4 md:pt-2" : "pb-3 pt-2 md:px-3 md:pb-4 md:pt-3"}`}>
         {action}
         <span aria-hidden="true" className="absolute bottom-1.5 right-1.5 z-20 flex h-14 w-14 -rotate-6 items-center justify-center bg-dragonfruit px-1.5 text-center font-display text-[10px] font-black leading-[1.02] text-primary-foreground shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] @min-[285px]:bottom-2 @min-[285px]:right-2 @min-[285px]:h-[4.5rem] @min-[285px]:w-[4.5rem] @min-[285px]:px-2 @min-[285px]:text-[12px] @min-[360px]:h-24 @min-[360px]:w-24 @min-[360px]:text-[15px]">
           LET THE KIDS TRY!
