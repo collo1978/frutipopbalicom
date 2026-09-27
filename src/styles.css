@@ -256,9 +256,11 @@
 .flavour-pop h3 { transition: transform 280ms ease; transform-origin: center top; }
 .flavour-pop:has(.flavour-product-pop[data-active="true"]) h3 { transform: scale(1.18); }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .flavour-pop:hover { z-index: 20; }
+  .flavour-pop:hover { z-index: 30; }
   .flavour-pop:hover .flavour-product-pop-img,
-  .flavour-product-pop:hover .flavour-product-pop-img { transform: scale(1.36) translateY(-5%); filter: drop-shadow(0 1.5rem 1.05rem rgb(0 0 0 / 0.25)); }
+  .flavour-product-pop:hover .flavour-product-pop-img { transform: scale(1.55) translateY(-4%); filter: drop-shadow(0 1.5rem 1.05rem rgb(0 0 0 / 0.25)); }
+  .flavour-pop:hover .flavour-product-pop-backdrop,
+  .flavour-product-pop:hover .flavour-product-pop-backdrop { opacity: 1; transform: scale(1); }
 }
 @media (prefers-reduced-motion: reduce) {
   .flavour-product-pop-img { transition: none; }
