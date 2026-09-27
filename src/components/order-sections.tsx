@@ -177,9 +177,10 @@ export function MysteryPopGame({ onAdd, homepage = false }: MysteryPopGameProps)
           </span>
           <MysteryPopIdle homepage={homepage} action={
             <div className="relative z-30">
-            <Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full px-5 font-extrabold md:px-6">PICK MY POP</Button>
-          </div>
-        } />
+              <Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full px-5 font-extrabold md:px-6">PICK MY POP</Button>
+            </div>
+          } />
+        </>
       )}
       {phase === "shuffling" && (
         <div className="flex min-h-[26rem] flex-1 flex-col items-center justify-center px-2 py-4">
