@@ -251,6 +251,17 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
         <fieldset ref={flavourRef} className="min-w-0 order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
           <legend className="sr-only">2. Pick Your Flavours</legend>
           <h2 className={legend} aria-hidden="true">2. Pick Your Flavours</h2>
+          <div className={cn("sticky top-[4.5rem] z-40 mt-3 rounded-xl border border-primary/20 bg-leaf/95 px-3 py-2.5 shadow-md backdrop-blur sm:px-4", complete && "ring-2 ring-primary/30")} aria-live="polite">
+            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+              <p className="text-sm font-bold text-accent sm:text-base">
+                {extraTotal > 0
+                  ? <>{pack.name} · {pack.limit} Pops + {extraTotal} {extraTotal === 1 ? "Extra" : "Extras"}</>
+                  : <>Your {pack.name} · {total} / {pack.limit} Pops · {complete ? <span className="text-primary">Your pack is ready! 🎉</span> : <span>{remaining} more to go!</span>}</>}
+              </p>
+              {complete && <Button type="button" size="sm" onClick={() => scrollTo(deliveryRef.current)} className="h-9 rounded-full px-4">Continue <span aria-hidden="true">→</span></Button>}
+            </div>
+            <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className="order-progress mt-1.5 h-2.5 w-full overflow-hidden rounded-full" />
+          </div>
           <div className="mt-3">
             <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Pick your flavours" tightTop desktopClass="md:grid md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[86%]">
               {[
@@ -283,15 +294,9 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
               ]}
             </SwipeRow>
           </div>
-          <div className="mt-4 rounded-xl bg-leaf p-4" aria-live="polite">
-            <p className="font-bold text-accent">
-              {extraTotal > 0
-                ? <>{pack.name} · {pack.limit} Pops + {extraTotal} {extraTotal === 1 ? "Extra" : "Extras"}</>
-                : <>Your {pack.name} · {total} / {pack.limit} Pops {complete ? <span className="text-primary">· Complete!</span> : <span>· {remaining} more to go!</span>}</>}
-            </p>
-            <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className="order-progress mt-2 h-3 w-full overflow-hidden rounded-full" />
+          <div className="mt-4 rounded-xl bg-leaf p-4">
             {complete && (
-              <div className="mt-3">
+              <div>
                 <p className="flex items-center gap-2 font-bold text-primary" aria-label="Your pack is full!"><PartyPopper className="h-5 w-5" /> Your pack is full!</p>
                 {!extrasEnabled ? (
                   <>

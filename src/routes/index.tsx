@@ -34,13 +34,13 @@ const A = () => <span className="cta-arrow" aria-hidden="true">→</span>;
 function Hero() {
   const alt = "Bali's Fruity Sorbet Ice Blocks. Refreshing flavours and a little pop of happiness.";
   return (
-    <section className="bg-hero-cream">
-      <div className="mx-auto flex min-h-[calc(100svh-4.5rem)] flex-col items-center justify-center px-2 pb-3 pt-1 md:min-h-0 md:px-4 md:pb-4 md:pt-1">
+    <section className="overflow-x-clip bg-hero-cream">
+      <div className="mx-auto flex min-h-[calc(100svh-4.5rem)] flex-col items-center justify-center px-2 pb-5 pt-1 md:min-h-0 md:px-4 md:pb-5 md:pt-1">
         <picture className="flex min-h-0 w-full items-center justify-center">
           <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1690} height={931} />
-          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto max-h-[calc(100svh-12rem)] w-auto max-w-full object-contain md:max-h-[calc(100svh-10.5rem)] md:w-full md:max-w-[1350px]" />
+          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto max-h-[calc(100svh-12rem)] w-auto max-w-full object-contain md:max-h-none md:w-[112%] md:max-w-[1510px]" />
         </picture>
-        <div className="mt-1 flex w-full flex-col items-center gap-1.5 md:mt-1">
+        <div className="-mt-5 flex w-full flex-col items-center gap-2.5 md:-mt-8 md:gap-3">
           <Button asChild size="lg" className={`${cta} w-[calc(100%-1rem)] max-w-md md:w-auto md:px-12 md:text-lg`}>
             <Link to="/order">Order My Pops <A /></Link>
           </Button>
@@ -118,17 +118,18 @@ function Home() {
                     <p className="text-sm font-bold text-primary">{m.t}</p>
                     <h3 className="mt-1 text-lg font-bold leading-tight text-accent">{m.h}</h3>
                     <p className="mt-1 flex-1 text-sm text-foreground/75">{m.d}</p>
-                    <Link to="/order" className="mt-3 text-sm font-bold text-primary hover:underline">{m.cta} <A /></Link>
+                    <Button asChild className="cta-pop cta-pop-sm mt-4 w-full rounded-full bg-primary text-primary-foreground">
+                      <Link to="/order">{m.cta} <A /></Link>
+                    </Button>
                   </div>
                 </article>
               ))}
             </SwipeRow>
           </div>
-          <p className="mt-6 text-center text-sm text-muted-foreground">Enjoyed by school and club communities including {COMMUNITY_NAMES.slice(0, -1).join(", ")} and {COMMUNITY_NAMES.at(-1)}.</p>
         </div>
       </section>
 
-      <section id="pop-stars" className="scroll-mt-20 bg-hero-cream py-10 md:py-12">
+      <section id="pop-stars" className="scroll-mt-20 bg-hero-cream pb-10 pt-2 md:pb-12 md:pt-3">
         <div className="mx-auto max-w-7xl px-4">
           <picture>
             <source media="(min-width: 768px)" srcSet={popStarsDesktop.url} width={1774} height={887} />

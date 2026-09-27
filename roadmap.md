@@ -13,8 +13,8 @@
 - [x] Separate regular flavour inspection from Mystery POP discovery on the Order page
 - [x] Add an explicit extra-pops flow with separate summary and WhatsApp details
 - [x] Replace Order page products with the six original full-resolution PNG files
-- [ ] Tighten homepage hero spacing and enlarge only the desktop header logo
-- [ ] Remove the homepage community sentence, strengthen all four occasion CTAs, and tighten the POP Stars transition
-- [ ] Keep live pack progress sticky during flavour selection with a compact completed state
-- [ ] Remove every “Sister business” label and update the Snow Wave Bali description
+- [x] Tighten homepage hero spacing and enlarge only the desktop header logo
+- [x] Remove the homepage community sentence, strengthen all four occasion CTAs, and tighten the POP Stars transition
+- [x] Keep live pack progress sticky during flavour selection with a compact completed state
+- [x] Remove every “Sister business” label and update the Snow Wave Bali description
 - [ ] Verify the requested desktop and mobile layouts and ordering interaction

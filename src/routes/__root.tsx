@@ -65,7 +65,7 @@ function SiteHeader() {
     <header className="sticky top-0 z-50 border-b bg-coconut/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-2">
         <Link to="/" onClick={() => setOpen(false)} aria-label="Fruti Pop Bali home">
-          <img src={logo.url} alt="Fruti Pop" className="h-12 w-auto" />
+          <img src={logo.url} alt="Fruti Pop" className="h-12 w-auto lg:scale-125 lg:origin-left" />
         </Link>
         <nav aria-label="Main" className="hidden items-center lg:flex">
           {NAV.map((item) => (
@@ -143,9 +143,9 @@ function SiteFooter() {
           </ul>
         </div>
         <div>
-          <p className="font-display font-semibold text-mango">Sister business</p>
-          <a href={SNOWWAVE.url} target="_blank" rel="noopener noreferrer" className="mt-2 block text-sm hover:underline">
-            {SNOWWAVE.label} {SNOWWAVE.blurb} ↗
+          <a href={SNOWWAVE.url} target="_blank" rel="noopener noreferrer" className="block text-sm hover:underline">
+            <span className="font-display font-semibold text-mango">{SNOWWAVE.label}</span><br />
+            {SNOWWAVE.blurb} ↗
           </a>
         </div>
       </div>
