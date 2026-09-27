@@ -42,3 +42,6 @@
 - [x] Replace the desktop hero with the new wide transparent artwork
 - [x] Compact the mobile Our Flavours carousel without changing desktop
 - [x] Verify desktop hero and mobile flavour interactions
+- [x] Align mobile homepage heading impact and POP accent treatment
+- [x] Compact the desktop flavour grid with its CTA in the final grid cell
+- [x] Verify the updated mobile headings and desktop flavour layout
