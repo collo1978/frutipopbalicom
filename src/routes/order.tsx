@@ -2,12 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { OrderForm, type PackKey } from "@/components/order-form";
 import { WhyFrutiPop } from "@/components/order-sections";
 
-type OrderSearch = { pack?: PackKey };
+type OrderSearch = { pack?: PackKey; mystery?: boolean };
 
 export const Route = createFileRoute("/order")({
   validateSearch: (search: Record<string, unknown>): OrderSearch => {
-    if (search["pack"] === "family" || search["pack"] === "jumbo") return { pack: search["pack"] };
-    return {};
+    const result: OrderSearch = {};
+    if (search["pack"] === "family" || search["pack"] === "jumbo") result.pack = search["pack"];
+    if (search["mystery"]) result.mystery = true;
+    return result;
   },
   head: () => ({
     meta: [
@@ -23,13 +25,13 @@ export const Route = createFileRoute("/order")({
 });
 
 function OrderPage() {
-  const { pack } = Route.useSearch();
+  const { pack, mystery } = Route.useSearch();
   return (
     <>
-      <section className="bg-muted py-4 md:py-5">
+      <section className="bg-muted py-3 md:py-4">
         <div className="mx-auto max-w-7xl px-4">
-          <h1 className="fruti-section-heading">Order Your Fruti Pops</h1>
-          <div className="mx-auto mt-3 max-w-6xl"><OrderForm initialPack={pack} /></div>
+          <h1 className="sr-only">Order Your Fruti Pops</h1>
+          <div className="mx-auto max-w-6xl"><OrderForm initialPack={pack} openMystery={mystery} /></div>
         </div>
       </section>
 
