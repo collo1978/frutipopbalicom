@@ -180,7 +180,7 @@ export function FlavourDiscovery() {
   const tube = ORDER_FLAVOURS.find((f) => f.name === viewTube) ?? null;
   return (
     <>
-      <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Our flavours" desktopClass="md:grid md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[82%]" tightTop>
+      <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Our flavours" desktopClass="md:grid md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[84%]" tightTop>
         {[
           ...ORDER_FLAVOURS.map((flavour) => (
             <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col overflow-hidden rounded-3xl ${flavour.tint}`}>
