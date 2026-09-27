@@ -14,6 +14,7 @@ import { FLAVOURS } from "@/lib/flavours";
 import { ORDER_FLAVOURS, type OrderFlavour } from "@/lib/order-flavours";
 import { waLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { FruitIcon } from "@/components/fruit-icon";
 
 export type PackKey = "family" | "jumbo";
 
@@ -67,6 +68,22 @@ function baliCurrentTime() {
 export function OrderForm({ initialPack, openMystery = false }: { initialPack: PackKey | undefined; openMystery?: boolean | undefined }) {
   const [packKey, setPackKey] = useState<PackKey | undefined>(initialPack);
   const [quantities, setQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
+  const trackerSentinel = useRef<HTMLDivElement>(null);
+  const [stuck, setStuck] = useState(false);
+  const [headerH, setHeaderH] = useState(72);
+  useEffect(() => {
+    const header = document.querySelector("header");
+    const measure = () => setHeaderH(header ? Math.round(header.getBoundingClientRect().height) : 72);
+    measure();
+    window.addEventListener("resize", measure);
+    const el = trackerSentinel.current;
+    let io: IntersectionObserver | undefined;
+    if (el) {
+      io = new IntersectionObserver(([entry]) => setStuck(!entry.isIntersecting && entry.boundingClientRect.top < window.innerHeight / 2), { rootMargin: `-${(header?.getBoundingClientRect().height ?? 72) + 1}px 0px 0px 0px` });
+      io.observe(el);
+    }
+    return () => { window.removeEventListener("resize", measure); io?.disconnect(); };
+  });
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("+62");
   const [address, setAddress] = useState("");
