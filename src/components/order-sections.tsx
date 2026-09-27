@@ -119,16 +119,16 @@ export function BestSellerBadge({ className = "" }: { className?: string }) {
 }
 
 /** Shared Mystery POP artwork direction. The action remains a real page control. */
-export function MysteryPopIdle({ action }: { action: ReactNode }) {
+export function MysteryPopIdle({ action, compactDesktop = false }: { action: ReactNode; compactDesktop?: boolean }) {
   return (
     <div className="flex h-full w-full flex-col items-center text-center">
       <h3 className="font-display text-2xl font-black uppercase leading-none text-accent md:text-3xl">Mystery POP</h3>
       <p className="mt-1.5 text-sm font-bold text-foreground/75 md:text-base">Can't decide on a flavour?</p>
-      <div className="relative my-0 min-h-32 w-full flex-1 overflow-hidden md:min-h-52">
-        <img src={strawberryArt} alt="" aria-hidden="true" className="absolute -bottom-3 -left-[11%] w-[66%] -rotate-12 object-contain drop-shadow-md" />
-        <img src={mangoArt} alt="" aria-hidden="true" className="absolute -bottom-4 -right-[12%] w-[66%] rotate-12 object-contain drop-shadow-md" />
-        <span aria-hidden="true" className="absolute left-1/2 top-[38%] z-10 flex h-52 w-40 -translate-x-1/2 -translate-y-1/2 rotate-3 items-center justify-center font-display text-[17.5rem] font-black leading-none text-accent drop-shadow-md md:top-[37%] md:h-80 md:w-64 md:text-[29rem]">?</span>
-        <img src={popsArt} alt="" aria-hidden="true" className="absolute -bottom-0.5 left-1/2 z-20 w-[45%] -translate-x-1/2 object-contain drop-shadow-md md:w-[43%]" />
+      <div className={`relative my-0 min-h-32 w-full flex-1 overflow-hidden md:min-h-52 ${compactDesktop ? "md:min-h-0" : ""}`}>
+        <img src={strawberryArt} alt="" aria-hidden="true" className={`absolute -bottom-3 -left-[11%] w-[66%] -rotate-12 object-contain drop-shadow-md ${compactDesktop ? "md:-bottom-2 md:-left-[8%] md:w-[58%]" : ""}`} />
+        <img src={mangoArt} alt="" aria-hidden="true" className={`absolute -bottom-4 -right-[12%] w-[66%] rotate-12 object-contain drop-shadow-md ${compactDesktop ? "md:-bottom-2 md:-right-[8%] md:w-[58%]" : ""}`} />
+        <span aria-hidden="true" className={`absolute left-1/2 top-[38%] z-10 flex h-52 w-40 -translate-x-1/2 -translate-y-1/2 rotate-3 items-center justify-center font-display text-[17.5rem] font-black leading-none text-accent drop-shadow-md ${compactDesktop ? "md:top-[40%] md:h-48 md:w-36 md:text-[17rem]" : "md:top-[37%] md:h-80 md:w-64 md:text-[29rem]"}`}>?</span>
+        <img src={popsArt} alt="" aria-hidden="true" className={`absolute -bottom-0.5 left-1/2 z-20 w-[45%] -translate-x-1/2 object-contain drop-shadow-md ${compactDesktop ? "md:w-[39%]" : "md:w-[43%]"}`} />
       </div>
       <div className="mt-auto flex justify-center">{action}</div>
     </div>
@@ -167,9 +167,9 @@ export function MysteryPopGame({ onAdd, homepage = false }: MysteryPopGameProps)
   if (!flavour) return null;
 
   return (
-    <div className={`flavour-pop relative flex h-full flex-col items-center overflow-visible rounded-3xl bg-pastel-lavender px-2 pb-3 pt-3 text-center md:pb-4 md:pt-4 ${homepage ? "min-h-[23rem] md:min-h-[24rem]" : "min-h-[19rem] md:min-h-[26rem]"}`}>
+    <div className={`flavour-pop relative flex h-full flex-col items-center overflow-visible rounded-3xl bg-pastel-lavender px-2 pb-3 pt-3 text-center md:pb-4 md:pt-4 ${homepage ? "min-h-[23rem] md:min-h-0 md:overflow-hidden" : "min-h-[19rem] md:min-h-[26rem]"}`}>
       {phase === "idle" && (
-        <MysteryPopIdle action={
+        <MysteryPopIdle compactDesktop={homepage} action={
           <div className="relative">
             <span aria-hidden="true" className="absolute -right-10 -top-9 z-20 flex h-14 w-14 rotate-12 items-center justify-center bg-mango px-1.5 text-center font-display text-[9px] font-black leading-[0.9] text-accent shadow-md [clip-path:polygon(50%_0%,61%_23%,82%_10%,79%_36%,100%_43%,78%_56%,91%_78%,64%_74%,57%_100%,45%_77%,22%_91%,25%_64%,0%_55%,23%_43%,8%_21%,36%_26%)] md:-right-14 md:-top-11 md:h-16 md:w-16 md:text-[10px]">
               LET THE KIDS PRESS!
@@ -259,7 +259,7 @@ export function FlavourDiscovery({ desktopEndcap }: { desktopEndcap?: ReactNode 
               <div className="flex h-10 items-center justify-center pt-1 md:h-16 md:pt-2">
                 {flavour.name === "Strawberry" && <BestSellerBadge className="px-3 py-1 text-xs md:px-5 md:py-2 md:text-base [&_svg]:h-3.5 [&_svg]:w-3.5 md:[&_svg]:h-[1.125rem] md:[&_svg]:w-[1.125rem]" />}
               </div>
-              {flavour.art && <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="h-[21.5rem] w-full select-none object-contain md:aspect-[2/3] md:h-auto md:object-cover" />}
+              {flavour.art && <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className={`h-[21.5rem] w-full select-none object-contain md:aspect-[2/3] md:h-auto ${flavour.name === "Piña Colada" ? "md:object-contain" : "md:object-cover"}`} />}
               <div className="flex flex-1 flex-col items-center px-3 pb-3 pt-1 text-center md:pb-4 md:pt-2">
                 <h3 className="font-display text-lg font-extrabold text-accent md:text-2xl">{flavour.name}</h3>
                 <div className="mt-auto pt-2 md:pt-3"><SeeThePopButton name={flavour.name} onClick={() => setViewTube(flavour.name)} /></div>
@@ -362,7 +362,7 @@ export function WhyFrutiPop({ showCta = false, showTestimonial = false }: { show
     <section className="bg-background py-8 md:py-10">
       <div className="mx-auto max-w-6xl px-4">
         <div className="text-center">
-          <h2 className="font-display text-[2.5rem] font-black leading-[0.92] text-accent md:text-[2.25rem] md:leading-none">Why Fruti Pop?</h2>
+          <h2 className="fruti-section-heading">Why Fruti Pop?</h2>
           <p className="mt-1.5 text-base font-medium text-foreground/70 md:text-lg">A little goodness in every pop!</p>
         </div>
         <div className="mt-4 md:mt-5"><BenefitCards /></div>

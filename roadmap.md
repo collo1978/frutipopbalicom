@@ -45,3 +45,5 @@
 - [x] Align mobile homepage heading impact and POP accent treatment
 - [x] Compact the desktop flavour grid with its CTA in the final grid cell
 - [x] Verify the updated mobile headings and desktop flavour layout
+- [x] Replace Piña Colada artwork and refine the desktop flavour section cards and CTA
+- [ ] Verify the updated artwork, desktop alignment, and mobile presentation
