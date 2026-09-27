@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
-import { CalendarIcon, Copy, Minus, PartyPopper, Plus, RefreshCw } from "lucide-react";
+import { Dices, Eye, Minus, PartyPopper, Plus, RefreshCw, X } from "lucide-react";
 import { SwipeRow } from "@/components/order-sections";
-import { ZoomableFlavourImage } from "@/components/flavour-zoom";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
