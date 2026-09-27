@@ -38,6 +38,6 @@
 - [x] Replace all six homepage and Order flavour artworks with the supplied clearer matching set
 - [x] Verify all six artworks, cards, carousel, and Mystery Pop on mobile and desktop
 
-- [ ] Replace the desktop hero with the new wide transparent artwork
-- [ ] Compact the mobile Our Flavours carousel without changing desktop
+- [x] Replace the desktop hero with the new wide transparent artwork
+- [x] Compact the mobile Our Flavours carousel without changing desktop
 - [ ] Verify desktop hero and mobile flavour interactions
