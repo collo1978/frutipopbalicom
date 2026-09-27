@@ -206,6 +206,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
       const t = window.setTimeout(() => flavourRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 300);
       return () => window.clearTimeout(t);
     }
+    return undefined;
   }, []);
 
   const mysteryRef = useRef<HTMLDivElement>(null);
