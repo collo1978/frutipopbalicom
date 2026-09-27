@@ -4,6 +4,7 @@ import { CalendarIcon, Copy, Minus, PartyPopper, Plus, RefreshCw } from "lucide-
 import { BestSellerBadge, MysteryPopIdle, SeeThePopButton, SwipeRow, TubeViewer } from "@/components/order-sections";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -17,9 +18,13 @@ import { cn } from "@/lib/utils";
 export type PackKey = "family" | "jumbo";
 
 const PACKS = {
-  family: { name: "Family Pack", limit: 10, price: "Rp250,000" },
-  jumbo: { name: "Jumbo Pack", limit: 20, price: "Rp485,000" },
+  family: { name: "Family Pack", limit: 10, price: "Rp250,000", amount: 250000 },
+  jumbo: { name: "Jumbo Pack", limit: 20, price: "Rp485,000", amount: 485000 },
 } as const;
+
+/** Normal price for one extra Pop. Not yet confirmed by Fruti Pop: set a number (e.g. 25000) to enable extra charges. */
+const EXTRA_POP_PRICE: number | null = null;
+const rupiah = (n: number) => `Rp${n.toLocaleString("en-US")}`;
 
 const flavourEmoji: Record<string, string> = {
   Strawberry: "🍓",
@@ -62,8 +67,6 @@ function baliCurrentTime() {
 export function OrderForm({ initialPack, openMystery = false }: { initialPack: PackKey | undefined; openMystery?: boolean | undefined }) {
   const [packKey, setPackKey] = useState<PackKey | undefined>(initialPack);
   const [quantities, setQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
-  const [extraQuantities, setExtraQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
-  const [extrasEnabled, setExtrasEnabled] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("+62");
   const [address, setAddress] = useState("");
@@ -75,28 +78,37 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [copied, setCopied] = useState(false);
 
-  const pack = packKey ? PACKS[packKey] : undefined;
   const total = useMemo(() => Object.values(quantities).reduce((sum, value) => sum + value, 0), [quantities]);
-  const extraTotal = useMemo(() => Object.values(extraQuantities).reduce((sum, value) => sum + value, 0), [extraQuantities]);
+  // Best pricing: a Family Pack reaching 20 Pops automatically becomes a Jumbo Pack (and reverts below 20).
+  const effectiveKey: PackKey | undefined = packKey === "family" && total >= PACKS.jumbo.limit ? "jumbo" : packKey;
+  const pack = effectiveKey ? PACKS[effectiveKey] : undefined;
+  const extraTotal = pack ? Math.max(0, total - pack.limit) : 0;
   const complete = Boolean(pack && total >= pack.limit);
+  const extraCharge = EXTRA_POP_PRICE != null ? extraTotal * EXTRA_POP_PRICE : null;
+  const orderTotal = pack ? (extraTotal === 0 ? pack.price : extraCharge != null ? rupiah(pack.amount + extraCharge) : `${pack.price} + ${extraTotal} extra ${extraTotal === 1 ? "Pop" : "Pops"} (price to be confirmed)`) : "";
+  const extraChargeLabel = extraCharge != null ? rupiah(extraCharge) : "Price to be confirmed";
+
+  const [upgradeNotice, setUpgradeNotice] = useState(false);
+  const prevKey = useRef(effectiveKey);
+  useEffect(() => {
+    if (packKey === "family" && prevKey.current === "family" && effectiveKey === "jumbo") {
+      setUpgradeNotice(true);
+      const t = window.setTimeout(() => setUpgradeNotice(false), 4500);
+      prevKey.current = effectiveKey;
+      return () => window.clearTimeout(t);
+    }
+    if (effectiveKey !== "jumbo") setUpgradeNotice(false);
+    prevKey.current = effectiveKey;
+    return undefined;
+  }, [effectiveKey, packKey]);
 
   useEffect(() => {
     setPackKey(initialPack);
   }, [initialPack]);
 
   const choosePack = (next: PackKey) => {
-    const nextLimit = PACKS[next].limit;
     setPackKey(next);
-    setExtrasEnabled(false);
-    setExtraQuantities(Object.fromEntries(FLAVOURS.map((flavour) => [flavour.name, 0])));
     setErrors((current) => ({ ...current, pack: "", quantities: "" }));
-    if (total <= nextLimit) return;
-    let remaining = nextLimit;
-    setQuantities(Object.fromEntries(FLAVOURS.map((flavour) => {
-      const kept = Math.min(quantities[flavour.name] ?? 0, remaining);
-      remaining -= kept;
-      return [flavour.name, kept];
-    })));
   };
 
   const changeQuantity = (flavour: string, amount: number) => {
@@ -106,12 +118,6 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     }
     const currentValue = quantities[flavour] ?? 0;
     if (amount < 0 && currentValue === 0) return;
-    if (amount > 0 && total >= pack.limit && !extrasEnabled) return;
-    if (amount > 0 && total >= pack.limit) {
-      setExtraQuantities((current) => ({ ...current, [flavour]: (current[flavour] ?? 0) + 1 }));
-    } else if (amount < 0 && (extraQuantities[flavour] ?? 0) > 0) {
-      setExtraQuantities((current) => ({ ...current, [flavour]: Math.max(0, (current[flavour] ?? 0) - 1) }));
-    }
     setQuantities((current) => ({ ...current, [flavour]: Math.max(0, (current[flavour] ?? 0) + amount) }));
     setErrors((current) => ({ ...current, quantities: "" }));
   };
@@ -136,13 +142,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length || !pack || !date || !payment) return;
 
-    const packLines = FLAVOURS.map((flavour) => {
-      const packQuantity = (quantities[flavour.name] ?? 0) - (extraQuantities[flavour.name] ?? 0);
-      return `${flavourEmoji[flavour.name]} ${flavour.name} Sorbet: ${packQuantity} pcs`;
-    });
-    const extraLines = FLAVOURS
-      .filter((flavour) => (extraQuantities[flavour.name] ?? 0) > 0)
-      .map((flavour) => `${flavourEmoji[flavour.name]} ${flavour.name} Sorbet: ${extraQuantities[flavour.name]} extra`);
+    const packLines = FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((flavour) => `${flavourEmoji[flavour.name]} ${flavour.name} Sorbet: ${quantities[flavour.name]} pcs`);
     const message = [
       "Hi Fruti Pop 👋",
       "",
@@ -151,11 +151,11 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
       `Pack: ${pack.name}`,
       "",
       ...packLines,
-      ...(extraLines.length ? ["", "Extra Pops (price to be confirmed):", ...extraLines] : []),
       "",
       `📦 Total Order: ${total} pcs`,
-      `💰 Pack Price: ${pack.price}`,
-      ...(extraLines.length ? ["Extra Pop Price: To be confirmed"] : []),
+      `💰 ${pack.name} (${pack.limit} Pops): ${pack.price}`,
+      ...(extraTotal ? [`➕ ${extraTotal} Extra ${extraTotal === 1 ? "Pop" : "Pops"}: ${extraChargeLabel}`] : []),
+      `🧾 Total: ${orderTotal}`,
       "",
       "Delivery Details:",
       "",
@@ -179,9 +179,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     && date && !isPastDate(date) && !timeIsPast,
   );
   const [reached, setReached] = useState({ delivery: false, payment: false });
-  useEffect(() => {
-    if (complete && !reached.delivery) setReached((r) => ({ ...r, delivery: true }));
-  }, [complete, reached.delivery]);
+  const [choiceOpen, setChoiceOpen] = useState(false);
   useEffect(() => {
     if (deliveryValid && reached.delivery && !reached.payment) setReached((r) => ({ ...r, payment: true }));
   }, [deliveryValid, reached.delivery, reached.payment]);
@@ -224,7 +222,20 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
 
   const [viewTube, setViewTube] = useState<OrderFlavour | null>(null);
   const remaining = pack ? Math.max(0, pack.limit - total) : 0;
-  const full = Boolean(pack && total >= pack.limit);
+  const goDelivery = () => {
+    setChoiceOpen(false);
+    if (reached.delivery) scrollTo(deliveryRef.current);
+    else setReached((r) => ({ ...r, delivery: true }));
+  };
+  const goFlavours = () => { setChoiceOpen(false); window.setTimeout(() => flavourRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 250); };
+  const goMystery = () => {
+    setChoiceOpen(false);
+    window.setTimeout(() => {
+      mysteryRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+      setMysteryHighlight(true);
+      window.setTimeout(() => setMysteryHighlight(false), 3000);
+    }, 250);
+  };
 
   const fieldError = (key: string) => errors[key] ? <p className="mt-1 text-sm font-semibold text-destructive">{errors[key]}</p> : null;
   const legend = "scroll-mt-24 font-display text-3xl font-extrabold text-accent md:text-4xl";
@@ -262,12 +273,15 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
             <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
               <p className="text-sm font-bold text-accent sm:text-base">
                 {extraTotal > 0
-                  ? <>{pack.name} · {pack.limit} Pops + {extraTotal} {extraTotal === 1 ? "Extra" : "Extras"}</>
+                  ? <>Your {pack.name} · {total} Pops · <span className="text-primary">Pack complete ✓</span></>
                   : <>Your {pack.name} · {total} / {pack.limit} Pops · {complete ? <span className="text-primary">Your pack is ready! 🎉</span> : <span>{remaining} more to go!</span>}</>}
               </p>
-              {complete && <Button type="button" size="sm" onClick={() => scrollTo(deliveryRef.current)} className="h-8 rounded-full px-3 sm:h-9 sm:px-4">Continue <span aria-hidden="true">→</span></Button>}
+              {complete && <Button type="button" size="sm" onClick={() => setChoiceOpen(true)} className="h-8 rounded-full px-3 sm:h-9 sm:px-4">Continue <span aria-hidden="true">→</span></Button>}
             </div>
             <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className="order-progress mt-1 h-2 w-full sm:mt-1.5 sm:h-2.5 overflow-hidden rounded-full" />
+            {upgradeNotice && (
+              <p role="status" className="order-step-reveal mt-1.5 text-xs font-bold text-primary sm:text-sm">🎉 You've unlocked the Jumbo Pack! <span className="font-semibold text-leaf-foreground">We've automatically applied the better 20-Pop price.</span></p>
+            )}
           </div>
           <div className="mt-3">
             <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Pick your flavours" tightTop desktopClass="md:grid md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[64%] md:w-auto">
@@ -287,7 +301,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
                         <div className="mt-auto flex items-center gap-1.5 pt-2 md:gap-2 md:pt-3">
                           <Button type="button" variant="secondary" size="icon" onClick={() => changeQuantity(flavour.name, -1)} disabled={quantity === 0} aria-label={`Remove one ${flavour.name}`} className="h-10 w-10 rounded-full"><Minus /></Button>
                           <output aria-label={`${flavour.name} quantity`} className="w-7 text-center text-lg font-bold">{quantity}</output>
-                          <Button type="button" size="icon" onClick={() => changeQuantity(flavour.name, 1)} disabled={full && !extrasEnabled} aria-label={`Add one ${flavour.name}`} className="h-10 w-10 rounded-full"><Plus /></Button>
+                          <Button type="button" size="icon" onClick={() => changeQuantity(flavour.name, 1)} aria-label={`Add one ${flavour.name}`} className="h-10 w-10 rounded-full"><Plus /></Button>
                           <span aria-hidden="true" className="mx-1 h-7 w-px bg-accent/25" />
                           <SeeThePopButton name={flavour.name} onClick={() => setViewTube(flavour)} />
                         </div>
@@ -296,29 +310,23 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
                   );
                 }),
                 <div key="mystery" ref={mysteryRef} className={cn("h-full rounded-3xl transition-shadow duration-300", mysteryHighlight && "ring-4 ring-primary ring-offset-4 ring-offset-card")}>
-                  <MysteryPop full={full} extrasEnabled={extrasEnabled} onAdd={(n) => changeQuantity(n, 1)} />
+                  <MysteryPop onAdd={(n) => changeQuantity(n, 1)} />
                 </div>,
               ]}
             </SwipeRow>
           </div>
-          <div className="mt-4 rounded-xl bg-leaf p-4">
-            {complete && (
-              <div>
-                <p className="flex items-center gap-2 font-bold text-primary" aria-label="Your pack is full!"><PartyPopper className="h-5 w-5" /> Your pack is full!</p>
-                {!extrasEnabled ? (
-                  <>
-                    <p className="mt-1 text-sm font-semibold text-leaf-foreground">Want a few more? Add extra pops to your order.</p>
-                    <Button type="button" size="sm" onClick={() => setExtrasEnabled(true)} className="mt-3 rounded-full"><Plus /> Add Extra Pops</Button>
-                  </>
-                ) : (
-                  <>
-                    <p className="mt-1 text-sm font-semibold text-leaf-foreground">Extra pops are open. Add as many as you like.</p>
-                    <p className="mt-1 text-sm font-semibold text-accent">One more? Let Mystery POP choose it.</p>
-                  </>
-                )}
-              </div>
-            )}
-          </div>
+          {total > 0 && (
+            <div className="mt-4 rounded-xl bg-leaf p-4 text-sm text-leaf-foreground">
+              <p className="font-bold text-accent">Your selection</p>
+              <ul className="mt-2 flex flex-wrap gap-2 text-xs font-bold text-accent">{FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((f) => <li key={f.name} className="rounded-md bg-card px-2 py-1">{f.name} × {quantities[f.name]}</li>)}</ul>
+              <dl className="mt-3 grid gap-1">
+                <div className="flex justify-between gap-3"><dt>{pack.name} · {pack.limit} Pops</dt><dd className="font-bold">{pack.price}</dd></div>
+                {extraTotal > 0 && <div className="flex justify-between gap-3"><dt>+ {extraTotal} Extra {extraTotal === 1 ? "Pop" : "Pops"}</dt><dd className="font-bold">{extraChargeLabel}</dd></div>}
+                <div className="flex justify-between gap-3 border-t border-accent/15 pt-1"><dt>Total Pops</dt><dd className="font-bold">{total}</dd></div>
+                <div className="flex justify-between gap-3"><dt className="font-bold">Total</dt><dd className="text-right font-bold text-accent">{complete ? orderTotal : `${remaining} more to complete your pack`}</dd></div>
+              </dl>
+            </div>
+          )}
           {fieldError("quantities")}
         </fieldset>
       )}
@@ -373,21 +381,17 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
           <section className="rounded-2xl border bg-muted p-5 shadow-lg" aria-labelledby="order-summary-heading">
             <h2 id="order-summary-heading" className="text-xl font-bold text-accent">Order Summary</h2>
             <dl className="mt-3 grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
-              <div className="flex justify-between gap-3"><dt>Selected pack</dt><dd className="font-bold">{pack?.name ?? "Not selected"}</dd></div>
+              <div className="flex justify-between gap-3"><dt>Pack</dt><dd className="font-bold">{pack ? `${pack.name} · ${pack.limit} Pops` : "Not selected"}</dd></div>
               <div className="flex justify-between gap-3"><dt>Pack price</dt><dd className="font-bold">{pack?.price ?? "Not selected"}</dd></div>
+              {extraTotal > 0 && <div className="flex justify-between gap-3"><dt>{extraTotal} Extra {extraTotal === 1 ? "Pop" : "Pops"}</dt><dd className="font-bold">{extraChargeLabel}</dd></div>}
               <div className="flex justify-between gap-3"><dt>Total pops</dt><dd className="font-bold">{total}</dd></div>
               <div className="flex justify-between gap-3"><dt>Payment</dt><dd className="font-bold">{payment ?? "Not selected"}</dd></div>
+              <div className="flex justify-between gap-3"><dt className="font-bold">Total</dt><dd className="text-right font-bold text-accent">{orderTotal}</dd></div>
             </dl>
             <div className="mt-3">
-              <p className="text-xs font-bold uppercase text-muted-foreground">Pack flavours</p>
-              <ul className="mt-1 flex flex-wrap gap-2 text-xs font-bold text-accent">{FLAVOURS.filter((f) => (quantities[f.name] ?? 0) - (extraQuantities[f.name] ?? 0) > 0).map((f) => <li key={f.name} className="rounded-md bg-secondary px-2 py-1">{f.name} × {(quantities[f.name] ?? 0) - (extraQuantities[f.name] ?? 0)}</li>)}</ul>
+              <p className="text-xs font-bold uppercase text-muted-foreground">Flavours</p>
+              <ul className="mt-1 flex flex-wrap gap-2 text-xs font-bold text-accent">{FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((f) => <li key={f.name} className="rounded-md bg-secondary px-2 py-1">{f.name} × {quantities[f.name]}</li>)}</ul>
             </div>
-            {extraTotal > 0 && (
-              <div className="mt-3 rounded-lg bg-leaf p-3">
-                <p className="text-xs font-bold uppercase text-leaf-foreground">Extra pops · Price to be confirmed</p>
-                <ul className="mt-1 flex flex-wrap gap-2 text-xs font-bold text-accent">{FLAVOURS.filter((f) => (extraQuantities[f.name] ?? 0) > 0).map((f) => <li key={f.name} className="rounded-md bg-card px-2 py-1">{f.name} × {extraQuantities[f.name]}</li>)}</ul>
-              </div>
-            )}
             <p className="mt-3 text-sm text-muted-foreground">Delivery fee and final total confirmed on WhatsApp.</p>
             {Object.values(errors).some(Boolean) && <p className="mt-3 text-sm font-semibold text-destructive">Please check the highlighted details above.</p>}
             <Button type="submit" size="lg" className="mt-5 min-h-12 w-full rounded-full text-base font-bold">Send Order on WhatsApp</Button>
@@ -396,11 +400,24 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
       )}
 
       <TubeViewer tube={viewTube} onClose={() => setViewTube(null)} />
+      <Dialog open={choiceOpen} onOpenChange={setChoiceOpen}>
+        <DialogContent className="w-[calc(100%-2rem)] max-w-md rounded-3xl bg-card p-6 text-center">
+          <DialogHeader className="text-center sm:text-center">
+            <DialogTitle className="font-display text-2xl font-extrabold text-accent">Your pack is full! 🎉</DialogTitle>
+            <DialogDescription className="font-semibold">Ready to check out, or fancy adding a few more Pops?</DialogDescription>
+          </DialogHeader>
+          <div className="mt-2 grid gap-2.5">
+            <Button type="button" size="lg" onClick={goDelivery} className="min-h-12 rounded-full text-base font-bold">Continue to Delivery →</Button>
+            <Button type="button" size="lg" variant="outline" onClick={goFlavours} className="min-h-12 rounded-full text-base font-bold">Add More Flavours →</Button>
+            <Button type="button" size="lg" variant="secondary" onClick={goMystery} className="min-h-12 rounded-full text-base font-bold">🎲 Pick a Mystery Pop →</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </form>
   );
 }
 
-function MysteryPop({ full, extrasEnabled, onAdd }: { full: boolean; extrasEnabled: boolean; onAdd: (name: string) => void }) {
+function MysteryPop({ onAdd }: { onAdd: (name: string) => void }) {
   const [phase, setPhase] = useState<"idle" | "shuffling" | "result">("idle");
   const [index, setIndex] = useState(0);
   const timers = useRef<number[]>([]);
@@ -425,25 +442,25 @@ function MysteryPop({ full, extrasEnabled, onAdd }: { full: boolean; extrasEnabl
   const flavour = ORDER_FLAVOURS[index];
   if (!flavour) return null;
   return (
-    <div className="flavour-pop relative flex h-full min-h-[19rem] flex-col items-center overflow-hidden rounded-3xl bg-pastel-lavender px-3 pb-3 pt-4 md:min-h-[26rem] md:pb-4 md:pt-5 text-center">
+    <div className="flavour-pop relative flex h-full min-h-[19rem] flex-col items-center overflow-hidden rounded-3xl bg-pastel-lavender px-2 pb-3 pt-3 md:min-h-[26rem] md:pb-4 md:pt-4 text-center">
       {phase === "idle" && (
         <MysteryPopIdle action={<Button type="button" size="sm" onClick={shuffle} className="cta-pop cta-pop-sm whitespace-nowrap rounded-full">PICK MY POP</Button>} />
       )}
       {phase === "shuffling" && (
         <div className="flex flex-1 flex-col items-center justify-center">
-          {flavour.art && <img src={flavour.art} alt="" className="mystery-shuffle-img max-h-40 md:max-h-52 w-auto select-none rounded-2xl object-contain opacity-80" draggable={false} />}
+          {flavour.art && <img src={flavour.art} alt="" className="mystery-shuffle-img max-h-64 md:max-h-80 w-auto max-w-full select-none rounded-2xl object-contain opacity-80" draggable={false} />}
           <h3 className="mt-3 font-display text-lg font-extrabold text-accent">Shuffling...</h3>
         </div>
       )}
       {phase === "result" && (
         <>
           <div className="mystery-reveal flex flex-1 flex-col items-center justify-center">
-            {flavour.art && <img src={flavour.art} alt={`Fruti Pop ${flavour.name} flavour artwork`} loading="lazy" draggable={false} className="max-h-44 w-auto select-none rounded-2xl object-contain shadow-md md:max-h-64" />}
+            {flavour.art && <img src={flavour.art} alt={`Fruti Pop ${flavour.name} flavour artwork`} loading="lazy" draggable={false} className="max-h-64 w-auto max-w-full select-none rounded-2xl object-contain shadow-md md:max-h-96" />}
             <h3 className="mt-3 flex items-center gap-1.5 font-display text-lg font-extrabold text-accent" aria-live="polite"><PartyPopper className="h-5 w-5" aria-hidden="true" /> It's {flavour.name}!</h3>
             {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">{flavour.tagline}</p>}
           </div>
           <div className="mt-auto flex w-full flex-col gap-2 pt-2">
-            <Button type="button" size="sm" onClick={() => onAdd(flavour.name)} disabled={full && !extrasEnabled} className="h-auto min-h-9 whitespace-normal rounded-full">+ Add {flavour.name} to My Pack</Button>
+            <Button type="button" size="sm" onClick={() => onAdd(flavour.name)} className="h-auto min-h-9 whitespace-normal rounded-full">+ Add {flavour.name} to My Pack</Button>
             <Button type="button" size="sm" variant="outline" onClick={shuffle} className="rounded-full"><RefreshCw /> Pick Again</Button>
           </div>
         </>
