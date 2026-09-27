@@ -23,8 +23,8 @@ const PACKS = {
   jumbo: { name: "Jumbo Pack", limit: 20, price: "Rp485,000", amount: 485000 },
 } as const;
 
-/** Normal price for one extra Pop. Not yet confirmed by Fruti Pop: set a number (e.g. 25000) to enable extra charges. */
-const EXTRA_POP_PRICE: number | null = null;
+/** Confirmed normal price for each Pop above the applicable pack quantity. */
+const EXTRA_POP_PRICE = 30000;
 const rupiah = (n: number) => `Rp${n.toLocaleString("en-US")}`;
 
 const flavourEmoji: Record<string, string> = {
@@ -101,9 +101,9 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
   const pack = effectiveKey ? PACKS[effectiveKey] : undefined;
   const extraTotal = pack ? Math.max(0, total - pack.limit) : 0;
   const complete = Boolean(pack && total >= pack.limit);
-  const extraCharge = EXTRA_POP_PRICE != null ? extraTotal * EXTRA_POP_PRICE : null;
-  const orderTotal = pack ? (extraTotal === 0 ? pack.price : extraCharge != null ? rupiah(pack.amount + extraCharge) : `${pack.price} + ${extraTotal} extra ${extraTotal === 1 ? "Pop" : "Pops"} (price to be confirmed)`) : "";
-  const extraChargeLabel = extraCharge != null ? rupiah(extraCharge) : "Price to be confirmed";
+  const extraCharge = extraTotal * EXTRA_POP_PRICE;
+  const orderTotal = pack ? rupiah(pack.amount + extraCharge) : "";
+  const extraChargeLabel = rupiah(extraCharge);
 
   const [upgradeNotice, setUpgradeNotice] = useState(false);
   const prevKey = useRef(effectiveKey);
@@ -249,14 +249,18 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     if (reached.delivery) scrollTo(deliveryRef.current);
     else setReached((r) => ({ ...r, delivery: true }));
   };
-  const goFlavours = () => { setChoiceOpen(false); window.setTimeout(() => flavourRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 250); };
+  const goFlavours = () => setChoiceOpen(false);
   const goMystery = () => {
+    const pageY = window.scrollY;
     setChoiceOpen(false);
     window.setTimeout(() => {
-      mysteryRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+      const item = mysteryRef.current?.parentElement;
+      const carousel = item?.parentElement;
+      if (item && carousel) carousel.scrollTo({ left: item.offsetLeft - carousel.offsetLeft - 16, behavior: "smooth" });
+      window.scrollTo({ top: pageY, behavior: "instant" });
       setMysteryHighlight(true);
       window.setTimeout(() => setMysteryHighlight(false), 3000);
-    }, 250);
+    }, 80);
   };
 
   const fieldError = (key: string) => errors[key] ? <p className="mt-1 text-sm font-semibold text-destructive">{errors[key]}</p> : null;
@@ -312,7 +316,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
             )}
             <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className={cn("order-progress w-full overflow-hidden rounded-full", stuck ? "mt-1 h-1" : "mt-1.5 h-1.5 sm:h-2")} />
             {upgradeNotice && (
-              <p role="status" className="order-step-reveal mt-1.5 text-xs font-bold text-primary sm:text-sm">🎉 You've unlocked the Jumbo Pack! <span className="font-semibold text-leaf-foreground">We've automatically applied the better 20-Pop price.</span></p>
+              <p role="status" className="order-step-reveal mt-1.5 text-xs font-bold text-primary sm:text-sm">🎉 You’ve unlocked the Jumbo Pack! <span className="font-semibold text-leaf-foreground">We’ve automatically applied the better 20-Pop price.</span></p>
             )}
           </div>
           <div className="mt-3" style={{ scrollMarginTop: headerH + 90 }}>
@@ -433,7 +437,7 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
 
       <TubeViewer tube={viewTube} onClose={() => setViewTube(null)} />
       <Dialog open={choiceOpen} onOpenChange={setChoiceOpen}>
-        <DialogContent className="w-[calc(100%-2rem)] max-w-md rounded-3xl bg-card p-6 text-center">
+        <DialogContent onCloseAutoFocus={(event) => event.preventDefault()} className="w-[calc(100%-2rem)] max-w-md rounded-3xl bg-card p-6 text-center">
           <DialogHeader className="text-center sm:text-center">
             <DialogTitle className="font-display text-2xl font-extrabold text-accent">Your pack is full! 🎉</DialogTitle>
             <DialogDescription className="font-semibold">Ready to check out, or fancy adding a few more Pops?</DialogDescription>
