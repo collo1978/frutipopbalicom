@@ -5,6 +5,16 @@ import popStarsDesktop from "@/assets/pop-stars-desktop.png.asset.json";
 import popStarsMobile from "@/assets/pop-stars-mobile.png.asset.json";
 import birthdayParty from "@/assets/birthday-pool-party.png.asset.json";
 import eventBoy from "@/assets/event-boy-two-pops.jpg.asset.json";
+import heroWoman from "@/assets/event-woman-straw-hat.png.asset.json";
+import heroKids from "@/assets/hero-kids-cooler-pair.png.asset.json";
+import heroFootball from "@/assets/schools-football-boy-yellow.png.asset.json";
+import frutiLogo from "@/assets/fruti-pop-logo.png.asset.json";
+import lemonPop from "@/assets/lemon-sorbet-original.png.asset.json";
+import mangoPop from "@/assets/mango-original.png.asset.json";
+import passionPop from "@/assets/passion-fruit-original.png.asset.json";
+import pinaPop from "@/assets/pina-colada-original.png.asset.json";
+import pineapplePop from "@/assets/pineapple-original.png.asset.json";
+import strawberryPop from "@/assets/strawberry-original.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { FlavourDiscovery, SwipeRow, WhyFrutiPop } from "@/components/order-sections";
 import { WhatsAppIcon } from "@/components/site";
@@ -32,23 +42,67 @@ const cta = "cta-pop rounded-full shadow-md";
 const A = () => <span className="cta-arrow" aria-hidden="true">→</span>;
 
 function Hero() {
-  const alt = "Bali's Fruity Sorbet Ice Blocks. Refreshing flavours and a little pop of happiness.";
   return (
-    <section className="min-h-[calc(100svh-4rem)] overflow-x-clip bg-hero-cream md:min-h-0">
-      <div className="flex flex-col items-center px-2 pb-8 pt-2 md:px-4 md:pb-2 md:pt-0">
-        <picture className="flex w-full items-center justify-center">
-          <source media="(min-width: 768px)" srcSet={heroDesktop.url} width={1920} height={768} />
-          <img src={heroMobile.url} alt={alt} width={1024} height={1536} className="mx-auto h-auto max-h-[calc(100svh-12rem)] w-auto max-w-full object-contain md:max-h-[calc(100svh-10rem)] md:w-[90vw] md:max-w-[1920px]" />
-        </picture>
-        <div className="-mt-5 flex w-full flex-col items-center gap-2.5 md:mt-0 md:gap-2">
-          <Button asChild size="lg" className={`${cta} w-[calc(100%-1rem)] max-w-md md:w-auto md:px-12 md:text-lg`}>
-            <Link to="/order">Order My Pops <A /></Link>
-          </Button>
-          <p className="text-center text-xs font-semibold text-foreground/65 sm:text-sm">Less Sugar • Full of Vitamins • Packed with Fruit</p>
+    <section className="overflow-hidden bg-hero-cream">
+      <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1920px] flex-col items-center px-3 pt-3 md:min-h-0 md:px-6 md:pt-4">
+
+        <img
+          src={frutiLogo.url}
+          alt="Fruti Pop"
+          className="relative z-30 w-[180px] md:w-[270px]"
+        />
+
+        <div className="relative mt-1 h-[440px] w-full max-w-[1500px] md:h-[520px]">
+
+          <div className="absolute left-1/2 top-[12%] z-10 flex -translate-x-1/2 items-end justify-center gap-0">
+            <img src={lemonPop.url} alt="" className="w-[55px] -rotate-12 md:w-[95px]" />
+            <img src={strawberryPop.url} alt="" className="w-[58px] -rotate-6 md:w-[100px]" />
+            <img src={mangoPop.url} alt="" className="w-[60px] md:w-[105px]" />
+            <img src={passionPop.url} alt="" className="w-[58px] rotate-6 md:w-[100px]" />
+            <img src={pinaPop.url} alt="" className="w-[55px] rotate-12 md:w-[95px]" />
+            <img src={pineapplePop.url} alt="" className="w-[52px] rotate-[18deg] md:w-[90px]" />
+          </div>
+
+          <img
+            src={heroKids.url}
+            alt="Kids enjoying Fruti Pop"
+            className="absolute bottom-[4%] left-[-5%] z-20 w-[46%] max-w-[520px] rounded-[2rem] object-cover md:left-[2%] md:w-[34%]"
+          />
+
+          <img
+            src={heroFootball.url}
+            alt="Young football player enjoying Fruti Pop"
+            className="absolute bottom-0 left-1/2 z-20 h-[78%] w-[52%] -translate-x-1/2 rounded-[2rem] object-cover object-top md:h-[82%] md:w-[32%]"
+          />
+
+          <img
+            src={heroWoman.url}
+            alt="Enjoying Fruti Pop"
+            className="absolute bottom-[4%] right-[-5%] z-20 w-[46%] max-w-[520px] rounded-[2rem] object-cover md:right-[2%] md:w-[34%]"
+          />
+
         </div>
+
+        <div className="relative z-40 -mt-1 flex w-full flex-col items-center gap-2 pb-6">
+          <Button
+            asChild
+            size="lg"
+            className={`${cta} w-[calc(100%-1rem)] max-w-md md:w-auto md:px-12 md:text-lg`}
+          >
+            <Link to="/order">
+              Order My Pops <A />
+            </Link>
+          </Button>
+
+          <p className="text-center text-xs font-semibold text-foreground/65 sm:text-sm">
+            Less Sugar • Full of Vitamins • Packed with Fruit
+          </p>
+        </div>
+
       </div>
     </section>
   );
+}
 }
 
 const MOMENTS = [
