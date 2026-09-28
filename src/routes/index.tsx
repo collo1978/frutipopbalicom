@@ -5,16 +5,16 @@ import popStarsDesktop from "@/assets/pop-stars-desktop.png.asset.json";
 import popStarsMobile from "@/assets/pop-stars-mobile.png.asset.json";
 import birthdayParty from "@/assets/birthday-pool-party.png.asset.json";
 import eventBoy from "@/assets/event-boy-two-pops.jpg.asset.json";
-import heroWoman from "@/assets/event-woman-straw-hat.png.asset.json";
-import heroKids from "@/assets/hero-kids-cooler-pair.png.asset.json";
-import heroFootball from "@/assets/schools-football-boy-yellow.png.asset.json";
+import heroWoman from "@/assets/photos/customer-moments/event-woman-straw-hat.png";
+import heroKids from "@/assets/photos/customer-moments/hero-kids-cooler-pair.png";
+import heroFootball from "@/assets/photos/customer-moments/schools-football-boy-yellow.png";
 import frutiLogo from "@/assets/fruti-pop-logo.png.asset.json";
-import lemonPop from "@/assets/lemon-sorbet-original.png.asset.json";
-import mangoPop from "@/assets/mango-original.png.asset.json";
-import passionPop from "@/assets/passion-fruit-original.png.asset.json";
-import pinaPop from "@/assets/pina-colada-original.png.asset.json";
-import pineapplePop from "@/assets/pineapple-original.png.asset.json";
-import strawberryPop from "@/assets/strawberry-original.png.asset.json";
+import lemonPop from "@/assets/order-originals/lemon-sorbet-original.png.asset.json";
+import mangoPop from "@/assets/order-originals/mango-original.png.asset.json";
+import passionPop from "@/assets/order-originals/passion-fruit-original.png.asset.json";
+import pinaPop from "@/assets/order-originals/pina-colada-original.png.asset.json";
+import pineapplePop from "@/assets/order-originals/pineapple-original.png.asset.json";
+import strawberryPop from "@/assets/order-originals/strawberry-original.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { FlavourDiscovery, SwipeRow, WhyFrutiPop } from "@/components/order-sections";
 import { WhatsAppIcon } from "@/components/site";
@@ -66,19 +66,19 @@ function Hero() {
           </div>
 
           <img
-            src={heroKids.url}
+            src={heroKids}
             alt="Kids enjoying Fruti Pop"
             className="absolute bottom-[4%] left-[-5%] z-20 w-[46%] max-w-[520px] rounded-[2rem] object-cover md:left-[2%] md:w-[34%]"
           />
 
           <img
-            src={heroFootball.url}
+            src={heroFootball}
             alt="Young football player enjoying Fruti Pop"
             className="absolute bottom-0 left-1/2 z-20 h-[78%] w-[52%] -translate-x-1/2 rounded-[2rem] object-cover object-top md:h-[82%] md:w-[32%]"
           />
 
           <img
-            src={heroWoman.url}
+            src={heroWoman}
             alt="Enjoying Fruti Pop"
             className="absolute bottom-[4%] right-[-5%] z-20 w-[46%] max-w-[520px] rounded-[2rem] object-cover md:right-[2%] md:w-[34%]"
           />
