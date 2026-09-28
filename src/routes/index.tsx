@@ -54,7 +54,7 @@ function Hero() {
   <img
     src={heroFruitSplash.url}
     alt=""
-    className="pointer-events-none absolute inset-x-0 bottom-[-5%] z-[5] mx-auto w-full max-w-[1500px] object-contain"
+    className="pointer-events-none absolute inset-x-0 bottom-[-5%] z-[13] mx-auto w-full max-w-[1500px] object-contain"
   />;
   return (
     <section className="overflow-hidden bg-hero-cream">
