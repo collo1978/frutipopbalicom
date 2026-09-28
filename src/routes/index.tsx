@@ -9,7 +9,7 @@ import heroWoman from "@/assets/photos/customer-moments/event-woman-straw-hat.pn
 import heroKids from "@/assets/photos/customer-moments/hero-kids-cooler-pair.png";
 import heroFootball from "@/assets/photos/customer-moments/schools-football-boy-yellow.png";
 import frutiLogo from "@/assets/fruti-pop-logo.png.asset.json";
-import lemonPop from "@/assets/order-originals/lemon-sorbet-original.png.asset.json";
+import lemonPop from "@/assets/order-originals/lemon-sorbet-transparent.png.asset.json";
 import mangoPop from "@/assets/order-originals/mango-original.png.asset.json";
 import passionPop from "@/assets/order-originals/passion-fruit-original.png.asset.json";
 import pinaPop from "@/assets/order-originals/pina-colada-original.png.asset.json";

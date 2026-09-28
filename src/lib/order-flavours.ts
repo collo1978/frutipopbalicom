@@ -1,5 +1,5 @@
 import strawberry from "@/assets/order-originals/strawberry-original.png.asset.json";
-import lemon from "@/assets/order-originals/lemon-sorbet-original.png.asset.json";
+import lemon from "@/assets/order-originals/lemon-sorbet-transparent.png.asset.json";
 import pineapple from "@/assets/order-originals/pineapple-original.png.asset.json";
 import pinaColada from "@/assets/order-originals/pina-colada-original.png.asset.json";
 import mango from "@/assets/order-originals/mango-original.png.asset.json";
