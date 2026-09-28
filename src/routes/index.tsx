@@ -62,7 +62,12 @@ function Hero() {
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-28%] top-[-12%] z-[10] w-[55%] object-contain"
+            className="pointer-events-none absolute left-[-22%] top-[-12%] z-[10] w-[55%] object-contain"
+          />
+          <img
+            src={heroSplashRight.url}
+            alt=""
+            className="pointer-events-none absolute right-[-22%] top-[-12%] z-[10] w-[55%] object-contain"
           />
           <div className="absolute left-1/2 top-[-18%] z-40 flex -translate-x-1/2 items-end justify-center gap-[-8px] md:top-[-20%]">
             <img
