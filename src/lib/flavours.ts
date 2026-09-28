@@ -1,5 +1,5 @@
 import strawberry from "@/assets/strawberry-pop-card.webp.asset.json";
-import lemon from "@/assets/order-originals/lemon-sorbet-original.png.asset.json";
+import lemon from "@/assets/order-originals/lemon-sorbet-transparent.png.asset.json";
 import pineapple from "@/assets/pineapple-pop-card.webp.asset.json";
 import pinaColada from "@/assets/pina-colada-pop-card.webp.asset.json";
 import mango from "@/assets/mango-pop-card.webp.asset.json";
