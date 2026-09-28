@@ -9,6 +9,7 @@ import heroWoman from "@/assets/photos/customer-moments/event-woman-straw-hat.pn
 import heroKids from "@/assets/photos/customer-moments/hero-kids-cooler-pair.png";
 import heroFootball from "@/assets/photos/customer-moments/schools-football-boy-yellow.png";
 import frutiLogo from "@/assets/fruti-pop-logo.png.asset.json";
+import heroFruitSplash from "@/assets/hero-fruit-splash.png.asset.json";
 import lemonPop from "@/assets/order-originals/lemon-sorbet-transparent.png.asset.json";
 import mangoPop from "@/assets/order-originals/mango-original.png.asset.json";
 import passionPop from "@/assets/order-originals/passion-fruit-original.png.asset.json";
@@ -50,6 +51,11 @@ const A = () => (
 );
 
 function Hero() {
+  <img
+    src={heroFruitSplash.url}
+    alt=""
+    className="pointer-events-none absolute inset-x-0 bottom-[-5%] z-[5] mx-auto w-full max-w-[1500px] object-contain"
+  />;
   return (
     <section className="overflow-hidden bg-hero-cream">
       <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1920px] flex-col items-center px-3 pt-3 md:min-h-0 md:px-6 md:pt-4">
