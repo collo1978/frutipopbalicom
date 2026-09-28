@@ -56,13 +56,13 @@ function Hero() {
         <img src={frutiLogo.url} alt="Fruti Pop" className="relative z-30 w-[180px] md:w-[270px]" />
 
         <div className="relative mt-1 h-[440px] w-full max-w-[1500px] md:h-[520px]">
-          <div className="absolute left-1/2 top-[12%] z-10 flex -translate-x-1/2 items-end justify-center gap-0">
-            <img src={lemonPop.url} alt="" className="w-[55px] -rotate-12 md:w-[95px]" />
-            <img src={strawberryPop.url} alt="" className="w-[58px] -rotate-6 md:w-[100px]" />
-            <img src={mangoPop.url} alt="" className="w-[60px] md:w-[105px]" />
-            <img src={passionPop.url} alt="" className="w-[58px] rotate-6 md:w-[100px]" />
-            <img src={pinaPop.url} alt="" className="w-[55px] rotate-12 md:w-[95px]" />
-            <img src={pineapplePop.url} alt="" className="w-[52px] rotate-[18deg] md:w-[90px]" />
+          <div className="absolute left-1/2 top-[-4%] z-10 flex -translate-x-1/2 items-end justify-center gap-[-8px] md:top-[-8%]">
+            <img src={lemonPop.url} alt="" className="w-[72px] -rotate-[20deg] md:w-[135px]"
+            <img src={strawberryPop.url} alt="" className="w-[76px] -rotate-12 md:w-[140px]"
+            <img src={mangoPop.url} alt="" className="w-[80px] -rotate-4 md:w-[145px]"
+            <img src={passionPop.url} alt="" className="w-[76px] rotate-4 md:w-[140px]"
+            <img src={pinaPop.url} alt="" className="w-[72px] rotate-12 md:w-[135px]"
+            <img src={pineapplePop.url} alt="" className="w-[70px] rotate-[20deg] md:w-[130px]"
           </div>
 
           <img
