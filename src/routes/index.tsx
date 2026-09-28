@@ -51,17 +51,17 @@ const A = () => (
 );
 
 function Hero() {
-  <img
-    src={heroFruitSplash.url}
-    alt=""
-    className="pointer-events-none absolute inset-x-0 bottom-[-5%] z-[35] mx-auto w-full max-w-[1500px] object-contain"
-  />;
   return (
     <section className="overflow-hidden bg-hero-cream">
       <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1920px] flex-col items-center px-3 pt-3 md:min-h-0 md:px-6 md:pt-4">
         <img src={frutiLogo.url} alt="Fruti Pop" className="relative z-30 w-[180px] md:w-[270px]" />
 
         <div className="relative mt-1 h-[440px] w-full max-w-[1500px] md:h-[520px]">
+          <img
+            src={heroFruitSplash.url}
+            alt=""
+            className="pointer-events-none absolute inset-x-0 bottom-[-5%] z-[35] mx-auto w-full max-w-[1500px] object-contain"
+          />
           <div className="absolute left-1/2 top-[-18%] z-40 flex -translate-x-1/2 items-end justify-center gap-[-8px] md:top-[-20%]">
             <img
               src={lemonPop.url}
