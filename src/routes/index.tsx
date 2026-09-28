@@ -60,7 +60,7 @@ function Hero() {
           <img
             src={heroFruitSplash.url}
             alt=""
-            className="pointer-events-none absolute inset-x-0 bottom-[-5%] z-[35] mx-auto w-full max-w-[1500px] object-contain"
+            className="pointer-events-none absolute inset-x-0 top-[-10%] z-[35] mx-auto w-full max-w-[1500px] object-contain"
           />
           <div className="absolute left-1/2 top-[-18%] z-40 flex -translate-x-1/2 items-end justify-center gap-[-8px] md:top-[-20%]">
             <img
