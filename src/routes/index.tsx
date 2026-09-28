@@ -10,6 +10,8 @@ import heroKids from "@/assets/photos/customer-moments/hero-kids-cooler-pair.png
 import heroFootball from "@/assets/photos/customer-moments/schools-football-boy-yellow.png";
 import frutiLogo from "@/assets/fruti-pop-logo.png.asset.json";
 import heroFruitSplash from "@/assets/hero-fruit-splash.png.asset.json";
+import heroSplashLeft from "@/assets/hero-splash-left.png.asset.json";
+import heroSplashRight from "@/assets/hero-splash-right.png.asset.json";
 import lemonPop from "@/assets/order-originals/lemon-sorbet-transparent.png.asset.json";
 import mangoPop from "@/assets/order-originals/mango-original.png.asset.json";
 import passionPop from "@/assets/order-originals/passion-fruit-original.png.asset.json";
@@ -58,9 +60,9 @@ function Hero() {
 
         <div className="relative mt-1 h-[440px] w-full max-w-[1500px] md:h-[520px]">
           <img
-            src={heroFruitSplash.url}
+            src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute inset-x-0 top-[-32%] z-[10] mx-auto w-[125%] max-w-[1500px] object-contain"
+            className="pointer-events-none absolute left-[-12%] top-[-12%] z-[10] w-[55%] object-contain"
           />
           <div className="absolute left-1/2 top-[-18%] z-40 flex -translate-x-1/2 items-end justify-center gap-[-8px] md:top-[-20%]">
             <img
