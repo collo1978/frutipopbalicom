@@ -57,7 +57,9 @@ function Hero() {
     <section className="overflow-hidden bg-hero-cream">
       <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1920px] flex-col items-center px-3 pt-3 md:min-h-0 md:px-6 md:pt-4">
         <img src={frutiLogo.url} alt="Fruti Pop" className="relative z-30 w-[180px] md:w-[270px]" />
-
+        <h1 className="relative z-30 mt-1 text-center text-2xl font-black leading-tight text-purple-800 md:text-4xl">
+          Bali’s Fruti Sorbet Ice Blocks
+        </h1>
         <div className="relative mt-1 h-[440px] w-full max-w-[1500px] md:h-[520px]">
           <img
             src={heroSplashLeft.url}
