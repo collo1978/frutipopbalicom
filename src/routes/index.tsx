@@ -71,29 +71,6 @@ function Hero() {
             alt=""
             className="pointer-events-none absolute right-[-12%] top-[-12%] z-[10] w-[55%] object-contain"
           />
-          <div className="absolute left-1/2 top-[-18%] z-40 flex -translate-x-1/2 items-end justify-center gap-[-8px] md:top-[-20%]">
-            <img
-              src={lemonPop.url}
-              alt=""
-              className="relative z-[1] w-[72px] -rotate-[20deg] md:w-[135px] md:translate-x-[55px]"
-            />
-            <img
-              src={strawberryPop.url}
-              alt=""
-              className="relative z-[2] w-[76px] -rotate-12 md:w-[140px] md:translate-x-[30px]"
-            />
-            <img src={mangoPop.url} alt="" className="w-[80px] -rotate-4 md:w-[145px]" />
-            <img src={passionPop.url} alt="" className="w-[76px] rotate-4 md:w-[140px]" />
-            <img
-              src={pinaPop.url}
-              alt=""
-              className="relative z-[2] w-[72px] rotate-12 md:w-[135px] md:-translate-x-[30px]"
-            />
-            <img
-              src={pineapplePop.url}
-              alt=""
-              className="relative z-[1] w-[70px] rotate-[20deg] md:w-[130px] md:-translate-x-[55px]"
-            />
           </div>
 
           <img
