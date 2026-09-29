@@ -71,7 +71,7 @@ function Hero() {
             alt=""
             className="pointer-events-none absolute right-[-12%] top-[-12%] z-[10] w-[55%] object-contain"
           />
-          </div>
+
 
           <img
             src={heroKids}
