@@ -9,6 +9,7 @@ import heroWoman from "@/assets/photos/customer-moments/event-woman-straw-hat.pn
 import heroKids from "@/assets/photos/customer-moments/hero-kids-cooler-pair.png";
 import heroFootball from "@/assets/photos/customer-moments/schools-football-boy-yellow.png";
 import frutiLogo from "@/assets/fruti-pop-logo.png.asset.json";
+import heroHeadline from "@/assets/hero-headline.png.asset.json";
 import heroFruitSplash from "@/assets/hero-fruit-splash.png.asset.json";
 import heroSplashLeft from "@/assets/splashes/hero-splash-left.png.asset.json";
 import heroSplashRight from "@/assets/splashes/hero-splash-right.png.asset.json";
