@@ -53,7 +53,7 @@ function Hero() {
         <img
           src={heroHeadline.url}
           alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-          className="relative z-40 -mb-8 w-[300px] drop-shadow-sm md:-mb-14 md:h-[clamp(6.5rem,14svh,10.5rem)] md:w-auto"
+          className="relative z-40 -mb-8 w-[330px] drop-shadow-sm md:-mb-14 md:h-[clamp(8.25rem,18.5svh,14rem)] md:w-auto"
         />
         <div className="relative h-[440px] w-full max-w-[1400px] md:h-[clamp(15rem,calc(100svh-25rem),26rem)]">
           <img
