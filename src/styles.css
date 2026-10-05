@@ -298,3 +298,17 @@
 .order-step-reveal { animation: fade-in 0.45s ease-out both; }
 @media (prefers-reduced-motion: reduce) { .mystery-shuffle-img, .mystery-reveal, .order-step-reveal { animation: none; } }
 @keyframes fade-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Hero photo candy frames: white inner border + coloured ring + offset pop shadow */
+@utility frame-pop-left {
+  border: 5px solid var(--color-coconut, #fff);
+  box-shadow: 0 0 0 5px var(--mango), 9px 9px 0 5px var(--dragonfruit), 0 18px 30px -10px color-mix(in oklab, var(--foreground) 35%, transparent);
+}
+@utility frame-pop-center {
+  border: 6px solid var(--color-coconut, #fff);
+  box-shadow: 0 0 0 6px var(--pastel-blue), 0 0 0 11px var(--mango), 0 22px 40px -12px color-mix(in oklab, var(--foreground) 45%, transparent);
+}
+@utility frame-pop-right {
+  border: 5px solid var(--color-coconut, #fff);
+  box-shadow: 0 0 0 5px var(--dragonfruit), -9px 9px 0 5px var(--mango), 0 18px 30px -10px color-mix(in oklab, var(--foreground) 35%, transparent);
+}
