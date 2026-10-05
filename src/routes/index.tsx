@@ -56,7 +56,7 @@ function Hero() {
           alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
           className="relative z-40 -mb-8 w-[330px] drop-shadow-sm md:absolute md:left-1/2 md:top-[-2%] md:mb-0 md:w-[min(42vw,600px)] md:h-auto md:-translate-x-1/2"
         />
-        <div className="relative h-[440px] w-full max-w-[1400px] md:h-[clamp(22rem,calc(100svh-11.5rem),40rem)] md:w-[94vw] md:max-w-[1500px]">
+        <div className="relative h-[440px] w-full max-w-[1400px] md:h-[clamp(22rem,calc(100svh-11.5rem),40rem)] md:w-[97vw] md:max-w-[1560px]">
           <img
             src={heroSplashLeft.url}
             alt=""
@@ -75,22 +75,27 @@ function Hero() {
           <img src={heroSplashLeft.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-6%] left-[26%] z-[4] hidden w-[20%] rotate-[150deg] object-contain opacity-90 md:block" />
           <img src={heroSplashRight.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-8%] right-[26%] z-[4] hidden w-[20%] -rotate-[150deg] object-contain opacity-90 md:block" />
 
+          {/* Desktop-only bottom fruit wrap: fills under the side photos and lower outer corners */}
+          <img src={heroSplashLeft.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-16%] left-[2%] z-[4] hidden w-[30%] -scale-y-100 rotate-[8deg] object-contain md:block" />
+          <img src={heroSplashRight.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-16%] right-[2%] z-[4] hidden w-[30%] -scale-y-100 -rotate-[8deg] object-contain md:block" />
+          <img src={heroFruitSplash.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-22%] left-1/2 z-[4] hidden w-[46%] -translate-x-1/2 -scale-y-100 object-contain opacity-90 md:block" />
+
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[3%] md:left-[19%] md:h-[66%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6 "
+            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[3%] md:left-[18%] md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6 "
           />
 
           <img
             src={heroFootball}
             alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-1 md:h-[70%] md:rounded-[1.75rem]"
+            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-1 md:h-[77%] md:rounded-[1.75rem]"
           />
 
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[3%] md:right-[19%] md:h-[66%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6 "
+            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[3%] md:right-[18%] md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6 "
           />
         </div>
 
