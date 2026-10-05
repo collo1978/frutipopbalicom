@@ -56,44 +56,44 @@ const A = () => (
 function Hero() {
   return (
     <section className="overflow-hidden bg-hero-cream">
-      <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1920px] flex-col items-center px-3 pt-3 md:min-h-0 md:px-6 md:pt-4">
+      <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1920px] flex-col items-center px-3 pt-3 md:min-h-0 md:px-6 md:pt-2">
         <img
           src={heroHeadline.url}
           alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-          className="relative z-30 w-[300px] md:w-[480px]"
+          className="relative z-30 w-[300px] md:h-[clamp(6rem,13svh,10rem)] md:w-auto"
         />
-        <div className="relative mt-1 h-[440px] w-full max-w-[1500px] md:h-[420px]">
+        <div className="relative mt-2 h-[440px] w-full max-w-[1400px] md:mt-3 md:h-[clamp(15rem,calc(100svh-24rem),26rem)]">
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-22%] top-[-12%] z-[10] w-[55%] object-contain"
+            className="pointer-events-none absolute left-[-22%] top-[-12%] z-[5] w-[55%] object-contain md:left-[-5%] md:top-[-16%] md:w-[42%]"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-12%] top-[-12%] z-[10] w-[55%] object-contain"
+            className="pointer-events-none absolute right-[-12%] top-[-12%] z-[5] w-[55%] object-contain md:right-[-3%] md:top-[-16%] md:w-[42%]"
           />
 
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-[-2%] left-[-3%] z-20 w-[49%] max-w-[560px] rounded-[2rem] object-cover md:left-[0%] md:w-[37%]md:h-[360px]"
+            className="absolute bottom-[-2%] left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[5%] md:left-[0.5%] md:h-[80%] md:w-[33%] md:max-w-none md:rounded-[1.75rem] md:shadow-xl"
           />
 
           <img
             src={heroFootball}
             alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-[-2%] left-1/2 z-30 h-[88%] w-[54%] -translate-x-1/2 rounded-[2rem] object-cover object-top md:h-[92%] md:w-[35%]"
+            className="absolute bottom-[-2%] left-1/2 z-30 h-[88%] w-[54%] -translate-x-1/2 rounded-[1.5rem] border-4 border-white object-cover object-top shadow-lg md:bottom-0 md:h-full md:w-[36%] md:rounded-[1.75rem] md:shadow-xl"
           />
 
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-[-2%] right-[-3%] z-20 w-[49%] max-w-[560px] rounded-[2rem] object-cover md:right-[0%] md:w-[32%]"
+            className="absolute bottom-[-2%] right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[5%] md:right-[0.5%] md:h-[80%] md:w-[31%] md:max-w-none md:rounded-[1.75rem] md:shadow-xl"
           />
         </div>
 
-        <div className="relative z-40 -mt-1 flex w-full flex-col items-center gap-2 pb-6">
+        <div className="relative z-40 -mt-1 flex w-full flex-col items-center gap-2 pb-6 md:gap-1.5 md:pb-3">
           <Button asChild size="lg" className={`${cta} w-[calc(100%-1rem)] max-w-md md:w-auto md:px-12 md:text-lg`}>
             <Link to="/order">
               Order My Pops <A />
