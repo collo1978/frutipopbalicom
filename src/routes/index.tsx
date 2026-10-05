@@ -55,7 +55,7 @@ function Hero() {
           alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
           className="relative z-30 w-[300px] md:h-[clamp(6rem,13svh,10rem)] md:w-auto"
         />
-        <div className="relative mt-2 h-[440px] w-full max-w-[1400px] md:mt-3 md:h-[clamp(15rem,calc(100svh-24rem),26rem)]">
+        <div className="relative mt-2 h-[440px] w-full max-w-[1400px] md:mt-3 md:h-[clamp(15rem,calc(100svh-25rem),26rem)]">
           <img
             src={heroSplashLeft.url}
             alt=""
