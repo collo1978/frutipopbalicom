@@ -301,14 +301,14 @@
 
 /* Hero photo candy frames: white inner border + coloured ring + offset pop shadow */
 @utility frame-pop-left {
-  border: 6px solid var(--color-coconut, #fff);
-  box-shadow: 0 0 0 1px color-mix(in oklab, var(--foreground) 10%, transparent), 0 0 0 4px var(--mango), 7px 7px 0 3px var(--dragonfruit), 0 18px 30px -10px color-mix(in oklab, var(--foreground) 35%, transparent);
+  border: 5px solid var(--color-coconut, #fff);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--foreground) 8%, transparent), 0 0 0 2.5px var(--mango), 4px 4px 0 1.5px color-mix(in oklab, var(--dragonfruit) 65%, transparent), 0 14px 24px -10px color-mix(in oklab, var(--foreground) 30%, transparent);
 }
 @utility frame-pop-center {
-  border: 7px solid var(--color-coconut, #fff);
-  box-shadow: 0 0 0 1px color-mix(in oklab, var(--foreground) 10%, transparent), 0 0 0 4px var(--pastel-blue), 0 0 0 8px var(--mango), 0 22px 40px -12px color-mix(in oklab, var(--foreground) 45%, transparent);
+  border: 6px solid var(--color-coconut, #fff);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--foreground) 8%, transparent), 0 0 0 3px var(--pastel-blue), 0 0 0 5.5px color-mix(in oklab, var(--mango) 80%, transparent), 0 18px 32px -12px color-mix(in oklab, var(--foreground) 38%, transparent);
 }
 @utility frame-pop-right {
-  border: 6px solid var(--color-coconut, #fff);
-  box-shadow: 0 0 0 1px color-mix(in oklab, var(--foreground) 10%, transparent), 0 0 0 4px var(--dragonfruit), -7px 7px 0 3px var(--mango), 0 18px 30px -10px color-mix(in oklab, var(--foreground) 35%, transparent);
+  border: 5px solid var(--color-coconut, #fff);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--foreground) 8%, transparent), 0 0 0 2.5px var(--dragonfruit), -4px 4px 0 1.5px color-mix(in oklab, var(--mango) 65%, transparent), 0 14px 24px -10px color-mix(in oklab, var(--foreground) 30%, transparent);
 }

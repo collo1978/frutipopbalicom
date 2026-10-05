@@ -54,13 +54,13 @@ function Hero() {
         <img
           src={heroHeadline.url}
           alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-          className="relative z-40 -mb-8 w-[330px] drop-shadow-sm md:absolute md:left-1/2 md:top-[-2%] md:mb-0 md:w-[min(42vw,600px,calc(100svh-8rem))] md:h-auto md:-translate-x-1/2"
+          className="relative z-40 -mb-8 w-[330px] drop-shadow-sm md:absolute md:left-1/2 md:top-[-10%] md:mb-0 md:w-[min(42vw,600px,calc(100svh-8rem))] md:h-auto md:-translate-x-1/2"
         />
         <div className="relative h-[440px] w-full max-w-[1400px] md:h-[clamp(22rem,calc(100svh-11.5rem),40rem)] md:w-[97vw] md:max-w-[1560px]">
           {/* Desktop fruit treatment: one broad upper burst, one outer wrap per side,
               a couple of lower corner accents. Fruit frames the collage, never competes. */}
-          <img src={heroSplashLeft.url} alt="" className="pointer-events-none absolute left-[-22%] top-[-12%] z-[5] w-[55%] object-contain md:left-[4%] md:top-[12%] md:w-[29%] md:-rotate-6" />
-          <img src={heroSplashRight.url} alt="" className="pointer-events-none absolute right-[-12%] top-[-12%] z-[5] w-[55%] object-contain md:right-[3%] md:top-[9%] md:w-[30%] md:rotate-6" />
+          <img src={heroSplashLeft.url} alt="" className="pointer-events-none absolute left-[-22%] top-[-12%] z-[5] w-[55%] object-contain md:left-[1%] md:top-[16%] md:w-[24%] md:-rotate-6" />
+          <img src={heroSplashRight.url} alt="" className="pointer-events-none absolute right-[-12%] top-[-12%] z-[5] w-[55%] object-contain md:right-[0%] md:top-[13%] md:w-[25%] md:rotate-6" />
           <img src={heroFruitSplash.url} alt="" aria-hidden className="pointer-events-none absolute left-1/2 top-[-9%] z-[4] hidden w-[66%] -translate-x-1/2 object-contain opacity-95 md:block" />
           <img src={heroSplashLeft.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-1%] left-[13%] z-[6] hidden w-[17%] -scale-y-100 rotate-[19deg] object-contain md:block" />
           <img src={heroSplashRight.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-1%] right-[12%] z-[6] hidden w-[19%] -scale-y-100 -rotate-[11deg] object-contain md:block" />
@@ -68,7 +68,7 @@ function Hero() {
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[3%] md:left-[22%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6 "
+            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[3%] md:left-[24%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6 "
           />
 
           <img
@@ -80,7 +80,7 @@ function Hero() {
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[3%] md:right-[22%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6 "
+            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[3%] md:right-[24%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6 "
           />
         </div>
 
