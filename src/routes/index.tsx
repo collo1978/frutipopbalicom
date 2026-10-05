@@ -60,12 +60,12 @@ function Hero() {
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-22%] top-[-12%] z-[5] w-[55%] object-contain md:left-[-5%] md:top-[10%] md:w-[31%] md:-rotate-6"
+            className="pointer-events-none absolute left-[-22%] top-[-12%] z-[5] w-[55%] object-contain md:left-[-2%] md:top-[9%] md:w-[30%] md:-rotate-6"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-12%] top-[-12%] z-[5] w-[55%] object-contain md:right-[-4%] md:top-[5%] md:w-[34%] md:rotate-6"
+            className="pointer-events-none absolute right-[-12%] top-[-12%] z-[5] w-[55%] object-contain md:right-[-2%] md:top-[5%] md:w-[32%] md:rotate-6"
           />
 
           {/* Desktop fruit burst: staggered scales and crops keep the wrap organic. */}
@@ -74,16 +74,20 @@ function Hero() {
           <img src={heroSplashLeft.url} alt="" aria-hidden className="pointer-events-none absolute right-[19%] top-[-11%] z-[4] hidden w-[23%] -scale-x-100 -rotate-[9deg] object-contain opacity-90 md:block" />
 
           {/* Lower corner and gap clusters tuck the frames into the fruit burst. */}
-          <img src={heroSplashLeft.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-8%] left-[-2%] z-[6] hidden w-[23%] -scale-y-100 rotate-[19deg] object-contain md:block" />
-          <img src={heroFruitSplash.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-17%] left-[25%] z-[6] hidden w-[26%] -scale-y-100 rotate-[7deg] object-contain opacity-95 md:block" />
-          <img src={heroSplashRight.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-13%] right-[27%] z-[6] hidden w-[21%] -scale-x-100 -scale-y-100 -rotate-[16deg] object-contain opacity-90 md:block" />
-          <img src={heroSplashRight.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-6%] right-[-3%] z-[6] hidden w-[27%] -scale-y-100 -rotate-[11deg] object-contain md:block" />
-          <img src={heroFruitSplash.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-20%] left-[44%] z-[5] hidden w-[19%] -scale-x-100 -scale-y-100 rotate-[22deg] object-contain opacity-80 md:block" />
+          <img src={heroSplashLeft.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[1%] left-[3%] z-[6] hidden w-[20%] -scale-y-100 rotate-[19deg] object-contain md:block" />
+          <img src={heroFruitSplash.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-2%] left-[27%] z-[6] hidden w-[22%] -scale-y-100 rotate-[7deg] object-contain opacity-95 md:block" />
+          <img src={heroSplashRight.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[1%] right-[28%] z-[6] hidden w-[18%] -scale-x-100 -scale-y-100 -rotate-[16deg] object-contain opacity-90 md:block" />
+          <img src={heroSplashRight.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[2%] right-[2%] z-[6] hidden w-[22%] -scale-y-100 -rotate-[11deg] object-contain md:block" />
+          <img src={heroFruitSplash.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-3%] left-[45%] z-[5] hidden w-[16%] -scale-x-100 -scale-y-100 rotate-[22deg] object-contain opacity-75 md:block" />
+
+          {/* Small foreground peeks make the outer frames feel nested in the burst. */}
+          <img src={heroSplashRight.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[5%] left-[15%] z-[25] hidden w-[10%] -scale-x-100 rotate-[24deg] object-contain md:block" />
+          <img src={heroSplashLeft.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[6%] right-[15%] z-[25] hidden w-[9%] -rotate-[28deg] object-contain md:block" />
 
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[3%] md:left-[20%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6 "
+            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[3%] md:left-[22%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6 "
           />
 
           <img
@@ -95,7 +99,7 @@ function Hero() {
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[3%] md:right-[20%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6 "
+            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[3%] md:right-[22%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6 "
           />
         </div>
 
