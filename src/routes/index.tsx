@@ -53,36 +53,36 @@ function Hero() {
         <img
           src={heroHeadline.url}
           alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-          className="relative z-40 -mb-8 w-[300px] drop-shadow-sm md:-mb-12 md:h-[clamp(6.5rem,14svh,10.5rem)] md:w-auto"
+          className="relative z-40 -mb-8 w-[300px] drop-shadow-sm md:-mb-14 md:h-[clamp(6.5rem,14svh,10.5rem)] md:w-auto"
         />
         <div className="relative h-[440px] w-full max-w-[1400px] md:h-[clamp(15rem,calc(100svh-25rem),26rem)]">
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-22%] top-[-12%] z-[5] w-[55%] object-contain md:left-[1%] md:top-[-14%] md:w-[38%] md:-rotate-3"
+            className="pointer-events-none absolute left-[-22%] top-[-12%] z-[5] w-[55%] object-contain md:left-[6%] md:top-[-12%] md:w-[30%] md:-rotate-3"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-12%] top-[-12%] z-[5] w-[55%] object-contain md:right-[2%] md:top-[-14%] md:w-[38%] md:rotate-3"
+            className="pointer-events-none absolute right-[-12%] top-[-12%] z-[5] w-[55%] object-contain md:right-[7%] md:top-[-12%] md:w-[30%] md:rotate-3"
           />
 
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[3%] md:left-[7%] md:h-[78%] md:w-[30%] md:max-w-none md:-rotate-[5deg] md:rounded-[1.75rem] md:shadow-xl"
+            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[5%] md:left-[17%] md:h-[68%] md:w-[23%] md:max-w-none md:-rotate-6 md:rounded-[1.75rem] md:shadow-xl"
           />
 
           <img
             src={heroFootball}
             alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-[54%] -translate-x-1/2 rounded-[1.5rem] border-4 border-white object-cover object-top shadow-lg md:bottom-0 md:h-full md:w-[37%] md:rounded-[1.75rem] md:shadow-2xl"
+            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-[54%] -translate-x-1/2 rounded-[1.5rem] border-4 border-white object-cover object-top shadow-lg md:bottom-0 md:h-full md:w-[32%] md:rounded-[1.75rem] md:shadow-2xl"
           />
 
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[3%] md:right-[7%] md:h-[78%] md:w-[30%] md:max-w-none md:rotate-[5deg] md:rounded-[1.75rem] md:shadow-xl"
+            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[5%] md:right-[17%] md:h-[68%] md:w-[23%] md:max-w-none md:rotate-6 md:rounded-[1.75rem] md:shadow-xl"
           />
         </div>
 
