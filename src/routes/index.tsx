@@ -54,7 +54,7 @@ function Hero() {
         <img
           src={heroHeadline.url}
           alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-          className="relative z-40 -mb-8 w-[330px] drop-shadow-sm md:absolute md:left-1/2 md:top-[-18%] md:mb-0 md:w-[min(42vw,600px,calc(100svh-8rem))] md:h-auto md:-translate-x-1/2"
+          className="relative z-40 -mb-8 w-[330px] drop-shadow-sm md:absolute md:left-1/2 md:top-[-11%] md:mb-0 md:w-[min(42vw,600px,calc(100svh-8rem))] md:h-auto md:-translate-x-1/2"
         />
         <div className="relative h-[440px] w-full max-w-[1400px] md:h-[clamp(22rem,calc(100svh-11.5rem),40rem)] md:w-[97vw] md:max-w-[1560px]">
           {/* Desktop fruit treatment: one broad upper burst, one outer wrap per side,
