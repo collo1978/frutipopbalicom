@@ -70,23 +70,23 @@ function Hero() {
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-[-2%] left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[5%] md:left-[0.5%] md:h-[80%] md:w-[33%] md:max-w-none md:rounded-[1.75rem] md:shadow-xl"
+            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[5%] md:left-[0.5%] md:h-[80%] md:w-[33%] md:max-w-none md:rounded-[1.75rem] md:shadow-xl"
           />
 
           <img
             src={heroFootball}
             alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-[-2%] left-1/2 z-30 h-[88%] w-[54%] -translate-x-1/2 rounded-[1.5rem] border-4 border-white object-cover object-top shadow-lg md:bottom-0 md:h-full md:w-[36%] md:rounded-[1.75rem] md:shadow-xl"
+            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-[54%] -translate-x-1/2 rounded-[1.5rem] border-4 border-white object-cover object-top shadow-lg md:bottom-0 md:h-full md:w-[36%] md:rounded-[1.75rem] md:shadow-xl"
           />
 
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-[-2%] right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[5%] md:right-[0.5%] md:h-[80%] md:w-[31%] md:max-w-none md:rounded-[1.75rem] md:shadow-xl"
+            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[5%] md:right-[0.5%] md:h-[80%] md:w-[31%] md:max-w-none md:rounded-[1.75rem] md:shadow-xl"
           />
         </div>
 
-        <div className="relative z-40 -mt-1 flex w-full flex-col items-center gap-2 pb-6 md:gap-1.5 md:pb-3">
+        <div className="relative z-40 mt-2 flex w-full flex-col items-center gap-2 pb-6 md:gap-1.5 md:pb-3">
           <Button asChild size="lg" className={`${cta} w-[calc(100%-1rem)] max-w-md md:w-auto md:px-12 md:text-lg`}>
             <Link to="/order">
               Order My Pops <A />
