@@ -89,7 +89,7 @@ function Hero() {
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-[-2%] right-[-3%] z-20 w-[49%] max-w-[560px] rounded-[2rem] object-cover md:right-[0%] md:w-[37%]"
+            className="absolute bottom-[-2%] right-[-3%] z-20 w-[49%] max-w-[560px] rounded-[2rem] object-cover md:right-[0%] md:w-[32%]"
           />
         </div>
 
