@@ -70,7 +70,7 @@ function Hero() {
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[5%] md:left-[17%] md:h-[68%] md:w-[23%] md:max-w-none md:-rotate-6 md:rounded-[1.75rem] md:shadow-xl"
+            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[5%] md:left-[14.5%] md:h-[70%] md:w-[24%] md:max-w-none md:-rotate-6 md:rounded-[1.75rem] md:shadow-xl"
           />
 
           <img
@@ -82,7 +82,7 @@ function Hero() {
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[5%] md:right-[17%] md:h-[68%] md:w-[23%] md:max-w-none md:rotate-6 md:rounded-[1.75rem] md:shadow-xl"
+            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] border-4 border-white object-cover shadow-lg md:bottom-[5%] md:right-[14.5%] md:h-[70%] md:w-[24%] md:max-w-none md:rotate-6 md:rounded-[1.75rem] md:shadow-xl"
           />
         </div>
 
