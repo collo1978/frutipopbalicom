@@ -49,11 +49,11 @@ const A = () => (
 function Hero() {
   return (
     <section className="overflow-hidden bg-hero-cream">
-      <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1920px] flex-col items-center px-3 pt-3 md:min-h-0 md:px-6 md:pt-0">
+      <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1920px] flex-col items-center px-3 pt-3 md:min-h-0 md:px-6 md:pt-0">
         <img
           src={heroHeadline.url}
           alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-          className="relative z-40 -mb-8 w-[330px] drop-shadow-sm md:absolute md:left-1/2 md:top-1 md:mb-0 md:h-[36%] md:w-auto md:-translate-x-1/2"
+          className="relative z-40 -mb-8 w-[330px] drop-shadow-sm md:absolute md:left-1/2 md:top-1 md:mb-0 md:h-[clamp(8rem,calc((100svh-11.5rem)*0.38),15rem)] md:w-auto md:-translate-x-1/2"
         />
         <div className="relative h-[440px] w-full max-w-[1400px] md:h-[clamp(22rem,calc(100svh-11.5rem),40rem)] md:w-[94vw] md:max-w-[1500px]">
           <img
