@@ -91,13 +91,13 @@ function Hero() {
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[-25px] md:left-[24%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6"
+            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[-70px] md:left-[24%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6"
           />
 
           <img
             src={heroFootball}
             alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[-55px] md:z-30 md:h-[78%] md:rounded-[1.75rem]"
+            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[-100px] md:z-30 md:h-[78%] md:rounded-[1.75rem]"
           />
 
           <img
