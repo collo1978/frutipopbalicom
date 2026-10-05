@@ -77,7 +77,7 @@ function Hero() {
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-[-2%] left-[-3%] z-20 w-[49%] max-w-[560px] rounded-[2rem] object-cover md:left-[0%] md:w-[37%]"
+            className="absolute bottom-[-2%] left-[-3%] z-20 w-[49%] max-w-[560px] rounded-[2rem] object-cover md:left-[0%] md:w-[37%]md:h-[360px]"
           />
 
           <img
