@@ -11,6 +11,7 @@ import heroFootball from "@/assets/photos/customer-moments/schools-football-boy-
 import frutiLogo from "@/assets/fruti-pop-logo.png.asset.json";
 import heroHeadline from "@/assets/balis-fruti-pop-sticker.png.asset.json";
 import heroSplashLeft from "@/assets/splashes/hero-splash-left.png.asset.json";
+import heroFruitSplash from "@/assets/hero-fruit-splash.png.asset.json";
 import heroSplashRight from "@/assets/splashes/hero-splash-right.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { FlavourDiscovery, SwipeRow, WhyFrutiPop } from "@/components/order-sections";
@@ -59,13 +60,20 @@ function Hero() {
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-22%] top-[-12%] z-[5] w-[55%] object-contain md:left-[2%] md:top-[14%] md:w-[30%] md:-rotate-3"
+            className="pointer-events-none absolute left-[-22%] top-[-12%] z-[5] w-[55%] object-contain md:left-[-1%] md:top-[4%] md:w-[34%] md:-rotate-3"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-12%] top-[-12%] z-[5] w-[55%] object-contain md:right-[2%] md:top-[14%] md:w-[30%] md:rotate-3"
+            className="pointer-events-none absolute right-[-12%] top-[-12%] z-[5] w-[55%] object-contain md:right-[-1%] md:top-[4%] md:w-[34%] md:rotate-3"
           />
+
+          {/* Desktop-only extra splash layers so fruit spreads across the whole collage */}
+          <img src={heroFruitSplash.url} alt="" aria-hidden className="pointer-events-none absolute left-1/2 top-[-6%] z-[4] hidden w-[64%] -translate-x-1/2 object-contain opacity-95 md:block" />
+          <img src={heroSplashRight.url} alt="" aria-hidden className="pointer-events-none absolute left-[16%] top-[-10%] z-[4] hidden w-[24%] -scale-x-100 rotate-[14deg] object-contain md:block" />
+          <img src={heroSplashLeft.url} alt="" aria-hidden className="pointer-events-none absolute right-[16%] top-[-8%] z-[4] hidden w-[24%] -scale-x-100 -rotate-[12deg] object-contain md:block" />
+          <img src={heroSplashLeft.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-6%] left-[26%] z-[4] hidden w-[20%] rotate-[150deg] object-contain opacity-90 md:block" />
+          <img src={heroSplashRight.url} alt="" aria-hidden className="pointer-events-none absolute bottom-[-8%] right-[26%] z-[4] hidden w-[20%] -rotate-[150deg] object-contain opacity-90 md:block" />
 
           <img
             src={heroKids}
