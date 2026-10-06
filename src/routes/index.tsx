@@ -50,40 +50,39 @@ const A = () => (
 function Hero() {
   return (
     <section className="overflow-hidden bg-hero-cream w-full">
-      {/* 1. CHANGED: Removed justify-between and min-h screen restrictions on mobile so layout spaces itself naturally */}
+      {/* Container maintains a tight top-down stacking flow on mobile */}
       <div className="relative mx-auto flex w-full max-w-[1920px] flex-col items-center px-4 pt-6 pb-8 md:px-6 md:pt-4 md:pb-8 md:h-[calc(100vh-4rem)] md:max-h-[760px] md:justify-between">
-        {/* ROW 1: HEADLINE LOGO */}
-        <div className="relative z-40 flex justify-center w-full md:-mt-4">
+        {/* ROW 1: HEADLINE LOGO - Expanded to 90vw on mobile to fill out the right and left dead space */}
+        <div className="relative z-40 flex justify-center w-full -mt-2 md:-mt-4">
           <img
             src={heroHeadline.url}
             alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-            className="w-[280px] sm:w-[320px] md:w-[420px] h-auto drop-shadow-sm"
+            className="w-[90vw] max-w-[360px] sm:max-w-[380px] md:w-[420px] h-auto drop-shadow-sm"
           />
         </div>
 
         {/* =========================================================================
             MOBILE-ONLY OVERLAPPING FAN COLLAGE ZONE
             ========================================================================= */}
-        {/* 2. CHANGED: Replaced my-auto with a tight mt-4 mb-2 margin to pull images UP close to the headline */}
         <div className="relative w-full h-[230px] max-w-[340px] mt-4 mb-2 md:hidden flex items-center justify-center">
           {/* Background Fruit Splashes */}
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-15%] top-[5%] z-5 w-[50%] object-contain -rotate-6 opacity-50"
+            className="pointer-events-none absolute left-[-15%] top-[-10%] z-5 w-[50%] object-contain -rotate-6 opacity-50"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-15%] top-[5%] z-5 w-[50%] object-contain rotate-6 opacity-50"
+            className="pointer-events-none absolute right-[-15%] top-[-10%] z-5 w-[50%] object-contain rotate-6 opacity-50"
           />
 
-          {/* Left Card: Rotates left and steps slightly back */}
+          {/* Left Card */}
           <div className="absolute left-2 bottom-[10px] z-10 w-[125px] rotate-[-8deg] bg-white p-1 pb-4 shadow-md rounded-xl border border-black/5">
             <img src={heroKids} alt="Kids enjoying Fruti Pop" className="w-full h-[145px] object-cover rounded-lg" />
           </div>
 
-          {/* Center Card: Larger focal element overlapping the side cards in the absolute center layer */}
+          {/* Center Card */}
           <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-30 w-[150px] scale-105 bg-white p-1.5 pb-5 shadow-xl rounded-xl border border-black/5">
             <img
               src={heroFootball}
@@ -92,7 +91,7 @@ function Hero() {
             />
           </div>
 
-          {/* Right Card: Rotates right and steps slightly back */}
+          {/* Right Card */}
           <div className="absolute right-2 bottom-[12px] z-20 w-[125px] rotate-[8deg] bg-white p-1 pb-4 shadow-md rounded-xl border border-black/5">
             <img src={heroWoman} alt="Enjoying Fruti Pop" className="w-full h-[145px] object-cover rounded-lg" />
           </div>
@@ -162,7 +161,6 @@ function Hero() {
         </div>
 
         {/* ROW 3: CTA BUTTON ZONE */}
-        {/* 3. CHANGED: Added mt-2 to pull the button right underneath the cards without any gap */}
         <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-2 md:mt-0">
           <Button
             asChild
