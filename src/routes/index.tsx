@@ -61,55 +61,104 @@ function Hero() {
           />
         </div>
 
-        {/* ROW 2: PHOTO COLLAGE ZONE - Re-engineered mobile layout using simple, predictable flex row bounds */}
-        <div className="relative w-full max-w-[420px] md:max-w-[1140px] md:h-[180px] md:w-[80vw] md:-mt-6 my-auto md:my-0 flex items-center justify-center">
-          {/* Decorative Fruit Splashes - Pulled far out on desktop, turned down on mobile layout screen limits */}
+        {/* =========================================================================
+            MOBILE-ONLY OVERLAPPING FAN COLLAGE ZONE
+            Eliminates dead space by making the images larger and overlapping them natively
+            ========================================================================= */}
+        {/* Changed flex-row to a relative box layer with an increased height md:hidden */}
+        <div className="relative w-full h-[240px] max-w-[340px] my-auto md:hidden flex items-center justify-center">
+          {/* Background Fruit Splashes - Tucked slightly behind the cards */}
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-15%] top-[-10%] z-5 w-[45%] md:w-[28%] md:left-[-12%] md:top-[-55%] object-contain -rotate-6 opacity-40 md:opacity-100"
+            className="pointer-events-none absolute left-[-15%] top-[5%] z-5 w-[50%] object-contain -rotate-6 opacity-50"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-15%] top-[-10%] z-5 w-[45%] md:w-[28%] md:right-[-12%] md:top-[-57%] object-contain rotate-6 opacity-40 md:opacity-100"
+            className="pointer-events-none absolute right-[-15%] top-[5%] z-5 w-[50%] object-contain rotate-6 opacity-50"
+          />
+
+          {/* Left Card: Rotates left and steps slightly back */}
+          <div className="absolute left-2 bottom-[10px] z-10 w-[130px] rotate-[-8deg] bg-white p-1 pb-4 shadow-md rounded-xl border border-black/5">
+            <img src={heroKids} alt="Kids enjoying Fruti Pop" className="w-full h-[150px] object-cover rounded-lg" />
+          </div>
+
+          {/* Center Card: Larger focal element overlapping the side cards in the absolute center layer */}
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-30 w-[155px] scale-105 bg-white p-1.5 pb-5 shadow-xl rounded-xl border border-black/5">
+            <img
+              src={heroFootball}
+              alt="Young football player enjoying Fruti Pop"
+              className="w-full h-[175px] object-cover rounded-lg"
+            />
+          </div>
+
+          {/* Right Card: Rotates right and steps slightly back */}
+          <div className="absolute right-2 bottom-[15px] z-20 w-[130px] rotate-[8deg] bg-white p-1 pb-4 shadow-md rounded-xl border border-black/5">
+            <img src={heroWoman} alt="Enjoying Fruti Pop" className="w-full h-[150px] object-cover rounded-lg" />
+          </div>
+        </div>
+
+        {/* =========================================================================
+            EXISTING BLOCK B: ORIGINAL DESKTOP PHOTO COLLAGE ZONE
+            Stays completely locked to desktop screens only via max-md:hidden
+            ========================================================================= */}
+        <div className="max-md:hidden relative h-[180px] w-[80vw] max-w-[1040px] md:-mt-6">
+          {/* Upper Background Fruit Splashes */}
+          <img
+            src={heroSplashLeft.url}
+            alt=""
+            className="pointer-events-none absolute left-[-12%] top-[-55%] z-5 w-[28%] object-contain -rotate-6"
+          />
+          <img
+            src={heroSplashRight.url}
+            alt=""
+            className="pointer-events-none absolute right-[-12%] top-[-57%] z-5 w-[28%] object-contain rotate-6"
           />
           <img
             src={heroFruitSplash.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-[-60%] z-4 hidden w-[60%] -translate-x-1/2 object-contain opacity-95 md:block"
+            className="pointer-events-none absolute left-1/2 top-[-60%] z-4 w-[60%] -translate-x-1/2 object-contain opacity-95"
           />
 
-          {/* 2. SECURE MOBILE ROW DISPLAY: Bypasses the broken stacking CSS rules by using a distinct, 
-              clean horizontal side-by-side arrangement on mobile screen viewports */}
-          <div className="flex w-full justify-between items-end gap-1.5 px-1 md:block md:p-0 md:relative md:h-full md:w-full">
-            {/* Card 1: Left Polaroid (Kids) */}
-            <div className="relative z-10 scale-[0.95] -rotate-3 md:absolute md:scale-100 md:rotate-0 md:bottom-[25px] md:left-[24%] md:z-20">
-              <img
-                src={heroKids}
-                alt="Kids enjoying Fruti Pop"
-                className="rounded-[0.75rem] md:rounded-[1.25rem] h-[140px] w-[105px] sm:h-[170px] sm:w-[125px] md:h-[190px] md:w-[145px] object-cover md:-rotate-6 shadow-sm md:shadow-none"
-              />
-            </div>
+          {/* Lower Corner Fruit Splashes */}
+          <img
+            src={heroSplashLeft.url}
+            alt=""
+            aria-hidden
+            className="pointer-events-none absolute bottom-[90%] left-[-14%] z-6 w-[16%] -scale-y-100 rotate-[19deg] object-contain"
+          />
+          <img
+            src={heroSplashRight.url}
+            alt=""
+            aria-hidden
+            className="pointer-events-none absolute bottom-[90%] right-[-14%] z-6 w-[18%] -scale-y-100 -rotate-[11deg] object-contain"
+          />
 
-            {/* Card 2: Center Polaroid (Football Boy) */}
-            <div className="relative z-20 scale-[1.05] translate-y-[-4px] md:absolute md:scale-100 md:translate-y-0 md:bottom-[15px] md:left-1/2 md:-translate-x-1/2 md:z-30">
-              <img
-                src={heroFootball}
-                alt="Young football player enjoying Fruti Pop"
-                className="rounded-[0.75rem] md:rounded-[1.25rem] h-[155px] w-[115px] sm:h-[190px] sm:w-[140px] md:h-[210px] md:w-[160px] object-cover shadow-md md:drop-shadow-md"
-              />
-            </div>
+          {/* Sandboxed Photo Card Frame layers */}
+          <div className="frame-pop-left absolute bottom-[25px] left-[24%] z-20">
+            <img
+              src={heroKids}
+              alt="Kids enjoying Fruti Pop"
+              className="rounded-[1.25rem] md:h-[190px] md:w-[145px] md:object-cover md:-rotate-6"
+            />
+          </div>
 
-            {/* Card 3: Right Polaroid (Woman) */}
-            <div className="relative z-10 scale-[0.95] rotate-3 md:absolute md:scale-100 md:rotate-0 md:bottom-[30px] md:right-[24%]">
-              <img
-                src={heroWoman}
-                alt="Enjoying Fruti Pop"
-                className="rounded-[0.75rem] md:rounded-[1.25rem] h-[140px] w-[105px] sm:h-[170px] sm:w-[125px] md:h-[190px] md:w-[145px] object-cover md:rotate-6 shadow-sm md:shadow-none"
-              />
-            </div>
+          <div className="frame-pop-center absolute bottom-[15px] left-1/2 z-30 -translate-x-1/2">
+            <img
+              src={heroFootball}
+              alt="Young football player enjoying Fruti Pop"
+              className="rounded-[1.25rem] md:h-[210px] md:w-[160px] md:object-cover"
+            />
+          </div>
+
+          <div className="frame-pop-right absolute bottom-[30px] right-[24%] z-20">
+            <img
+              src={heroWoman}
+              alt="Enjoying Fruti Pop"
+              className="rounded-[1.25rem] md:h-[190px] md:w-[145px] md:object-cover md:rotate-6"
+            />
           </div>
         </div>
 
