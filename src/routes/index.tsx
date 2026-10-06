@@ -50,68 +50,69 @@ const A = () => (
 function Hero() {
   return (
     <section className="overflow-hidden bg-hero-cream">
-      {/* 1. Added md:pt-16 to give the headline breathing room at the top */}
-      <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1920px] flex-col items-center px-3 pt-3 md:min-h-0 md:px-6 md:pt-16">
-        {/* 2. Moved top from [45px] to [20px] to push the headline up */}
+      {/* Increased padding-top to md:pt-24 to push the entire content block down from the navbar */}
+      <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1920px] flex-col items-center px-3 pt-3 md:min-h-0 md:px-6 md:pt-24">
+        {/* Placed headline layout out of absolute overlap on desktop so it sits cleanly on top of the images */}
         <img
           src={heroHeadline.url}
           alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-          className="relative z-40 -mb-8 w-[330px] drop-shadow-sm md:absolute md:left-1/2 md:top-[20px] md:mb-0 md:w-[650px] md:h-auto md:-translate-x-1/2"
+          className="relative z-40 -mb-8 w-[330px] drop-shadow-sm md:mb-6 md:w-[680px] md:h-auto"
         />
 
-        {/* 3. Removed md:-mt-[100px] entirely so the images slide down out from under the headline */}
-        <div className="relative h-[440px] w-full max-w-[1400px] md:h-[clamp(22rem,calc(100svh-16rem),40rem)] md:w-[97vw] md:max-w-[1560px]">
+        {/* Adjusted height clamps and removed negative margins to let the photo cards breathe */}
+        <div className="relative h-[440px] w-full max-w-[1400px] md:h-[clamp(20rem,calc(100svh-24rem),35rem)] md:w-[97vw] md:max-w-[1560px]">
           {/* Desktop fruit treatment */}
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-22%] top-[-12%] z-[5] w-[55%] object-contain md:left-[1%] md:top-[16%] md:w-[24%] md:-rotate-6"
+            className="pointer-events-none absolute left-[-22%] top-[-12%] z-5 w-[55%] object-contain md:left-[1%] md:top-[5%] md:w-[24%] md:-rotate-6"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-12%] top-[-12%] z-[5] w-[55%] object-contain md:right-[0%] md:top-[13%] md:w-[25%] md:rotate-6"
+            className="pointer-events-none absolute right-[-12%] top-[-12%] z-5 w-[55%] object-contain md:right-[0%] md:top-[3%] md:w-[25%] md:rotate-6"
           />
           <img
             src={heroFruitSplash.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-[-9%] z-[4] hidden w-[66%] -translate-x-1/2 object-contain opacity-95 md:block"
+            className="pointer-events-none absolute left-1/2 top-[-25%] z-4 hidden w-[66%] -translate-x-1/2 object-contain opacity-95 md:block"
           />
           <img
             src={heroSplashLeft.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[-1%] left-[13%] z-[6] hidden w-[17%] -scale-y-100 rotate-[19deg] object-contain md:block"
+            className="pointer-events-none absolute bottom-[-5%] left-[13%] z-6 hidden w-[17%] -scale-y-100 rotate-[19deg] object-contain md:block"
           />
           <img
             src={heroSplashRight.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[-1%] right-[12%] z-[6] hidden w-[19%] -scale-y-100 -rotate-[11deg] object-contain md:block"
+            className="pointer-events-none absolute bottom-[-5%] right-[12%] z-6 hidden w-[19%] -scale-y-100 -rotate-[11deg] object-contain md:block"
           />
 
+          {/* Tweaked bottom values to keep the picture borders aligned underneath the logo */}
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[-40px] md:left-[24%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6"
+            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[-20px] md:left-[24%] md:z-20 md:h-[75%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6"
           />
 
           <img
             src={heroFootball}
             alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[-60px] md:z-30 md:h-[78%] md:rounded-[1.75rem]"
+            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[-40px] md:z-30 md:h-[80%] md:rounded-[1.75rem]"
           />
 
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[-10px] md:right-[24%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6"
+            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[-5px] md:right-[24%] md:z-20 md:h-[75%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6"
           />
         </div>
 
-        {/* 4. Removed md:translate-y-[85px] and switched to a clean bottom layout margin so it never gets clipped */}
-        <div className="relative z-50 mt-4 flex w-full flex-col items-center gap-2 pb-8 md:mt-8 md:gap-1.5 md:pb-12">
+        {/* Clean layout flow positioning for the CTA and benefit items */}
+        <div className="relative z-50 mt-6 flex w-full flex-col items-center gap-2 pb-8 md:mt-12 md:gap-1.5 md:pb-12">
           <Button
             asChild
             size="lg"
