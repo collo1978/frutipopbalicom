@@ -166,7 +166,7 @@ function Home() {
                 <Button
                   asChild
                   size="lg"
-                  className={`${cta} w-full !whitespace-nowrap px-3 text-base lg:px-5 lg:text-lg`}
+                  className={`${cta} w-full !whitespace-nowrap px-3 text-base md:w-auto md:min-w-[16rem] md:px-12 lg:px-14 lg:text-lg`}
                 >
                   <Link to="/order">
                     Order My Flavours <A />
