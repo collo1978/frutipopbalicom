@@ -52,8 +52,8 @@ function Hero() {
     <section className="overflow-hidden bg-hero-cream w-full md:h-[calc(100vh-4rem)] md:max-h-[760px]">
       {/* 1. Structural vertical layout partitions the single window cleanly into three safe slots */}
       <div className="relative mx-auto flex h-full max-w-[1920px] flex-col items-center px-3 pt-4 pb-6 md:px-6 md:pt-4 md:pb-8 md:justify-between">
-        {/* ROW 1: HEADLINE LOGO - Pins cleanly at the top of the visible screen */}
-        <div className="relative z-40 flex justify-center w-full">
+        {/* ROW 1: HEADLINE LOGO - Added md:-mt-4 to slide just the headline up slightly */}
+        <div className="relative z-40 flex justify-center w-full md:-mt-4">
           <img
             src={heroHeadline.url}
             alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
