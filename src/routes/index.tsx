@@ -50,73 +50,77 @@ const A = () => (
 function Hero() {
   return (
     <section className="overflow-hidden bg-hero-cream w-full md:min-h-[calc(100svh-4rem)] md:max-h-[820px]">
-      {/* 1. CSS GRID GRID LAYER: Locks the page to 3 strict, independent height zones */}
-      <div className="relative mx-auto grid w-full max-w-[1920px] grid-cols-1 px-3 pt-6 pb-12 md:px-6 md:pt-8 md:pb-10 md:grid-rows-[auto_1fr_auto] md:gap-4 md:h-[calc(100svh-4rem)] md:max-h-[800px]">
+      {/* 1. Kept the clean 3-row accordion grid to partition layout cells */}
+      <div className="relative mx-auto grid w-full max-w-[1920px] grid-cols-1 px-3 pt-6 pb-12 md:px-6 md:pt-4 md:pb-6 md:grid-rows-[auto_1fr_auto] md:gap-2 md:h-[calc(100svh-4rem)] md:max-h-[780px]">
         {/* ROW 1: HEADLINE LOGO - Confined completely to the top grid row */}
         <div className="relative z-40 flex justify-center w-full md:row-start-1">
           <img
             src={heroHeadline.url}
             alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-            className="w-[310px] drop-shadow-sm md:w-[450px] md:h-auto"
+            className="w-[310px] drop-shadow-sm md:w-[420px] md:h-auto"
           />
         </div>
 
-        {/* ROW 2: PHOTO COLLAGE ZONE - Confined cleanly to the middle grid row, isolated from text cells */}
-        <div className="relative h-[340px] w-full max-w-[1400px] mx-auto md:row-start-2 md:h-[280px] md:w-[85vw] md:max-w-[1140px] md:!mt-0 md:!top-0">
-          {/* Upper Background Fruit Splashes - Tucked far out into the corner gutters */}
-          <img
-            src={heroSplashLeft.url}
-            alt=""
-            className="pointer-events-none absolute left-[-22%] top-[-12%] z-5 w-[55%] object-contain md:left-[-12%] md:top-[-35%] md:w-[28%] md:-rotate-6"
-          />
-          <img
-            src={heroSplashRight.url}
-            alt=""
-            className="pointer-events-none absolute right-[-12%] top-[-12%] z-5 w-[55%] object-contain md:right-[-12%] md:top-[-37%] md:w-[28%] md:rotate-6"
-          />
-          <img
-            src={heroFruitSplash.url}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 top-[-40%] z-4 hidden w-[60%] -translate-x-1/2 object-contain opacity-95 md:block"
-          />
+        {/* ROW 2: PHOTO COLLAGE ZONE - Wrapped inside an outer layout mask to physically scale down conflicting custom CSS */}
+        <div className="relative h-[340px] w-full max-w-[1400px] mx-auto md:row-start-2 md:h-[250px] md:w-[85vw] md:max-w-[1140px] md:!mt-0 md:!top-0">
+          {/* Inner Transform Mask: Force-shrinks the entire image zone down to 85% layout size on desktop 
+              to instantly pull text boundaries down from the logo sticker and clear out the button row */}
+          <div className="w-full h-full relative md:scale-[0.85] md:origin-center">
+            {/* Upper Background Fruit Splashes */}
+            <img
+              src={heroSplashLeft.url}
+              alt=""
+              className="pointer-events-none absolute left-[-22%] top-[-12%] z-5 w-[55%] object-contain md:left-[-12%] md:top-[-35%] md:w-[28%] md:-rotate-6"
+            />
+            <img
+              src={heroSplashRight.url}
+              alt=""
+              className="pointer-events-none absolute right-[-12%] top-[-12%] z-5 w-[55%] object-contain md:right-[-12%] md:top-[-37%] md:w-[28%] md:rotate-6"
+            />
+            <img
+              src={heroFruitSplash.url}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute left-1/2 top-[-40%] z-4 hidden w-[60%] -translate-x-1/2 object-contain opacity-95 md:block"
+            />
 
-          {/* Lower Corner Fruit Accents - Shifted WAY up to bottom-[65%] to leave the row bottom completely clear */}
-          <img
-            src={heroSplashLeft.url}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute bottom-[40%] left-[-4%] z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block md:bottom-[65%] md:left-[-12%]"
-          />
-          <img
-            src={heroSplashRight.url}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute bottom-[40%] right-[-4%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block md:bottom-[65%] md:right-[-12%]"
-          />
+            {/* Lower Corner Fruit Accents - Shrunk and lifted to guarantee text clarity */}
+            <img
+              src={heroSplashLeft.url}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute bottom-[40%] left-[-4%] z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block md:bottom-[65%] md:left-[-14%]"
+            />
+            <img
+              src={heroSplashRight.url}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute bottom-[40%] right-[-4%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block md:bottom-[65%] md:right-[-14%]"
+            />
 
-          {/* Polaroid Photo Cards - Heights constrained to fit the row grid perfectly */}
-          <img
-            src={heroKids}
-            alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[0px] md:left-[24%] md:z-20 md:!h-[240px] md:!w-[190px] md:object-cover md:rounded-[1.5rem] md:-rotate-6 md:!mt-0"
-          />
+            {/* Polaroid Photo Cards */}
+            <img
+              src={heroKids}
+              alt="Kids enjoying Fruti Pop"
+              className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[0px] md:left-[24%] md:z-20 md:!h-[240px] md:!w-[190px] md:object-cover md:rounded-[1.5rem] md:-rotate-6 md:!mt-0"
+            />
 
-          <img
-            src={heroFootball}
-            alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[-15px] md:z-30 md:!h-[270px] md:!w-[215px] md:object-cover md:rounded-[1.5rem] md:!mt-0"
-          />
+            <img
+              src={heroFootball}
+              alt="Young football player enjoying Fruti Pop"
+              className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[-15px] md:z-30 md:!h-[270px] md:!w-[215px] md:object-cover md:rounded-[1.5rem] md:!mt-0"
+            />
 
-          <img
-            src={heroWoman}
-            alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[5px] md:right-[24%] md:z-20 md:!h-[240px] md:!w-[190px] md:object-cover md:rounded-[1.5rem] md:rotate-6 md:!mt-0"
-          />
+            <img
+              src={heroWoman}
+              alt="Enjoying Fruti Pop"
+              className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[5px] md:right-[24%] md:z-20 md:!h-[240px] md:!w-[190px] md:object-cover md:rounded-[1.5rem] md:rotate-6 md:!mt-0"
+            />
+          </div>
         </div>
 
-        {/* ROW 3: CTA BUTTON ZONE - Locked strictly to the bottom cell row on pristine background cream */}
-        <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-6 md:row-start-3 md:mt-0 md:pt-2">
+        {/* ROW 3: CTA BUTTON ZONE - Locked strictly to the bottom cell row on a clean backdrop */}
+        <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-6 md:row-start-3 md:mt-0 md:pt-4">
           <Button
             asChild
             size="lg"
