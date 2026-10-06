@@ -60,7 +60,7 @@ function Hero() {
         />
 
         {/* 3. Image Container: Clean fixed layout height avoids layout overlap or section breakage */}
-        <div className="relative h-[340px] w-full max-w-[1400px] md:h-[480px] md:w-[90vw] md:max-w-[1440px]">
+        <div className="relative h-[340px] w-full max-w-[1400px] md:h-[380px] md:-mt-[45px] md:w-[90vw] md:max-w-[1440px]">
           {/* Desktop fruit treatment */}
           <img
             src={heroSplashLeft.url}
