@@ -49,11 +49,11 @@ const A = () => (
 
 function Hero() {
   return (
-    <section className="overflow-hidden bg-hero-cream w-full md:h-[calc(100svh-4rem)] md:max-h-[820px]">
-      {/* 1. Main vertical accordion layout distributes space perfectly from top to bottom */}
-      <div className="relative mx-auto flex h-full max-w-[1920px] flex-col items-center px-3 pt-4 pb-6 md:px-6 md:pt-6 md:pb-8 md:justify-between">
-        {/* 2. HEADLINE LOGO: Positioned cleanly at the top slot */}
-        <div className="relative z-40 flex justify-center w-full">
+    <section className="overflow-hidden bg-hero-cream w-full md:min-h-[calc(100svh-4rem)] md:max-h-[840px]">
+      {/* 1. Swapped out justify-between for clean top-down block spacing */}
+      <div className="relative mx-auto flex w-full max-w-[1920px] flex-col items-center px-3 pt-6 pb-12 md:px-6 md:pt-10 md:pb-14">
+        {/* 2. HEADLINE LOGO: Stays statically at the top layer with a healthy bottom margin */}
+        <div className="relative z-40 flex justify-center w-full mb-4 md:mb-6">
           <img
             src={heroHeadline.url}
             alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
@@ -61,9 +61,9 @@ function Hero() {
           />
         </div>
 
-        {/* 3. PHOTO COLLAGE ZONE: Positioned nicely underneath the headline curves */}
-        <div className="relative h-[340px] w-full max-w-[1400px] md:mt-6 md:h-[300px] md:w-[85vw] md:max-w-[1140px]">
-          {/* Upper Background Fruit Splashes */}
+        {/* 3. PHOTO COLLAGE CONTAINER: Standard pixel height locks it below the headline sticker logo bounds */}
+        <div className="relative h-[340px] w-full max-w-[1400px] md:h-[300px] md:w-[85vw] md:max-w-[1140px] md:mb-10">
+          {/* Upper Background Fruit Splashes - Shifted out to the sides */}
           <img
             src={heroSplashLeft.url}
             alt=""
@@ -81,22 +81,21 @@ function Hero() {
             className="pointer-events-none absolute left-1/2 top-[-35%] z-4 hidden w-[60%] -translate-x-1/2 object-contain opacity-95 md:block"
           />
 
-          {/* CHANGED: Shifted lower corner fruit accents significantly higher up (to md:bottom-[50%]) 
-              and further out (to md:left-[-6%]/md:right-[-6%]) to lift the strawberry graphics completely off your text! */}
+          {/* Lower Corner Fruit Accents - Shifted WAY up to bottom-[60%] and out to completely expose the subtext lane */}
           <img
             src={heroSplashLeft.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[40%] left-[-4%] z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block md:bottom-[50%] md:left-[-6%]"
+            className="pointer-events-none absolute bottom-[40%] left-[-4%] z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block md:bottom-[60%] md:left-[-12%]"
           />
           <img
             src={heroSplashRight.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[40%] right-[-4%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block md:bottom-[50%] md:right-[-6%]"
+            className="pointer-events-none absolute bottom-[40%] right-[-4%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block md:bottom-[60%] md:right-[-12%]"
           />
 
-          {/* Polaroid Photo Cards */}
+          {/* Polaroid Photo Cards - Uniform dimensions stay aligned under the logo text boundaries */}
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
@@ -116,8 +115,8 @@ function Hero() {
           />
         </div>
 
-        {/* 4. CTA BUTTON ZONE: Safe at the bottom window layer on a clean cream background backdrop */}
-        <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-6 md:mt-0 md:pt-4">
+        {/* 4. CTA BUTTON ZONE: Placed in natural layout document flow on a pristine cream background layer */}
+        <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-6 md:mt-2">
           <Button
             asChild
             size="lg"
@@ -128,7 +127,6 @@ function Hero() {
             </Link>
           </Button>
 
-          {/* This subtext now sits completely uncovered and high-contrast */}
           <p className="text-center text-xs font-semibold text-foreground/65 sm:text-sm">
             Less Sugar • Full of Vitamins • Packed with Fruit
           </p>
