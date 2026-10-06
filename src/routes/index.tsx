@@ -50,9 +50,9 @@ const A = () => (
 function Hero() {
   return (
     <section className="overflow-hidden bg-hero-cream w-full md:h-[calc(100vh-4rem)] md:max-h-[760px]">
-      {/* 1. Locks the container to the visible window height and auto-distributes the three sections vertically */}
-      <div className="relative mx-auto flex h-full max-w-[1920px] flex-col items-center px-3 pt-4 pb-6 md:px-6 md:pt-6 md:pb-8 md:justify-between">
-        {/* 2. HEADLINE LOGO: Kept relative at the very top slot */}
+      {/* 1. Structural vertical layout partitions the single window cleanly into three safe slots */}
+      <div className="relative mx-auto flex h-full max-w-[1920px] flex-col items-center px-3 pt-4 pb-6 md:px-6 md:pt-4 md:pb-8 md:justify-between">
+        {/* ROW 1: HEADLINE LOGO - Pins cleanly at the top of the visible screen */}
         <div className="relative z-40 flex justify-center w-full">
           <img
             src={heroHeadline.url}
@@ -61,10 +61,9 @@ function Hero() {
           />
         </div>
 
-        {/* 3. PHOTO COLLAGE CONTAINER: Reduced layout height to md:h-[220px] to strictly fit the screen window,
-            and added md:-mt-4 to pull it down slightly away from the headline text boundaries */}
-        <div className="relative h-[340px] w-full max-w-[1400px] md:h-[220px] md:w-[80vw] md:max-w-[1040px] md:-mt-4 md:!top-0">
-          {/* Upper Background Fruit Splashes - Tucked high and out */}
+        {/* ROW 2: PHOTO COLLAGE ZONE - Tightened container height to keep layouts balanced */}
+        <div className="relative h-[340px] w-full max-w-[1400px] md:h-[220px] md:w-[80vw] md:max-w-[1040px] md:-mt-2">
+          {/* Upper Background Fruit Splashes - Tucked far out into the side gutters */}
           <img
             src={heroSplashLeft.url}
             alt=""
@@ -82,7 +81,7 @@ function Hero() {
             className="pointer-events-none absolute left-1/2 top-[-50%] z-4 hidden w-[60%] -translate-x-1/2 object-contain opacity-95 md:block"
           />
 
-          {/* Lower Corner Fruit Accents - Lifted way up to bottom-[75%] to keep the bottom text region completely empty */}
+          {/* Lower Corner Fruit Accents - Lifted up to bottom-[75%] to completely clear out the bottom subtext row */}
           <img
             src={heroSplashLeft.url}
             alt=""
@@ -96,27 +95,55 @@ function Hero() {
             className="pointer-events-none absolute bottom-[40%] right-[-4%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block md:bottom-[75%] md:right-[-14%]"
           />
 
-          {/* Polaroid Photo Cards - Force-shrunk dimensions to perfectly fit laptop screen limits */}
+          {/* 2. SANDBOXED PHOTO CARDS: Wrapping the custom layout frame classes inside sandboxed absolute `div` layers 
+              neutralizes their destructive page overrides and locks them underneath the logo sticker boundaries! */}
+
+          {/* Left Polaroid Frame */}
+          <div className="frame-pop-left absolute bottom-[5px] left-[24%] z-20 hidden md:block">
+            <img
+              src={heroKids}
+              alt="Kids enjoying Fruti Pop"
+              className="rounded-[1.25rem] md:h-[200px] md:w-[155px] md:object-cover md:-rotate-6"
+            />
+          </div>
+
+          {/* Center Polaroid Frame */}
+          <div className="frame-pop-center absolute bottom-0 left-1/2 z-30 -translate-x-1/2 hidden md:block">
+            <img
+              src={heroFootball}
+              alt="Young football player enjoying Fruti Pop"
+              className="rounded-[1.25rem] md:h-[225px] md:w-[175px] md:object-cover"
+            />
+          </div>
+
+          {/* Right Polaroid Frame */}
+          <div className="frame-pop-right absolute bottom-[10px] right-[24%] z-20 hidden md:block">
+            <img
+              src={heroWoman}
+              alt="Enjoying Fruti Pop"
+              className="rounded-[1.25rem] md:h-[200px] md:w-[155px] md:object-cover md:rotate-6"
+            />
+          </div>
+
+          {/* Mobile Fallback View (Kept completely intact) */}
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[0px] md:left-[24%] md:z-20 md:!h-[210px] md:!w-[165px] md:object-cover md:rounded-[1.25rem] md:-rotate-6 md:!mt-0"
+            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] md:hidden"
           />
-
           <img
             src={heroFootball}
             alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[-15px] md:z-30 md:!h-[240px] md:!w-[190px] md:object-cover md:rounded-[1.25rem] md:!mt-0"
+            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] md:hidden"
           />
-
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[5px] md:right-[24%] md:z-20 md:!h-[210px] md:!w-[165px] md:object-cover md:rounded-[1.25rem] md:rotate-6 md:!mt-0"
+            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] md:hidden"
           />
         </div>
 
-        {/* 4. BUTTON ZONE: Hard-anchored to the absolute bottom row window slot on standard solid background cream */}
+        {/* ROW 3: CTA BUTTON ZONE - Securely anchored at the bottom edge on a clean cream background */}
         <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-6 md:mt-0 md:pt-2">
           <Button
             asChild
@@ -128,7 +155,7 @@ function Hero() {
             </Link>
           </Button>
 
-          {/* This subtext line sits cleanly uncovered and clearly visible */}
+          {/* This text line is forced into clear contrast view inside the visible viewport */}
           <p className="text-center text-xs font-semibold text-foreground/65 sm:text-sm">
             Less Sugar • Full of Vitamins • Packed with Fruit
           </p>
