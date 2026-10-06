@@ -49,9 +49,9 @@ const A = () => (
 
 function Hero() {
   return (
-    <section className="overflow-hidden bg-hero-cream w-full min-h-[calc(100svh-4rem)] md:h-[calc(100vh-4rem)] md:max-h-[760px]">
-      {/* 1. Standard vertical flexbox handles full layout distribution predictably across all viewports */}
-      <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] h-full max-w-[1920px] flex-col items-center justify-between px-3 pt-4 pb-6 md:px-6 md:pt-4 md:pb-8">
+    <section className="overflow-hidden bg-hero-cream w-full">
+      {/* 1. CHANGED: Removed justify-between and min-h screen restrictions on mobile so layout spaces itself naturally */}
+      <div className="relative mx-auto flex w-full max-w-[1920px] flex-col items-center px-4 pt-6 pb-8 md:px-6 md:pt-4 md:pb-8 md:h-[calc(100vh-4rem)] md:max-h-[760px] md:justify-between">
         {/* ROW 1: HEADLINE LOGO */}
         <div className="relative z-40 flex justify-center w-full md:-mt-4">
           <img
@@ -63,11 +63,10 @@ function Hero() {
 
         {/* =========================================================================
             MOBILE-ONLY OVERLAPPING FAN COLLAGE ZONE
-            Eliminates dead space by making the images larger and overlapping them natively
             ========================================================================= */}
-        {/* Changed flex-row to a relative box layer with an increased height md:hidden */}
-        <div className="relative w-full h-[240px] max-w-[340px] my-auto md:hidden flex items-center justify-center">
-          {/* Background Fruit Splashes - Tucked slightly behind the cards */}
+        {/* 2. CHANGED: Replaced my-auto with a tight mt-4 mb-2 margin to pull images UP close to the headline */}
+        <div className="relative w-full h-[230px] max-w-[340px] mt-4 mb-2 md:hidden flex items-center justify-center">
+          {/* Background Fruit Splashes */}
           <img
             src={heroSplashLeft.url}
             alt=""
@@ -80,22 +79,22 @@ function Hero() {
           />
 
           {/* Left Card: Rotates left and steps slightly back */}
-          <div className="absolute left-2 bottom-[10px] z-10 w-[130px] rotate-[-8deg] bg-white p-1 pb-4 shadow-md rounded-xl border border-black/5">
-            <img src={heroKids} alt="Kids enjoying Fruti Pop" className="w-full h-[150px] object-cover rounded-lg" />
+          <div className="absolute left-2 bottom-[10px] z-10 w-[125px] rotate-[-8deg] bg-white p-1 pb-4 shadow-md rounded-xl border border-black/5">
+            <img src={heroKids} alt="Kids enjoying Fruti Pop" className="w-full h-[145px] object-cover rounded-lg" />
           </div>
 
           {/* Center Card: Larger focal element overlapping the side cards in the absolute center layer */}
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-30 w-[155px] scale-105 bg-white p-1.5 pb-5 shadow-xl rounded-xl border border-black/5">
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-30 w-[150px] scale-105 bg-white p-1.5 pb-5 shadow-xl rounded-xl border border-black/5">
             <img
               src={heroFootball}
               alt="Young football player enjoying Fruti Pop"
-              className="w-full h-[175px] object-cover rounded-lg"
+              className="w-full h-[165px] object-cover rounded-lg"
             />
           </div>
 
           {/* Right Card: Rotates right and steps slightly back */}
-          <div className="absolute right-2 bottom-[15px] z-20 w-[130px] rotate-[8deg] bg-white p-1 pb-4 shadow-md rounded-xl border border-black/5">
-            <img src={heroWoman} alt="Enjoying Fruti Pop" className="w-full h-[150px] object-cover rounded-lg" />
+          <div className="absolute right-2 bottom-[12px] z-20 w-[125px] rotate-[8deg] bg-white p-1 pb-4 shadow-md rounded-xl border border-black/5">
+            <img src={heroWoman} alt="Enjoying Fruti Pop" className="w-full h-[145px] object-cover rounded-lg" />
           </div>
         </div>
 
@@ -108,12 +107,12 @@ function Hero() {
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-12%] top-[-55%] z-5 w-[28%] object-contain -rotate-6"
+            className="pointer-events-none absolute left-[-12%] top-[-155%] z-5 w-[28%] object-contain -rotate-6"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-12%] top-[-57%] z-5 w-[28%] object-contain rotate-6"
+            className="pointer-events-none absolute right-[-12%] top-[-157%] z-5 w-[28%] object-contain rotate-6"
           />
           <img
             src={heroFruitSplash.url}
@@ -163,7 +162,8 @@ function Hero() {
         </div>
 
         {/* ROW 3: CTA BUTTON ZONE */}
-        <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-4 md:mt-0">
+        {/* 3. CHANGED: Added mt-2 to pull the button right underneath the cards without any gap */}
+        <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-2 md:mt-0">
           <Button
             asChild
             size="lg"
