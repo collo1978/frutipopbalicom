@@ -107,7 +107,7 @@ function Hero() {
           />
         </div>
 
-        <div className="relative z-50 mt-2 flex w-full flex-col items-center gap-2 pb-6 md:mt-70 md:gap-1.5 md:pb-3">
+        <div className="relative z-50 mt-2 flex w-full flex-col items-center gap-2 pb-6 md:mt-[70px] md:gap-1.5 md:pb-3">
           <Button
             asChild
             size="lg"
