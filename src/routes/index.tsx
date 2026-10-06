@@ -50,29 +50,29 @@ const A = () => (
 function Hero() {
   return (
     <section className="overflow-hidden bg-hero-cream w-full min-h-[calc(100svh-4rem)] md:h-[calc(100vh-4rem)] md:max-h-[760px]">
-      {/* 1. Main viewport wrapper manages full vertical layout space cleanly */}
-      <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] h-full max-w-[1920px] flex-col items-center justify-between px-4 pt-4 pb-6 md:px-6 md:pt-4 md:pb-8">
+      {/* 1. Standard vertical flexbox handles full layout distribution predictably across all viewports */}
+      <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] h-full max-w-[1920px] flex-col items-center justify-between px-3 pt-4 pb-6 md:px-6 md:pt-4 md:pb-8">
         {/* ROW 1: HEADLINE LOGO */}
         <div className="relative z-40 flex justify-center w-full md:-mt-4">
           <img
             src={heroHeadline.url}
             alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-            className="w-[280px] sm:w-[330px] md:w-[420px] h-auto drop-shadow-sm"
+            className="w-[280px] sm:w-[320px] md:w-[420px] h-auto drop-shadow-sm"
           />
         </div>
 
-        {/* ROW 2: PHOTO COLLAGE ZONE - Overlaps as a beautiful card stack on mobile, rows cleanly on desktop */}
-        <div className="relative h-[280px] sm:h-[320px] w-full max-w-[400px] md:h-[180px] md:w-[80vw] md:max-w-[1040px] md:-mt-6 my-auto md:my-0 flex items-center justify-center">
-          {/* Background Fruit Splashes */}
+        {/* ROW 2: PHOTO COLLAGE ZONE - Re-engineered mobile layout using simple, predictable flex row bounds */}
+        <div className="relative w-full max-w-[420px] md:max-w-[1140px] md:h-[180px] md:w-[80vw] md:-mt-6 my-auto md:my-0 flex items-center justify-center">
+          {/* Decorative Fruit Splashes - Pulled far out on desktop, turned down on mobile layout screen limits */}
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-15%] top-[-5%] z-5 w-[45%] md:w-[28%] md:left-[-12%] md:top-[-55%] object-contain -rotate-6 opacity-60 md:opacity-100"
+            className="pointer-events-none absolute left-[-15%] top-[-10%] z-5 w-[45%] md:w-[28%] md:left-[-12%] md:top-[-55%] object-contain -rotate-6 opacity-40 md:opacity-100"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-15%] top-[-5%] z-5 w-[45%] md:w-[28%] md:right-[-12%] md:top-[-57%] object-contain rotate-6 opacity-60 md:opacity-100"
+            className="pointer-events-none absolute right-[-15%] top-[-10%] z-5 w-[45%] md:w-[28%] md:right-[-12%] md:top-[-57%] object-contain rotate-6 opacity-40 md:opacity-100"
           />
           <img
             src={heroFruitSplash.url}
@@ -81,53 +81,45 @@ function Hero() {
             className="pointer-events-none absolute left-1/2 top-[-60%] z-4 hidden w-[60%] -translate-x-1/2 object-contain opacity-95 md:block"
           />
 
-          {/* Lower Corner Fruit Splashes */}
-          <img
-            src={heroSplashLeft.url}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute bottom-[90%] left-[-14%] z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block"
-          />
-          <img
-            src={heroSplashRight.url}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute bottom-[90%] right-[-14%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block"
-          />
+          {/* 2. SECURE MOBILE ROW DISPLAY: Bypasses the broken stacking CSS rules by using a distinct, 
+              clean horizontal side-by-side arrangement on mobile screen viewports */}
+          <div className="flex w-full justify-between items-end gap-1.5 px-1 md:block md:p-0 md:relative md:h-full md:w-full">
+            {/* Card 1: Left Polaroid (Kids) */}
+            <div className="relative z-10 scale-[0.95] -rotate-3 md:absolute md:scale-100 md:rotate-0 md:bottom-[25px] md:left-[24%] md:z-20">
+              <img
+                src={heroKids}
+                alt="Kids enjoying Fruti Pop"
+                className="rounded-[0.75rem] md:rounded-[1.25rem] h-[140px] w-[105px] sm:h-[170px] sm:w-[125px] md:h-[190px] md:w-[145px] object-cover md:-rotate-6 shadow-sm md:shadow-none"
+              />
+            </div>
 
-          {/* 2. FAN COLLAGE STACK: Left card tilts left, right card tilts right, center boy stays directly up front */}
+            {/* Card 2: Center Polaroid (Football Boy) */}
+            <div className="relative z-20 scale-[1.05] translate-y-[-4px] md:absolute md:scale-100 md:translate-y-0 md:bottom-[15px] md:left-1/2 md:-translate-x-1/2 md:z-30">
+              <img
+                src={heroFootball}
+                alt="Young football player enjoying Fruti Pop"
+                className="rounded-[0.75rem] md:rounded-[1.25rem] h-[155px] w-[115px] sm:h-[190px] sm:w-[140px] md:h-[210px] md:w-[160px] object-cover shadow-md md:drop-shadow-md"
+              />
+            </div>
 
-          {/* Card 1: Left Polaroid (Kids) */}
-          <div className="absolute z-10 bottom-[10px] left-[10px] scale-90 -rotate-6 md:rotate-0 md:scale-100 md:bottom-[25px] md:left-[24%] md:z-20">
-            <img
-              src={heroKids}
-              alt="Kids enjoying Fruti Pop"
-              className="rounded-[1rem] md:rounded-[1.25rem] h-[160px] w-[120px] sm:h-[180px] sm:w-[135px] md:h-[190px] md:w-[145px] object-cover md:-rotate-6 shadow-md md:shadow-none"
-            />
-          </div>
-
-          {/* Card 2: Center Polaroid (Football Boy) - Prominent top focal layer */}
-          <div className="absolute z-30 bottom-0 left-1/2 -translate-x-1/2 scale-100 md:bottom-[15px]">
-            <img
-              src={heroFootball}
-              alt="Young football player enjoying Fruti Pop"
-              className="rounded-[1rem] md:rounded-[1.25rem] h-[180px] w-[135px] sm:h-[200px] sm:w-[150px] md:h-[210px] md:w-[160px] object-cover drop-shadow-md"
-            />
-          </div>
-
-          {/* Card 3: Right Polaroid (Woman) - Fixed bracket syntax error */}
-          <div className="absolute z-20 bottom-[15px] right-[10px] scale-90 rotate-6 md:rotate-0 md:scale-100 md:bottom-[30px] md:right-[24%]">
-            <img
-              src={heroWoman}
-              alt="Enjoying Fruti Pop"
-              className="rounded-[1rem] md:rounded-[1.25rem] h-[160px] w-[120px] sm:h-[180px] sm:w-[135px] md:h-[190px] md:w-[145px] object-cover md:rotate-6 shadow-md md:shadow-none"
-            />
+            {/* Card 3: Right Polaroid (Woman) */}
+            <div className="relative z-10 scale-[0.95] rotate-3 md:absolute md:scale-100 md:rotate-0 md:bottom-[30px] md:right-[24%]">
+              <img
+                src={heroWoman}
+                alt="Enjoying Fruti Pop"
+                className="rounded-[0.75rem] md:rounded-[1.25rem] h-[140px] w-[105px] sm:h-[170px] sm:w-[125px] md:h-[190px] md:w-[145px] object-cover md:rotate-6 shadow-sm md:shadow-none"
+              />
+            </div>
           </div>
         </div>
 
         {/* ROW 3: CTA BUTTON ZONE */}
         <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-4 md:mt-0">
-          <Button asChild size="lg" className={`${cta} w-full max-w-xs md:w-auto md:min-w-[17rem] md:px-14 md:text-lg`}>
+          <Button
+            asChild
+            size="lg"
+            className={`${cta} w-full max-w-[280px] md:w-auto md:min-w-[17rem] md:px-14 md:text-lg`}
+          >
             <Link to="/order">
               Order My Pops <A />
             </Link>
