@@ -50,33 +50,33 @@ const A = () => (
 function Hero() {
   return (
     <section className="overflow-hidden bg-hero-cream">
-      {/* Increased padding-top to md:pt-24 to push the entire content block down from the navbar */}
-      <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1920px] flex-col items-center px-3 pt-3 md:min-h-0 md:px-6 md:pt-24">
-        {/* Placed headline layout out of absolute overlap on desktop so it sits cleanly on top of the images */}
+      {/* 1. Added explicit height and extra padding to ensure the bottom text doesn't overflow the section */}
+      <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1920px] flex-col items-center px-3 pt-3 md:min-h-0 md:px-6 md:pt-12 md:pb-24">
+        {/* 2. Anchored the headline logo cleanly at the very top layer */}
         <img
           src={heroHeadline.url}
           alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-          className="relative z-40 -mb-8 w-[330px] drop-shadow-sm md:mb-6 md:w-[680px] md:h-auto"
+          className="relative z-40 -mb-8 w-[330px] drop-shadow-sm md:absolute md:left-1/2 md:top-[25px] md:mb-0 md:w-[650px] md:h-auto md:-translate-x-1/2"
         />
 
-        {/* Adjusted height clamps and removed negative margins to let the photo cards breathe */}
-        <div className="relative h-[440px] w-full max-w-[1400px] md:h-[clamp(20rem,calc(100svh-24rem),35rem)] md:w-[97vw] md:max-w-[1560px]">
+        {/* 3. Added md:pt-[180px] to physically push the photo cards and background splashes BELOW the logo layout */}
+        <div className="relative h-[440px] w-full max-w-[1400px] md:h-[clamp(22rem,calc(100svh-22rem),36rem)] md:w-[97vw] md:max-w-[1560px] md:pt-[180px]">
           {/* Desktop fruit treatment */}
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-22%] top-[-12%] z-5 w-[55%] object-contain md:left-[1%] md:top-[5%] md:w-[24%] md:-rotate-6"
+            className="pointer-events-none absolute left-[-22%] top-[-12%] z-5 w-[55%] object-contain md:left-[1%] md:top-[30%] md:w-[24%] md:-rotate-6"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-12%] top-[-12%] z-5 w-[55%] object-contain md:right-[0%] md:top-[3%] md:w-[25%] md:rotate-6"
+            className="pointer-events-none absolute right-[-12%] top-[-12%] z-5 w-[55%] object-contain md:right-[0%] md:top-[25%] md:w-[25%] md:rotate-6"
           />
           <img
             src={heroFruitSplash.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-[-25%] z-4 hidden w-[66%] -translate-x-1/2 object-contain opacity-95 md:block"
+            className="pointer-events-none absolute left-1/2 top-[-2%] z-4 hidden w-[66%] -translate-x-1/2 object-contain opacity-95 md:block"
           />
           <img
             src={heroSplashLeft.url}
@@ -91,28 +91,28 @@ function Hero() {
             className="pointer-events-none absolute bottom-[-5%] right-[12%] z-6 hidden w-[19%] -scale-y-100 -rotate-[11deg] object-contain md:block"
           />
 
-          {/* Tweaked bottom values to keep the picture borders aligned underneath the logo */}
+          {/* Adjusted picture frames bottom alignment to account for the new layout space */}
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[-20px] md:left-[24%] md:z-20 md:h-[75%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6"
+            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[20px] md:left-[24%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6"
           />
 
           <img
             src={heroFootball}
             alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[-40px] md:z-30 md:h-[80%] md:rounded-[1.75rem]"
+            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[0px] md:z-30 md:h-[78%] md:rounded-[1.75rem]"
           />
 
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[-5px] md:right-[24%] md:z-20 md:h-[75%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6"
+            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[35px] md:right-[24%] md:z-20 md:h-[73%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6"
           />
         </div>
 
-        {/* Clean layout flow positioning for the CTA and benefit items */}
-        <div className="relative z-50 mt-6 flex w-full flex-col items-center gap-2 pb-8 md:mt-12 md:gap-1.5 md:pb-12">
+        {/* 4. Swapped out regular margins for a clean absolute bottom anchor so your text can NEVER hide again */}
+        <div className="relative z-50 mt-6 flex w-full flex-col items-center gap-2 pb-6 md:absolute md:bottom-6 md:left-1/2 md:mt-0 md:-translate-x-1/2 md:gap-1.5 md:pb-0">
           <Button
             asChild
             size="lg"
@@ -123,80 +123,13 @@ function Hero() {
             </Link>
           </Button>
 
+          {/* The "little words" text is forced back into absolute visibility here */}
           <p className="text-center text-xs font-semibold text-foreground/65 sm:text-sm">
             Less Sugar • Full of Vitamins • Packed with Fruit
           </p>
         </div>
       </div>
     </section>
-  );
-}
-
-const MOMENTS = [
-  {
-    t: "Birthday Parties",
-    h: "The moment the cooler opens.",
-    d: "Nothing gets a squeal quite like a cooler full of bright, fruity pops on a hot Bali afternoon.",
-    cta: "Order Birthday Pops",
-    p: { src: birthdayParty.url, alt: "Excited children around a cooler full of Fruti Pops at a poolside party" },
-    pos: "object-[50%_58%]",
-  },
-  {
-    t: "Schools & Sports Clubs",
-    h: "The final whistle. The first pop.",
-    d: "After all the running and cheering, a cold, fruity reward. Big smiles for the whole team.",
-    cta: "Pop the Whole Team",
-    p: P.footballPair,
-    pos: "object-top",
-  },
-  {
-    t: "Events",
-    h: "A little pop. A lot of happy faces.",
-    d: "From community gatherings to big celebrations, a burst of fruity fun that gets everyone smiling.",
-    cta: "Make My Event Pop",
-    p: { src: eventBoy.url, alt: "A smiling boy holding two Fruti Pops at an event" },
-    pos: "object-center",
-  },
-  {
-    t: "Villas & Poolside",
-    h: "Sun's out. Pops out.",
-    d: "Poolside laughs, sunny afternoons and a freezer full of fruity pops.",
-    cta: "Fill My Freezer",
-    p: P.villaDelivery,
-    pos: "object-center",
-  },
-];
-
-function PackCard({
-  name,
-  qty,
-  price,
-  pack,
-  badge,
-}: {
-  name: string;
-  qty: string;
-  price: string;
-  pack: "family" | "jumbo";
-  badge?: string;
-}) {
-  return (
-    <article className="relative flex flex-col items-center rounded-3xl border bg-card p-6 pt-8 text-center shadow-sm">
-      {badge && (
-        <span className="absolute -top-4 left-1/2 -translate-x-1/2 -rotate-2 whitespace-nowrap rounded-full bg-dragonfruit px-5 py-1.5 font-display text-base font-bold text-accent-foreground shadow-md md:text-lg">
-          {badge}
-        </span>
-      )}
-      <p className="font-bold text-primary">{name}</p>
-      <h3 className="mt-1 text-4xl font-bold text-accent">{qty}</h3>
-      <p className="mt-2 text-2xl font-bold">{price}</p>
-      <p className="mt-2 text-foreground/75">Mix & match your favourite flavours.</p>
-      <Button asChild size="lg" className={`mt-5 ${cta}`}>
-        <Link to="/order" search={{ pack }}>
-          Fill My Freezer <A />
-        </Link>
-      </Button>
-    </article>
   );
 }
 
