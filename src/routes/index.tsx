@@ -253,3 +253,15 @@ function Home() {
     </>
   );
 }
+function PackCard({ name, qty, price, pack }) {
+  return (
+    <div className="rounded-2xl bg-white p-6 shadow-sm border border-black/5 flex flex-col items-center text-center">
+      <h3 className="text-xl font-bold text-foreground">{name}</h3>
+      <p className="text-sm font-medium text-foreground/60 mt-1">{qty}</p>
+      <span className="text-2xl font-black text-primary mt-4">{price}</span>
+      <Button asChild className={`${cta} mt-6 px-8`}>
+        <Link to={`/order?pack=${pack}`}>Select Pack</Link>
+      </Button>
+    </div>
+  );
+}
