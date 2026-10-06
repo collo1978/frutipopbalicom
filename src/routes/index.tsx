@@ -49,84 +49,85 @@ const A = () => (
 
 function Hero() {
   return (
-    <section className="overflow-hidden bg-hero-cream">
-      {/* 1. Added explicit desktop padding bottom to keep the CTA text inside the layout section */}
-      <div className="relative mx-auto flex max-w-[1920px] flex-col items-center px-3 pt-6 pb-10 md:h-[calc(100svh-4rem)] md:max-h-[850px] md:justify-between md:px-6 md:pt-6 md:pb-8">
-        {/* 2. The main headline logo remains relative so it naturally defines the top layout boundary */}
+    <section className="overflow-hidden bg-hero-cream relative w-full md:h-[820px] lg:h-[860px]">
+      {/* 1. TOP ZONE: Headline Logo - Anchored safely at the top */}
+      <div className="relative z-40 flex justify-center w-full pt-6 md:absolute md:top-[40px] md:pt-0">
         <img
           src={heroHeadline.url}
           alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-          className="relative z-40 -mb-4 w-[330px] drop-shadow-sm md:-mb-6 md:w-[540px] md:h-auto"
+          className="w-[310px] drop-shadow-sm md:w-[480px] md:h-auto"
+        />
+      </div>
+
+      {/* 2. MIDDLE ZONE: Photos & Splashes - Anchored strictly in the center grid */}
+      <div className="relative h-[340px] w-full max-w-[1400px] mx-auto mt-4 md:absolute md:top-[240px] md:left-1/2 md:-translate-x-1/2 md:h-[350px] md:w-[90vw] md:max-w-[1200px] md:mt-0">
+        {/* Upper Background Fruit Splashes - Shifted up and out */}
+        <img
+          src={heroSplashLeft.url}
+          alt=""
+          className="pointer-events-none absolute left-[-22%] top-[-12%] z-5 w-[55%] object-contain md:left-[-8%] md:top-[-20%] md:w-[28%] md:-rotate-6"
+        />
+        <img
+          src={heroSplashRight.url}
+          alt=""
+          className="pointer-events-none absolute right-[-12%] top-[-12%] z-5 w-[55%] object-contain md:right-[-8%] md:top-[-22%] md:w-[28%] md:rotate-6"
+        />
+        <img
+          src={heroFruitSplash.url}
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-[-30%] z-4 hidden w-[60%] -translate-x-1/2 object-contain opacity-95 md:block"
         />
 
-        {/* 3. Image Container: Clean fixed layout height avoids layout overlap or section breakage */}
-        <div className="relative h-[340px] w-full max-w-[1400px] md:h-[340px] md:w-[85vw] md:max-w-[1280px]">
-          {/* Desktop fruit treatment */}
-          <img
-            src={heroSplashLeft.url}
-            alt=""
-            className="pointer-events-none absolute left-[-22%] top-[-12%] z-[5] w-[55%] object-contain md:left-[-5%] md:top-[12%] md:w-[28%] md:-rotate-6"
-          />
-          <img
-            src={heroSplashRight.url}
-            alt=""
-            className="pointer-events-none absolute right-[-12%] top-[-12%] z-[5] w-[55%] object-contain md:right-[-5%] md:top-[10%] md:w-[28%] md:rotate-6"
-          />
-          <img
-            src={heroFruitSplash.url}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 top-[-15%] z-[4] hidden w-[66%] -translate-x-1/2 object-contain opacity-95 md:block"
-          />
-          <img
-            src={heroSplashLeft.url}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute bottom-[-5%] left-[10%] z-[6] hidden w-[17%] -scale-y-100 rotate-[19deg] object-contain md:block"
-          />
-          <img
-            src={heroSplashRight.url}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute bottom-[-5%] right-[10%] z-[6] hidden w-[19%] -scale-y-100 -rotate-[11deg] object-contain md:block"
-          />
+        {/* Lower Corner Fruit Accents - Shifted WAY up and out to clear the button area completely */}
+        <img
+          src={heroSplashLeft.url}
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute bottom-[40%] left-[4%] z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block"
+        />
+        <img
+          src={heroSplashRight.url}
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute bottom-[40%] right-[4%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block"
+        />
 
-          {/* 4. Beautifully balanced photo card coordinates below the headline sticker */}
-          <img
-            src={heroKids}
-            alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[20px] md:left-[22%] md:z-20 md:h-[310%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6"
-          />
+        {/* Polaroid Photo Cards - Explicitly sized to avoid global layout inheritance */}
+        <img
+          src={heroKids}
+          alt="Kids enjoying Fruti Pop"
+          className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[15px] md:left-[23%] md:z-20 md:!h-[240px] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6"
+        />
 
-          <img
-            src={heroFootball}
-            alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[0px] md:z-30 md:h-[340%] md:rounded-[1.75rem]"
-          />
+        <img
+          src={heroFootball}
+          alt="Young football player enjoying Fruti Pop"
+          className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[0px] md:z-30 md:!h-[275px] md:rounded-[1.75rem]"
+        />
 
-          <img
-            src={heroWoman}
-            alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[30px] md:right-[22%] md:z-20 md:h-[310%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6"
-          />
-        </div>
+        <img
+          src={heroWoman}
+          alt="Enjoying Fruti Pop"
+          className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[20px] md:right-[23%] md:z-20 md:!h-[240px] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6"
+        />
+      </div>
 
-        {/* 5. Safe layout container pushes the CTA and benefits items below the cards */}
-        <div className="relative z-50 mt-8 flex w-full flex-col items-center gap-3">
-          <Button
-            asChild
-            size="lg"
-            className={`${cta} w-[calc(100%-1rem)] max-w-md md:w-auto md:min-w-[17rem] md:px-14 md:text-lg`}
-          >
-            <Link to="/order">
-              Order My Pops <A />
-            </Link>
-          </Button>
+      {/* 3. BOTTOM ZONE: CTA Button & Subtext - Anchored cleanly on the bottom cream background */}
+      <div className="relative z-50 mt-8 flex w-full flex-col items-center gap-2 pb-8 md:absolute md:bottom-[50px] md:left-1/2 md:-translate-x-1/2 md:mt-0 md:pb-0">
+        <Button
+          asChild
+          size="lg"
+          className={`${cta} w-[calc(100%-1rem)] max-w-md md:w-auto md:min-w-[17rem] md:px-14 md:text-lg`}
+        >
+          <Link to="/order">
+            Order My Pops <A />
+          </Link>
+        </Button>
 
-          <p className="text-center text-xs font-semibold text-foreground/65 sm:text-sm">
-            Less Sugar • Full of Vitamins • Packed with Fruit
-          </p>
-        </div>
+        <p className="text-center text-xs font-semibold text-foreground/65 sm:text-sm">
+          Less Sugar • Full of Vitamins • Packed with Fruit
+        </p>
       </div>
     </section>
   );
