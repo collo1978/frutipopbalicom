@@ -95,19 +95,19 @@ function Hero() {
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[20px] md:left-[22%] md:z-20 md:h-[80%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6"
+            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[20px] md:left-[22%] md:z-20 md:h-[310%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:-rotate-6"
           />
 
           <img
             src={heroFootball}
             alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[0px] md:z-30 md:h-[85%] md:rounded-[1.75rem]"
+            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[0px] md:z-30 md:h-[340%] md:rounded-[1.75rem]"
           />
 
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[30px] md:right-[22%] md:z-20 md:h-[80%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6"
+            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[30px] md:right-[22%] md:z-20 md:h-[310%] md:rounded-[1.75rem] md:w-auto md:max-w-none md:rotate-6"
           />
         </div>
 
