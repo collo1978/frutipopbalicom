@@ -34,6 +34,7 @@ const flavourEmoji: Record<string, string> = {
   "Piña Colada": "🥥",
   "Passion Fruit": "💜",
   "Lemon Sorbet": "🍋",
+  "Mixed Berry Sorbet": "🫐",
 };
 
 const detailsSchema = z.object({

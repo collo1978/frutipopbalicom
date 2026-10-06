@@ -14,7 +14,7 @@ export const Route = createFileRoute("/order")({
   head: () => ({
     meta: [
       { title: "Order Fruti Pops | Fruti Pop Bali" },
-      { name: "description", content: "Choose a Fruti Pop pack, mix your six favourite flavours, add delivery details and send your order on WhatsApp." },
+      { name: "description", content: "Choose a Fruti Pop pack, mix your seven favourite flavours, add delivery details and send your order on WhatsApp." },
       { property: "og:title", content: "Order Fruti Pops | Fruti Pop Bali" },
       { property: "og:description", content: "Build a Family Pack or Jumbo Pack and send your completed Fruti Pop order on WhatsApp." },
       { property: "og:type", content: "website" },

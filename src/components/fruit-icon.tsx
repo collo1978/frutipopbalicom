@@ -129,6 +129,23 @@ export function FruitIcon({ name, className = "h-6 w-6" }: Props) {
           <ellipse cx="15.5" cy="24" rx="2.6" ry="4.5" fill="#FFFFFF" opacity="0.25" transform="rotate(-25 15.5 24)" />
         </svg>
       );
+    case "Mixed Berry Sorbet":
+      return (
+        <svg {...common}>
+          <g stroke="#4A164F" strokeWidth="1.4">
+            <circle cx="16" cy="27" r="8" fill="#6D2A8B" />
+            <circle cx="27" cy="31" r="8.5" fill="#C52363" />
+            <circle cx="32" cy="20" r="7" fill="#3F3B95" />
+          </g>
+          <g fill="#FFFFFF" opacity="0.42">
+            <circle cx="13.5" cy="24" r="2" />
+            <circle cx="24.5" cy="28" r="2" />
+            <circle cx="29.5" cy="17.5" r="1.8" />
+          </g>
+          <path d="M22 14c-1-5 2-8 7-9-1 5-3 8-7 9Z" fill="#54A845" stroke="#2E7D3B" strokeWidth="1.3" />
+          <path d="M24 14c4-4 9-4 13-1-4 3-8 4-13 1Z" fill="#73BD45" stroke="#2E7D3B" strokeWidth="1.3" />
+        </svg>
+      );
     default:
       return <svg {...common}><circle cx="24" cy="24" r="15" fill="#FFB21E" /></svg>;
   }
