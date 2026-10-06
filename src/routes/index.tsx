@@ -50,76 +50,73 @@ const A = () => (
 function Hero() {
   return (
     <section className="overflow-hidden bg-hero-cream w-full md:h-[calc(100svh-4rem)] md:max-h-[820px]">
-      {/* 1. Main vertical accordion layout distributes space perfectly from top to bottom */}
-      <div className="relative mx-auto flex h-full max-w-[1920px] flex-col items-center px-3 pt-4 pb-6 md:px-6 md:pt-4 md:pb-8 md:justify-between">
-        {/* 2. HEADLINE LOGO: Shifted upwards and scaled down slightly to prevent overlapping the photo cards */}
-        <div className="relative z-40 flex justify-center w-full md:-mt-2">
+      {/* 1. Main container keeps elements completely under control on a single screen layout */}
+      <div className="relative mx-auto flex h-full max-w-[1920px] flex-col items-center px-3 pt-4 pb-6 md:px-6 md:pt-6 md:pb-8 md:justify-between">
+        {/* 2. HEADLINE LOGO: Relative positioning pins it cleanly to the top without overlap */}
+        <div className="relative z-40 flex justify-center w-full">
           <img
             src={heroHeadline.url}
             alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-            className="w-[310px] drop-shadow-sm md:w-[410px] md:h-auto"
+            className="w-[310px] drop-shadow-sm md:w-[460px] md:h-auto"
           />
         </div>
 
-        {/* 3. PHOTO COLLAGE CONTAINER: Nudged downward using md:mt-2 to separate it from the headline curves, 
-            and tightened to md:h-[260px] to give the bottom layout slots breathing room */}
-        <div className="relative h-[340px] w-full max-w-[1400px] md:mt-2 md:h-[260px] md:w-[85vw] md:max-w-[1140px]">
-          {/* Upper Background Fruit Splashes - Placed cleanly to frame the layout sides */}
+        {/* 3. PHOTO COLLAGE ZONE: Pushed down with md:mt-6 so the headline sticker NEVER covers the center card */}
+        <div className="relative h-[340px] w-full max-w-[1400px] md:mt-6 md:h-[300px] md:w-[85vw] md:max-w-[1140px]">
+          {/* Background Splashes: Decoupled and pulled way up and out so they cannot touch the button area */}
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-22%] top-[-12%] z-5 w-[55%] object-contain md:left-[-6%] md:top-[-10%] md:w-[26%] md:-rotate-6"
+            className="pointer-events-none absolute left-[-22%] top-[-12%] z-5 w-[55%] object-contain md:left-[-12%] md:top-[-30%] md:w-[28%] md:-rotate-6"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-12%] top-[-12%] z-5 w-[55%] object-contain md:right-[-6%] md:top-[-12%] md:w-[26%] md:rotate-6"
+            className="pointer-events-none absolute right-[-12%] top-[-12%] z-5 w-[55%] object-contain md:right-[-12%] md:top-[-32%] md:w-[28%] md:rotate-6"
           />
           <img
             src={heroFruitSplash.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-[-25%] z-4 hidden w-[60%] -translate-x-1/2 object-contain opacity-95 md:block"
+            className="pointer-events-none absolute left-1/2 top-[-35%] z-4 hidden w-[60%] -translate-x-1/2 object-contain opacity-95 md:block"
           />
 
-          {/* CHANGED: Lower Corner Fruit Accents - Shifted much higher up (from bottom-[25%] to bottom-[45%]) 
-              and further outward to clear the button area completely */}
+          {/* Lower Corner Splashes: Shifted high to bottom-[40%] to empty out the button lane entirely */}
           <img
             src={heroSplashLeft.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[45%] left-0 z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block"
+            className="pointer-events-none absolute bottom-[40%] left-[-4%] z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block"
           />
           <img
             src={heroSplashRight.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[45%] right-0 z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block"
+            className="pointer-events-none absolute bottom-[40%] right-[-4%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block"
           />
 
-          {/* CHANGED: Photo Cards - Proportionally scaled down their dimensions (md:!h-[200px] and md:!h-[230px]) 
-              so they display cleanly underneath the headline sticker logo boundaries */}
+          {/* Polaroid Photo Cards: Locked to large, visible aspect ratios without breaking out */}
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[10px] md:left-[24%] md:z-20 md:!h-[200px] md:!w-[160px] md:object-cover md:rounded-[1.25rem] md:-rotate-6"
+            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] frame-pop-left md:bottom-[0px] md:left-[24%] md:z-20 md:!h-[240px] md:!w-[190px] md:object-cover md:rounded-[1.5rem] md:-rotate-6"
           />
 
           <img
             src={heroFootball}
             alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[0px] md:z-30 md:!h-[230px] md:!w-[185px] md:object-cover md:rounded-[1.25rem]"
+            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] frame-pop-center md:bottom-[-20px] md:z-30 md:!h-[270px] md:!w-[215px] md:object-cover md:rounded-[1.5rem]"
           />
 
           <img
             src={heroWoman}
             alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[15px] md:right-[24%] md:z-20 md:!h-[200px] md:!w-[160px] md:object-cover md:rounded-[1.25rem] md:rotate-6"
+            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] frame-pop-right md:bottom-[5px] md:right-[24%] md:z-20 md:!h-[240px] md:!w-[190px] md:object-cover md:rounded-[1.5rem] md:rotate-6"
           />
         </div>
 
-        {/* 4. BUTTON ZONE: Set comfortably into layout alignment on a clean cream background backdrop */}
-        <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-4 md:mt-2">
+        {/* 4. CTA BUTTON ZONE: Forced to the bottom on a completely clean cream background */}
+        <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-6 md:mt-0 md:pt-4">
           <Button
             asChild
             size="lg"
