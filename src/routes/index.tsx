@@ -51,16 +51,16 @@ function Hero() {
   return (
     <section className="overflow-hidden bg-hero-cream">
       {/* 1. Added explicit desktop padding bottom to keep the CTA text inside the layout section */}
-      <div className="relative mx-auto flex max-w-[1920px] flex-col items-center px-3 pt-6 pb-12 md:px-6 md:pt-12 md:pb-20">
+      <div className="relative mx-auto flex max-w-[1920px] flex-col items-center px-3 pt-6 pb-10 md:h-[calc(100svh-4rem)] md:max-h-[850px] md:justify-between md:px-6 md:pt-6 md:pb-8">
         {/* 2. The main headline logo remains relative so it naturally defines the top layout boundary */}
         <img
           src={heroHeadline.url}
           alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-          className="relative z-40 -mb-4 w-[330px] drop-shadow-sm md:-mb-16 md:w-[620px] md:h-auto"
+          className="relative z-40 -mb-4 w-[330px] drop-shadow-sm md:-mb-6 md:w-[540px] md:h-auto"
         />
 
         {/* 3. Image Container: Clean fixed layout height avoids layout overlap or section breakage */}
-        <div className="relative h-[340px] w-full max-w-[1400px] md:h-[380px] md:-mt-[45px] md:w-[90vw] md:max-w-[1440px]">
+        <div className="relative h-[340px] w-full max-w-[1400px] md:h-[340px] md:w-[85vw] md:max-w-[1280px]">
           {/* Desktop fruit treatment */}
           <img
             src={heroSplashLeft.url}
