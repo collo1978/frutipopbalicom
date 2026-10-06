@@ -295,3 +295,28 @@ function PackCard({
   pack,
   badge,
 }: {
+  name: string;
+  qty: string;
+  price: string;
+  pack: "family" | "jumbo";
+  badge?: string;
+}) {
+  return (
+    <article className="relative flex flex-col items-center rounded-3xl border bg-card p-6 pt-8 text-center shadow-sm">
+      {badge && (
+        <span className="absolute -top-4 left-1/2 -translate-x-1/2 -rotate-2 whitespace-nowrap rounded-full bg-dragonfruit px-5 py-1.5 font-display text-base font-bold text-accent-foreground shadow-md md:text-lg">
+          {badge}
+        </span>
+      )}
+      <p className="font-bold text-primary">{name}</p>
+      <h3 className="mt-1 text-4xl font-bold text-accent">{qty}</h3>
+      <p className="mt-2 text-2xl font-bold">{price}</p>
+      <p className="mt-2 text-foreground/75">Mix & match your favourite flavours.</p>
+      <Button asChild size="lg" className={`mt-5 ${cta}`}>
+        <Link to="/order" search={{ pack }}>
+          Fill My Freezer <A />
+        </Link>
+      </Button>
+    </article>
+  );
+}
