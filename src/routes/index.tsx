@@ -253,15 +253,45 @@ function Home() {
     </>
   );
 }
-function PackCard({ name, qty, price, pack }) {
-  return (
-    <div className="rounded-2xl bg-white p-6 shadow-sm border border-black/5 flex flex-col items-center text-center">
-      <h3 className="text-xl font-bold text-foreground">{name}</h3>
-      <p className="text-sm font-medium text-foreground/60 mt-1">{qty}</p>
-      <span className="text-2xl font-black text-primary mt-4">{price}</span>
-      <Button asChild className={`${cta} mt-6 px-8`}>
-        <Link to={`/order?pack=${pack}`}>Select Pack</Link>
-      </Button>
-    </div>
-  );
-}
+const MOMENTS = [
+  {
+    t: "Birthday Parties",
+    h: "The moment the cooler opens.",
+    d: "Nothing gets a squeal quite like a cooler full of bright, fruity pops on a hot Bali afternoon.",
+    cta: "Order Birthday Pops",
+    p: { src: birthdayParty.url, alt: "Excited children around a cooler full of Fruti Pops at a poolside party" },
+    pos: "object-[50%_58%]",
+  },
+  {
+    t: "Schools & Sports Clubs",
+    h: "The final whistle. The first pop.",
+    d: "After all the running and cheering, a cold, fruity reward. Big smiles for the whole team.",
+    cta: "Pop the Whole Team",
+    p: P.footballPair,
+    pos: "object-top",
+  },
+  {
+    t: "Events",
+    h: "A little pop. A lot of happy faces.",
+    d: "From community gatherings to big celebrations, a burst of fruity fun that gets everyone smiling.",
+    cta: "Make My Event Pop",
+    p: { src: eventBoy.url, alt: "A smiling boy holding two Fruti Pops at an event" },
+    pos: "object-center",
+  },
+  {
+    t: "Villas & Poolside",
+    h: "Sun's out. Pops out.",
+    d: "Poolside laughs, sunny afternoons and a freezer full of fruity pops.",
+    cta: "Fill My Freezer",
+    p: P.villaDelivery,
+    pos: "object-center",
+  },
+];
+
+function PackCard({
+  name,
+  qty,
+  price,
+  pack,
+  badge,
+}: {
