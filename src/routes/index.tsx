@@ -46,14 +46,14 @@ const A = () => (
     →
   </span>
 );
-
 function Hero() {
   return (
-    <section className="overflow-hidden bg-hero-cream w-full">
-      {/* Container maintains a tight top-down stacking flow on mobile */}
-      <div className="relative mx-auto flex w-full max-w-[1920px] flex-col items-center px-4 pt-6 pb-8 md:px-6 md:pt-4 md:pb-8 md:h-[calc(100vh-4rem)] md:max-h-[760px] md:justify-between">
-        {/* ROW 1: HEADLINE LOGO - Expanded to 90vw on mobile to fill out the right and left dead space */}
-        <div className="relative z-40 flex justify-center w-full -mt-2 md:-mt-4">
+    /* 1. Force the section itself to lock strictly to the visible browser height on ALL devices */
+    <section className="overflow-hidden bg-hero-cream w-full h-[calc(100svh-4rem)] max-h-[780px]">
+      {/* 2. Added h-full and justify-between on ALL devices to act like a strict box container */}
+      <div className="relative mx-auto flex h-full w-full max-w-[1920px] flex-col items-center justify-between px-4 pt-3 pb-5 md:px-6 md:pt-4 md:pb-8">
+        {/* ROW 1: HEADLINE LOGO - Stays high at the top slot */}
+        <div className="relative z-40 flex justify-center w-full -mt-1 md:-mt-4">
           <img
             src={heroHeadline.url}
             alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
@@ -63,46 +63,45 @@ function Hero() {
 
         {/* =========================================================================
             MOBILE-ONLY OVERLAPPING FAN COLLAGE ZONE
+            Force-shrunk h-[180px] to strictly fit inside a short mobile viewport
             ========================================================================= */}
-        <div className="relative w-full h-[230px] max-w-[340px] mt-4 mb-2 md:hidden flex items-center justify-center">
+        <div className="relative w-full h-[180px] max-w-[320px] md:hidden flex items-center justify-center">
           {/* Background Fruit Splashes */}
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-15%] top-[-10%] z-5 w-[50%] object-contain -rotate-6 opacity-50"
+            className="pointer-events-none absolute left-[-15%] top-[-10%] z-5 w-[50%] object-contain -rotate-6 opacity-35"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-15%] top-[-10%] z-5 w-[50%] object-contain rotate-6 opacity-50"
+            className="pointer-events-none absolute right-[-15%] top-[-10%] z-5 w-[50%] object-contain rotate-6 opacity-35"
           />
 
           {/* Left Card */}
-          <div className="absolute left-2 bottom-[10px] z-10 w-[125px] rotate-[-8deg] bg-white p-1 pb-4 shadow-md rounded-xl border border-black/5">
-            <img src={heroKids} alt="Kids enjoying Fruti Pop" className="w-full h-[145px] object-cover rounded-lg" />
+          <div className="absolute left-1 bottom-[5px] z-10 w-[110px] rotate-[-8deg] bg-white p-1 pb-3 shadow-md rounded-xl border border-black/5">
+            <img src={heroKids} alt="Kids enjoying Fruti Pop" className="w-full h-[120px] object-cover rounded-lg" />
           </div>
 
           {/* Center Card */}
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-30 w-[150px] scale-105 bg-white p-1.5 pb-5 shadow-xl rounded-xl border border-black/5">
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-30 w-[130px] scale-105 bg-white p-1.5 pb-4 shadow-xl rounded-xl border border-black/5">
             <img
               src={heroFootball}
               alt="Young football player enjoying Fruti Pop"
-              className="w-full h-[165px] object-cover rounded-lg"
+              className="w-full h-[140px] object-cover rounded-lg"
             />
           </div>
 
           {/* Right Card */}
-          <div className="absolute right-2 bottom-[12px] z-20 w-[125px] rotate-[8deg] bg-white p-1 pb-4 shadow-md rounded-xl border border-black/5">
-            <img src={heroWoman} alt="Enjoying Fruti Pop" className="w-full h-[145px] object-cover rounded-lg" />
+          <div className="absolute right-1 bottom-[7px] z-20 w-[110px] rotate-[8deg] bg-white p-1 pb-3 shadow-md rounded-xl border border-black/5">
+            <img src={heroWoman} alt="Enjoying Fruti Pop" className="w-full h-[120px] object-cover rounded-lg" />
           </div>
         </div>
 
         {/* =========================================================================
-            EXISTING BLOCK B: ORIGINAL DESKTOP PHOTO COLLAGE ZONE
-            Stays completely locked to desktop screens only via max-md:hidden
+            ORIGINAL DESKTOP PHOTO COLLAGE ZONE
             ========================================================================= */}
         <div className="max-md:hidden relative h-[180px] w-[80vw] max-w-[1040px] md:-mt-6">
-          {/* Upper Background Fruit Splashes */}
           <img
             src={heroSplashLeft.url}
             alt=""
@@ -119,8 +118,6 @@ function Hero() {
             aria-hidden
             className="pointer-events-none absolute left-1/2 top-[-60%] z-4 w-[60%] -translate-x-1/2 object-contain opacity-95"
           />
-
-          {/* Lower Corner Fruit Splashes */}
           <img
             src={heroSplashLeft.url}
             alt=""
@@ -134,7 +131,6 @@ function Hero() {
             className="pointer-events-none absolute bottom-[90%] right-[-14%] z-6 w-[18%] -scale-y-100 -rotate-[11deg] object-contain"
           />
 
-          {/* Sandboxed Photo Card Frame layers */}
           <div className="frame-pop-left absolute bottom-[25px] left-[24%] z-20">
             <img
               src={heroKids}
@@ -142,7 +138,6 @@ function Hero() {
               className="rounded-[1.25rem] md:h-[190px] md:w-[145px] md:object-cover md:-rotate-6"
             />
           </div>
-
           <div className="frame-pop-center absolute bottom-[15px] left-1/2 z-30 -translate-x-1/2">
             <img
               src={heroFootball}
@@ -150,7 +145,6 @@ function Hero() {
               className="rounded-[1.25rem] md:h-[210px] md:w-[160px] md:object-cover"
             />
           </div>
-
           <div className="frame-pop-right absolute bottom-[30px] right-[24%] z-20">
             <img
               src={heroWoman}
@@ -160,8 +154,8 @@ function Hero() {
           </div>
         </div>
 
-        {/* ROW 3: CTA BUTTON ZONE */}
-        <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-2 md:mt-0">
+        {/* ROW 3: CTA BUTTON ZONE - Locked cleanly at the very bottom edge of the mobile screen window */}
+        <div className="relative z-50 flex w-full flex-col items-center gap-1.5 mt-2 md:mt-0">
           <Button
             asChild
             size="lg"
