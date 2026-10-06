@@ -49,114 +49,91 @@ const A = () => (
 
 function Hero() {
   return (
-    <section className="overflow-hidden bg-hero-cream w-full md:h-[calc(100vh-4rem)] md:max-h-[760px]">
-      {/* 1. Structural vertical layout partitions the single window cleanly into three safe slots */}
-      <div className="relative mx-auto flex h-full max-w-[1920px] flex-col items-center px-3 pt-4 pb-6 md:px-6 md:pt-4 md:pb-8 md:justify-between">
-        {/* ROW 1: HEADLINE LOGO - Added md:-mt-4 to slide just the headline up slightly */}
+    <section className="overflow-hidden bg-hero-cream w-full min-h-[calc(100svh-4rem)] md:h-[calc(100vh-4rem)] md:max-h-[760px]">
+      {/* 1. Main viewport wrapper manages full vertical layout space cleanly */}
+      <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] h-full max-w-[1920px] flex-col items-center justify-between px-4 pt-4 pb-6 md:px-6 md:pt-4 md:pb-8">
+        {/* ROW 1: HEADLINE LOGO */}
         <div className="relative z-40 flex justify-center w-full md:-mt-4">
           <img
             src={heroHeadline.url}
             alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-            className="w-[310px] drop-shadow-sm md:w-[420px] md:h-auto"
+            className="w-[280px] sm:w-[330px] md:w-[420px] h-auto drop-shadow-sm"
           />
         </div>
 
-        {/* ROW 2: PHOTO COLLAGE ZONE - Tightened container height to keep layouts balanced */}
-        <div className="relative h-[340px] w-full max-w-[1400px] md:h-[220px] md:w-[80vw] md:max-w-[1040px] md:-mt-2">
-          {/* Upper Background Fruit Splashes - Tucked far out into the side gutters */}
+        {/* ROW 2: PHOTO COLLAGE ZONE - Overlaps as a beautiful card stack on mobile, rows cleanly on desktop */}
+        <div className="relative h-[280px] sm:h-[320px] w-full max-w-[400px] md:h-[180px] md:w-[80vw] md:max-w-[1040px] md:-mt-6 my-auto md:my-0 flex items-center justify-center">
+          {/* Background Fruit Splashes */}
           <img
             src={heroSplashLeft.url}
             alt=""
-            className="pointer-events-none absolute left-[-22%] top-[-12%] z-5 w-[55%] object-contain md:left-[-12%] md:top-[-45%] md:w-[28%] md:-rotate-6"
+            className="pointer-events-none absolute left-[-15%] top-[-5%] z-5 w-[45%] md:w-[28%] md:left-[-12%] md:top-[-55%] object-contain -rotate-6 opacity-60 md:opacity-100"
           />
           <img
             src={heroSplashRight.url}
             alt=""
-            className="pointer-events-none absolute right-[-12%] top-[-12%] z-5 w-[55%] object-contain md:right-[-12%] md:top-[-47%] md:w-[28%] md:rotate-6"
+            className="pointer-events-none absolute right-[-15%] top-[-5%] z-5 w-[45%] md:w-[28%] md:right-[-12%] md:top-[-57%] object-contain rotate-6 opacity-60 md:opacity-100"
           />
           <img
             src={heroFruitSplash.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-[-50%] z-4 hidden w-[60%] -translate-x-1/2 object-contain opacity-95 md:block"
+            className="pointer-events-none absolute left-1/2 top-[-60%] z-4 hidden w-[60%] -translate-x-1/2 object-contain opacity-95 md:block"
           />
 
-          {/* Lower Corner Fruit Accents - Lifted up to bottom-[75%] to completely clear out the bottom subtext row */}
+          {/* Lower Corner Fruit Splashes */}
           <img
             src={heroSplashLeft.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[40%] left-[-4%] z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block md:bottom-[75%] md:left-[-14%]"
+            className="pointer-events-none absolute bottom-[90%] left-[-14%] z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block"
           />
           <img
             src={heroSplashRight.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[40%] right-[-4%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block md:bottom-[75%] md:right-[-14%]"
+            className="pointer-events-none absolute bottom-[90%] right-[-14%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block"
           />
 
-          {/* 2. SANDBOXED PHOTO CARDS: Wrapping the custom layout frame classes inside sandboxed absolute `div` layers 
-              neutralizes their destructive page overrides and locks them underneath the logo sticker boundaries! */}
+          {/* 2. FAN COLLAGE STACK: Left card tilts left, right card tilts right, center boy stays directly up front */}
 
-          {/* Left Polaroid Frame */}
-          <div className="frame-pop-left absolute bottom-[5px] left-[24%] z-20 hidden md:block">
+          {/* Card 1: Left Polaroid (Kids) */}
+          <div className="absolute z-10 bottom-[10px] left-[10px] scale-90 -rotate-6 md:rotate-0 md:scale-100 md:bottom-[25px] md:left-[24%] md:z-20">
             <img
               src={heroKids}
               alt="Kids enjoying Fruti Pop"
-              className="rounded-[1.25rem] md:h-[200px] md:w-[155px] md:object-cover md:-rotate-6"
+              className="rounded-[1rem] md:rounded-[1.25rem] h-[160px] w-[120px] sm:h-[180px] sm:w-[135px] md:h-[190px] md:w-[145px] object-cover md:-rotate-6 shadow-md md:shadow-none"
             />
           </div>
 
-          {/* Center Polaroid Frame */}
-          <div className="frame-pop-center absolute bottom-0 left-1/2 z-30 -translate-x-1/2 hidden md:block">
+          {/* Card 2: Center Polaroid (Football Boy) - Prominent top focal layer */}
+          <div className="absolute z-30 bottom-0 left-1/2 -translate-x-1/2 scale-100 md:bottom-[15px]">
             <img
               src={heroFootball}
               alt="Young football player enjoying Fruti Pop"
-              className="rounded-[1.25rem] md:h-[225px] md:w-[175px] md:object-cover"
+              className="rounded-[1rem] md:rounded-[1.25rem] h-[180px] w-[135px] sm:h-[200px] sm:w-[150px] md:h-[210px] md:w-[160px] object-cover drop-shadow-md"
             />
           </div>
 
-          {/* Right Polaroid Frame */}
-          <div className="frame-pop-right absolute bottom-[10px] right-[24%] z-20 hidden md:block">
+          {/* Card 3: Right Polaroid (Woman) - Fixed bracket syntax error */}
+          <div className="absolute z-20 bottom-[15px] right-[10px] scale-90 rotate-6 md:rotate-0 md:scale-100 md:bottom-[30px] md:right-[24%]">
             <img
               src={heroWoman}
               alt="Enjoying Fruti Pop"
-              className="rounded-[1.25rem] md:h-[200px] md:w-[155px] md:object-cover md:rotate-6"
+              className="rounded-[1rem] md:rounded-[1.25rem] h-[160px] w-[120px] sm:h-[180px] sm:w-[135px] md:h-[190px] md:w-[145px] object-cover md:rotate-6 shadow-md md:shadow-none"
             />
           </div>
-
-          {/* Mobile Fallback View (Kept completely intact) */}
-          <img
-            src={heroKids}
-            alt="Kids enjoying Fruti Pop"
-            className="absolute bottom-0 left-[-3%] z-10 w-[49%] max-w-[560px] -rotate-2 rounded-[1.5rem] md:hidden"
-          />
-          <img
-            src={heroFootball}
-            alt="Young football player enjoying Fruti Pop"
-            className="absolute bottom-0 left-1/2 z-30 h-[86%] w-auto -translate-x-1/2 rounded-[1.5rem] md:hidden"
-          />
-          <img
-            src={heroWoman}
-            alt="Enjoying Fruti Pop"
-            className="absolute bottom-0 right-[-3%] z-20 w-[49%] max-w-[560px] rotate-2 rounded-[1.5rem] md:hidden"
-          />
         </div>
 
-        {/* ROW 3: CTA BUTTON ZONE - Securely anchored at the bottom edge on a clean cream background */}
-        <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-6 md:mt-0 md:pt-2">
-          <Button
-            asChild
-            size="lg"
-            className={`${cta} w-[calc(100%-1rem)] max-w-md md:w-auto md:min-w-[17rem] md:px-14 md:text-lg`}
-          >
+        {/* ROW 3: CTA BUTTON ZONE */}
+        <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-4 md:mt-0">
+          <Button asChild size="lg" className={`${cta} w-full max-w-xs md:w-auto md:min-w-[17rem] md:px-14 md:text-lg`}>
             <Link to="/order">
               Order My Pops <A />
             </Link>
           </Button>
 
-          {/* This text line is forced into clear contrast view inside the visible viewport */}
-          <p className="text-center text-xs font-semibold text-foreground/65 sm:text-sm">
+          <p className="text-center text-xs font-semibold text-foreground/65 px-2">
             Less Sugar • Full of Vitamins • Packed with Fruit
           </p>
         </div>
