@@ -50,9 +50,9 @@ const A = () => (
 function Hero() {
   return (
     <section className="overflow-hidden bg-hero-cream w-full md:h-[calc(100svh-4rem)] md:max-h-[820px]">
-      {/* 1. Main container keeps elements completely under control on a single screen layout */}
+      {/* 1. Main vertical accordion layout distributes space perfectly from top to bottom */}
       <div className="relative mx-auto flex h-full max-w-[1920px] flex-col items-center px-3 pt-4 pb-6 md:px-6 md:pt-6 md:pb-8 md:justify-between">
-        {/* 2. HEADLINE LOGO: Relative positioning pins it cleanly to the top without overlap */}
+        {/* 2. HEADLINE LOGO: Positioned cleanly at the top slot */}
         <div className="relative z-40 flex justify-center w-full">
           <img
             src={heroHeadline.url}
@@ -61,9 +61,9 @@ function Hero() {
           />
         </div>
 
-        {/* 3. PHOTO COLLAGE ZONE: Pushed down with md:mt-6 so the headline sticker NEVER covers the center card */}
+        {/* 3. PHOTO COLLAGE ZONE: Positioned nicely underneath the headline curves */}
         <div className="relative h-[340px] w-full max-w-[1400px] md:mt-6 md:h-[300px] md:w-[85vw] md:max-w-[1140px]">
-          {/* Background Splashes: Decoupled and pulled way up and out so they cannot touch the button area */}
+          {/* Upper Background Fruit Splashes */}
           <img
             src={heroSplashLeft.url}
             alt=""
@@ -81,21 +81,22 @@ function Hero() {
             className="pointer-events-none absolute left-1/2 top-[-35%] z-4 hidden w-[60%] -translate-x-1/2 object-contain opacity-95 md:block"
           />
 
-          {/* Lower Corner Splashes: Shifted high to bottom-[40%] to empty out the button lane entirely */}
+          {/* CHANGED: Shifted lower corner fruit accents significantly higher up (to md:bottom-[50%]) 
+              and further out (to md:left-[-6%]/md:right-[-6%]) to lift the strawberry graphics completely off your text! */}
           <img
             src={heroSplashLeft.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[40%] left-[-4%] z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block"
+            className="pointer-events-none absolute bottom-[40%] left-[-4%] z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block md:bottom-[50%] md:left-[-6%]"
           />
           <img
             src={heroSplashRight.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[40%] right-[-4%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block"
+            className="pointer-events-none absolute bottom-[40%] right-[-4%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block md:bottom-[50%] md:right-[-6%]"
           />
 
-          {/* Polaroid Photo Cards: Locked to large, visible aspect ratios without breaking out */}
+          {/* Polaroid Photo Cards */}
           <img
             src={heroKids}
             alt="Kids enjoying Fruti Pop"
@@ -115,7 +116,7 @@ function Hero() {
           />
         </div>
 
-        {/* 4. CTA BUTTON ZONE: Forced to the bottom on a completely clean cream background */}
+        {/* 4. CTA BUTTON ZONE: Safe at the bottom window layer on a clean cream background backdrop */}
         <div className="relative z-50 flex w-full flex-col items-center gap-2 mt-6 md:mt-0 md:pt-4">
           <Button
             asChild
@@ -127,6 +128,7 @@ function Hero() {
             </Link>
           </Button>
 
+          {/* This subtext now sits completely uncovered and high-contrast */}
           <p className="text-center text-xs font-semibold text-foreground/65 sm:text-sm">
             Less Sugar • Full of Vitamins • Packed with Fruit
           </p>
