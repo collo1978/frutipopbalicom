@@ -554,12 +554,8 @@ export function SwipeRow({
             {c}
           </li>
         ))}
-        {desktopEndcap && (
-          <li className="hidden min-h-full items-center justify-center md:col-span-4 md:flex md:w-full md:justify-center md:pt-3">
-            {desktopEndcap}
-          </li>
-        )}
       </ul>
+      {desktopEndcap && <div className="hidden justify-center pt-4 md:flex">{desktopEndcap}</div>}
       <div className="mt-3 flex justify-center gap-1.5 md:hidden">
         {Array.from({ length: count }, (_, i) => (
           <button
