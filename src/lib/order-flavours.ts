@@ -4,12 +4,14 @@ import pineapple from "@/assets/order-originals/pineapple-original.png.asset.jso
 import pinaColada from "@/assets/order-originals/pina-colada-original.png.asset.json";
 import mango from "@/assets/order-originals/mango-original.png.asset.json";
 import passionFruit from "@/assets/order-originals/passion-fruit-original.png.asset.json";
+import mixedBerry from "@/assets/order-originals/mixed-berry-sorbet-original.jpeg.asset.json";
 import strawberryArt from "@/assets/flavour-artwork-new/strawberry-sorbet.png.asset.json";
 import lemonArt from "@/assets/flavour-artwork-new/lemon-sorbet.png.asset.json";
 import pineappleArt from "@/assets/flavour-artwork-new/pineapple-sorbet.png.asset.json";
 import pinaColadaArt from "@/assets/flavour-artwork-new/pina-colada-sorbet-edge-to-edge.png.asset.json";
 import mangoArt from "@/assets/flavour-artwork-new/mango-sorbet.png.asset.json";
 import passionFruitArt from "@/assets/flavour-artwork-new/passion-fruit-sorbet.png.asset.json";
+import mixedBerryArt from "@/assets/flavour-artwork/mixed-berry-sorbet-artwork.jpeg.asset.json";
 import { FLAVOURS, type Flavour } from "@/lib/flavours";
 
 const originalImages: Record<string, string> = {
@@ -19,6 +21,7 @@ const originalImages: Record<string, string> = {
   "Piña Colada": pinaColada.url,
   Mango: mango.url,
   "Passion Fruit": passionFruit.url,
+  "Mixed Berry Sorbet": mixedBerry.url,
 };
 
 const artworkImages: Record<string, string> = {
@@ -28,6 +31,7 @@ const artworkImages: Record<string, string> = {
   "Piña Colada": pinaColadaArt.url,
   Mango: mangoArt.url,
   "Passion Fruit": passionFruitArt.url,
+  "Mixed Berry Sorbet": mixedBerryArt.url,
 };
 
 export type OrderFlavour = Flavour & { art: string };

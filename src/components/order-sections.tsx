@@ -449,7 +449,7 @@ export function FlavourDiscovery({ desktopEndcap }: { desktopEndcap?: ReactNode 
 export function ProductLineup() {
   return (
     <div className="overflow-hidden rounded-2xl bg-card px-3 py-6 shadow-sm sm:px-6">
-      <div className="grid grid-cols-6 items-end gap-1 sm:gap-3">
+      <div className="grid grid-cols-7 items-end gap-1 sm:gap-3">
         {FLAVOURS.map((flavour) => (
           <div key={flavour.name} className="min-w-0 text-center">
             {flavour.img && (
