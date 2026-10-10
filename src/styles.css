@@ -436,28 +436,11 @@
   .approved-desktop { display: none; }
   .approved-mobile { --mobile-violet: #863cc9; display: block; position: relative; isolation: isolate; overflow: hidden; padding: 10px 14px 26px; background: var(--home-cream); }
   .approved-mobile > * { position: relative; z-index: 1; }
-  .approved-mobile > .mobile-ocean { position: absolute; z-index: 0; top: 0; left: 0; width: 100%; height: 685px; opacity: 1; }
-  .mobile-headline { width: 92%; margin: 0 auto; }
-  .mobile-headline svg { display: block; width: 100%; height: auto; }
-  .mobile-subheading { font-size: 16px; font-weight: 900; text-align: center; line-height: 1.35; margin-top: 5px; text-shadow: 0 1px 1px var(--home-white); }
-  .mobile-subheading > span { color: var(--home-yellow); -webkit-text-stroke: 1px var(--home-navy); font-size: 21px; }
-  .mobile-subheading strong { color: var(--home-red); }
-  .mobile-subheading em { color: var(--home-green); font-style: normal; }
-  .mobile-product-stage { display: grid; gap: 13px; margin: 8px -5px 0; }
-  .mobile-shelf { position: relative; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 5px; padding: 0 8px 13px; isolation: isolate; }
-  .mobile-shelf::before { content: ""; position: absolute; z-index: -1; bottom: 0; left: 0; right: 0; height: 63px; border: 2px solid var(--home-navy); border-top: 4px solid var(--home-turquoise); border-radius: 50% 50% 45% 45% / 20% 20% 24% 24%; background: linear-gradient(var(--home-turquoise) -60%, var(--home-blue) 35%, var(--home-navy)); box-shadow: inset 0 2px 2px var(--home-white), 0 3px 0 var(--home-turquoise), 0 7px 0 var(--home-blue), 0 10px 10px color-mix(in oklab,var(--home-navy) 35%,transparent); }
-  .mobile-shelf-fruit { position: absolute; z-index: 0; bottom: 48px; left: 7%; width: 86%; height: 80px; object-fit: contain; object-position: center bottom; pointer-events: none; }
-  .mobile-product { position: relative; z-index: 1; min-width: 0; display: flex; align-items: center; flex-direction: column; }
-  .mobile-product img { width: 100%; height: 164px; object-fit: contain; object-position: bottom; filter: drop-shadow(3px 4px 3px color-mix(in oklab,var(--home-navy) 35%,transparent)); }
-  .mobile-product p { display: flex; justify-content: center; align-items: center; font-family: var(--font-display-family); font-weight: 700; font-size: 15px; text-align: center; line-height: 1.05; width: 100%; height: 39px; padding: 3px 5px; margin-top: -1px; border-radius: 11px; color: var(--home-white); background: linear-gradient(170deg,color-mix(in oklab,var(--plate) 40%,var(--home-white)),var(--plate) 55%,color-mix(in oklab,var(--plate) 75%,var(--home-navy))); border: 2px solid var(--home-white); box-shadow: inset 0 2px 1px color-mix(in oklab,var(--home-white) 65%,transparent), 0 3px 0 var(--home-navy),0 0 7px var(--home-turquoise); text-shadow: 0 1px 1px var(--home-navy),1px 1px 0 var(--home-navy); }
-  .mobile-flavour-0 { --plate: var(--mobile-violet); }
-  .mobile-flavour-1 { --plate: var(--home-orange); }
-  .mobile-flavour-2 { --plate: var(--home-red); }
-  .mobile-flavour-3 { --plate: var(--home-yellow); }
-  .mobile-flavour-4 { --plate: var(--mobile-violet); }
-  .mobile-flavour-5 { --plate: var(--home-cream); }
-  .mobile-flavour-1 p, .mobile-flavour-3 p, .mobile-flavour-5 p { color: var(--home-navy); text-shadow: 0 1px 0 var(--home-white); }
-  .mobile-order { width: 94%; margin: 0 auto; display: flex; height: 61px; font-size: 26px; border-width: 3px; animation: mobile-button-glow 4s ease-in-out infinite; }
+  .mobile-original-showcase { display: block; width: calc(100% + 28px); height: auto; margin: -10px -14px 0; }
+  .mobile-order { width: 96%; margin: 0 auto; display: block; height: auto; min-height: 44px; padding: 0; background: transparent; border: 0; border-radius: 0; box-shadow: none; animation: mobile-button-glow 4s ease-in-out infinite; transition: transform .18s, filter .18s; }
+  .mobile-order svg { display: block; width: 100%; height: auto; }
+  .mobile-order:hover { background: transparent; filter: brightness(1.06); }
+  .mobile-order:active { transform: translateY(3px); }
   @keyframes mobile-button-glow { 0%,70%,100% { filter: brightness(1); } 85% { filter: brightness(1.08) drop-shadow(0 0 5px var(--home-turquoise)); } }
   .mobile-trust { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); align-items: start; gap: 5px; font-size: 12px; font-weight: 900; text-align: center; margin: 17px -14px 0; padding: 10px 8px; background: var(--home-cream); }
   .mobile-trust > div { display: flex; flex-direction: column; align-items: center; gap: 4px; }
