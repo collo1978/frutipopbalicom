@@ -368,6 +368,23 @@
 .home-shell #flavours { padding: 70px 0 60px; position: relative; }
 .home-shell #flavours > div { max-width: 1180px; padding-inline: 24px; }
 .home-shell #flavours .fruti-flavours-heading { white-space: normal; font-size: 44px; }
+.home-shell #flavours h2,
+.home-shell #packs h2,
+.home-shell main > section.bg-background > div > div:first-child > h2,
+.home-shell #pop-moments h2 {
+  color: var(--home-yellow);
+  font-family: var(--font-display-family);
+  font-weight: 700;
+  -webkit-text-stroke: 1.5px var(--home-navy);
+  paint-order: stroke fill;
+  text-shadow: 0 2px 0 var(--home-blue), 1px 4px 0 var(--home-navy), 1px 6px 0 color-mix(in oklab, var(--home-navy) 12%, transparent);
+  padding-bottom: 8px;
+  overflow: visible;
+}
+.home-shell #packs h2, .home-shell #pop-moments h2 { color: var(--home-white); }
+.home-shell #flavours h2 > span > span,
+.home-shell #pop-moments h2 > span { color: var(--home-yellow); }
+.home-shell .mobile-dj-comment { transform-origin: center; }
 .home-shell #flavours .flavour-pop { border-radius: 18px; box-shadow: var(--home-shadow); border: 1px solid color-mix(in oklab, var(--home-navy) 10%, transparent); }
 .home-shell #flavours .flavour-pop > div:first-child { height: 48px; }
 .home-shell #flavours .flavour-pop h3 { font-size: 23px; }
@@ -445,6 +462,12 @@
   .mobile-ways li:nth-child(2)::before { color: var(--home-blue); }
   .mobile-ways li:nth-child(3)::before { color: var(--home-green); }
   .home-shell .fruti-section-heading, .home-shell #flavours .fruti-flavours-heading { font-size: 32px; line-height: 1.12; white-space: normal; }
+  .home-shell #flavours h2, .home-shell #packs h2,
+  .home-shell main > section.bg-background > div > div:first-child > h2,
+  .home-shell #pop-moments h2 {
+    -webkit-text-stroke-width: 1.2px;
+    text-shadow: 0 1.5px 0 var(--home-blue), 1px 3px 0 var(--home-navy), 1px 4px 0 color-mix(in oklab, var(--home-navy) 12%, transparent);
+  }
   .home-shell #flavours { padding-block: 40px; }
   .home-shell #flavours > div { padding-inline: 20px; }
   .home-shell #flavours .flavour-pop h3 { font-size: 22px; }
