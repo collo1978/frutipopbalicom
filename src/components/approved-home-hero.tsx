@@ -70,7 +70,7 @@ export function ApprovedHomeHero() {
       <div className="approved-desktop" dangerouslySetInnerHTML={{ __html: desktop }} />
       <div className="approved-mobile">
          <svg className="mobile-ocean" viewBox="610 270 440 145" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><image href={layers.scene} width="1366" height="783.635" /></svg>
-         <svg className="mobile-palm" viewBox="0 50 75 230" aria-hidden="true"><image href={layers.scene} width="1366" height="783.635" /></svg>
+         <svg className="mobile-palm" viewBox="0 60 40 230" aria-hidden="true"><image href={layers.scene} width="1366" height="783.635" /></svg>
          <div className="mobile-headline" aria-label="Little pops. Big smiles.">
           <svg viewBox="70 67 500 143" role="img" aria-label="Little pops. Big smiles."><image href={layers.scene} width="1366" height="783.635" /></svg>
         </div>
