@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -61,6 +62,7 @@ function SocialBrandIcon({ brand, className = "h-6 w-6" }: { brand: "instagram" 
 }
 
 function SiteHeader() {
+  const homepage = useRouterState({ select: (state) => state.location.pathname === "/" });
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b bg-coconut/95 backdrop-blur">
@@ -79,7 +81,7 @@ function SiteHeader() {
               <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-8 w-8 items-center justify-center rounded-full transition-transform hover:scale-105 sm:h-10 sm:w-10"><SocialBrandIcon brand={brand} className="h-6 w-6" /></a>
             ))}
           </div>
-          <Button asChild className="cta-pop cta-pop-sm rounded-full"><Link to="/order" onClick={() => setOpen(false)}>Order Now</Link></Button>
+          {!homepage && <Button asChild className="cta-pop cta-pop-sm rounded-full"><Link to="/order" onClick={() => setOpen(false)}>Order Now</Link></Button>}
           <Button type="button" variant="outline" size="icon" className="h-10 w-10 rounded-full lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen((v) => !v)}>
             <span aria-hidden className="text-xl">{open ? "✕" : "☰"}</span>
           </Button>
@@ -267,10 +269,11 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const homepage = useRouterState({ select: (state) => state.location.pathname === "/" });
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col">
+      <div className={`flex min-h-screen flex-col ${homepage ? "home-shell" : ""}`}>
         <SiteHeader />
         <main className="flex-1">
           <Outlet />

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ApprovedHomeHero } from "@/components/approved-home-hero";
 import heroDesktop from "@/assets/hero-desktop-extra-wide.png.asset.json";
 import heroMobile from "@/assets/hero-mobile-oct.png.asset.json";
 import popStarsDesktop from "@/assets/pop-stars-desktop.png.asset.json";
@@ -46,116 +47,16 @@ const A = () => (
     →
   </span>
 );
-function Hero() {
-  return (
-    /* 1. Kept the strict single-screen height lock layout on all devices */
-    <section className="overflow-hidden bg-hero-cream w-full h-[calc(100svh-4rem)] max-h-[780px]">
-      {/* 2. Changed justify-between to a tight flex layout to bring elements together natively */}
-      <div className="relative mx-auto flex h-full w-full max-w-[1920px] flex-col items-center px-4 pt-3 pb-5 md:px-6 md:pt-4 md:pb-8 md:justify-between">
-        {/* ROW 1: HEADLINE LOGO */}
-        <div className="relative z-40 flex justify-center w-full -mt-1 md:-mt-4">
-          <img
-            src={heroHeadline.url}
-            alt="Bali's Fruti Pop Sorbet Ice Blocks — Real fruit. Real smiles."
-            className="w-[90vw] max-w-[360px] sm:max-w-[380px] md:w-[420px] h-auto drop-shadow-sm"
-          />
-        </div>
-
-        {/* ROW 2: PHOTO COLLAGE ZONE - Increased height to h-[310px] on mobile to fill out the dead space perfectly, 
-            and removed the md:hidden block so the beautiful background fruit splashes display on mobile too */}
-        <div className="relative h-[310px] sm:h-[340px] w-[95vw] max-w-[420px] md:h-[180px] md:w-[80vw] md:max-w-[1140px] flex items-center justify-center -mt-2 md:-mt-6">
-          {/* Upper Background Fruit Splashes - CHANGED: Enabled on mobile and repositioned to fill layout background space */}
-          <img
-            src={heroSplashLeft.url}
-            alt=""
-            className="pointer-events-none absolute left-[-10%] top-[-8%] z-5 w-[45%] md:w-[28%] md:left-[-12%] md:top-[-45%] object-contain -rotate-6 opacity-80 md:opacity-100"
-          />
-          <img
-            src={heroSplashRight.url}
-            alt=""
-            className="pointer-events-none absolute right-[-10%] top-[-10%] z-5 w-[45%] md:w-[28%] md:right-[-12%] md:top-[-47%] object-contain rotate-6 opacity-80 md:opacity-100"
-          />
-          <img
-            src={heroFruitSplash.url}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 top-[-25%] md:top-[-50%] z-4 w-[65%] md:w-[60%] -translate-x-1/2 object-contain opacity-40 md:opacity-95"
-          />
-
-          {/* Lower Corner Fruit Accents */}
-          <img
-            src={heroSplashLeft.url}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute bottom-[40%] left-[-4%] z-6 hidden w-[16%] -scale-y-100 rotate-[19deg] object-contain md:block md:bottom-[75%] md:left-[-14%]"
-          />
-          <img
-            src={heroSplashRight.url}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute bottom-[40%] right-[-4%] z-6 hidden w-[18%] -scale-y-100 -rotate-[11deg] object-contain md:block md:bottom-[75%] md:right-[-14%]"
-          />
-
-          {/* 3. PHOTO CARDS: Increased vertical height scales on mobile to take up more screen layout space */}
-
-          {/* Card 1: Left Polaroid Frame */}
-          <div className="frame-pop-left absolute bottom-[15px] left-[2%] z-10 w-[29vw] max-w-[125px] md:bottom-[0px] md:left-[24%] md:z-20 md:w-auto">
-            <img
-              src={heroKids}
-              alt="Kids enjoying Fruti Pop"
-              className="rounded-[1rem] md:rounded-[1.25rem] w-full h-[190px] sm:h-[220px] md:h-[240px] md:w-[190px] object-cover md:-rotate-6"
-            />
-          </div>
-
-          {/* Card 2: Center Polaroid Frame (Football boy) */}
-          <div className="frame-pop-center absolute bottom-[5px] left-1/2 -translate-x-1/2 z-30 w-[34vw] max-w-[145px] md:bottom-[-15px] md:w-auto">
-            <img
-              src={heroFootball}
-              alt="Young football player enjoying Fruti Pop"
-              className="rounded-[1rem] md:rounded-[1.25rem] w-full h-[220px] sm:h-[250px] md:h-[270px] md:w-[215px] object-cover drop-shadow-md"
-            />
-          </div>
-
-          {/* Card 3: Right Polaroid Frame */}
-          <div className="frame-pop-right absolute bottom-[20px] right-[2%] z-20 w-[29vw] max-w-[125px] md:bottom-[5px] md:right-[24%] md:w-auto">
-            <img
-              src={heroWoman}
-              alt="Enjoying Fruti Pop"
-              className="rounded-[1rem] md:rounded-[1.25rem] w-full h-[190px] sm:h-[220px] md:h-[240px] md:w-[190px] object-cover md:rotate-6"
-            />
-          </div>
-        </div>
-
-        {/* ROW 3: CTA BUTTON ZONE */}
-        <div className="relative z-50 flex w-full flex-col items-center gap-1.5 mt-2 md:mt-0">
-          <Button
-            asChild
-            size="lg"
-            className={`${cta} w-full max-w-[280px] md:w-auto md:min-w-[17rem] md:px-14 md:text-lg`}
-          >
-            <Link to="/order">
-              Order My Pops <A />
-            </Link>
-          </Button>
-
-          <p className="text-center text-xs font-semibold text-foreground/65 px-2">
-            Less Sugar • Full of Vitamins • Packed with Fruit
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function Home() {
   return (
     <>
-      <Hero />
+      <ApprovedHomeHero />
 
       <section id="flavours" className="overflow-x-clip scroll-mt-20 bg-hero-cream pb-5 pt-10 md:py-14">
         <div className="mx-auto max-w-7xl px-2 text-center md:px-4">
-          <h2 className="fruti-flavours-heading flex justify-center overflow-hidden">
-            <span className="inline-block shrink-0 origin-center scale-x-[0.82] whitespace-nowrap min-[360px]:scale-x-90 md:scale-x-100">
+          <h2 className="fruti-flavours-heading flex justify-center">
+            <span className="inline-block">
               Flavours That Make You{" "}
               <span className="font-black text-dragonfruit text-[1.12em] leading-none">POP!</span>
             </span>
@@ -317,7 +218,7 @@ function PackCard({
   badge?: string;
 }) {
   return (
-    <article className="relative flex flex-col items-center rounded-3xl border bg-card p-6 pt-8 text-center shadow-sm">
+    <article className={`home-pack home-pack-${pack} relative flex flex-col items-center rounded-3xl border bg-card p-6 pt-8 text-center shadow-sm`}>
       {badge && (
         <span className="absolute -top-4 left-1/2 -translate-x-1/2 -rotate-2 whitespace-nowrap rounded-full bg-dragonfruit px-5 py-1.5 font-display text-base font-bold text-accent-foreground shadow-md md:text-lg">
           {badge}
