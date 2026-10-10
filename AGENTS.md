@@ -14,3 +14,4 @@
 - The homepage uses the approved SVG with externalized exact image layers and React-managed comments on desktop, plus an independently arranged mobile composition; retain all previous original source artwork.
 - Homepage styling is scoped to the homepage shell, so shared order components and non-homepage routes retain their existing presentation and logic.
 - Mobile hero crops and mascot masking reference the original local scene through SVG viewBoxes and clip paths, leaving source pixels and the approved desktop SVG unchanged.
+- The mobile headline uses an alpha-only vector mask traced from its original scene; this removes the sky rectangle without changing source image pixels or desktop artwork.
