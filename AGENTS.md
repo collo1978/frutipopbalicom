@@ -13,3 +13,4 @@
 - Homepage and Order Mystery Pop use one configurable game component so their shuffle and reveal behaviour stay consistent.
 - The homepage uses the approved SVG with externalized exact image layers and React-managed comments on desktop, plus an independently arranged mobile composition; retain all previous original source artwork.
 - Homepage styling is scoped to the homepage shell, so shared order components and non-homepage routes retain their existing presentation and logic.
+- Mobile hero crops and mascot masking reference the original local scene through SVG viewBoxes and clip paths, leaving source pixels and the approved desktop SVG unchanged.
