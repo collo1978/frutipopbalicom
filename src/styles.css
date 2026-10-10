@@ -386,7 +386,7 @@
 .home-shell #pop-moments h2 > span { color: var(--home-yellow); }
 .home-shell .mobile-dj-comment { transform-origin: center; }
 .home-shell #flavours .flavour-pop { border-radius: 18px; box-shadow: var(--home-shadow); border: 1px solid color-mix(in oklab, var(--home-navy) 10%, transparent); }
-.home-shell #flavours .flavour-pop > div:first-child { height: 48px; }
+.home-shell #flavours .flavour-pop:not(.text-center) > div:first-child { height: 48px; }
 .home-shell #flavours .flavour-pop h3 { font-size: 23px; }
 .home-shell #flavours .bg-pastel-lavender { background: color-mix(in oklab, var(--home-turquoise) 16%, var(--home-white)); }
 .home-shell #packs { background: var(--secondary); padding-block: 64px 76px; border-radius: 50% 50% 0 0 / 28px 28px 0 0; }

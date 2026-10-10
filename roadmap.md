@@ -1,8 +1,8 @@
 # Roadmap
 
-- [ ] Restore all approved homepage assets as byte-identical local files
-- [ ] Refine only main homepage headings and animate DJ comment changes
-- [ ] Verify final dimensions and save connector-accessible screenshots and base64 review copies
+- [x] Restore all approved homepage assets as byte-identical local files
+- [x] Refine only main homepage headings and animate DJ comment changes
+- [x] Verify final dimensions and save connector-accessible screenshots and base64 review copies
 
 - [x] Integrate the approved layered desktop hero and practical mobile composition without publishing
 - [x] Extend the approved visual system through the homepage only
