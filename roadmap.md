@@ -1,5 +1,9 @@
 # Roadmap
 
+- [ ] Integrate the approved layered desktop hero and practical mobile composition without publishing
+- [ ] Extend the approved visual system through the homepage only
+- [ ] Verify desktop/mobile hero, flavour zoom, Mystery Pop, video and order navigation
+
 - [x] Replace the desktop hero with the supplied extra-wide transparent artwork and preserve the one-screen layout
 - [x] Replace the homepage hero and reorder the homepage shopping journey
 - [x] Add the dedicated `/order` page with pack, flavour, delivery, payment, and WhatsApp validation
