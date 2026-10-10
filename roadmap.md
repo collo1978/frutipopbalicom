@@ -1,5 +1,8 @@
 # Roadmap
 
+- [ ] Replace mobile tiers with the intact original desktop showcase and button artwork
+- [ ] Verify mobile widths, comments, ordering and desktop equivalence; save new review images
+
 - [x] Polish mobile headline edges, restrained original fruit decoration and DJ speech tail
 - [x] Verify desktop equivalence and mobile widths; refresh screenshots and base64 review copies
 
