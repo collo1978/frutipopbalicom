@@ -457,3 +457,5 @@
   .home-shell .cta-pop, .home-primary { transition: none; }
   .home-shell .cta-pop:hover, .home-primary:hover { transform: none; }
 }
+.approved-desktop svg:has(.control:hover) .pulse { filter: brightness(1.1) drop-shadow(0 0 5px var(--home-turquoise)); }
+.approved-desktop svg:has(.control:active) .pulse { transform: translateY(3px); }
