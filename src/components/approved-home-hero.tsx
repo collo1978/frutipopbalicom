@@ -16,7 +16,22 @@ export function ApprovedHomeHero() {
   useEffect(() => {
     let index = 0;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const timer = window.setInterval(() => {
+    let timer: number | undefined;
+    const pop = (node: Element) => {
+      if (reduced.matches) return;
+      node.animate([
+        { opacity: 0.3, transform: "translateY(2px) scale(.97)" },
+        { opacity: 1, transform: "translateY(0) scale(1.015)", offset: 0.7 },
+        { opacity: 1, transform: "translateY(0) scale(1)" },
+      ], { duration: 300, easing: "ease-out" });
+    };
+    const schedule = () => {
+      window.clearTimeout(timer);
+      if (!document.hidden && !reduced.matches) {
+        timer = window.setTimeout(change, index === 3 ? 8500 : 6000);
+      }
+    };
+    const change = () => {
       if (document.hidden || reduced.matches) return;
       index = (index + 1) % comments.length;
       const lines = comments[index] ?? comments[0];
@@ -31,11 +46,23 @@ export function ApprovedHomeHero() {
           span.textContent = line;
           return span;
         }));
+        pop(node);
       });
       const mobile = ref.current?.querySelector(".mobile-dj-comment");
-      if (mobile) mobile.textContent = lines.join(" ");
-    }, 6000);
-    return () => window.clearInterval(timer);
+      if (mobile) {
+        mobile.textContent = lines.join(" ");
+        pop(mobile);
+      }
+      schedule();
+    };
+    document.addEventListener("visibilitychange", schedule);
+    reduced.addEventListener("change", schedule);
+    schedule();
+    return () => {
+      window.clearTimeout(timer);
+      document.removeEventListener("visibilitychange", schedule);
+      reduced.removeEventListener("change", schedule);
+    };
   }, []);
   return (
     <section ref={ref} className="approved-hero" aria-labelledby="approved-hero-heading">

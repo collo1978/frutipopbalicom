@@ -1,0 +1,80 @@
+[
+  {
+    "file": "scene.jpg",
+    "sha256": "8a51a0b39e60718d1bb7f4664dc0d664378e3dce2e09b932f7732d7347c195ba",
+    "bytes": 679492,
+    "identical_to_original": true
+  },
+  {
+    "file": "mixed-berry.png",
+    "sha256": "2a7b3def5e28d2f65d92a0786c317d0362de1be6d83ab1efbba1eeeb78caf570",
+    "bytes": 434192,
+    "identical_to_original": true
+  },
+  {
+    "file": "mango.png",
+    "sha256": "26df760d133ad62e3762d9121d5419271a5a50cf5a04472ea2af02862ba12b77",
+    "bytes": 310344,
+    "identical_to_original": true
+  },
+  {
+    "file": "strawberry.png",
+    "sha256": "d470164c99f5a5ac3ddc0a50e3e57158f8ff13a74d0b9e4544d0c00414b21dfe",
+    "bytes": 347652,
+    "identical_to_original": true
+  },
+  {
+    "file": "pineapple.png",
+    "sha256": "973f0beefe03787b3e72f1b93a819b8bf6230d40729ad99b9c0a3740e8f4303b",
+    "bytes": 333828,
+    "identical_to_original": true
+  },
+  {
+    "file": "passion-fruit.png",
+    "sha256": "bd1a92d266bb0e5db5cdf47ba621335ba31d1b97bcb244a00389722e2f4914e4",
+    "bytes": 311998,
+    "identical_to_original": true
+  },
+  {
+    "file": "pina-colada.png",
+    "sha256": "b5c132c80a433a60aca36c98beea27cd4cf871d48627a55859b9fdcccf14cf7f",
+    "bytes": 325908,
+    "identical_to_original": true
+  },
+  {
+    "file": "logo.png",
+    "sha256": "2353160327fcedcd11ef975fd358a61687cd7a8b658fb6c243f7e32fe8764923",
+    "bytes": 706667,
+    "identical_to_original": true
+  },
+  {
+    "file": "football-boy.png",
+    "sha256": "69885b8f3a8943b503af259db90d224190d7403c4a6a75e97a030a623c033ddd",
+    "bytes": 389612,
+    "identical_to_original": true
+  },
+  {
+    "file": "family.png",
+    "sha256": "311acfbbef8b8f5b31a55087f38ad27eda6a2d3634805059e7b86cd14bfaa40c",
+    "bytes": 970588,
+    "identical_to_original": true
+  },
+  {
+    "file": "three-ways.png",
+    "sha256": "2278f2a8a276bafffa11089703959e5a0d91a3bfe32f98f13617b1db57782fc5",
+    "bytes": 75816,
+    "identical_to_original": true
+  },
+  {
+    "file": "button-scene.jpg",
+    "sha256": "36a0080fde9c9cc3cdec87f26a9335ea79480926c1768d50f39df27e9d68b37b",
+    "bytes": 583295,
+    "identical_to_original": true
+  },
+  {
+    "file": "Fruti-Pop-Smiles-Desktop-1366.svg",
+    "sha256": "7c4aed88d8ddfc3fa92cc9bd77dc6c696ef684457a094bcea0305e2a76291dc7",
+    "bytes": 7412060,
+    "identical_to_original": true
+  }
+]
