@@ -1,5 +1,8 @@
 # Roadmap
 
+- [ ] Polish mobile headline edges, restrained original fruit decoration and DJ speech tail
+- [ ] Verify desktop equivalence and mobile widths; refresh screenshots and base64 review copies
+
 - [x] Rebuild only the mobile hero from original desktop artwork with two illuminated shelves
 - [x] Verify mobile interactions, desktop pixel equivalence and save mobile review screenshots
 

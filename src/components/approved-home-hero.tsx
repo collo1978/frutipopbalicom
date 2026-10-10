@@ -3,6 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import desktop from "@/assets/approved-homepage/desktop.svg?raw";
 import layers from "@/assets/approved-homepage/layers.json";
+import headlineMask from "@/assets/approved-homepage/mobile-headline-mask.txt?raw";
+import fruitSplash from "@/assets/hero-fruit-splash.png.asset.json";
 
 const products = [
   ["Mixed Berry", layers["mixed-berry"]], ["Mango", layers.mango],
@@ -70,13 +72,13 @@ export function ApprovedHomeHero() {
       <div className="approved-desktop" dangerouslySetInnerHTML={{ __html: desktop }} />
       <div className="approved-mobile">
          <svg className="mobile-ocean" viewBox="610 270 440 145" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><image href={layers.scene} width="1366" height="783.635" /></svg>
-         <svg className="mobile-palm" viewBox="0 60 40 230" aria-hidden="true"><image href={layers.scene} width="1366" height="783.635" /></svg>
          <div className="mobile-headline" aria-label="Little pops. Big smiles.">
-          <svg viewBox="70 67 500 143" role="img" aria-label="Little pops. Big smiles."><image href={layers.scene} width="1366" height="783.635" /></svg>
+          <svg viewBox="70 67 500 143" role="img" aria-label="Little pops. Big smiles."><defs><clipPath id="mobile-headline-cutout"><path d={headlineMask} /></clipPath></defs><image href={layers.scene} width="1366" height="783.635" clipPath="url(#mobile-headline-cutout)" /></svg>
         </div>
         <p className="mobile-subheading"><span>6</span> delicious <strong>frozen fruit sorbet pops.</strong><br />Made for <em>Bali’s sunny days.</em></p>
          <div className="mobile-product-stage">
            {[products.slice(0, 3), products.slice(3)].map((row, tier) => <div className="mobile-shelf" key={tier}>
+             <img className="mobile-shelf-fruit" src={fruitSplash.url} alt="" aria-hidden="true" />
              {row.map(([name, src], n) => <div className={`mobile-product mobile-flavour-${tier * 3 + n}`} key={name}><img src={src} alt={`Original ${name} Fruti Pop package`} /><p>{name}</p></div>)}
            </div>)}
         </div>
