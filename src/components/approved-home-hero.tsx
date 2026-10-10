@@ -78,7 +78,8 @@ export function ApprovedHomeHero() {
       <div className="approved-desktop" dangerouslySetInnerHTML={{ __html: desktop }} />
       <div className="approved-mobile">
         <svg className="mobile-original-showcase" viewBox="0 50 680 696" role="img" aria-label="Little pops. Big smiles. 6 delicious frozen fruit sorbet pops. Made for Bali’s sunny days. Mixed Berry, Mango, Strawberry, Pineapple, Passion Fruit and Piña Colada together on the original illuminated fruit-and-ice display.">
-          <image href={layers.scene} x="0" y="0" width="1366" height="783.635265700483" />
+          <defs><clipPath id="mobile-showcase-scene"><path d="M0 50H680V695H662V746H0Z" /></clipPath></defs>
+          <image href={layers.scene} x="0" y="0" width="1366" height="783.635265700483" clipPath="url(#mobile-showcase-scene)" />
           {products.map(([name, src], i) => {
             const position = showcasePositions[i];
             if (!position) return null;
