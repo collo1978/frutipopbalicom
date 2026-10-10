@@ -11,4 +11,5 @@
 
 - Homepage and Order flavour cards share the latest supplied 2:3 artwork in consistent edge-to-edge frames without per-flavour inset styling.
 - Homepage and Order Mystery Pop use one configurable game component so their shuffle and reveal behaviour stay consistent.
-- The homepage hero uses separate supplied transparent artwork for desktop and mobile; preserve the breakpoint-specific files and never crop either image.
+- The homepage uses the approved SVG with externalized exact image layers and React-managed comments on desktop, plus an independently arranged mobile composition; retain all previous original source artwork.
+- Homepage styling is scoped to the homepage shell, so shared order components and non-homepage routes retain their existing presentation and logic.
