@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Fit the approved desktop hero beneath the measured existing header without cropping artwork
+- [x] Verify five desktop viewports, complete artwork bounds, all messages and unchanged mobile
+
 - [x] Install the verified desktop hero ZIP without changing mobile, navigation or ordering
 - [x] Verify approved desktop assets, rotating messages, order navigation and mobile equivalence
 

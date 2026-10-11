@@ -201,3 +201,16 @@
 @media(min-width:768px){.fruti-approved-hero .fp-desktop .fp-dj{transform:translateY(27px);}.fruti-approved-hero .fp-desktop .fp-speech{top:-8px;}.fruti-approved-hero .fp-desktop .fp-speech-tail{transform:translateY(14px);}}
 @media(min-width:1700px){.fruti-approved-hero .fp-desktop .fp-dj{transform:translateY(32px);}.fruti-approved-hero .fp-desktop .fp-speech{top:12px;}}
 }
+
+/* Fit the complete approved composition beneath the measured header, not just its grid box. */
+@media (min-width: 1200px) {
+  .fruti-approved-hero .approved-desktop.fp-desktop {
+    height: var(--fp-fit-height, auto);
+  }
+  .fruti-approved-hero .fp-desktop .fp-layout {
+    min-height: 0;
+    align-items: start;
+    transform-origin: top left;
+    transform: translateX(var(--fp-fit-left, 0px)) scale(var(--fp-fit-scale, 1));
+  }
+}
