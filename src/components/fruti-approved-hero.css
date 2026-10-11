@@ -202,23 +202,32 @@
 @media(min-width:1700px){.fruti-approved-hero .fp-desktop .fp-dj{transform:translateY(32px);}.fruti-approved-hero .fp-desktop .fp-speech{top:12px;}}
 }
 
-/* Fit the complete approved composition beneath the measured header, not just its grid box. */
+/* Approved desktop composition: one 1366px coordinate system at every desktop width, scaled to fit below the measured header. */
 @media (min-width: 1200px) {
-  /* Size lettering against its own column, keeping the existing row heights and photo gap. */
-  .fruti-approved-hero .fp-desktop .fp-ways {
-    container-type: inline-size;
-  }
-  .fruti-approved-hero .fp-desktop .fp-ways li {
-    font-size: min(clamp(16px, 1.2vw, 22px), 11cqi);
-    line-height: calc(clamp(16px, 1.2vw, 22px) * 1.2);
-  }
-  .fruti-approved-hero .approved-desktop.fp-desktop {
-    height: var(--fp-fit-height, auto);
-  }
-  .fruti-approved-hero .fp-desktop .fp-layout {
-    min-height: 0;
-    align-items: start;
-    transform-origin: top left;
-    transform: translateX(var(--fp-fit-left, 0px)) scale(var(--fp-fit-scale, 1));
-  }
+  .fruti-approved-hero .approved-desktop.fp-desktop { height: var(--fp-fit-height, auto); }
+  .fruti-approved-hero .fp-desktop .fp-layout { width: 1366px; min-height: 0; grid-template-columns: 662px 636px; gap: 20px; padding: 14px 24px; align-items: center; transform-origin: top left; transform: translateX(var(--fp-fit-left, 0px)) scale(var(--fp-fit-scale, 1)); }
+  .fruti-approved-hero .fp-desktop .fp-products { width: 662px; max-width: none; margin: 0; }
+  .fruti-approved-hero .fp-desktop .fp-headline { width: 100%; max-width: none; margin: 0 auto; }
+  .fruti-approved-hero .fp-desktop .fp-subheading { font-size: 24.6px; margin: 10px 0 8px; padding-left: 7%; line-height: 1.2; }
+  .fruti-approved-hero .fp-desktop .fp-platform { width: 100%; }
+  .fruti-approved-hero .fp-desktop .fp-experience { width: 636px; max-width: none; margin: 0; align-self: center; }
+  .fruti-approved-hero .fp-desktop .fp-collage { grid-template-columns: 370px 248px; gap: 18px; }
+  .fruti-approved-hero .fp-desktop .fp-boy { height: 314px; }
+  .fruti-approved-hero .fp-desktop .fp-side-photos { gap: 15px; }
+  .fruti-approved-hero .fp-desktop .fp-brand-row { grid-template-columns: 174px 190px; gap: 6px; min-height: 185px; margin-top: 16px; }
+  .fruti-approved-hero .fp-desktop .fp-dj { width: 174px; height: 180px; transform: translateY(27px); }
+  .fruti-approved-hero .fp-desktop .fp-dj-art { left: -10px; top: 38px; width: 170px; }
+  .fruti-approved-hero .fp-desktop .fp-speech { left: -8px; top: -8px; bottom: auto; width: 185px; height: 48px; padding: 4px 10px; font-size: 16px; line-height: 1.15; border-radius: 26px; }
+  .fruti-approved-hero .fp-desktop .fp-speech-tail { width: 240px; height: 180px; transform: translateY(14px); }
+  .fruti-approved-hero .fp-desktop .fp-tail-normal { display: block; }
+  .fruti-approved-hero .fp-desktop .fp-tail-wide { display: none; }
+  .fruti-approved-hero .fp-desktop .fp-ways { width: 190px; container-type: normal; padding: 0; }
+  .fruti-approved-hero .fp-desktop .fp-ways h2 { margin-bottom: 10px; }
+  .fruti-approved-hero .fp-desktop .fp-ways h2 img { max-width: 190px; }
+  .fruti-approved-hero .fp-desktop .fp-ways ul { gap: 11px; }
+  .fruti-approved-hero .fp-desktop .fp-ways li { font-size: 18px; line-height: 1.2; gap: 8px; white-space: nowrap; }
+  .fruti-approved-hero .fp-desktop .fp-order { margin-top: 20px; }
+  .fruti-approved-hero .fp-desktop .fp-trust { margin-top: 12px; padding: 8px; }
+  .fruti-approved-hero .fp-desktop .fp-trust svg { width: 35.5px; }
+  .fruti-approved-hero .fp-desktop .fp-trust span { font-size: 13.7px; }
 }
