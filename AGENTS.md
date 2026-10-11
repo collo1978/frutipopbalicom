@@ -13,6 +13,7 @@
 - Homepage and Order Mystery Pop use one configurable game component so their shuffle and reveal behaviour stay consistent.
 - The homepage desktop uses the supplied DesktopHomeHero module and its scoped stylesheet, while mobile retains its separate original-scene composition; this isolates approved desktop replacements from mobile and ordering. Retain all previous original source artwork.
 - At desktop widths, proportionally fit the entire approved hero composition to the viewport using the measured header and full SVG overflow bounds; this keeps the platform, character, CTA and trust visible without modifying artwork or shared header sizing.
+- Desktop display-only transforms must be excluded from the base scene-fit measurement and capped by available painted space, so product trials never resize or reposition the remaining composition.
 - Homepage styling is scoped to the homepage shell, so shared order components and non-homepage routes retain their existing presentation and logic.
 - Mobile hero crops and mascot masking reference the original local scene through SVG viewBoxes and clip paths, leaving source pixels and the approved desktop SVG unchanged.
 - The mobile headline, subheading and six-product showcase share one proportional SVG window using the exact desktop scene and product coordinates; this preserves the original fruit, ice, platform and nameplates without recreating them.
