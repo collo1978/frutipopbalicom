@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import layers from '@/assets/approved-homepage/layers.json';
 
@@ -19,6 +19,58 @@ function SceneCrop({ box, className, label, stretch = false, slice = false }: { 
 
 export function DesktopHomeHero() {
   const [comment, setComment] = useState(0);
+  const sceneRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const scene = sceneRef.current;
+    const layout = scene?.querySelector<HTMLElement>('.fp-layout');
+    if (!scene || !layout) return;
+    const header = scene.closest('.home-shell')?.querySelector('header');
+    const desktop = window.matchMedia('(min-width: 1200px)');
+    let frame = 0;
+    let scale = 1;
+    const fit = () => {
+      if (!desktop.matches) {
+        scene.style.removeProperty('--fp-fit-height');
+        scene.style.removeProperty('--fp-fit-scale');
+        scene.style.removeProperty('--fp-fit-left');
+        scale = 1;
+        return;
+      }
+      const headerHeight = header?.getBoundingClientRect().height ?? 0;
+      const sceneTop = scene.getBoundingClientRect().top + window.scrollY;
+      const available = Math.max(1, window.innerHeight - Math.max(headerHeight, sceneTop));
+      const origin = layout.getBoundingClientRect().top;
+      let bottom = layout.offsetHeight;
+      // SVG platform artwork extends below its viewBox; include its full painted bounds.
+      layout.querySelectorAll('.fp-standalone-platform, .fp-dj-art, .fp-speech, .fp-order, .fp-trust').forEach(node => {
+        bottom = Math.max(bottom, (node.getBoundingClientRect().bottom - origin) / scale);
+      });
+      const nextScale = Math.min(1, (available - 12) / (bottom + 12));
+      scene.style.setProperty('--fp-fit-height', `${available}px`);
+      scene.style.setProperty('--fp-fit-scale', String(nextScale));
+      scene.style.setProperty('--fp-fit-left', `${scene.clientWidth * (1 - nextScale) / 2}px`);
+      scale = nextScale;
+    };
+    const schedule = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(fit);
+    };
+    const observer = new ResizeObserver(schedule);
+    observer.observe(layout);
+    if (header) observer.observe(header);
+    scene.addEventListener('load', schedule, true);
+    window.addEventListener('resize', schedule);
+    desktop.addEventListener('change', schedule);
+    void document.fonts.ready.then(schedule);
+    schedule();
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer.disconnect();
+      scene.removeEventListener('load', schedule, true);
+      window.removeEventListener('resize', schedule);
+      desktop.removeEventListener('change', schedule);
+    };
+  }, []);
   useEffect(() => {
     let timer: number | undefined;
     
@@ -32,7 +84,7 @@ export function DesktopHomeHero() {
     return () => { window.clearTimeout(timer); document.removeEventListener('visibilitychange', schedule); };
   }, []);
   return (
-    <div className="approved-desktop fp-desktop">
+    <div ref={sceneRef} className="approved-desktop fp-desktop">
       <svg className="fp-art-defs" aria-hidden="true"><defs>
         <image id="fp-original-scene" href={layers.scene} width="1366" height="783.635265700483" />
         <image id="fp-original-button-scene" href={layers['button-scene']} width="1366" height="783.635265700483" />
