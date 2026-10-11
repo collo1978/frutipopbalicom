@@ -209,7 +209,7 @@
   .fruti-approved-hero .fp-desktop .fp-products { width: 662px; max-width: none; margin: 0; }
   .fruti-approved-hero .fp-desktop .fp-headline { width: 100%; max-width: none; margin: 0 auto; }
   .fruti-approved-hero .fp-desktop .fp-subheading { font-size: 24.6px; margin: 10px 0 8px; padding-left: 7%; line-height: 1.2; }
-  .fruti-approved-hero .fp-desktop .fp-platform { width: 100%; transform-origin: top right; transform: translateY(15px) scale(var(--fp-display-scale, 1)); }
+  .fruti-approved-hero .fp-desktop .fp-platform { width: 100%; transform-origin: bottom right; transform: translateY(15px) scale(var(--fp-display-scale, 1)); }
   .fruti-approved-hero .fp-desktop .fp-experience { width: 636px; max-width: none; margin: 0; align-self: center; }
   .fruti-approved-hero .fp-desktop .fp-collage { grid-template-columns: 370px 248px; gap: 18px; }
   .fruti-approved-hero .fp-desktop .fp-boy { height: 314px; }

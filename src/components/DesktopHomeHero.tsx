@@ -42,7 +42,9 @@ export function DesktopHomeHero() {
       const origin = layout.getBoundingClientRect().top;
       let paintedHeight = layout.offsetHeight;
       const platform = layout.querySelector<SVGSVGElement>('.fp-platform');
-      const displayTop = platform ? (platform.getBoundingClientRect().top - origin) / scale - 15 : 0;
+      const displayBoxHeight = platform?.clientHeight ?? 0;
+      const displayTop = platform ? (platform.getBoundingClientRect().top - origin) / scale - 15 + displayBoxHeight * (displayScale - 1) : 0;
+      const displayAnchor = displayTop + displayBoxHeight;
       let displayBottom = 0;
       layout.querySelectorAll<SVGElement | HTMLElement>(
         '.fp-standalone-platform, .fp-dj-art, .fp-speech, .fp-order, .fp-trust, .fp-photo'
@@ -50,7 +52,7 @@ export function DesktopHomeHero() {
         let bottom = (node.getBoundingClientRect().bottom - origin) / scale;
         if (node.classList.contains('fp-standalone-platform')) {
           // Keep the existing whole-scene fit independent of this display-only trial.
-          bottom = displayTop + (bottom - displayTop - 15) / displayScale;
+          bottom = displayAnchor + (bottom - displayAnchor - 15) / displayScale;
           displayBottom = bottom;
         }
         paintedHeight = Math.max(paintedHeight, bottom);
@@ -66,10 +68,14 @@ export function DesktopHomeHero() {
       scene.style.setProperty('--fp-fit-scale', String(nextScale));
       scene.style.setProperty('--fp-fit-left', `${(scene.clientWidth - 1366 * nextScale) / 2}px`);
       scene.style.setProperty('--fp-fit-height', `${Math.max(1, available)}px`);
-      const displayHeight = displayBottom - displayTop;
+      const displayOverflow = displayBottom - displayAnchor;
+      const subheading = layout.querySelector<HTMLElement>('.fp-subheading');
+      const headingBottom = subheading ? (subheading.getBoundingClientRect().bottom - origin) / scale : displayTop;
       // Grow into unused space on the left, only as far as the complete platform fits.
-      displayScale = displayHeight > 0
-        ? Math.max(1, Math.min(1.08, ((available - 8) / nextScale - displayTop - 15) / displayHeight))
+      displayScale = displayBoxHeight > 0 && displayOverflow > 0
+        ? Math.max(1, Math.min(1.08,
+          1 + (displayTop - headingBottom + 15 - 8) / displayBoxHeight,
+          ((available - 4) / nextScale - displayAnchor - 15) / displayOverflow))
         : 1;
       scene.style.setProperty('--fp-display-scale', String(displayScale));
       scale = nextScale;
