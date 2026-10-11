@@ -1,7 +1,7 @@
 # Roadmap
 
-- [ ] Fit all three desktop option labels within their column without touching the customer photo
-- [ ] Verify text Range clearance and full hero fit at five desktop sizes; inspect screenshots and automatic build
+- [x] Fit all three desktop option labels within their column without touching the customer photo
+- [x] Verify text Range clearance and full hero fit at five desktop sizes; inspect screenshots and automatic build
 
 - [x] Fit the approved desktop hero beneath the measured existing header without cropping artwork
 - [x] Verify five desktop viewports, complete artwork bounds, all messages and unchanged mobile
