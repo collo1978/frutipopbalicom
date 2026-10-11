@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Install the verified desktop hero ZIP without changing mobile, navigation or ordering
+- [x] Verify approved desktop assets, rotating messages, order navigation and mobile equivalence
+
 - [x] Replace mobile tiers with the intact original desktop showcase and button artwork
 - [x] Verify mobile widths, comments, ordering and desktop equivalence; save new review images
 

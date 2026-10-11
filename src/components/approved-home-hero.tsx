@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import desktop from "@/assets/approved-homepage/desktop.svg?raw";
+import { DesktopHomeHero } from "./DesktopHomeHero";
+import "./fruti-approved-hero.css";
 import layers from "@/assets/approved-homepage/layers.json";
 
 const products = [
@@ -74,8 +75,8 @@ export function ApprovedHomeHero() {
   }, []);
   return (
     <section ref={ref} className="approved-hero" aria-labelledby="approved-hero-heading">
-      <h1 id="approved-hero-heading" className="sr-only">Fruti Pop Bali — Little pops. Big smiles.</h1>
-      <div className="approved-desktop" dangerouslySetInnerHTML={{ __html: desktop }} />
+      <h1 id="approved-hero-heading" className="sr-only">Fruti Pop Bali — MAKE THEIR DAY POP!</h1>
+      <div className="fruti-approved-hero"><DesktopHomeHero /></div>
       <div className="approved-mobile">
         <svg className="mobile-original-showcase" viewBox="0 50 680 696" role="img" aria-label="Little pops. Big smiles. 6 delicious frozen fruit sorbet pops. Made for Bali’s sunny days. Mixed Berry, Mango, Strawberry, Pineapple, Passion Fruit and Piña Colada together on the original illuminated fruit-and-ice display.">
           <defs><clipPath id="mobile-showcase-scene"><path d="M0 50H680V695H662V746H0Z" /></clipPath></defs>
