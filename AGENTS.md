@@ -11,7 +11,7 @@
 
 - Homepage and Order flavour cards share the latest supplied 2:3 artwork in consistent edge-to-edge frames without per-flavour inset styling.
 - Homepage and Order Mystery Pop use one configurable game component so their shuffle and reveal behaviour stay consistent.
-- The homepage uses the approved SVG with externalized exact image layers and React-managed comments on desktop, plus an independently arranged mobile composition; retain all previous original source artwork.
+- The homepage desktop uses the supplied DesktopHomeHero module and its scoped stylesheet, while mobile retains its separate original-scene composition; this isolates approved desktop replacements from mobile and ordering. Retain all previous original source artwork.
 - Homepage styling is scoped to the homepage shell, so shared order components and non-homepage routes retain their existing presentation and logic.
 - Mobile hero crops and mascot masking reference the original local scene through SVG viewBoxes and clip paths, leaving source pixels and the approved desktop SVG unchanged.
 - The mobile headline, subheading and six-product showcase share one proportional SVG window using the exact desktop scene and product coordinates; this preserves the original fruit, ice, platform and nameplates without recreating them.
