@@ -27,22 +27,35 @@ export function DesktopHomeHero() {
     const desktop = window.matchMedia('(min-width: 1200px)');
     let frame = 0;
     let scale = 1;
+    let displayScale = 1;
     const fit = () => {
       if (!desktop.matches) {
         scene.style.removeProperty('--fp-fit-height');
         scene.style.removeProperty('--fp-fit-scale');
         scene.style.removeProperty('--fp-fit-left');
+        scene.style.removeProperty('--fp-display-scale');
         scale = 1;
+        displayScale = 1;
         return;
       }
       // Measure the fixed approved composition, then scale every part together.
       const origin = layout.getBoundingClientRect().top;
       let paintedHeight = layout.offsetHeight;
+      const platform = layout.querySelector<SVGSVGElement>('.fp-platform');
+      const displayBoxHeight = platform?.clientHeight ?? 0;
+      const displayTop = platform ? (platform.getBoundingClientRect().top - origin) / scale - 15 + displayBoxHeight * (displayScale - 1) : 0;
+      const displayAnchor = displayTop + displayBoxHeight;
+      let displayBottom = 0;
       layout.querySelectorAll<SVGElement | HTMLElement>(
         '.fp-standalone-platform, .fp-dj-art, .fp-speech, .fp-order, .fp-trust, .fp-photo'
       ).forEach(node => {
-        paintedHeight = Math.max(paintedHeight,
-          (node.getBoundingClientRect().bottom - origin) / scale);
+        let bottom = (node.getBoundingClientRect().bottom - origin) / scale;
+        if (node.classList.contains('fp-standalone-platform')) {
+          // Keep the existing whole-scene fit independent of this display-only trial.
+          bottom = displayAnchor + (bottom - displayAnchor - 15) / displayScale;
+          displayBottom = bottom;
+        }
+        paintedHeight = Math.max(paintedHeight, bottom);
       });
       const naturalHeight = Math.ceil(paintedHeight + 12);
       const widthScale = Math.min(scene.clientWidth, 1600) / 1366;
@@ -55,6 +68,16 @@ export function DesktopHomeHero() {
       scene.style.setProperty('--fp-fit-scale', String(nextScale));
       scene.style.setProperty('--fp-fit-left', `${(scene.clientWidth - 1366 * nextScale) / 2}px`);
       scene.style.setProperty('--fp-fit-height', `${Math.max(1, available)}px`);
+      const displayOverflow = displayBottom - displayAnchor;
+      const subheading = layout.querySelector<HTMLElement>('.fp-subheading');
+      const headingBottom = subheading ? (subheading.getBoundingClientRect().bottom - origin) / scale : displayTop;
+      // Grow into unused space on the left, only as far as the complete platform fits.
+      displayScale = displayBoxHeight > 0 && displayOverflow > 0
+        ? Math.max(1, Math.min(1.08,
+          1 + (displayTop - headingBottom + 15 - 8) / displayBoxHeight,
+          ((available - 4) / nextScale - displayAnchor - 15) / displayOverflow))
+        : 1;
+      scene.style.setProperty('--fp-display-scale', String(displayScale));
       scale = nextScale;
     };
     const schedule = () => {

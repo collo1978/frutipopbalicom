@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Trial a wider, lower desktop product group without resizing the rest of the hero
+- [x] Verify desktop display/CTA bounds, unchanged mobile/tablet and order navigation
+
 - [x] Fit all three desktop option labels within their column without touching the customer photo
 - [x] Verify text Range clearance and full hero fit at five desktop sizes; inspect screenshots and automatic build
 
