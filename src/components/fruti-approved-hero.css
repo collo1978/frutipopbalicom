@@ -204,6 +204,14 @@
 
 /* Fit the complete approved composition beneath the measured header, not just its grid box. */
 @media (min-width: 1200px) {
+  /* Size lettering against its own column, keeping the existing row heights and photo gap. */
+  .fruti-approved-hero .fp-desktop .fp-ways {
+    container-type: inline-size;
+  }
+  .fruti-approved-hero .fp-desktop .fp-ways li {
+    font-size: min(clamp(16px, 1.2vw, 22px), 11cqi);
+    line-height: calc(clamp(16px, 1.2vw, 22px) * 1.2);
+  }
   .fruti-approved-hero .approved-desktop.fp-desktop {
     height: var(--fp-fit-height, auto);
   }
