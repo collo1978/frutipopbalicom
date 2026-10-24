@@ -296,7 +296,11 @@ export function MysteryPopGame({ onAdd, homepage = false }: MysteryPopGameProps)
             )}
           </div>
           <div className="mt-auto flex w-full flex-col gap-2 px-3 pb-3 pt-2 md:px-4 md:pb-4">
-            {homepage ? (
+            {flavour.name === "Lemon Sorbet" ? (
+              <Button type="button" size="sm" disabled className="rounded-full">
+                OUT OF STOCK
+              </Button>
+            ) : homepage ? (
               <Button asChild type="button" size="sm" className="h-auto min-h-9 whitespace-normal rounded-full">
                 <Link to="/order">Order This Flavour →</Link>
               </Button>
