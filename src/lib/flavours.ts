@@ -11,7 +11,7 @@ export type Flavour = { name: string; tagline?: string; img: string | null; tint
 
 export const FLAVOURS: Flavour[] = [
   { name: "Strawberry", tagline: "Super Fresh.", img: strawberry.url, tint: "bg-dragonfruit/12" },
-  { name: "Lemon Sorbet", tagline: "Super Fresh", img: lemon.url, tint: "bg-mango/25" },
+  {{ name: "Lemon Sorbet", tagline: "OUT OF STOCK", img: lemon.url, tint: "bg-mango/25" },
   { name: "Pineapple", tagline: "Golden Bite.", img: pineapple.url, tint: "bg-mango/30" },
   { name: "Piña Colada", tagline: "Perfection.", img: pinaColada.url, tint: "bg-secondary" },
   { name: "Mango", tagline: "So Smooth.", img: mango.url, tint: "bg-mango/20" },
