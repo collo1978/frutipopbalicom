@@ -39,14 +39,27 @@ const flavourEmoji: Record<string, string> = {
 
 const detailsSchema = z.object({
   name: z.string().trim().min(2, "Enter your name.").max(100, "Name is too long."),
-  phone: z.string().trim().regex(/^\+?[0-9][0-9\s()-]{6,20}$/, "Enter a valid phone number with country code."),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^\+?[0-9][0-9\s()-]{6,20}$/, "Enter a valid phone number with country code."),
   address: z.string().trim().min(8, "Enter your delivery address.").max(400, "Address is too long."),
   maps: z.union([
     z.literal(""),
-    z.string().trim().url("Paste a valid Google Maps link.").max(500).refine((value) => {
-      const hostname = new URL(value).hostname.toLowerCase();
-      return hostname === "maps.app.goo.gl" || hostname === "goo.gl" || hostname === "maps.google.com" || hostname.endsWith(".google.com");
-    }, "Paste a valid Google Maps link."),
+    z
+      .string()
+      .trim()
+      .url("Paste a valid Google Maps link.")
+      .max(500)
+      .refine((value) => {
+        const hostname = new URL(value).hostname.toLowerCase();
+        return (
+          hostname === "maps.app.goo.gl" ||
+          hostname === "goo.gl" ||
+          hostname === "maps.google.com" ||
+          hostname.endsWith(".google.com")
+        );
+      }, "Paste a valid Google Maps link."),
   ]),
   time: z.string().min(1, "Choose a delivery time."),
   payment: z.enum(["Bank Transfer", "Cash on Delivery"], { required_error: "Choose a payment method." }),
@@ -57,18 +70,36 @@ const BALI_TIME_ZONE = "Asia/Makassar";
 const TIME_OPTIONS = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
 
 function baliToday() {
-  const parts = new Intl.DateTimeFormat("en-CA", { timeZone: BALI_TIME_ZONE, year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: BALI_TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
   const get = (type: string) => parts.find((part) => part.type === type)?.value ?? "";
   return `${get("year")}-${get("month")}-${get("day")}`;
 }
 
 function baliCurrentTime() {
-  return new Intl.DateTimeFormat("en-GB", { timeZone: BALI_TIME_ZONE, hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date());
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone: BALI_TIME_ZONE,
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(new Date());
 }
 
-export function OrderForm({ initialPack, openMystery = false }: { initialPack: PackKey | undefined; openMystery?: boolean | undefined }) {
+export function OrderForm({
+  initialPack,
+  openMystery = false,
+}: {
+  initialPack: PackKey | undefined;
+  openMystery?: boolean | undefined;
+}) {
   const [packKey, setPackKey] = useState<PackKey | undefined>(initialPack);
-  const [quantities, setQuantities] = useState<Record<string, number>>(() => Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])));
+  const [quantities, setQuantities] = useState<Record<string, number>>(() =>
+    Object.fromEntries(FLAVOURS.map((f) => [f.name, 0])),
+  );
   const trackerSentinel = useRef<HTMLDivElement>(null);
   const [stuck, setStuck] = useState(false);
   const [headerH, setHeaderH] = useState(72);
@@ -80,10 +111,16 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     const el = trackerSentinel.current;
     let io: IntersectionObserver | undefined;
     if (el) {
-      io = new IntersectionObserver(([entry]) => entry && setStuck(!entry.isIntersecting && entry.boundingClientRect.top < window.innerHeight / 2), { rootMargin: `-${(header?.getBoundingClientRect().height ?? 72) + 1}px 0px 0px 0px` });
+      io = new IntersectionObserver(
+        ([entry]) => entry && setStuck(!entry.isIntersecting && entry.boundingClientRect.top < window.innerHeight / 2),
+        { rootMargin: `-${(header?.getBoundingClientRect().height ?? 72) + 1}px 0px 0px 0px` },
+      );
       io.observe(el);
     }
-    return () => { window.removeEventListener("resize", measure); io?.disconnect(); };
+    return () => {
+      window.removeEventListener("resize", measure);
+      io?.disconnect();
+    };
   }, [packKey]);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("+62");
@@ -129,7 +166,11 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     setErrors((current) => ({ ...current, pack: "", quantities: "" }));
   };
 
-  const positionBeforeQuantityChange = useRef<{ pageY: number; carousel: HTMLElement | null; carouselLeft: number } | null>(null);
+  const positionBeforeQuantityChange = useRef<{
+    pageY: number;
+    carousel: HTMLElement | null;
+    carouselLeft: number;
+  } | null>(null);
   const changeQuantity = (flavour: string, amount: number) => {
     if (!pack) {
       setErrors((current) => ({ ...current, pack: "Choose a pack first." }));
@@ -162,7 +203,8 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     event.preventDefault();
     const nextErrors: Record<string, string> = {};
     if (!pack) nextErrors["pack"] = "Choose a pack.";
-    if (!pack || total < pack.limit) nextErrors["quantities"] = pack ? `Choose at least ${pack.limit} pops.` : "Choose a pack first.";
+    if (!pack || total < pack.limit)
+      nextErrors["quantities"] = pack ? `Choose at least ${pack.limit} pops.` : "Choose a pack first.";
     if (!date) nextErrors["date"] = "Choose a delivery date.";
     if (date && isPastDate(date)) nextErrors["date"] = "Choose today or a future date.";
     if (timeIsPast) nextErrors["time"] = "Choose a future time in Bali.";
@@ -174,7 +216,10 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length || !pack || !date || !payment) return;
 
-    const packLines = FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((flavour) => `${flavourEmoji[flavour.name]} ${flavour.name}${flavour.name.endsWith("Sorbet") ? "" : " Sorbet"}: ${quantities[flavour.name]} pcs`);
+    const packLines = FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map(
+      (flavour) =>
+        `${flavourEmoji[flavour.name]} ${flavour.name}${flavour.name.endsWith("Sorbet") ? "" : " Sorbet"}: ${quantities[flavour.name]} pcs`,
+    );
     const message = [
       "Hi Fruti Pop 👋",
       "",
@@ -226,12 +271,19 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     if (!mounted.current || !el) return;
     window.setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
   };
-  useEffect(() => { if (showFlavours) scrollTo(flavourRef.current); }, [showFlavours]);
-  useEffect(() => { if (showDelivery) scrollTo(deliveryRef.current); }, [showDelivery]);
+  useEffect(() => {
+    if (showFlavours) scrollTo(flavourRef.current);
+  }, [showFlavours]);
+  useEffect(() => {
+    if (showDelivery) scrollTo(deliveryRef.current);
+  }, [showDelivery]);
   useEffect(() => {
     mounted.current = true;
     if (initialPack && !openMystery) {
-      const t = window.setTimeout(() => flavourRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 300);
+      const t = window.setTimeout(
+        () => flavourRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }),
+        300,
+      );
       return () => window.clearTimeout(t);
     }
     return undefined;
@@ -272,27 +324,55 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
     }, 120);
   };
 
-  const fieldError = (key: string) => errors[key] ? <p className="mt-1 text-sm font-semibold text-destructive">{errors[key]}</p> : null;
+  const fieldError = (key: string) =>
+    errors[key] ? <p className="mt-1 text-sm font-semibold text-destructive">{errors[key]}</p> : null;
   const legend = "scroll-mt-24 font-display text-3xl font-extrabold text-accent md:text-4xl";
 
   return (
     <form onSubmit={submit} noValidate className="space-y-6">
       <fieldset className="min-w-0 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
         <legend className="sr-only">1. Choose Your Pack</legend>
-        <h2 className={legend} aria-hidden="true">1. Choose Your Pack</h2>
+        <h2 className={legend} aria-hidden="true">
+          1. Choose Your Pack
+        </h2>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           {(Object.keys(PACKS) as PackKey[]).map((key) => {
             const option = PACKS[key];
             const selected = packKey === key;
             return (
-              <Button key={key} type="button" variant="outline" aria-pressed={selected} onClick={() => choosePack(key)} className={cn("group relative h-auto min-h-28 justify-start rounded-xl p-4 text-left whitespace-normal transition-colors md:hover:border-accent md:hover:bg-accent md:hover:text-accent-foreground", selected && "border-primary bg-leaf ring-2 ring-primary/20")}>
-                <span className={cn("mr-2 h-5 w-5 shrink-0 rounded-full border-2 border-primary md:group-hover:border-accent-foreground", selected && "border-[6px]")} />
+              <Button
+                key={key}
+                type="button"
+                variant="outline"
+                aria-pressed={selected}
+                onClick={() => choosePack(key)}
+                className={cn(
+                  "group relative h-auto min-h-28 justify-start rounded-xl p-4 text-left whitespace-normal transition-colors md:hover:border-accent md:hover:bg-accent md:hover:text-accent-foreground",
+                  selected && "border-primary bg-leaf ring-2 ring-primary/20",
+                )}
+              >
+                <span
+                  className={cn(
+                    "mr-2 h-5 w-5 shrink-0 rounded-full border-2 border-primary md:group-hover:border-accent-foreground",
+                    selected && "border-[6px]",
+                  )}
+                />
                 <span>
-                  <span className="block font-bold text-foreground md:group-hover:text-accent-foreground">{option.name}</span>
-                  <span className="block text-sm text-muted-foreground md:group-hover:text-accent-foreground/85">{option.limit} Pops</span>
-                  <span className="block text-lg font-bold text-accent md:group-hover:text-accent-foreground">{option.price}</span>
+                  <span className="block font-bold text-foreground md:group-hover:text-accent-foreground">
+                    {option.name}
+                  </span>
+                  <span className="block text-sm text-muted-foreground md:group-hover:text-accent-foreground/85">
+                    {option.limit} Pops
+                  </span>
+                  <span className="block text-lg font-bold text-accent md:group-hover:text-accent-foreground">
+                    {option.price}
+                  </span>
                 </span>
-                {key === "jumbo" && <span className="absolute right-2 top-2 rounded-md bg-primary/10 px-2 py-1 text-xs font-bold text-primary md:group-hover:bg-card/20 md:group-hover:text-accent-foreground">Save Rp15,000!</span>}
+                {key === "jumbo" && (
+                  <span className="absolute right-2 top-2 rounded-md bg-primary/10 px-2 py-1 text-xs font-bold text-primary md:group-hover:bg-card/20 md:group-hover:text-accent-foreground">
+                    Save Rp15,000!
+                  </span>
+                )}
               </Button>
             );
           })}
@@ -301,59 +381,144 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
       </fieldset>
 
       {showFlavours && pack && (
-        <fieldset ref={flavourRef} className="min-w-0 order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
+        <fieldset
+          ref={flavourRef}
+          className="min-w-0 order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6"
+        >
           <legend className="sr-only">2. Pick Your Flavours</legend>
-          <h2 className={legend} aria-hidden="true">2. Pick Your Flavours</h2>
+          <h2 className={legend} aria-hidden="true">
+            2. Pick Your Flavours
+          </h2>
           <div ref={trackerSentinel} aria-hidden="true" className="h-px" />
-          <div className={cn("sticky z-40 mt-3 h-32 overflow-hidden rounded-xl border border-primary/20 bg-leaf/95 px-2.5 py-2 shadow-md backdrop-blur sm:px-4 md:h-28", complete && "ring-2 ring-primary/30")} style={{ top: headerH }} aria-live="polite">
-            <p className={cn("font-bold leading-tight text-accent", finishAvailable && complete && "pr-28 sm:pr-32", stuck ? "text-xs sm:text-sm" : "text-sm sm:text-base")}>
-              {extraTotal > 0
-                ? <>Your {pack.name} · {total} Pops · <span className="text-primary">Pack complete ✓</span></>
-                : <>Your {pack.name} · {total}/{pack.limit} · {complete ? <span className="text-primary">Pack full! 🎉</span> : <span>{remaining} to go!</span>}</>}
+          <div
+            className={cn(
+              "sticky z-40 mt-3 h-32 overflow-hidden rounded-xl border border-primary/20 bg-leaf/95 px-2.5 py-2 shadow-md backdrop-blur sm:px-4 md:h-28",
+              complete && "ring-2 ring-primary/30",
+            )}
+            style={{ top: headerH }}
+            aria-live="polite"
+          >
+            <p
+              className={cn(
+                "font-bold leading-tight text-accent",
+                finishAvailable && complete && "pr-28 sm:pr-32",
+                stuck ? "text-xs sm:text-sm" : "text-sm sm:text-base",
+              )}
+            >
+              {extraTotal > 0 ? (
+                <>
+                  Your {pack.name} · {total} Pops · <span className="text-primary">Pack complete ✓</span>
+                </>
+              ) : (
+                <>
+                  Your {pack.name} · {total}/{pack.limit} ·{" "}
+                  {complete ? <span className="text-primary">Pack full! 🎉</span> : <span>{remaining} to go!</span>}
+                </>
+              )}
             </p>
             {finishAvailable && complete && (
-              <Button type="button" size="sm" onClick={goDelivery} className="absolute right-2 top-2 h-8 rounded-full px-3 text-xs font-extrabold shadow-sm sm:right-3 sm:text-sm">
+              <Button
+                type="button"
+                size="sm"
+                onClick={goDelivery}
+                className="absolute right-2 top-2 h-8 rounded-full px-3 text-xs font-extrabold shadow-sm sm:right-3 sm:text-sm"
+              >
                 Finish Order →
               </Button>
             )}
             <div className="h-[4.25rem] md:h-12">
-            {total > 0 && (
-              <ul aria-label="Flavours in your pack" className="mt-1 grid grid-cols-3 gap-x-1 gap-y-0.5 md:grid-cols-6 md:gap-x-2">
-                {ORDER_FLAVOURS.filter((flavour) => (quantities[flavour.name] ?? 0) > 0).map((flavour) => (
-                  <li key={flavour.name} aria-label={`${flavour.name} × ${quantities[flavour.name]}`} className="flex min-w-0 items-center gap-0.5">
-                    <FruitIcon name={flavour.name} className="h-7 w-7 shrink-0 drop-shadow-sm md:h-8 md:w-8" />
-                    <span className="truncate text-[10px] font-extrabold text-accent sm:text-xs">
-                      {flavour.name} <span className="tabular-nums">×{quantities[flavour.name]}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )}
+              {total > 0 && (
+                <ul
+                  aria-label="Flavours in your pack"
+                  className="mt-1 grid grid-cols-3 gap-x-1 gap-y-0.5 md:grid-cols-6 md:gap-x-2"
+                >
+                  {ORDER_FLAVOURS.filter((flavour) => (quantities[flavour.name] ?? 0) > 0).map((flavour) => (
+                    <li
+                      key={flavour.name}
+                      aria-label={`${flavour.name} × ${quantities[flavour.name]}`}
+                      className="flex min-w-0 items-center gap-0.5"
+                    >
+                      <FruitIcon name={flavour.name} className="h-7 w-7 shrink-0 drop-shadow-sm md:h-8 md:w-8" />
+                      <span className="truncate text-[10px] font-extrabold text-accent sm:text-xs">
+                        {flavour.name} <span className="tabular-nums">×{quantities[flavour.name]}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
-            <progress value={Math.min(total, pack.limit)} max={pack.limit} aria-label="Pack completion" className="order-progress mt-1 h-1.5 w-full overflow-hidden rounded-full sm:h-2" />
+            <progress
+              value={Math.min(total, pack.limit)}
+              max={pack.limit}
+              aria-label="Pack completion"
+              className="order-progress mt-1 h-1.5 w-full overflow-hidden rounded-full sm:h-2"
+            />
             {upgradeNotice && (
-              <p role="status" className="order-step-reveal mt-1.5 text-xs font-bold text-primary sm:text-sm">🎉 You’ve unlocked the Jumbo Pack! <span className="font-semibold text-leaf-foreground">We’ve automatically applied the better 20-Pop price.</span></p>
+              <p role="status" className="order-step-reveal mt-1.5 text-xs font-bold text-primary sm:text-sm">
+                🎉 You’ve unlocked the Jumbo Pack!{" "}
+                <span className="font-semibold text-leaf-foreground">
+                  We’ve automatically applied the better 20-Pop price.
+                </span>
+              </p>
             )}
           </div>
           <div className="mt-6 md:mt-3" style={{ scrollMarginTop: headerH + 90 }}>
-            <SwipeRow count={ORDER_FLAVOURS.length + 1} label="Pick your flavours" tightTop desktopClass="md:grid md:auto-rows-fr md:grid-cols-3 md:gap-5 xl:grid-cols-4" itemClass="w-[64%] md:w-auto">
+            <SwipeRow
+              count={ORDER_FLAVOURS.length + 1}
+              label="Pick your flavours"
+              tightTop
+              desktopClass="md:grid md:auto-rows-fr md:grid-cols-3 md:gap-5 xl:grid-cols-4"
+              itemClass="w-[64%] md:w-auto"
+            >
               {[
                 ...ORDER_FLAVOURS.map((flavour) => {
                   const quantity = quantities[flavour.name] ?? 0;
                   return (
-                    <div key={flavour.name} className={`flavour-pop relative flex h-full flex-col overflow-hidden rounded-3xl ${flavour.tint}`}>
+                    <div
+                      key={flavour.name}
+                      className={`flavour-pop relative flex h-full flex-col overflow-hidden rounded-3xl ${flavour.tint}`}
+                    >
                       <div className="flex h-8 items-center justify-center pt-1.5 md:h-10 md:pt-2">
                         {flavour.name === "Strawberry" && <BestSellerBadge />}
                       </div>
                       {flavour.art && (
-                        <img src={flavour.art} alt={`Original Fruti Pop ${flavour.name} sorbet artwork`} loading="lazy" draggable={false} className="aspect-[2/3] w-full select-none object-cover" />
+                        <img
+                          src={flavour.art}
+                          alt={`Original Fruti Pop ${flavour.name} sorbet artwork`}
+                          loading="lazy"
+                          draggable={false}
+                          className="aspect-[2/3] w-full select-none object-cover"
+                        />
                       )}
                       <div className="flex flex-1 flex-col items-center px-2 pb-3 pt-2 text-center md:px-3 md:pb-4 md:pt-3">
                         <h3 className="font-display text-lg font-extrabold text-accent md:text-2xl">{flavour.name}</h3>
+                        {flavour.name === "Lemon Sorbet" && (
+                          <p className="mt-2 text-sm font-extrabold text-red-600">OUT OF STOCK</p>
+                        )}
                         <div className="mt-auto flex items-center gap-1.5 pt-2 md:gap-2 md:pt-3">
-                          <Button type="button" variant="secondary" size="icon" onClick={() => changeQuantity(flavour.name, -1)} disabled={quantity === 0} aria-label={`Remove one ${flavour.name}`} className="h-10 w-10 rounded-full"><Minus /></Button>
-                          <output aria-label={`${flavour.name} quantity`} className="w-7 text-center text-lg font-bold">{quantity}</output>
-                          <Button type="button" size="icon" onClick={() => changeQuantity(flavour.name, 1)} aria-label={`Add one ${flavour.name}`} className="h-10 w-10 rounded-full"><Plus /></Button>
+                          <Button
+                            type="button"
+                            variant="secondary"
+                            size="icon"
+                            onClick={() => changeQuantity(flavour.name, -1)}
+                            disabled={quantity === 0}
+                            aria-label={`Remove one ${flavour.name}`}
+                            className="h-10 w-10 rounded-full"
+                          >
+                            <Minus />
+                          </Button>
+                          <output aria-label={`${flavour.name} quantity`} className="w-7 text-center text-lg font-bold">
+                            {quantity}
+                          </output>
+                          <Button
+                            type="button"
+                            size="icon"
+                            onClick={() => changeQuantity(flavour.name, 1)}
+                            aria-label={`Add one ${flavour.name}`}
+                            className="h-10 w-10 rounded-full"
+                          >
+                            <Plus />
+                          </Button>
                           <span aria-hidden="true" className="mx-1 h-7 w-px bg-accent/25" />
                           <SeeThePopButton name={flavour.name} onClick={() => setViewTube(flavour)} />
                         </div>
@@ -361,7 +526,14 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
                     </div>
                   );
                 }),
-                <div key="mystery" ref={mysteryRef} className={cn("h-full rounded-3xl transition-shadow duration-300", mysteryHighlight && "ring-4 ring-primary ring-offset-4 ring-offset-card")}>
+                <div
+                  key="mystery"
+                  ref={mysteryRef}
+                  className={cn(
+                    "h-full rounded-3xl transition-shadow duration-300",
+                    mysteryHighlight && "ring-4 ring-primary ring-offset-4 ring-offset-card",
+                  )}
+                >
                   <MysteryPopGame onAdd={(n) => changeQuantity(n, 1)} />
                 </div>,
               ]}
@@ -370,12 +542,38 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
           {total > 0 && (
             <div className="mt-4 rounded-xl bg-leaf p-4 text-sm text-leaf-foreground">
               <p className="font-bold text-accent">Your selection</p>
-              <ul className="mt-2 flex flex-wrap gap-2 text-xs font-bold text-accent">{FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((f) => <li key={f.name} className="rounded-md bg-card px-2 py-1">{f.name} × {quantities[f.name]}</li>)}</ul>
+              <ul className="mt-2 flex flex-wrap gap-2 text-xs font-bold text-accent">
+                {FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((f) => (
+                  <li key={f.name} className="rounded-md bg-card px-2 py-1">
+                    {f.name} × {quantities[f.name]}
+                  </li>
+                ))}
+              </ul>
               <dl className="mt-3 grid gap-1">
-                <div className="flex justify-between gap-3"><dt>{pack.name} · {pack.limit} Pops</dt><dd className="font-bold">{pack.price}</dd></div>
-                {extraTotal > 0 && <div className="flex justify-between gap-3"><dt>+ {extraTotal} Extra {extraTotal === 1 ? "Pop" : "Pops"}</dt><dd className="font-bold">{extraChargeLabel}</dd></div>}
-                <div className="flex justify-between gap-3 border-t border-accent/15 pt-1"><dt>Total Pops</dt><dd className="font-bold">{total}</dd></div>
-                <div className="flex justify-between gap-3"><dt className="font-bold">Total</dt><dd className="text-right font-bold text-accent">{complete ? orderTotal : `${remaining} more to complete your pack`}</dd></div>
+                <div className="flex justify-between gap-3">
+                  <dt>
+                    {pack.name} · {pack.limit} Pops
+                  </dt>
+                  <dd className="font-bold">{pack.price}</dd>
+                </div>
+                {extraTotal > 0 && (
+                  <div className="flex justify-between gap-3">
+                    <dt>
+                      + {extraTotal} Extra {extraTotal === 1 ? "Pop" : "Pops"}
+                    </dt>
+                    <dd className="font-bold">{extraChargeLabel}</dd>
+                  </div>
+                )}
+                <div className="flex justify-between gap-3 border-t border-accent/15 pt-1">
+                  <dt>Total Pops</dt>
+                  <dd className="font-bold">{total}</dd>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <dt className="font-bold">Total</dt>
+                  <dd className="text-right font-bold text-accent">
+                    {complete ? orderTotal : `${remaining} more to complete your pack`}
+                  </dd>
+                </div>
               </dl>
             </div>
           )}
@@ -384,30 +582,122 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
       )}
 
       {showDelivery && (
-        <fieldset ref={deliveryRef} className="min-w-0 order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
+        <fieldset
+          ref={deliveryRef}
+          className="min-w-0 order-step-reveal scroll-mt-24 rounded-2xl border bg-card p-4 shadow-lg sm:p-6"
+        >
           <legend className="sr-only">3. Delivery Details</legend>
-          <h2 className={legend} aria-hidden="true">3. Delivery Details</h2>
+          <h2 className={legend} aria-hidden="true">
+            3. Delivery Details
+          </h2>
           <div className="mt-3 grid gap-4 sm:grid-cols-2">
-            <label className="text-sm font-bold">Your Name *<Input value={name} onChange={(e) => setName(e.target.value)} maxLength={100} autoComplete="name" className="mt-1 h-11" />{fieldError("name")}</label>
-            <label className="text-sm font-bold">Phone Number *<Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={22} autoComplete="tel" className="mt-1 h-11" />{fieldError("phone")}</label>
-            <label className="text-sm font-bold sm:col-span-2">Delivery Address *<Textarea value={address} onChange={(e) => setAddress(e.target.value)} maxLength={400} rows={3} placeholder="Villa, hotel, street and area" className="mt-1" />{fieldError("address")}</label>
-            <label className="text-sm font-bold sm:col-span-2">Google Maps Location<Input type="url" value={maps} onChange={(e) => setMaps(e.target.value)} maxLength={500} placeholder="Paste your Google Maps link" className="mt-1 h-11" />{fieldError("maps")}</label>
+            <label className="text-sm font-bold">
+              Your Name *
+              <Input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                maxLength={100}
+                autoComplete="name"
+                className="mt-1 h-11"
+              />
+              {fieldError("name")}
+            </label>
+            <label className="text-sm font-bold">
+              Phone Number *
+              <Input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                maxLength={22}
+                autoComplete="tel"
+                className="mt-1 h-11"
+              />
+              {fieldError("phone")}
+            </label>
+            <label className="text-sm font-bold sm:col-span-2">
+              Delivery Address *
+              <Textarea
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                maxLength={400}
+                rows={3}
+                placeholder="Villa, hotel, street and area"
+                className="mt-1"
+              />
+              {fieldError("address")}
+            </label>
+            <label className="text-sm font-bold sm:col-span-2">
+              Google Maps Location
+              <Input
+                type="url"
+                value={maps}
+                onChange={(e) => setMaps(e.target.value)}
+                maxLength={500}
+                placeholder="Paste your Google Maps link"
+                className="mt-1 h-11"
+              />
+              {fieldError("maps")}
+            </label>
             <div className="text-sm font-bold">
               Preferred Delivery Date *
               <Popover>
-                <PopoverTrigger asChild><Button type="button" variant="outline" className={cn("mt-1 h-11 w-full justify-start text-left font-normal", !date && "text-muted-foreground")}><CalendarIcon />{date ? format(date, "PPP") : "Select date"}</Button></PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start"><Calendar mode="single" selected={date} onSelect={setDate} disabled={isPastDate} className="pointer-events-auto p-3" /></PopoverContent>
+                <PopoverTrigger asChild>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className={cn(
+                      "mt-1 h-11 w-full justify-start text-left font-normal",
+                      !date && "text-muted-foreground",
+                    )}
+                  >
+                    <CalendarIcon />
+                    {date ? format(date, "PPP") : "Select date"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    disabled={isPastDate}
+                    className="pointer-events-auto p-3"
+                  />
+                </PopoverContent>
               </Popover>
               {fieldError("date")}
             </div>
-            <label className="text-sm font-bold">Preferred Delivery Time *
-              <select value={time} onChange={(e) => setTime(e.target.value)} className="mt-1 h-11 w-full rounded-md border border-input bg-card px-3 text-base focus:outline-none focus:ring-2 focus:ring-ring md:text-sm">
+            <label className="text-sm font-bold">
+              Preferred Delivery Time *
+              <select
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                className="mt-1 h-11 w-full rounded-md border border-input bg-card px-3 text-base focus:outline-none focus:ring-2 focus:ring-ring md:text-sm"
+              >
                 <option value="">Select time</option>
-                {TIME_OPTIONS.map((option) => <option key={option} value={option} disabled={selectedDate === baliToday() && option <= baliCurrentTime()}>{option}</option>)}
+                {TIME_OPTIONS.map((option) => (
+                  <option
+                    key={option}
+                    value={option}
+                    disabled={selectedDate === baliToday() && option <= baliCurrentTime()}
+                  >
+                    {option}
+                  </option>
+                ))}
               </select>
               {fieldError("time")}
             </label>
-            <label className="text-sm font-bold sm:col-span-2">Additional Notes (optional)<Textarea value={notes} onChange={(e) => setNotes(e.target.value)} maxLength={800} rows={3} placeholder="Delivery instructions or special requests" className="mt-1" />{fieldError("notes")}</label>
+            <label className="text-sm font-bold sm:col-span-2">
+              Additional Notes (optional)
+              <Textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                maxLength={800}
+                rows={3}
+                placeholder="Delivery instructions or special requests"
+                className="mt-1"
+              />
+              {fieldError("notes")}
+            </label>
           </div>
         </fieldset>
       )}
@@ -416,55 +706,145 @@ export function OrderForm({ initialPack, openMystery = false }: { initialPack: P
         <div ref={paymentRef} className="order-step-reveal scroll-mt-24 space-y-6">
           <fieldset className="min-w-0 rounded-2xl border bg-card p-4 shadow-lg sm:p-6">
             <legend className="sr-only">4. Payment Method</legend>
-            <h2 className={legend} aria-hidden="true">4. Payment Method</h2>
+            <h2 className={legend} aria-hidden="true">
+              4. Payment Method
+            </h2>
             <RadioGroup value={payment ?? ""} onValueChange={setPayment} className="mt-3">
-              {["Bank Transfer", "Cash on Delivery"].map((method) => <label key={method} className="flex cursor-pointer items-center gap-3 text-sm font-semibold"><RadioGroupItem value={method} />{method}</label>)}
+              {["Bank Transfer", "Cash on Delivery"].map((method) => (
+                <label key={method} className="flex cursor-pointer items-center gap-3 text-sm font-semibold">
+                  <RadioGroupItem value={method} />
+                  {method}
+                </label>
+              ))}
             </RadioGroup>
             {fieldError("payment")}
             {payment === "Bank Transfer" && (
               <div className="mt-3 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-lg bg-leaf p-3 text-sm text-leaf-foreground">
-                <p><strong>Bank: Mandiri</strong><br />Account Name: Nuansa Fruit Bali<br /><span className="font-bold">Account Number: 1750004760129</span></p>
-                <Button type="button" variant="outline" size="sm" onClick={async () => { await navigator.clipboard.writeText("1750004760129"); setCopied(true); window.setTimeout(() => setCopied(false), 1800); }}><Copy />{copied ? "Copied" : "Copy"}</Button>
+                <p>
+                  <strong>Bank: Mandiri</strong>
+                  <br />
+                  Account Name: Nuansa Fruit Bali
+                  <br />
+                  <span className="font-bold">Account Number: 1750004760129</span>
+                </p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={async () => {
+                    await navigator.clipboard.writeText("1750004760129");
+                    setCopied(true);
+                    window.setTimeout(() => setCopied(false), 1800);
+                  }}
+                >
+                  <Copy />
+                  {copied ? "Copied" : "Copy"}
+                </Button>
               </div>
             )}
           </fieldset>
 
-          {payment && <section className="order-step-reveal rounded-2xl border bg-muted p-5 shadow-lg" aria-labelledby="order-summary-heading">
-            <h2 id="order-summary-heading" className="text-xl font-bold text-accent">Order Summary</h2>
-            <dl className="mt-3 grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
-              <div className="flex justify-between gap-3"><dt>Pack</dt><dd className="font-bold">{pack ? `${pack.name} · ${pack.limit} Pops` : "Not selected"}</dd></div>
-              <div className="flex justify-between gap-3"><dt>Pack price</dt><dd className="font-bold">{pack?.price ?? "Not selected"}</dd></div>
-              {extraTotal > 0 && <div className="flex justify-between gap-3"><dt>{extraTotal} Extra {extraTotal === 1 ? "Pop" : "Pops"}</dt><dd className="font-bold">{extraChargeLabel}</dd></div>}
-              <div className="flex justify-between gap-3"><dt>Total pops</dt><dd className="font-bold">{total}</dd></div>
-              <div className="flex justify-between gap-3"><dt>Payment</dt><dd className="font-bold">{payment ?? "Not selected"}</dd></div>
-              <div className="flex justify-between gap-3"><dt className="font-bold">Total</dt><dd className="text-right font-bold text-accent">{orderTotal}</dd></div>
-            </dl>
-            <div className="mt-3">
-              <p className="text-xs font-bold uppercase text-muted-foreground">Flavours</p>
-              <ul className="mt-1 flex flex-wrap gap-2 text-xs font-bold text-accent">{FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((f) => <li key={f.name} className="rounded-md bg-secondary px-2 py-1">{f.name} × {quantities[f.name]}</li>)}</ul>
-            </div>
-            <p className="mt-3 text-sm text-muted-foreground">Delivery fee and final total confirmed on WhatsApp.</p>
-            {Object.values(errors).some(Boolean) && <p className="mt-3 text-sm font-semibold text-destructive">Please check the highlighted details above.</p>}
-            <Button type="submit" size="lg" className="mt-5 min-h-12 w-full rounded-full text-base font-bold">Confirm Order on WhatsApp</Button>
-          </section>}
+          {payment && (
+            <section
+              className="order-step-reveal rounded-2xl border bg-muted p-5 shadow-lg"
+              aria-labelledby="order-summary-heading"
+            >
+              <h2 id="order-summary-heading" className="text-xl font-bold text-accent">
+                Order Summary
+              </h2>
+              <dl className="mt-3 grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
+                <div className="flex justify-between gap-3">
+                  <dt>Pack</dt>
+                  <dd className="font-bold">{pack ? `${pack.name} · ${pack.limit} Pops` : "Not selected"}</dd>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <dt>Pack price</dt>
+                  <dd className="font-bold">{pack?.price ?? "Not selected"}</dd>
+                </div>
+                {extraTotal > 0 && (
+                  <div className="flex justify-between gap-3">
+                    <dt>
+                      {extraTotal} Extra {extraTotal === 1 ? "Pop" : "Pops"}
+                    </dt>
+                    <dd className="font-bold">{extraChargeLabel}</dd>
+                  </div>
+                )}
+                <div className="flex justify-between gap-3">
+                  <dt>Total pops</dt>
+                  <dd className="font-bold">{total}</dd>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <dt>Payment</dt>
+                  <dd className="font-bold">{payment ?? "Not selected"}</dd>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <dt className="font-bold">Total</dt>
+                  <dd className="text-right font-bold text-accent">{orderTotal}</dd>
+                </div>
+              </dl>
+              <div className="mt-3">
+                <p className="text-xs font-bold uppercase text-muted-foreground">Flavours</p>
+                <ul className="mt-1 flex flex-wrap gap-2 text-xs font-bold text-accent">
+                  {FLAVOURS.filter((f) => (quantities[f.name] ?? 0) > 0).map((f) => (
+                    <li key={f.name} className="rounded-md bg-secondary px-2 py-1">
+                      {f.name} × {quantities[f.name]}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <p className="mt-3 text-sm text-muted-foreground">Delivery fee and final total confirmed on WhatsApp.</p>
+              {Object.values(errors).some(Boolean) && (
+                <p className="mt-3 text-sm font-semibold text-destructive">
+                  Please check the highlighted details above.
+                </p>
+              )}
+              <Button type="submit" size="lg" className="mt-5 min-h-12 w-full rounded-full text-base font-bold">
+                Confirm Order on WhatsApp
+              </Button>
+            </section>
+          )}
         </div>
       )}
 
       <TubeViewer tube={viewTube} onClose={() => setViewTube(null)} />
       <Dialog open={choiceOpen} onOpenChange={setChoiceOpen}>
-        <DialogContent onCloseAutoFocus={(event) => event.preventDefault()} className="w-[calc(100%-2rem)] max-w-md rounded-3xl bg-card p-6 text-center">
+        <DialogContent
+          onCloseAutoFocus={(event) => event.preventDefault()}
+          className="w-[calc(100%-2rem)] max-w-md rounded-3xl bg-card p-6 text-center"
+        >
           <DialogHeader className="text-center sm:text-center">
-            <DialogTitle className="font-display text-2xl font-extrabold text-accent">Your pack is full! 🎉</DialogTitle>
-            <DialogDescription className="font-semibold">Ready to check out, or fancy adding a few more Pops?</DialogDescription>
+            <DialogTitle className="font-display text-2xl font-extrabold text-accent">
+              Your pack is full! 🎉
+            </DialogTitle>
+            <DialogDescription className="font-semibold">
+              Ready to check out, or fancy adding a few more Pops?
+            </DialogDescription>
           </DialogHeader>
           <div className="mt-2 grid gap-2.5">
-            <Button type="button" size="lg" onClick={goDelivery} className="min-h-12 rounded-full text-base font-bold">Continue to Delivery →</Button>
-            <Button type="button" size="lg" variant="outline" onClick={goFlavours} className="min-h-12 rounded-full text-base font-bold">Add More Flavours →</Button>
-            <Button type="button" size="lg" variant="secondary" onClick={goMystery} className="min-h-12 rounded-full text-base font-bold">🎲 Pick a Mystery Pop →</Button>
+            <Button type="button" size="lg" onClick={goDelivery} className="min-h-12 rounded-full text-base font-bold">
+              Continue to Delivery →
+            </Button>
+            <Button
+              type="button"
+              size="lg"
+              variant="outline"
+              onClick={goFlavours}
+              className="min-h-12 rounded-full text-base font-bold"
+            >
+              Add More Flavours →
+            </Button>
+            <Button
+              type="button"
+              size="lg"
+              variant="secondary"
+              onClick={goMystery}
+              className="min-h-12 rounded-full text-base font-bold"
+            >
+              🎲 Pick a Mystery Pop →
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
     </form>
   );
 }
-
