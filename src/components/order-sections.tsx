@@ -289,7 +289,11 @@ export function MysteryPopGame({ onAdd, homepage = false }: MysteryPopGameProps)
             >
               <PartyPopper className="h-5 w-5" aria-hidden="true" /> It's {flavour.name}!
             </h3>
-            {flavour.tagline && <p className="text-xs font-semibold text-foreground/70">{flavour.tagline}</p>}
+            {flavour.name === "Lemon Sorbet" ? (
+              <p className="text-sm font-extrabold text-red-600">OUT OF STOCK</p>
+            ) : (
+              flavour.tagline && <p className="text-xs font-semibold text-foreground/70">{flavour.tagline}</p>
+            )}
           </div>
           <div className="mt-auto flex w-full flex-col gap-2 px-3 pb-3 pt-2 md:px-4 md:pb-4">
             {homepage ? (
