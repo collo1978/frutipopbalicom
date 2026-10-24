@@ -1,8 +1,8 @@
 // Business contact details — supplied by the owner (from the Fruti Pop Bali Facebook page).
 export const CONTACT = {
-  whatsappNumber: "6287841480116",
-  phoneDisplay: "+62 878-4148-0116",
-  phoneHref: "tel:+6287841480116",
+  whatsappNumber: "6281225240596",
+  phoneDisplay: "+62 812-2524-0596",
+  phoneHref: "tel:+6281225240596",
   email: "frutipopbali@gmail.com",
   address: "Jl. Raya Semer No.59A, Kerobokan, Kec. Kuta Utara, Badung, Bali 80361, Indonesia",
 };
@@ -10,7 +10,8 @@ export const CONTACT = {
 export const SNOWWAVE = {
   url: "https://thesnowwavebali.com/",
   label: "Snowwave Bali: Frozen Fruit & Fruit Purées",
-  blurb: "Specialises in producing premium fruit purées for creating beautiful cocktails, made for beach clubs, nightclubs, hotels, resorts and more.",
+  blurb:
+    "Specialises in producing premium fruit purées for creating beautiful cocktails, made for beach clubs, nightclubs, hotels, resorts and more.",
 };
 
 export const FAMILY_PACK = { pops: 10, price: "Rp250,000" };
